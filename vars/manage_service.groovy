@@ -18,6 +18,7 @@ def call() {
                 } catch (Exception err) {
                     error ("Failed executing command -> ${err}")
                     currentBuild.description = "#${HOST_NAME}: Failed"
+                    currentBuild.result = 'FAILURE'
                 }
             }
         }
