@@ -31,6 +31,7 @@ def call() {
                         ]) {
                             HOST_IP = ip
                         }
+                        break
 
                     case "RPi":
                         HOST_NAME = 'rastberry'
@@ -52,6 +53,7 @@ def call() {
                         ]) {
                             HOST_IP = ip
                         }
+                        break
                 }
                 // Change build name
                 currentBuild.displayName = "${HOST_NAME}: ${SERVICE} - ${COMMAND}"
