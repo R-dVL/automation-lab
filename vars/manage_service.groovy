@@ -17,12 +17,12 @@ def call() {
                         withCredentials([
                             usernamePassword(
                                 credentialsId: 'server-credentials',
-                                usernameVariable: 'HOST_USER',
-                                passwordVariable: 'HOST_PASSWORD')
-                        ]) //{
-                            //HOST_USER = user
-                            //HOST_PASSWORD = password
-                        //}
+                                usernameVariable: 'user',
+                                passwordVariable: 'password')
+                        ]) {
+                            HOST_USER = user
+                            HOST_PASSWORD = password
+                        }
 
                         withCredentials([
                             string(
