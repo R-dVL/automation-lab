@@ -9,6 +9,7 @@ def call() {
 
         try {
             stage('Configure Host') {
+                // Configure env vars in function of the host selected
                 switch(HOST) {
                     case "Server":
                         HOST_NAME = 'rdvl-server'
@@ -26,6 +27,27 @@ def call() {
                         withCredentials([
                             string(
                                 credentialsId: 'server-ip',
+                                variable: 'ip',)
+                        ]) {
+                            HOST_IP = ip
+                        }
+
+                    case "RPi":
+                        HOST_NAME = 'rastberry'
+
+                        withCredentials([
+                            usernamePassword(
+                                credentialsId: 'rpi-credentials',
+                                usernameVariable: 'user',
+                                passwordVariable: 'password')
+                        ]) {
+                            HOST_USER = user
+                            HOST_PASSWORD = password
+                        }
+
+                        withCredentials([
+                            string(
+                                credentialsId: 'rpi-ip',
                                 variable: 'ip',)
                         ]) {
                             HOST_IP = ip
