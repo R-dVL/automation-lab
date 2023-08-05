@@ -1,12 +1,5 @@
 def call() {
     node {
-        environment{
-            HOST_NAME
-            HOST_IP
-            HOST_USER
-            HOST_PASSWORD
-        }
-
         try {
             stage('Configure Host') {
                 switch(HOST) {
@@ -14,13 +7,15 @@ def call() {
                         HOST_NAME = 'rdvl-server'
 
                         withCredentials([
-                            usernamePassword(credentialsId: 'server-credentials',
+                            usernamePassword(
+                                credentialsId: 'server-credentials',
                                 usernameVariable = HOST_USER,
                                 passwordVariable = HOST_PASSWORD)
                         ])
 
                         withCredentials([
-                            string(credentialsId: 'server-ip',
+                            string(
+                                credentialsId: 'server-ip',
                                 variable = HOST_IP,)
                         ])
                 }
