@@ -75,7 +75,7 @@ def call() {
                     remote.allowAnyHosts = true
 
                     // Execute command
-                    sshCommand remote: remote, command: "systemctl ${COMMAND} ${SERVICE}", sudo: true
+                    sshCommand remote: remote, command: "systemctl ${COMMAND} ${SERVICE}", sudo: false
                     currentBuild.description = "${HOST_NAME}: Success"
                 }
             }
