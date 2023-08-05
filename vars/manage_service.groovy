@@ -6,7 +6,7 @@ def call() {
                     // Check mandatory params
                     assert HOST_NAME != null : "${HOST_NAME} Mandatory parameter"
                     assert HOST_IP != null : "${HOST_IP} Mandatory parameter"
-                    assert HOST_USER != null : "${HOST_USER} Mandatory parameter"
+                    assert HOST_USER != "" : "${HOST_USER} Mandatory parameter"
                     assert HOST_PASSWORD != null : "${HOST_PASSWORD} Mandatory parameter"
                     assert COMMAND != null : "${COMMAND} Mandatory parameter"
                     assert SERVICE != null: "${SERVICE} Mandatory parameter"
