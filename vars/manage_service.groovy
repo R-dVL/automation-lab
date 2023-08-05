@@ -2,6 +2,8 @@ def call() {
     node {
         stage('Check Service Status') {
             script {
+                currentBuild.description = "#${HOST_NAME}: ${SERVICE} - ${COMMAND}"
+
                 def remote = [:]
                 remote.name = HOST_NAME
                 remote.host = HOST_IP
@@ -9,7 +11,12 @@ def call() {
                 remote.password = HOST_PASSWORD
                 remote.port = 22
                 remote.allowAnyHosts = true
-                sshCommand remote: remote, command: "systemctl ${COMMAND} ${SERVICE}", sudo: false
+
+                try {
+                    sshCommand remote: remote, command: "systemctl ${COMMAND} ${SERVICE}", sudo: false
+                } catch (Exception err) {
+                    error ("Failed executing command -> ${err}")
+                }
             }
         }
     }
