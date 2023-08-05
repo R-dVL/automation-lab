@@ -9,7 +9,6 @@ def call() {
                 remote.password = HOST_PASSWORD
                 remote.port = 22
                 remote.allowAnyHosts = true
-                remote.sudo = true
                 sshCommand remote: remote, command: "apt update && apt upgrade"
             }
         }
