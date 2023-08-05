@@ -1,0 +1,11 @@
+{
+    "Hosts": {
+        "Server": {
+            "Host-Name": "rdvl-server"
+        },
+
+        "RPi": {
+            "Host-Name": "rastberry"
+        }
+    }
+}
