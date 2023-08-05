@@ -19,8 +19,8 @@ def call() {
                                 usernameVariable: 'user',
                                 passwordVariable: 'password')
                         ]) {
-                            HOST_USER = 'user'
-                            HOST_PASSWORD = 'password'
+                            HOST_USER = user
+                            HOST_PASSWORD = password
                         }
 
                         withCredentials([
@@ -28,7 +28,7 @@ def call() {
                                 credentialsId: 'server-ip',
                                 variable: 'ip',)
                         ]) {
-                            HOST_IP = 'ip'
+                            HOST_IP = ip
                         }
                 }
                 // Change build name
