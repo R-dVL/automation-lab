@@ -16,9 +16,9 @@ def call() {
                     sshCommand remote: remote, command: "systemctl ${COMMAND} ${SERVICE}", sudo: false
                     currentBuild.description = "#${HOST_NAME}: Success"
                 } catch (Exception err) {
-                    error ("Failed executing command -> ${err}")
                     currentBuild.description = "#${HOST_NAME}: Failed"
                     currentBuild.result = 'FAILURE'
+                    error ("Failed executing command -> ${err}")
                 }
             }
         }
