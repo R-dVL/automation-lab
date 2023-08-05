@@ -4,7 +4,7 @@ def call() {
             script {
                 try{
                     // Check mandatory params
-                    assert COMMAND == null : "HOST_NAME is a Mandatory parameter"
+                    assert HOST_USER == null : "HOST_NAME is a Mandatory parameter"
 
                     // Change build name
                     currentBuild.displayName = "${HOST_NAME}: ${SERVICE} - ${COMMAND}"
