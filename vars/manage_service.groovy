@@ -16,8 +16,8 @@ def call() {
                         withCredentials([
                             usernamePassword(
                                 credentialsId: 'server-credentials',
-                                usernameVariable = 'user',
-                                passwordVariable = 'password')
+                                usernameVariable: 'user',
+                                passwordVariable: 'password')
                         ]) {
                             HOST_USER = 'user'
                             HOST_PASSWORD = 'password'
@@ -26,7 +26,7 @@ def call() {
                         withCredentials([
                             string(
                                 credentialsId: 'server-ip',
-                                variable = 'ip',)
+                                variable: 'ip',)
                         ]) {
                             HOST_IP = 'ip'
                         }
