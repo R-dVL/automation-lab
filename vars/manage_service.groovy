@@ -27,9 +27,9 @@ def call() {
                         withCredentials([
                             string(
                                 credentialsId: 'server-ip',
-                                variable: 'ip',)
+                                variable: 'HOST_IP',)
                         ]) {
-                            HOST_IP = ip
+                            //HOST_IP = ip
                         }
 
                     case "RPi":
