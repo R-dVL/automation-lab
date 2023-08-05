@@ -3,8 +3,8 @@ def call() {
         script {
             def remote = [:]
             remote.host = IP
-            remote.user = CREDENTIALS
-            remote.password = CREDENTIALS
+            remote.user = USER
+            remote.password = PASSWORD
             remote.port = '22'
             remote.allowAnyHosts = true
             sshCommand remote: remote, command: "pwd"
