@@ -54,6 +54,10 @@ def call() {
                             HOST_IP = ip
                         }
                         break
+
+                    default:
+                        error("Error, selected HOST is not configured")
+                        break
                 }
                 // Change build name
                 currentBuild.displayName = "${HOST_NAME}: ${SERVICE} - ${COMMAND}"
