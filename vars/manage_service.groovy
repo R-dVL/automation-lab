@@ -4,12 +4,12 @@ def call() {
             script {
                 try{
                     // Check mandatory params
-                    assert HOST_NAME != null : "${HOST_NAME} Mandatory parameter"
-                    assert HOST_IP != null : "${HOST_IP} Mandatory parameter"
-                    assert HOST_USER != "" : "${HOST_USER} Mandatory parameter"
-                    assert HOST_PASSWORD != null : "${HOST_PASSWORD} Mandatory parameter"
-                    assert COMMAND != null : "${COMMAND} Mandatory parameter"
-                    assert SERVICE != null: "${SERVICE} Mandatory parameter"
+                    assert HOST_NAME != null : "HOST_NAME is a Mandatory parameter"
+                    assert HOST_IP != null : "HOST_IP is a Mandatory parameter"
+                    assert HOST_USER != null : "HOST_USER is a Mandatory parameter"
+                    assert HOST_PASSWORD != null : "HOST_PASSWORD is a Mandatory parameter"
+                    assert COMMAND != null : "COMMAND is a Mandatory parameter"
+                    assert SERVICE != null: "SERVICE is a Mandatory parameter"
 
 
                     // Change build name
