@@ -16,15 +16,20 @@ def call() {
                         withCredentials([
                             usernamePassword(
                                 credentialsId: 'server-credentials',
-                                usernameVariable = HOST_USER,
-                                passwordVariable = HOST_PASSWORD)
-                        ])
+                                usernameVariable = 'user',
+                                passwordVariable = 'password')
+                        ]) {
+                            HOST_USER = 'user'
+                            HOST_PASSWORD = 'password'
+                        }
 
                         withCredentials([
                             string(
                                 credentialsId: 'server-ip',
-                                variable = HOST_IP,)
-                        ])
+                                variable = 'ip',)
+                        ]) {
+                            HOST_IP = 'ip'
+                        }
                 }
                 // Change build name
                 currentBuild.displayName = "${HOST_NAME}: ${SERVICE} - ${COMMAND}"
