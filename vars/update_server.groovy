@@ -9,7 +9,7 @@ def call() {
                 remote.password = HOST_PASSWORD
                 remote.port = 22
                 remote.allowAnyHosts = true
-                sshCommand remote: remote, command: "apt update", sudo: true
+                sshCommand remote: remote, command: "systemctl status casaos", sudo: false
             }
         }
     }
