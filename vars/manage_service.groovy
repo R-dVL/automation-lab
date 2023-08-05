@@ -5,7 +5,7 @@ def call() {
                 try{
                     // Check mandatory params
                     try {
-                        assert HOST_USER != null : "HOST_NAME is a Mandatory parameter"
+                        assert HOST_USER == "" : "HOST_NAME is a Mandatory parameter"
                     } catch (AssertionError err) {
                         throw err
                     }
