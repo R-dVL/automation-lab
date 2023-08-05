@@ -10,54 +10,43 @@ def call() {
         try {
             stage('Configure Host') {
                 // Configure env vars in function of the host selected
+                String credentialsSecret
+                String ipSecret
+
                 switch(HOST) {
                     case "Server":
                         HOST_NAME = 'rdvl-server'
-
-                        withCredentials([
-                            usernamePassword(
-                                credentialsId: 'server-credentials',
-                                usernameVariable: 'user',
-                                passwordVariable: 'password')
-                        ]) {
-                            HOST_USER = user
-                            HOST_PASSWORD = password
-                        }
-
-                        withCredentials([
-                            string(
-                                credentialsId: 'server-ip',
-                                variable: 'ip',)
-                        ]) {
-                            HOST_IP = ip
-                        }
+                        credentialsSecret = 'server-credentials'
+                        ipSecret = 'server-ip'
                         break
 
                     case "RPi":
                         HOST_NAME = 'rastberry'
-
-                        withCredentials([
-                            usernamePassword(
-                                credentialsId: 'rpi-credentials',
-                                usernameVariable: 'user',
-                                passwordVariable: 'password')
-                        ]) {
-                            HOST_USER = user
-                            HOST_PASSWORD = password
-                        }
-
-                        withCredentials([
-                            string(
-                                credentialsId: 'rpi-ip',
-                                variable: 'ip',)
-                        ]) {
-                            HOST_IP = ip
-                        }
+                        credentialsSecret = 'rpi-credentials'
+                        ipSecret = 'rpi-ip'
                         break
 
                     default:
                         error("Error, selected HOST is not configured")
                         break
+
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: '${credentialsSecret}',
+                            usernameVariable: 'user',
+                            passwordVariable: 'password')
+                    ]) {
+                        HOST_USER = user
+                        HOST_PASSWORD = password
+                    }
+
+                    withCredentials([
+                        string(
+                            credentialsId: '${ipSecret}',
+                            variable: 'ip',)
+                    ]) {
+                        HOST_IP = ip
+                    }
                 }
                 // Change build name
                 currentBuild.displayName = "${HOST_NAME}: ${SERVICE} - ${COMMAND}"
