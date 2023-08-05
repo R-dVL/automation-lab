@@ -1,6 +1,6 @@
 def call() {
     node {
-        stage('Check ${SERVICE} Status') {
+        stage('Check Service Status') {
             script {
                 def remote = [:]
                 remote.name = HOST_NAME
