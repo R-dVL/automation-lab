@@ -4,7 +4,11 @@ def call() {
             script {
                 try{
                     // Check mandatory params
-                    assert HOST_USER == null : "HOST_NAME is a Mandatory parameter"
+                    try {
+                        assert HOST_USER != null : "HOST_NAME is a Mandatory parameter"
+                    } catch (AssertionError err) {
+                        throw err
+                    }
 
                     // Change build name
                     currentBuild.displayName = "${HOST_NAME}: ${SERVICE} - ${COMMAND}"
