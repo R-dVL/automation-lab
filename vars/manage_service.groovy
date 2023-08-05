@@ -19,10 +19,10 @@ def call() {
                                 credentialsId: 'server-credentials',
                                 usernameVariable: 'HOST_USER',
                                 passwordVariable: 'HOST_PASSWORD')
-                        ]) {
+                        ]) //{
                             //HOST_USER = user
                             //HOST_PASSWORD = password
-                        }
+                        //}
 
                         withCredentials([
                             string(
