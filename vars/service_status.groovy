@@ -1,6 +1,6 @@
 def call() {
     node {
-        stage('Demo') {
+        stage('Check ${SERVICE} Status') {
             script {
                 def remote = [:]
                 remote.name = HOST_NAME
@@ -9,7 +9,7 @@ def call() {
                 remote.password = HOST_PASSWORD
                 remote.port = 22
                 remote.allowAnyHosts = true
-                sshCommand remote: remote, command: "systemctl status casaos", sudo: false
+                sshCommand remote: remote, command: "systemctl status ${SERVICE}", sudo: false
             }
         }
     }
