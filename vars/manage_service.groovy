@@ -1,5 +1,12 @@
 def call() {
     node {
+        environment{
+            HOST_NAME
+            HOST_IP
+            HOST_USER
+            HOST_PASSWORD
+        }
+
         try {
             stage('Configure Host') {
                 switch(HOST) {
@@ -39,6 +46,7 @@ def call() {
                     currentBuild.description = "${HOST_NAME}: Success"
                 }
             }
+
         } catch (Exception err) {
             // Build failed
             currentBuild.description = "${HOST_NAME}: Failed"
