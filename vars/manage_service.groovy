@@ -21,7 +21,7 @@ def call() {
 
                         withCredentials([
                             string(credentialsId: 'server-ip',
-                                variable = HOST_IP,
+                                variable = HOST_IP,)
                         ])
                 }
                 // Change build name
