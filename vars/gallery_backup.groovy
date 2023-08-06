@@ -48,11 +48,11 @@ def call() {
                         remote.password = password
                         remote.port = 22
                         remote.allowAnyHosts = true
-                        def dt = 'test'
+                        def file = 'test.tar.gz'
                         // Execute command
                         sshCommand(
                             remote: remote,
-                            command: "find /DATA/Backups/Gallery ! -name ${dt}.tar.gz -type f -exec rm -f {} \;")
+                            command: "find /DATA/Backups/Gallery ! -name ${fle} -type f -exec rm -f {}")
                     }
                 }
             }
