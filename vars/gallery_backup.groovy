@@ -43,7 +43,7 @@ def call() {
 
                 // Define file name
                 LocalDate date = LocalDate.now();
-                fileName = "gallery_backup_" + date.replace('-', '_')
+                fileName = "gallery_backup_" + date.toString().replace('-', '_')
 
                 // Build display name
                 currentBuild.displayName = "${HOST_NAME}: Backup - ${fileName}"
