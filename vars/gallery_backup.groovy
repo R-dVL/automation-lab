@@ -43,7 +43,7 @@ def call() {
 
                 // Define file name
                 def dt = LocalDateTime.now()
-                FILE_NAME = "gallery_backup_" + dt
+                fileName = "gallery_backup_" + dt
 
             stage('Create Backup') {
                 // Get actual date and time
