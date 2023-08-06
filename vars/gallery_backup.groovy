@@ -7,9 +7,10 @@ def call() {
             HOST_IP
             HOST_USER
             HOST_PASSWORD
-            REMOTE
-            FILE_NAME
         }
+
+        def remote = [:]
+        String fileName
 
         try {
             stage('Configure Host') {
@@ -33,12 +34,12 @@ def call() {
                 ]) {
                     HOST_IP = ip
                 }
-                REMOTE.name = 'rdvl-server'
-                REMOTE.host = HOST_IP
-                REMOTE.user = HOST_USER
-                REMOTE.password = HOST_PASSWORD
-                REMOTE.port = 22
-                REMOTE.allowAnyHosts = true
+                remote.name = 'rdvl-server'
+                remote.host = HOST_IP
+                remote.user = HOST_USER
+                remote.password = HOST_PASSWORD
+                remote.port = 22
+                remote.allowAnyHosts = true
 
                 // Define file name
                 def dt = LocalDateTime.now()
@@ -49,8 +50,8 @@ def call() {
                 script {
                     // Execute command
                     sshCommand(
-                        remote: remote,
-                        command: "tar -czvf /DATA/Backups/Gallery/${FILE_NAME}.tar.gz /DATA/Gallery")
+                        remote: REMOTE,
+                        command: "tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
                 }
             }
 
@@ -59,8 +60,8 @@ def call() {
                     def file = 'test.tar.gz'
                     // Execute command
                     sshCommand(
-                        remote: remote,
-                        command: "find /DATA/Backups/Gallery/ ! -name ${fileFILE_NAMEName}.tar.gz -type f -exec rm -f {} +")
+                        remote: REMOTE,
+                        command: "find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
                     }
                 }
             }
