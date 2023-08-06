@@ -58,7 +58,7 @@ def call() {
                 }
             }
 
-            stage('Delete Old backups') {
+            stage('Delete Old Backups') {
                 script {
                     // Execute command
                     sshCommand(
