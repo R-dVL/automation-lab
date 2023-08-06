@@ -21,8 +21,7 @@ def call() {
                         // Execute command
                         sshCommand(
                             remote: remote,
-                            command: "tar -czvf /opt/backups/gallery/test.tar.gz /DATA/Gallery",
-                            sudo: true)
+                            command: "tar -czvf /DATA/Backups/Gallery/test.tar.gz /DATA/Gallery")
                     }
                 }
             }
