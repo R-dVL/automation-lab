@@ -50,7 +50,7 @@ def call() {
                 script {
                     // Execute command
                     sshCommand(
-                        remote: REMOTE,
+                        remote: remote,
                         command: "tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
                 }
             }
@@ -60,7 +60,7 @@ def call() {
                     def file = 'test.tar.gz'
                     // Execute command
                     sshCommand(
-                        remote: REMOTE,
+                        remote: remote,
                         command: "find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
                     }
                 }
