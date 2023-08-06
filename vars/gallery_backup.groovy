@@ -45,6 +45,10 @@ def call() {
                 def dt = LocalDateTime.now()
                 fileName = "gallery_backup_" + dt
 
+                // Build display name
+                currentBuild.displayName = "${HOST_NAME}: Backup - ${fileName}"
+            }
+
             stage('Create Backup') {
                 // Get actual date and time
                 script {
@@ -57,17 +61,17 @@ def call() {
 
             stage('Delete Old backups') {
                 script {
-                    def file = 'test.tar.gz'
                     // Execute command
                     sshCommand(
                         remote: remote,
                         command: "find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
-                    }
                 }
+                currentBuild.description = "${HOST_NAME}: Success"
             }
 
         } catch (Exception err) {
             // Build failed
+            currentBuild.description = "${HOST_NAME}: Failed executing command -> ${err}"
             currentBuild.result = 'FAILURE'
             error ("Failed executing command -> ${err}")
         }
