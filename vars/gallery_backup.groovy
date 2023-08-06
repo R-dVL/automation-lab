@@ -7,8 +7,8 @@ def call() {
             HOST_IP
             HOST_USER
             HOST_PASSWORD
-            remote
-            fileName
+            REMOTE
+            FILE_NAME
         }
 
         try {
@@ -33,16 +33,16 @@ def call() {
                 ]) {
                     HOST_IP = ip
                 }
-                remote.name = 'rdvl-server'
-                remote.host = HOST_IP
-                remote.user = HOST_USER
-                remote.password = HOST_PASSWORD
-                remote.port = 22
-                remote.allowAnyHosts = true
+                REMOTE.name = 'rdvl-server'
+                REMOTE.host = HOST_IP
+                REMOTE.user = HOST_USER
+                REMOTE.password = HOST_PASSWORD
+                REMOTE.port = 22
+                REMOTE.allowAnyHosts = true
 
                 // Define file name
                 def dt = LocalDateTime.now()
-                fileName = "gallery_backup_" + dt
+                FILE_NAME = "gallery_backup_" + dt
 
             stage('Create Backup') {
                 // Get actual date and time
@@ -50,7 +50,7 @@ def call() {
                     // Execute command
                     sshCommand(
                         remote: remote,
-                        command: "tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
+                        command: "tar -czvf /DATA/Backups/Gallery/${FILE_NAME}.tar.gz /DATA/Gallery")
                 }
             }
 
@@ -60,7 +60,7 @@ def call() {
                     // Execute command
                     sshCommand(
                         remote: remote,
-                        command: "find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
+                        command: "find /DATA/Backups/Gallery/ ! -name ${fileFILE_NAMEName}.tar.gz -type f -exec rm -f {} +")
                     }
                 }
             }
