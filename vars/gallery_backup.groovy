@@ -2,57 +2,65 @@ import java.time.LocalDateTime
 
 def call() {
     node {
+        environment{
+            HOST_NAME = ""
+            HOST_IP = ""
+            HOST_USER = ""
+            HOST_PASSWORD = ""
+            remote = [:]
+            fileName = ""
+        }
+
         try {
-/*
+            stage('Configure Host') {
+                // Configure env vars in function of the host selected
+                HOST_NAME = 'rdvl-server'
+
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'server-credentials',
+                        usernameVariable: 'user',
+                        passwordVariable: 'password')
+                ]) {
+                    HOST_USER = user
+                    HOST_PASSWORD = password
+                }
+
+                withCredentials([
+                    string(
+                        credentialsId: 'server-ip',
+                        variable: 'ip',)
+                ]) {
+                    HOST_IP = ip
+                }
+                remote.name = 'rdvl-server'
+                remote.host = HOST_IP
+                remote.user = HOST_USER
+                remote.password = HOST_PASSWORD
+                remote.port = 22
+                remote.allowAnyHosts = true
+
+                // Define file name
+                def dt = LocalDateTime.now()
+                fileName = "gallery_backup_" + dt
+
             stage('Create Backup') {
+                // Get actual date and time
                 script {
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'server-credentials',
-                            usernameVariable: 'user',
-                            passwordVariable: 'password')
-                    ]) {
-                        // Remote params
-                        def remote = [:]
-                        remote.name = 'rdvl-server'
-                        remote.host = '212.169.220.230'
-                        remote.user = user
-                        remote.password = password
-                        remote.port = 22
-                        remote.allowAnyHosts = true
-
-                        // Get actual date and time
-                        def dt = LocalDateTime.now()
-
-                        // Execute command
-                        sshCommand(
-                            remote: remote,
-                            command: "tar -czvf /DATA/Backups/Gallery/${dt}.tar.gz /DATA/Gallery")
-                    }
+                    // Execute command
+                    sshCommand(
+                        remote: remote,
+                        command: "tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
                 }
             }
-*/
+
             stage('Delete Old backups') {
                 script {
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'server-credentials',
-                            usernameVariable: 'user',
-                            passwordVariable: 'password')
-                    ]) {
-                        // Remote params
-                        def remote = [:]
-                        remote.name = 'rdvl-server'
-                        remote.host = '212.169.220.230'
-                        remote.user = user
-                        remote.password = password
-                        remote.port = 22
-                        remote.allowAnyHosts = true
-                        def file = 'test.tar.gz'
-                        // Execute command
-                        sshCommand(
-                            remote: remote,
-                            command: "find /DATA/Backups/Gallery/ ! -name ${file} -type f -exec rm -f {} +")
+                    def file = 'test.tar.gz'
+                    // Execute command
+                    sshCommand(
+                        remote: remote,
+                        command: "find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
                     }
                 }
             }
