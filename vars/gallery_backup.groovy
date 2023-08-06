@@ -57,7 +57,7 @@ def call() {
                         command: "tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
                 }
             }
-/*
+
             stage('Delete Old Backups') {
                 script {
                     // Execute command
@@ -67,7 +67,7 @@ def call() {
                 }
                 currentBuild.description = "${HOST_NAME}: Success"
             }
-*/
+
         } catch (Exception err) {
             // Build failed
             currentBuild.description = "${HOST_NAME}: Failed executing command -> ${err}"
