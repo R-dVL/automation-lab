@@ -1,4 +1,4 @@
-import java.time.LocalDateTime
+import java.time.LocalDate;
 
 def call() {
     node {
@@ -42,8 +42,9 @@ def call() {
                 remote.allowAnyHosts = true
 
                 // Define file name
-                //fileName = "gallery_backup_" + String.format('%tF', LocalDateTime.now())
-                fileName = 'test'
+                LocalDate date = LocalDate.now();
+                fileName = "gallery_backup_" + date.replace('-', '_')
+
                 // Build display name
                 currentBuild.displayName = "${HOST_NAME}: Backup - ${fileName}"
             }
