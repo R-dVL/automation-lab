@@ -3,6 +3,7 @@ import java.time.LocalDateTime
 def call() {
     node {
         try {
+/*
             stage('Create Backup') {
                 script {
                     withCredentials([
@@ -30,7 +31,7 @@ def call() {
                     }
                 }
             }
-
+*/
             stage('Delete Old backups') {
                 script {
                     withCredentials([
