@@ -21,7 +21,14 @@ def call() {
                         // Execute command
                         sshCommand(
                             remote: remote,
-                            command: "tar cf - /DATA/Gallery/bak -P | pv -s $(du -sb /Gallery-Backup | awk '{print $1}') | gzip > /DATA/Backups/Gallery/test2.tar.gz"
+                            command: "'
+                                FROMSIZE=`du -sk --apparent-size ${FROMPATH} | cut -f 1`;
+                                CHECKPOINT=`echo ${FROMSIZE}/50 | bc`;
+                                echo "Estimated: [==================================================]";
+                                echo -n "Progess:   [";
+                                tar -c --record-size=1K --checkpoint="${CHECKPOINT}" --checkpoint-action="ttyout=>" -f - "${FROMPATH}" | bzip2 > "${TOFILE}";
+                                echo "]"
+                            '"
                             //command: "tar -czvf /DATA/Backups/Gallery/test.tar.gz /DATA/Gallery")
                     }
                 }
