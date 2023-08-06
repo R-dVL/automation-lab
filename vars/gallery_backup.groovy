@@ -43,7 +43,7 @@ def call() {
 
                 // Define file name
                 //fileName = "gallery_backup_" + String.format('%tF', LocalDateTime.now())
-                filename = 'test'
+                fileName = 'test'
                 // Build display name
                 currentBuild.displayName = "${HOST_NAME}: Backup - ${fileName}"
             }
