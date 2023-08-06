@@ -52,7 +52,7 @@ def call() {
                         // Execute command
                         sshCommand(
                             remote: remote,
-                            command: "rm -v !("${file}")")
+                            command: "rm -v !('${file}')")
                     }
                 }
             }
