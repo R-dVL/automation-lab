@@ -3,12 +3,12 @@ import java.time.LocalDateTime
 def call() {
     node {
         environment{
-            HOST_NAME = ""
-            HOST_IP = ""
-            HOST_USER = ""
-            HOST_PASSWORD = ""
-            remote = [:]
-            fileName = ""
+            HOST_NAME
+            HOST_IP
+            HOST_USER
+            HOST_PASSWORD
+            remote
+            fileName
         }
 
         try {
