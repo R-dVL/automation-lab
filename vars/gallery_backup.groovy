@@ -42,8 +42,7 @@ def call() {
                 remote.allowAnyHosts = true
 
                 // Define file name
-                def dt = LocalDateTime.now()
-                fileName = "gallery_backup_" + dt
+                fileName = "gallery_backup_" + String.format('%tF %<tH:%<tM', LocalDateTime.now())
 
                 // Build display name
                 currentBuild.displayName = "${HOST_NAME}: Backup - ${fileName}"
