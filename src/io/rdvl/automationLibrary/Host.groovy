@@ -1,3 +1,5 @@
+package io.rdvl.automationLibrary
+
 class Host {
     private String name
     private String credentials
