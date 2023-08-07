@@ -1,12 +1,11 @@
 import groovy.json.JsonSlurper
 
 class Configuration {
-    public def configuration
+    private def configuration
     static final String path = 'resources/static_configuration.json'
 
     Configuration () {
-        def jsonSlurper = new JsonSlurper()
-        this.configuration = jsonSlurper.parse(new File(path))
+        this.configuration = new JsonSlurperClassic().parseText(steps.libraryResource('static_configuration.json'))
     }
 
     def getConfiguration() {
