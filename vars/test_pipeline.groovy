@@ -1,3 +1,5 @@
+package io.rdvl.automationLibrary
+
 def call() {
     node {
         stage('Test'){
