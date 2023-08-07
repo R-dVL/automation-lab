@@ -1,11 +1,13 @@
 {
     "Hosts": {
         "Server": {
-            "Host-Name": "rdvl-server"
+            "Credentials": "server-credentials",
+            "Ip": "server-ip"
         },
 
         "RPi": {
-            "Host-Name": "rastberry"
+            "Credentials": "rpi-credentials",
+            "Ip": "rpi-ip"
         }
     }
 }
