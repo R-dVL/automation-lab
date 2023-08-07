@@ -11,7 +11,7 @@ class Host {
     static def config = static_configuration.json
 
     Host(hostName) {
-        Configuration configJson = new Configuration()
+        //Configuration configJson = new Configuration()
         //this.config = configJson.getConfiguration()
         this.config = 'test1'
         this.name = hostName
