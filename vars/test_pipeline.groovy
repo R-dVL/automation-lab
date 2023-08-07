@@ -9,7 +9,7 @@ def call() {
                 println("Credentials -> " + test.getCredentials())
                 println("Config -> " + test.getConfig())
             }
-        } catch (Exceotion e) {
+        } catch (Exception e) {
             throw e
         }
     }
