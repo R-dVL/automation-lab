@@ -9,14 +9,11 @@ class Host {
     private def config
 
     Host(hostName) {
-        //Configuration configJson = new Configuration()
-        //this.config = configJson.getConfiguration()
-        this.config = 'test1'
+        Configuration configJson = new Configuration()
+        this.config = configJson.getConfiguration()
         this.name = hostName
-        //this.ip = config.Hosts."${name}".ip
-        this.ip = 'test'
-        //this.credentials = config.Hosts."${name}".credentials
-        this.credentials = 'test2'
+        this.ip = config.Hosts."${name}".ip
+        this.credentials = config.Hosts."${name}".credentials
     }
 
     def getName() {
