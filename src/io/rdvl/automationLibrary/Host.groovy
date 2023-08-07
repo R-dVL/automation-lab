@@ -15,8 +15,8 @@ class Host {
         //this.config = configJson.getConfiguration()
 
         this.name = hostName
-        this.ip = config.Hosts."${name}".ip
-        this.credentials = config.Hosts."${name}".credentials
+        //this.ip = config.Hosts."${name}".ip
+        //this.credentials = config.Hosts."${name}".credentials
     }
 
     def getName() {
