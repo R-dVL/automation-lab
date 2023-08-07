@@ -8,8 +8,6 @@ class Host {
     private String password
     private def config
 
-    static def config = static_configuration.json
-
     Host(hostName) {
         //Configuration configJson = new Configuration()
         //this.config = configJson.getConfiguration()
