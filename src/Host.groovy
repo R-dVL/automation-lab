@@ -8,7 +8,7 @@ class Host {
 
     static def config = static_configuration.json
 
-    def Host(hostName) {
+    Host(hostName) {
         Configuration configJson = new Configuration()
         this.config = configJson.getConfiguration()
 
