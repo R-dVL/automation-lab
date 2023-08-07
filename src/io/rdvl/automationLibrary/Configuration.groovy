@@ -1,8 +1,9 @@
 package io.rdvl.automationLibrary
+
 import groovy.json.JsonSlurperClassic
 
 class Configuration {
-    private def configuration
+    public def configuration
     static final String path = 'resources/static_configuration.json'
 
     Configuration () {
