@@ -7,25 +7,25 @@ class Host {
     private def config
 
     static def config = static_configuration.json
-}
 
-def Host(hostName) {
-    Configuration configJson = new Configuration()
-    this.config = configJson.getConfiguration()
+    def Host(hostName) {
+        Configuration configJson = new Configuration()
+        this.config = configJson.getConfiguration()
 
-    this.name = hostName
-    this.ip = config.Hosts."${name}".ip
-    this.credentials = config.Hosts."${name}".credentials
-}
+        this.name = hostName
+        this.ip = config.Hosts."${name}".ip
+        this.credentials = config.Hosts."${name}".credentials
+    }
 
-def getName() {
-    return this.name
-}
+    def getName() {
+        return this.name
+    }
 
-def getCredentials() {
-    return this.credentials
-}
+    def getCredentials() {
+        return this.credentials
+    }
 
-def getConfig() {
-    return this.config
+    def getConfig() {
+        return this.config
+    }
 }
