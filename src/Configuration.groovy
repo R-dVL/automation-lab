@@ -1,4 +1,4 @@
-import groovy.json.JsonSlurper
+import groovy.json.JsonSlurperClassic
 
 class Configuration {
     private def configuration
