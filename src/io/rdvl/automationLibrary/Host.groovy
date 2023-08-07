@@ -12,7 +12,7 @@ class Host {
 
     Host(hostName) {
         Configuration configJson = new Configuration()
-        this.config = configJson.getConfiguration()
+        //this.config = configJson.getConfiguration()
 
         this.name = hostName
         this.ip = config.Hosts."${name}".ip
