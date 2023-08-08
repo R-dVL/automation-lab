@@ -4,7 +4,7 @@ def call() {
     node {
         try {
             stage('Test'){
-                def configurationText = new URL ('https://github.com/R-dVL/automation-lab/blob/fc4e611929787b42079b3bd29d1c03025760b565/resources/static_configuration.json').getText()
+                def configurationText = new URL ('https://github.com/R-dVL/automation-lab/blob/master/resources/static_configuration.json').getText()
                 println(configurationText)
                 def configuration = readJSON text: configurationText
                 println(configuration)
