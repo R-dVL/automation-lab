@@ -4,7 +4,11 @@ def call() {
     node {
         try {
             stage('Test'){
-                sh('git clone https://github.com/R-dVL/automation-lab.git')
+                try {
+                    sh('git clone https://github.com/R-dVL/automation-lab.git')
+                } catch (Exception e) {
+                    println("Already in workspace")
+                }
                 def configuration = readJSON file: './automation-lab/resources/static_configuration.json'
                 println(configuration)
             }
