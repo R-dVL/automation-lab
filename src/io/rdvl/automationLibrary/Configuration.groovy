@@ -1,10 +1,13 @@
 package io.rdvl.automationLibrary
 
+import groovy.json.JsonSlurper
+
 class Configuration {
     private def configuration
 
     Configuration () {
-        this.configuration = readJSON file: './automation.lab/resources/static_configuration.json'
+        def jsonSlurper = new JsonSlurper()
+        this.configuration = jsonSlurper.parse(new File('./automation.lab/resources/static_configuration.json')
     }
 
     def getConfiguration() {
