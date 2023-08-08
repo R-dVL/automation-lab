@@ -10,8 +10,9 @@ def call() {
                 println("Config -> " + test.getConfig())
             }
         } catch (Exception e) {
-            println("ALERTA | ${e.getMessage()}")
-            error(" ERROR | ${e}")
+            println("ALERT | ${e.getMessage()}")
+            println("ERROR | ${e}")
+            error("Build Failed")
         }
     }
 }
