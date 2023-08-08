@@ -5,6 +5,7 @@ def call() {
         try {
             stage('Test'){
                 def configuration = readJSON file: './automation-lab/resources/static_configuration.json'
+                println(configuration)
             }
         } catch (Exception e) {
             println("ALERT | ${e.getMessage()}")
