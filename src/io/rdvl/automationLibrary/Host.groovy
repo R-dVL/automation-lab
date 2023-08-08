@@ -27,4 +27,9 @@ class Host {
     def getConfig() {
         return this.config
     }
+
+    @Override
+    public String toString() {
+        return "Host"
+    }
 }

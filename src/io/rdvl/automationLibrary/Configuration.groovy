@@ -13,4 +13,9 @@ class Configuration {
     def getConfiguration() {
         return this.configuration
     }
+
+    @Override
+    public String toString() {
+        return "Configuration"
+    }
 }
