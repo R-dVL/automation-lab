@@ -10,6 +10,11 @@ class Configuration {
         this.configuration = jsonSlurper.parse(new File('/var/jenkins_home/workspace/Test-Pipeline/automation-lab/resources/static_configuration.json'))
     }
 
+    @NonCPS
+    def getConfiguration() {
+        return this.configuration
+    }
+
     @Override
     public String toString() {
         return "Configuration"
