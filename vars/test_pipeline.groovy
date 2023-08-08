@@ -4,10 +4,10 @@ def call() {
     node {
         try {
             stage('Test'){
-                script {
-                    def config = readJSON file: 'resources/static_configuration.json'
-                    println config
-                }
+                Host test = new Host(HOST)
+                println("Name -> " + test.getName())
+                println("Credentials -> " + test.getCredentials())
+                println("Config -> " + test.getConfig())
             }
         } catch (Exception e) {
             println("ALERT | ${e.getMessage()}")
