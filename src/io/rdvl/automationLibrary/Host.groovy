@@ -16,18 +16,6 @@ class Host {
         this.credentials = config.Hosts."${name}".credentials
     }
 
-    def getName() {
-        return this.name
-    }
-
-    def getCredentials() {
-        return this.credentials
-    }
-
-    def getConfig() {
-        return this.config
-    }
-
     @Override
     public String toString() {
         return "Host"
