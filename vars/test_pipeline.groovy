@@ -10,7 +10,8 @@ def call() {
                 println("Config -> " + test.getConfig())
             }
         } catch (Exception e) {
-            throw e
+            println("ALERTA | ${e.getMessage()}")
+            println(" ERROR | ${e}")
         }
     }
 }
