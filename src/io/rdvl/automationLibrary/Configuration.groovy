@@ -4,7 +4,7 @@ class Configuration {
     private def configuration
 
     Configuration () {
-        this.configuration = readJSON file: 'resources/static_configuration.json'
+        this.configuration = readJSON file: './automation.lab/resources/static_configuration.json'
     }
 
     def getConfiguration() {
