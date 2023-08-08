@@ -1,0 +1,13 @@
+{
+    "Hosts": {
+        "Server": {
+            "Credentials": "server-credentials",
+            "Ip": "server-ip"
+        },
+
+        "RPi": {
+            "Credentials": "rpi-credentials",
+            "Ip": "rpi-ip"
+        }
+    }
+}
