@@ -4,7 +4,7 @@ def call() {
     node {
         try {
             stage('Test'){
-                def configuration = readJSON file: './automation-lab/resources/static_configuration.json'
+                def configuration = readJSON file: 'static_configuration.json'
                 println(configuration)
             }
         } catch (Exception e) {
