@@ -4,8 +4,8 @@ def call() {
     node {
         try {
             stage('Test'){
-                sh('pwd')
-                sh('ls')
+                sh('git clone https://github.com/R-dVL/automation-lab.git')
+                sh('pwd && ls')
                 def configuration = readJSON file: 'resources/static_configuration.json'
                 println(configuration)
             }
