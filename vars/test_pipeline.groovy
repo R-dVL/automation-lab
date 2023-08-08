@@ -5,8 +5,7 @@ def call() {
         try {
             stage('Test'){
                 sh('git clone https://github.com/R-dVL/automation-lab.git')
-                sh('pwd && ls')
-                def configuration = readJSON file: 'resources/static_configuration.json'
+                def configuration = readJSON file: './automation-lab/resources/static_configuration.json'
                 println(configuration)
             }
         } catch (Exception e) {
