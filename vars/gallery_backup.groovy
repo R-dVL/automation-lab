@@ -69,11 +69,13 @@ def call() {
                 currentBuild.description = "${HOST_NAME}: Success"
             }
 
-        } catch (Exception err) {
+        } catch (Exception e) {
             // Build failed
-            currentBuild.description = "${HOST_NAME}: Failed executing command -> ${err}"
+            currentBuild.description = "${HOST_NAME}: Failed executing command -> ${e}"
             currentBuild.result = 'FAILURE'
-            error ("Failed executing command -> ${err}")
+            println("ALERT | ${e.getMessage()}")
+            println("ERROR | ${e}")
+            error("Build Failure")
         }
     }
 }

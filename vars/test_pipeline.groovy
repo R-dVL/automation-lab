@@ -12,7 +12,7 @@ def call() {
         } catch (Exception e) {
             println("ALERT | ${e.getMessage()}")
             println("ERROR | ${e}")
-            error("Build Failed")
+            error("Build Failure")
         }
     }
 }
