@@ -11,7 +11,7 @@ def call() {
             }
         } catch (Exception e) {
             println("ALERTA | ${e.getMessage()}")
-            println(" ERROR | ${e}")
+            error(" ERROR | ${e}")
         }
     }
 }
