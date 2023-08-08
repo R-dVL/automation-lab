@@ -7,7 +7,7 @@ class Configuration {
 
     Configuration () {
         def jsonSlurper = new JsonSlurper()
-        this.configuration = jsonSlurper.parse(new File('${WORKSPACE}/automation-lab/resources/static_configuration.json'))
+        this.configuration = jsonSlurper.parse(new File('${env.WORKSPACE}/automation-lab/resources/static_configuration.json'))
     }
 
     def getConfiguration() {
