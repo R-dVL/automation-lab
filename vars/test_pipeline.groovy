@@ -5,6 +5,7 @@ def call() {
         try {
             stage('Test'){
                 sh('pwd')
+                sh('ls')
                 def configuration = readJSON file: 'resources/static_configuration.json'
                 println(configuration)
             }
