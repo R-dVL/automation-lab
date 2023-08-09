@@ -16,7 +16,8 @@ class Configuration {
     }
 
     @Override
+    @NonCPS
     public String toString() {
-        return "Configuration"
+        return "JSON: ${configuration}"
     }
 }

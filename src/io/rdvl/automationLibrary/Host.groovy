@@ -17,7 +17,8 @@ class Host {
     }
 
     @Override
+    @NonCPS
     public String toString() {
-        return "Host"
+        return "Name: ${name}\nIP: ${ip}\Credentials: ${credentials}"
     }
 }
