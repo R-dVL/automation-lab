@@ -8,12 +8,18 @@ def call() {
             stage('Pipeline Setup') {
                 // Clean before build
                 cleanWs()
+                // Clone repo
                 sh('git clone https://github.com/R-dVL/automation-lab.git')
             }
 
             // Default Params
             Host host = new Host(this, 'Server')
-            String fileName
+
+            LocalDate date = LocalDate.now();
+            String fileName = "gallery_backup_" + date.toString().replace('-', '_')
+
+            currentBuild.displayName = "Gallery Backup"
+            currentBuild.description = date
 
             stage('Host Setup') {
                 script {
@@ -34,10 +40,6 @@ def call() {
             }
 
             stage('Create Backup') {
-                // Define file name
-                LocalDate date = LocalDate.now();
-                fileName = "gallery_backup_" + date.toString().replace('-', '_')
-
                 // Command
                 host.sshCommand('tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery')
             }

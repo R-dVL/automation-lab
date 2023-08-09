@@ -12,6 +12,9 @@ def call() {
             // Default Params
             Host host = new Host(this, HOST)
 
+            currentBuild.displayName = "SSH Command - " + HOST
+            currentBuild.description = CMD
+
             stage('Host Setup') {
                 script {
                     // Retrieve info from Jenkins
