@@ -5,12 +5,11 @@ import groovy.json.JsonSlurper
 class Configuration {
     // Default params
     private def configuration
-    private String configurationPath
+    static final String configurationPath = '/var/jenkins_home/workspace/Test-Pipeline@2/automation-lab/resources/configuration.json'
 
     Configuration () {
         // Parse configuration json
         def jsonSlurper = new JsonSlurper()
-        this.configurationPath = steps.env.WORKSPACE + '/automation-lab/resources/configuration.json'
         this.configuration = jsonSlurper.parse(new File(configurationPath))
     }
 
