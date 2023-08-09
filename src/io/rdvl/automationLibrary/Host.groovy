@@ -20,17 +20,14 @@ class Host {
         // Get params from configuration
         switch(name){
             case 'Server':
-                this.ip = config.Hosts.Server.Ip
-                this.credentials = config.Hosts.Server.Credentials
+                this.ip = config.Hosts."${name}".Ip
+                this.credentials = config.Hosts."{name}".Credentials
                 break
 
             case 'RPi':
                 this.ip = config.Hosts.RPi.Ip
                 this.credentials = config.Hosts.RPi.Credentials
                 break
-
-            default:
-                steps.error('Not defined in configuration')
         }
     }
 
