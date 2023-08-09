@@ -2,16 +2,18 @@ import java.time.LocalDate;
 
 def call() {
     node {
-        String fileName
         try {
+            // Default Params
+            Host host = new Host(this, HOST)
+            String fileName
+
             stage('Pipeline Setup') {
                 // Clean before build
                 cleanWs()
                 sh('git clone https://github.com/R-dVL/automation-lab.git')
             }
 
-            stage('Host Setup'){
-                Host host = new Host(this, HOST)
+            stage('Host Setup') {
                 script {
                     // Retrieve info from Jenkins
                     // User & Password
@@ -26,28 +28,20 @@ def call() {
                         string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
                             host.setIp(ip)
                     }
-                    host.sshCommand(CMD)
                 }
             }
 
             stage('Create Backup') {
-                // Get actual date and time
-                script {
-                    // Execute command
-                    sshCommand(
-                        remote: remote,
-                        command: "tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
-                }
+                // Define file name
+                LocalDate date = LocalDate.now();
+                fileName = "gallery_backup_" + date.toString().replace('-', '_')
+
+                // Command
+                host.sshCommand('tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery')
             }
 
             stage('Delete Old Backups') {
-                script {
-                    // Execute command
-                    sshCommand(
-                        remote: remote,
-                        command: "find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
-                }
-                currentBuild.description = "${HOST_NAME}: Success"
+                host.sshCommand('find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +')
             }
 
         } catch(Exception err) {

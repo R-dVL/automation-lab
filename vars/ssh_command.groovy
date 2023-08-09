@@ -3,6 +3,7 @@ package io.rdvl.automationLibrary
 def call() {
     node {
         try {
+            // Default Params
             Host host = new Host(this, HOST)
 
             stage('Pipeline Setup') {
