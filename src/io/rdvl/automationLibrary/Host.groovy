@@ -12,8 +12,16 @@ class Host {
         Configuration configJson = new Configuration()
         this.config = configJson.getConfiguration()
         this.name = hostName
-        this.ip = config.Hosts.'${name}'.Ip
-        this.credentials = config.Hosts.'${name}'.Credentials
+        switch(name){
+            case 'Server':
+                this.ip = config.Hosts.Server.Ip
+                this.credentials = config.Hosts.Server.Credentials
+            case 'RPi':
+                this.ip = config.Hosts.RPi.Ip
+                this.credentials = config.Hosts.RPi.Credentials
+            default:
+                error('Not defined in configuration.')
+        }
     }
 
     @Override
