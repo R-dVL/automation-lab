@@ -77,7 +77,7 @@ class Host implements Serializable {
     }
     
     @NonCPS
-    def setUser(password) {
+    def setPassword(password) {
         this.password = password
     }
 
