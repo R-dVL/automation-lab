@@ -1,7 +1,7 @@
 package io.rdvl.automationLibrary
 
 def call() {
-    node ('Linux') {
+    node {
         try {
             stage('Test'){
                     // Clean before build
