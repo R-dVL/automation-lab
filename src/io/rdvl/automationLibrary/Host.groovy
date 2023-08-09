@@ -9,10 +9,9 @@ class Host {
     private String password
     private def config
 
-    Host(hostName) {
+    Host(hostName, configuration) {
         // Retrieve configuration
-        Configuration configJson = new Configuration()
-        this.config = configJson.getConfiguration()
+        this.config = configuration
 
         // Name selected when constructed
         this.name = hostName
