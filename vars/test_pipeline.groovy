@@ -16,13 +16,13 @@ def call() {
                     print(host)
 
                     withCredentials([
-                        usernamePassword(credentialsId: host.getCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
+                        usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
                         host.setUser(user)
                         host.setPassword(password)
                     }
 
                     withCredentials([
-                        string(credentialsId: host.getCredentials(), variable: 'ip')]) {
+                        string(credentialsId: 'server-ip', variable: 'ip')]) {
                         host.setIp(ip)
                     }
             }
