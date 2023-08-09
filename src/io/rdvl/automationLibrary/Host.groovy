@@ -67,7 +67,7 @@ class Host implements Serializable {
     }
 
     @NonCPS
-    def getconfigCredentials() {
+    def getConfigCredentials() {
         return this.configCredentials
     }
 
