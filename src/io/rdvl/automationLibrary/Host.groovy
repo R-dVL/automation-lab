@@ -44,22 +44,18 @@ class Host implements Serializable {
                 pipeline.error("${name} | Not defined in Configuration file")
                 break
 
-            try {
-                // Retrieve info from Jenkins
-                // User & Password
-                pipeline.withCredentials([
-                    usernamePassword(credentialsId: configCredentials, usernameVariable: 'user', passwordVariable: 'password')]) {
-                        this.user = user
-                        this.password = password
-                }
+            // Retrieve info from Jenkins
+            // User & Password
+            pipeline.withCredentials([
+                usernamePassword(credentialsId: configCredentials, usernameVariable: 'user', passwordVariable: 'password')]) {
+                    this.user = user
+                    this.password = password
+            }
 
-                // IP
-                pipeline.withCredentials([
-                    string(credentialsId: configIp, variable: 'ip')]) {
-                        this.ip = ip
-                }
-            } catch (err) {
-                pipeline.throw
+            // IP
+            pipeline.withCredentials([
+                string(credentialsId: configIp, variable: 'ip')]) {
+                    this.ip = ip
             }
         }
     }
