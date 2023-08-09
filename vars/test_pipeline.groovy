@@ -14,16 +14,17 @@ def call() {
             stage('Host Setup'){
                 Host host = new Host(this, HOST)
                 print(host)
+                script{
+                    withCredentials([
+                        usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                        host.setUser(user)
+                        host.setPassword(password)
+                    }
 
-                withCredentials([
-                    usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
-                    host.setUser(user)
-                    host.setPassword(password)
-                }
-
-                withCredentials([
-                    string(credentialsId: 'server-ip', variable: 'ip')]) {
-                    host.setIp(ip)
+                    withCredentials([
+                        string(credentialsId: 'server-ip', variable: 'ip')]) {
+                        host.setIp(ip)
+                    }
                 }
             }
         } catch(Exception err) {
