@@ -8,6 +8,7 @@ def call() {
 
         Configuration cfg = new Configuration(env.WORKSPACE)
         CONFIG = cfg.getConfiguration()
+        println(CONFIG)
 
         try {
             stage('Test'){
