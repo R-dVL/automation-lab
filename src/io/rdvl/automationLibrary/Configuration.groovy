@@ -6,13 +6,11 @@ class Configuration {
     // Default params
     private def configuration
     private String configurationPath
-    private String workspace
 
-    Configuration (inputWorkspace) {
+    Configuration () {
         // Parse configuration json
         def jsonSlurper = new JsonSlurper()
-        this.workspace = inputWorkspace
-        this.configurationPath = "${workspace}/automation-lab/resources/configuration.json"
+        this.configurationPath = "/var/jenkins_home/workspace/Test-Pipeline@2/automation-lab/resources/configuration.json"
         this.configuration = jsonSlurper.parse(new File(configurationPath))
     }
 
