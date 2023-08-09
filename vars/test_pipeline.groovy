@@ -13,6 +13,7 @@ def call() {
 
             stage('Host Setup'){
                     Host host = new Host(this, HOST)
+                    print(host)
 
                     withCredentials([
                         usernamePassword(credentialsId: host.getCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
@@ -24,7 +25,6 @@ def call() {
                         string(credentialsId: host.getCredentials(), variable: 'ip')]) {
                         host.setIp(ip)
                     }
-                    print(host)
             }
 
             stage('Execute Command') {
