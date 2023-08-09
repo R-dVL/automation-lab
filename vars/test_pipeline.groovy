@@ -13,7 +13,7 @@ def call() {
                 cleanWs()
                 sh('git clone https://github.com/R-dVL/automation-lab.git')
                 def jsonSlurper = new JsonSlurper()
-                CONFIGURATION = jsonSlurper.parse(new File('./automation-lab/resources/configuration.json'))
+                CONFIGURATION = jsonSlurper.parse(new File('automation-lab/resources/configuration.json'))
             }
 
             stage('Host Setup'){
