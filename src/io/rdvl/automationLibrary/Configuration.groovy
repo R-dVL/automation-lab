@@ -12,7 +12,7 @@ class Configuration {
         // Parse configuration json
         def jsonSlurper = new JsonSlurper()
         this.workspace = System.getenv('WORKSPACE')
-        this.configurationPath = workspace + "/automation-lab/resources/configuration.json"
+        this.configurationPath = this.workspace + "/automation-lab/resources/configuration.json"
         this.configuration = jsonSlurper.parse(new File(configurationPath))
     }
 
