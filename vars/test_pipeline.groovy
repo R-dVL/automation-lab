@@ -15,15 +15,15 @@ def call() {
                     // Retrieve info from Jenkins
                     // User & Password
                     withCredentials([
-                        usernamePassword(credentialsId: "${host.getConfigCredentials()}", usernameVariable: 'user', passwordVariable: 'password')]) {
+                        usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
                             host.setUser(user)
                             host.setPassword(password)
                     }
 
                     // IP
                     withCredentials([
-                        string(credentialsId: "${host.getConfigIp()}", variable: 'ip')]) {
-                            host.setIp(ip)
+                        string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
+                            host.setIp(ip.toString())
                     }
 
                     print(host)
