@@ -45,39 +45,36 @@ class Host implements Serializable {
         }
 
         // Retrieve info from Jenkins
-        pipeline.steps {
-            pipeline.script {
-                // User & Password
-                pipeline.withCredentials([
-                    pipeline.usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
-                        this.user = user
-                        this.password = password
-                }
-                // IP
-                pipeline.withCredentials([
-                    pipeline.string(credentialsId: 'server-ip', variable: 'ip')]) {
-                        this.ip = ip
-                }
+        pipeline.script {
+            // User & Password
+            pipeline.withCredentials([
+                pipeline.usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                    this.user = user
+                    this.password = password
             }
+            // IP
+            pipeline.withCredentials([
+                pipeline.string(credentialsId: 'server-ip', variable: 'ip')]) {
+                    this.ip = ip
+            }
+        }
         }
     }
 
     def sshCommand(cmd){
-        pipeline.step{
-            pipeline.script {
-                // Remote params
-                def remote = [
-                    name = name
-                    host = ip
-                    user = user
-                    password = password
-                    port = 22
-                    allowAnyHosts = true
-                ]
+        pipeline.script {
+            // Remote params
+            def remote = [
+                name = name
+                host = ip
+                user = user
+                password = password
+                port = 22
+                allowAnyHosts = true
+            ]
 
-                // Execute command
-                pipeline.sshCommand remote: remote, command: cmd, sudo: false
-            }
+            // Execute command
+            pipeline.sshCommand remote: remote, command: cmd, sudo: false
         }
     }
 
