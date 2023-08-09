@@ -43,23 +43,14 @@ class Host implements Serializable {
         }
 
         // Retrieve user and password from Jenkins
-        pipeline.withCredentials([
-            pipeline.usernamePassword(
-                credentialsId: credentials,
-                usernameVariable: 'credentialsUser',
-                passwordVariable: 'credentialsPassword')
-        ]) {
-            this.user = credentialsUser
-            this.password = credentialsPassword
+        pipeline.withCredentials([pipeline.usernamePassword(credentialsId: credentials, usernameVariable: 'user', passwordVariable: 'password')]) {
+            this.user = user
+            this.password = password
         }
 
         // Retrieve Ip from Jenkins
-        pipeline.withCredentials([
-            pipeline.string(
-                credentialsId: ip,
-                variable: 'credentialsIp',)
-        ]) {
-            this.ip = credentialsIp
+        pipeline.withCredentials([pipeline.string(credentialsId: ip, variable: 'ip',)]) {
+            this.ip = ip
         }
     }
 
