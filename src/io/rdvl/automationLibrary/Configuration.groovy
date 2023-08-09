@@ -5,7 +5,7 @@ import groovy.json.JsonSlurper
 class Configuration {
     // Default params
     private def configuration
-    static final String configurationPath = '${steps.WORKSPACE}/automation-lab/resources/configuration.json'
+    static final String configurationPath = steps.WORKSPACE + '/automation-lab/resources/configuration.json'
 
     Configuration () {
         // Parse configuration json
