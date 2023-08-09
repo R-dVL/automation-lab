@@ -12,8 +12,8 @@ class Host {
         Configuration configJson = new Configuration()
         this.config = configJson.getConfiguration()
         this.name = hostName
-        this.ip = config.Hosts
-        this.credentials = config.Hosts
+        this.ip = config.Hosts.'${name}'.Ip
+        this.credentials = config.Hosts.'${name}'.Credentials
     }
 
     @Override
