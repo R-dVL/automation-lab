@@ -1,3 +1,5 @@
+package io.rdvl.automationLibrary
+
 import java.time.LocalDate;
 
 def call() {
