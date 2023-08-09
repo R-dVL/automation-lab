@@ -2,10 +2,9 @@ package io.rdvl.automationLibrary
 
 def call() {
     node {
-        environment {
-            Host host = new Host(this, HOST)
-        }
         try {
+            Host host = new Host(this, HOST)
+
             stage('Pipeline Setup') {
                 // Clean before build
                 cleanWs()
