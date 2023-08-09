@@ -43,7 +43,6 @@ class Host implements Serializable {
         }
 
         // Retrieve user and password from Jenkins
-        @NonCPS
         pipeline.withCredentials([
             usernamePassword(
                 credentialsId: credentials,
@@ -55,7 +54,6 @@ class Host implements Serializable {
         }
 
         // Retrieve Ip from Jenkins
-        @NonCPS
         pipeline.withCredentials([
             string(
                 credentialsId: ip,
