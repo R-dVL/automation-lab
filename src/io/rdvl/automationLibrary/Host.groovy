@@ -21,9 +21,11 @@ class Host implements Serializable {
         // Retrieve configuration
         def jsonSlurper = new JsonSlurper()
         this.configuration =  jsonSlurper.parse(new File("${pipeline.WORKSPACE}/automation-lab/resources/configuration.json"))
+        pipeline.print("Configuration: " + configuration)
 
         // Host selected
         this.name = hostName
+        pipeline.print("Host Name: " + name)
         
         // Get params from configuration
         switch(name){
@@ -38,7 +40,7 @@ class Host implements Serializable {
                 break
             
             default:
-                pipeline.error('Not defined in Configuration file')
+                pipeline.error("${name} not defined in Configuration file")
                 break
         }
     }
