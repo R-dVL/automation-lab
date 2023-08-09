@@ -3,11 +3,14 @@ package io.rdvl.automationLibrary
 import groovy.json.JsonSlurper
 
 class Configuration {
+    // Default params
     private def configuration
+    static final String configurationPath = '/var/jenkins_home/workspace/Test-Pipeline/automation-lab/resources/configuration.json'
 
     Configuration () {
+        // Parse configuration json
         def jsonSlurper = new JsonSlurper()
-        this.configuration = jsonSlurper.parse(new File('/var/jenkins_home/workspace/Test-Pipeline/automation-lab/resources/static_configuration.json'))
+        this.configuration = jsonSlurper.parse(new File(configurationPath))
     }
 
     @NonCPS
