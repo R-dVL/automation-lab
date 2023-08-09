@@ -58,7 +58,6 @@ class Host implements Serializable {
                     this.ip = ip
             }
         }
-        }
     }
 
     def sshCommand(cmd){
