@@ -81,6 +81,11 @@ class Host implements Serializable {
         this.password = password
     }
 
+    @NonCPS
+    def setIp(ip) {
+        this.ip = ip
+    }
+
     @Override
     @NonCPS
     public String toString() {

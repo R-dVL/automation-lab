@@ -23,7 +23,7 @@ def call() {
                     // IP
                     withCredentials([
                         string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
-                            host.setIp(ip.toString())
+                            host.setIp(ip)
                     }
 
                     print(host)
