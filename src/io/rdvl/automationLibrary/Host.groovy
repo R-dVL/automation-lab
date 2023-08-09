@@ -60,6 +60,7 @@ class Host implements Serializable {
         }
     }
 
+    @NonCPS
     def sshCommand(cmd){
         pipeline.script {
             // Remote params
