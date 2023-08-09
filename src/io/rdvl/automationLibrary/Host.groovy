@@ -63,10 +63,10 @@ class Host implements Serializable {
     def sshCommand(cmd) {
         // Remote params
         def remote = [:]
-        remote.name = this.name
-        remote.host = this.ip
-        remote.user = this.user
-        remote.password = this.password
+        remote.name = name
+        remote.host = ip
+        remote.user = user
+        remote.password = password
         remote.port = 22
         remote.allowAnyHosts = true
 
@@ -122,6 +122,6 @@ class Host implements Serializable {
     @Override
     @NonCPS
     public String toString() {
-        return "Name: ${name}\nIP: ${ip}\nCredentials: ${credentials}"
+        return "Name: ${name}\nIP: ${ip}\nCredentials: ${credentials}\nUser: ${user}\nPassword: ${password}\nIP: ${ip}"
     }
 }
