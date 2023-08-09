@@ -5,15 +5,15 @@ import java.time.LocalDate;
 def call() {
     node {
         try {
-            // Default Params
-            Host host = new Host(this, 'Server')
-            String fileName
-
             stage('Pipeline Setup') {
                 // Clean before build
                 cleanWs()
                 sh('git clone https://github.com/R-dVL/automation-lab.git')
             }
+
+            // Default Params
+            Host host = new Host(this, 'Server')
+            String fileName
 
             stage('Host Setup') {
                 script {

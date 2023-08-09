@@ -3,14 +3,14 @@ package io.rdvl.automationLibrary
 def call() {
     node {
         try {
-            // Default Params
-            Host host = new Host(this, HOST)
-
             stage('Pipeline Setup') {
                 // Clean before build
                 cleanWs()
                 sh('git clone https://github.com/R-dVL/automation-lab.git')
             }
+
+            // Default Params
+            Host host = new Host(this, HOST)
 
             stage('Host Setup') {
                 script {
