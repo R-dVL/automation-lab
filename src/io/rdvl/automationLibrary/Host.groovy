@@ -14,7 +14,7 @@ class Host {
     Host(hostName, workspace) {
         // Retrieve configuration
         def jsonSlurper = new JsonSlurper()
-        this.configuration =  jsonSlurper.parse(new File("${workspace}/automation-lab/resources/configuration.json")
+        this.configuration =  jsonSlurper.parse(new File("${workspace}/automation-lab/resources/configuration.json"))
 
         // Name selected when constructed
         this.name = hostName
