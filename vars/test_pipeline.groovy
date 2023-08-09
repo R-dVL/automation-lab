@@ -17,7 +17,7 @@ def call() {
             }
 
             stage('Host Setup'){
-                    Host host = new Host(HOST)
+                    Host host = new Host(HOST, CONFIGURATION)
                     print(host)
             }
         } catch(Exception err) {
