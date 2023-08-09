@@ -1,7 +1,5 @@
 package io.rdvl.automationLibrary
 
-import groovy.json.JsonSlurper
-
 def call() {
     node {
         try {

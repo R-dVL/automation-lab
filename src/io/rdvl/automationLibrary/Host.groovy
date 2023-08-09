@@ -1,6 +1,6 @@
 package io.rdvl.automationLibrary
 
-import groovy.json.JsonSlurper
+import groovy.json.JsonSlurperClassic
 
 class Host implements Serializable {
     // Pipeline Context
@@ -19,8 +19,8 @@ class Host implements Serializable {
         this.pipeline = pipeline
 
         // Retrieve configuration
-        def jsonSlurper = new JsonSlurper()
-        this.configuration =  jsonSlurper.parse(new File("${pipeline.WORKSPACE}/automation-lab/resources/configuration.json"))
+        def jsonSlurperClassic = new JsonSlurperClassic()
+        this.configuration =  jsonSlurperClassic.parse(new File("${pipeline.WORKSPACE}/automation-lab/resources/configuration.json"))
         pipeline.print("Configuration: " + configuration)
 
         // Host selected
