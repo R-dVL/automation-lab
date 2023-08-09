@@ -43,20 +43,6 @@ class Host implements Serializable {
             default:
                 pipeline.error("${name} | Not defined in Configuration file")
                 break
-
-            // Retrieve info from Jenkins
-            // User & Password
-            pipeline.withCredentials([
-                usernamePassword(credentialsId: configCredentials, usernameVariable: 'user', passwordVariable: 'password')]) {
-                    this.user = user
-                    this.password = password
-            }
-
-            // IP
-            pipeline.withCredentials([
-                string(credentialsId: configIp, variable: 'ip')]) {
-                    this.ip = ip
-            }
         }
     }
 
@@ -73,6 +59,26 @@ class Host implements Serializable {
 
         // Execute command
         pipeline.sshCommand remote: remote, command: cmd, sudo: false
+    }
+
+    @NonCPS
+    def getConfigIp() {
+        return this.configIp
+    }
+
+    @NonCPS
+    def getconfigCredentials() {
+        return this.configCredentials
+    }
+
+    @NonCPS
+    def setUser(user) {
+        this.user = user
+    }
+    
+    @NonCPS
+    def setUser(password) {
+        this.password = password
     }
 
     @Override

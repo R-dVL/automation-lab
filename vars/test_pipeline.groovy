@@ -11,8 +11,24 @@ def call() {
 
             stage('Host Setup'){
                 Host host = new Host(this, HOST)
-                print(host)
-                host.sshCommand('status')
+                script {
+                    // Retrieve info from Jenkins
+                    // User & Password
+                    pipeline.withCredentials([
+                        usernamePassword(credentialsId: host.getconfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
+                            host.setUser(user)
+                            host.setPassword(password)
+                    }
+
+                    // IP
+                    pipeline.withCredentials([
+                        string(credentialsId: host.getConfigIp, variable: 'ip')]) {
+                            host.setIp(ip)
+                    }
+
+                    print(host)
+                    host.sshCommand('status')
+                }
             }
         } catch(Exception err) {
             println("ALERT | Something went wrong")
