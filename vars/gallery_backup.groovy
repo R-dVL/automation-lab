@@ -19,7 +19,6 @@ def call() {
             String fileName = "gallery_backup_" + date.toString().replace('-', '_')
 
             currentBuild.displayName = "Gallery Backup"
-            currentBuild.description = date
 
             stage('Host Setup') {
                 script {
