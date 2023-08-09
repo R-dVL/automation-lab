@@ -2,51 +2,32 @@ import java.time.LocalDate;
 
 def call() {
     node {
-        environment{
-            HOST_NAME
-            HOST_IP
-            HOST_USER
-            HOST_PASSWORD
-        }
-
-        def remote = [:]
         String fileName
-
         try {
-            stage('Configure Host') {
-                // Configure env vars in function of the host selected
-                HOST_NAME = 'rdvl-server'
+            stage('Pipeline Setup') {
+                // Clean before build
+                cleanWs()
+                sh('git clone https://github.com/R-dVL/automation-lab.git')
+            }
 
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'server-credentials',
-                        usernameVariable: 'user',
-                        passwordVariable: 'password')
-                ]) {
-                    HOST_USER = user
-                    HOST_PASSWORD = password
+            stage('Host Setup'){
+                Host host = new Host(this, HOST)
+                script {
+                    // Retrieve info from Jenkins
+                    // User & Password
+                    withCredentials([
+                        usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
+                            host.setUser(user)
+                            host.setPassword(password)
+                    }
+
+                    // IP
+                    withCredentials([
+                        string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
+                            host.setIp(ip)
+                    }
+                    host.sshCommand(CMD)
                 }
-
-                withCredentials([
-                    string(
-                        credentialsId: 'server-ip',
-                        variable: 'ip',)
-                ]) {
-                    HOST_IP = ip
-                }
-                remote.name = 'rdvl-server'
-                remote.host = HOST_IP
-                remote.user = HOST_USER
-                remote.password = HOST_PASSWORD
-                remote.port = 22
-                remote.allowAnyHosts = true
-
-                // Define file name
-                LocalDate date = LocalDate.now();
-                fileName = "gallery_backup_" + date.toString().replace('-', '_')
-
-                // Build display name
-                currentBuild.displayName = "${HOST_NAME}: Backup - ${fileName}"
             }
 
             stage('Create Backup') {
@@ -69,13 +50,9 @@ def call() {
                 currentBuild.description = "${HOST_NAME}: Success"
             }
 
-        } catch (Exception e) {
-            // Build failed
-            currentBuild.description = "${HOST_NAME}: Failed executing command -> ${e}"
-            currentBuild.result = 'FAILURE'
-            println("ALERT | ${e.getMessage()}")
-            println("ERROR | ${e}")
-            error("Build Failure")
+        } catch(Exception err) {
+            println("ALERT | Something went wrong")
+            error("MESSAGE | ${err.getMessage()}")
         }
     }
 }
