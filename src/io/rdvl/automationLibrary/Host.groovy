@@ -43,9 +43,8 @@ class Host implements Serializable {
                 pipeline.error("${name} | Not defined in Configuration file")
                 break
         }
-
-        init()
     }
+
     @NonCPS
     def init() {
         // Retrieve info from Jenkins

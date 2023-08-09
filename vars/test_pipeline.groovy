@@ -12,6 +12,7 @@ def call() {
             stage('Host Setup'){
                 Host host = new Host(this, HOST)
                 print(host)
+                host.init()
                 /*
                 steps {
                     script {
