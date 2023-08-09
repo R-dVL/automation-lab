@@ -11,9 +11,6 @@ def call() {
 
             stage('Host Setup'){
                 Host host = new Host(this, HOST)
-            }
-
-            stage('Execute Command') {
                 host.sshCommand('status')
             }
         } catch(Exception err) {
