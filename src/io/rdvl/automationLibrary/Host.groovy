@@ -22,11 +22,9 @@ class Host implements Serializable {
         // Retrieve configuration
         def jsonSlurperClassic = new JsonSlurperClassic()
         this.configuration =  jsonSlurperClassic.parse(new File("${pipeline.WORKSPACE}/automation-lab/resources/configuration.json"))
-        pipeline.print("Configuration: " + configuration)
 
         // Host selected
         this.name = hostName
-        pipeline.print("Host Name: " + name)
         
         // Get params from configuration
         switch(name){
