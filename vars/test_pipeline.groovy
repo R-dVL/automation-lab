@@ -14,6 +14,7 @@ def call() {
             stage('Host Setup'){
                 Host host = new Host(this, HOST)
                 print(host)
+                /*
                 steps {
                     script {
                         withCredentials([
@@ -28,6 +29,7 @@ def call() {
                         }
                     }
                 }
+                */
             }
         } catch(Exception err) {
             println("ALERT | Something went wrong")

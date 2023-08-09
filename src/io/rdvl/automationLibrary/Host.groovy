@@ -40,8 +40,43 @@ class Host implements Serializable {
                 break
             
             default:
-                pipeline.error("${name} not defined in Configuration file")
+                pipeline.error("${name} | Not defined in Configuration file")
                 break
+        }
+
+        // Retrieve info from Jenkins
+        pipeline.steps {
+            pipeline.script {
+                // User & Password
+                pipeline.withCredentials([
+                    pipeline.usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                        this.user = user
+                        this.password = password
+                }
+                // IP
+                pipeline.withCredentials([
+                    pipeline.string(credentialsId: 'server-ip', variable: 'ip')]) {
+                        this.ip = ip
+                }
+            }
+        }
+    }
+
+    def sshCommand(cmd){
+        pipeline.step{
+            pipeline.script {
+                // Remote params
+                def remote = [:]
+                remote.name = name
+                remote.host = ip
+                remote.user = user
+                remote.password = password
+                remote.port = 22
+                remote.allowAnyHosts = true
+
+                // Execute command
+                pipeline.sshCommand remote: remote, command: cmd, sudo: false
+            }
         }
     }
 
