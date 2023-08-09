@@ -36,6 +36,30 @@ class Host {
                 this.ip = configuration.Hosts.RPi.Ip
                 this.credentials = configuration.Hosts.RPi.Credentials
                 break
+            
+            default:
+                pipeline.error('Not defined in Configuration file')
+                break
+        }
+
+        // Retrieve user and password from Jenkins
+        pipeline.withCredentials([
+            usernamePassword(
+                credentialsId: credentials,
+                usernameVariable: 'credentialsUser',
+                passwordVariable: 'credentialsPassword')
+        ]) {
+            this.user = credentialsUser
+            this.password = credentialsPassword
+        }
+
+        // Retrieve Ip from Jenkins
+        pipeline.withCredentials([
+            string(
+                credentialsId: ip,
+                variable: 'credentialsIp',)
+        ]) {
+            this.ip = credentialsIp
         }
     }
 
