@@ -6,7 +6,7 @@ def call() {
     node {
         try {
             // Default Params
-            Host host = new Host(this, HOST)
+            Host host = new Host(this, 'Server')
             String fileName
 
             stage('Pipeline Setup') {
