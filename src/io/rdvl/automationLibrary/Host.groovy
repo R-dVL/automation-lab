@@ -19,8 +19,6 @@ class Host {
             case 'RPi':
                 this.ip = config.Hosts.RPi.Ip
                 this.credentials = config.Hosts.RPi.Credentials
-            default:
-                error('Not defined in configuration.')
         }
     }
 
