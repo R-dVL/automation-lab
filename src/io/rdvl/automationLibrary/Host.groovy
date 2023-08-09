@@ -11,11 +11,10 @@ class Host {
     private String password
     private def configuration
 
-    Host(hostName, config) {
+    Host(hostName, workspace) {
         // Retrieve configuration
         def jsonSlurper = new JsonSlurper()
-
-        this.configuration =  jsonSlurper.parse(config)
+        this.configuration =  jsonSlurper.parse(new File("${workspace}/automation-lab/resources/configuration.json")
 
         // Name selected when constructed
         this.name = hostName
