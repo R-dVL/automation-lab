@@ -28,6 +28,9 @@ class Host {
                 this.ip = config.Hosts.RPi.Ip
                 this.credentials = config.Hosts.RPi.Credentials
                 break
+
+            default:
+                steps.error('Not defined in configuration')
         }
     }
 
