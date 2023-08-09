@@ -34,11 +34,7 @@ def call() {
             }
 
             stage('Execute Command'){
-                def result = host.sshCommand(CMD)
-
-                if (result != 0) {
-                    print(result)
-                }
+                result = host.sshCommand(CMD)
             }
         } catch(Exception err) {
             println("ALERT | Something went wrong")

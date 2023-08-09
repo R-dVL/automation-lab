@@ -56,8 +56,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        def result = pipeline.sshCommand remote: remote, command: cmd, sudo: false
-        return result
+        pipeline.sshCommand remote: remote, command: cmd, sudo: false
     }
 
     @NonCPS
