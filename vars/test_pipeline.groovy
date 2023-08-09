@@ -14,14 +14,14 @@ def call() {
                 script {
                     // Retrieve info from Jenkins
                     // User & Password
-                    pipeline.withCredentials([
+                    withCredentials([
                         usernamePassword(credentialsId: "${host.getConfigCredentials()}", usernameVariable: 'user', passwordVariable: 'password')]) {
                             host.setUser(user)
                             host.setPassword(password)
                     }
 
                     // IP
-                    pipeline.withCredentials([
+                    withCredentials([
                         string(credentialsId: "${host.getConfigIp()}", variable: 'ip')]) {
                             host.setIp(ip)
                     }
