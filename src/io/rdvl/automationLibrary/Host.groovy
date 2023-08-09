@@ -61,20 +61,18 @@ class Host implements Serializable {
 
     @NonCPS
     def sshCommand(cmd) {
-        pipeline.script {
-            // Remote params
-            def remote = [
-                name = name
-                host = ip
-                user = user
-                password = password
-                port = 22
-                allowAnyHosts = true
-            ]
+        // Remote params
+        def remote = [
+            name = name
+            host = ip
+            user = user
+            password = password
+            port = 22
+            allowAnyHosts = true
+        ]
 
-            // Execute command
-            pipeline.sshCommand remote: remote, command: cmd, sudo: false
-        }
+        // Execute command
+        pipeline.sshCommand remote: remote, command: cmd, sudo: false
     }
 
     @NonCPS

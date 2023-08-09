@@ -11,23 +11,10 @@ def call() {
 
             stage('Host Setup'){
                 Host host = new Host(this, HOST)
-                print(host)
-                /*
-                steps {
-                    script {
-                        withCredentials([
-                            usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
-                            host.setUser(user)
-                            host.setPassword(password)
-                        }
+            }
 
-                        withCredentials([
-                            string(credentialsId: 'server-ip', variable: 'ip')]) {
-                            host.setIp(ip)
-                        }
-                    }
-                }
-                */
+            stage('Execute Command') {
+                host.sshCommand('status')
             }
         } catch(Exception err) {
             println("ALERT | Something went wrong")
