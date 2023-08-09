@@ -8,7 +8,8 @@ class Host implements Serializable {
 
     // Default Params
     private String name
-    private String credentials
+    private String credentialsUserPassword
+    private String credentialsIp
     private String ip
     private String user
     private String password
@@ -30,13 +31,13 @@ class Host implements Serializable {
         // Get params from configuration
         switch(name){
             case 'Server':
-                this.ip = configuration.Hosts.Server.Ip
-                this.credentials = configuration.Hosts.Server.Credentials
+                this.credentialsIp = configuration.Hosts.Server.Ip
+                this.credentialsUserPassword = configuration.Hosts.Server.Credentials
                 break
 
             case 'RPi':
-                this.ip = configuration.Hosts.RPi.Ip
-                this.credentials = configuration.Hosts.RPi.Credentials
+                this.credentialsIp = configuration.Hosts.RPi.Ip
+                this.credentialsUserPassword = configuration.Hosts.RPi.Credentials
                 break
             
             default:
@@ -46,14 +47,14 @@ class Host implements Serializable {
             // Retrieve info from Jenkins
             // User & Password
             pipeline.withCredentials([
-                pipeline.usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                pipeline.usernamePassword(credentialsId: credentialsUserPassword, usernameVariable: 'user', passwordVariable: 'password')]) {
                     this.user = user
                     this.password = password
             }
 
             // IP
             pipeline.withCredentials([
-                pipeline.string(credentialsId: 'server-ip', variable: 'ip')]) {
+                pipeline.string(credentialsId: credentialsIp, variable: 'ip')]) {
                     this.ip = ip
             }
         }
