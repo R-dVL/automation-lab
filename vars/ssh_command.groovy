@@ -38,7 +38,7 @@ def call() {
             }
         } catch(Exception err) {
             println("ALERT | Something went wrong")
-            error("MESSAGE | ${err.getMessage()}")
+            println("MESSAGE | ${err.getMessage()}")
         }
     }
 }
