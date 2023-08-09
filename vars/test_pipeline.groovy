@@ -12,34 +12,18 @@ def call() {
             }
 
             stage('Host Setup'){
-                    Host host = new Host(this, HOST)
-                    print(host)
+                Host host = new Host(this, HOST)
+                print(host)
 
-                    withCredentials([
-                        usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
-                        host.setUser(user)
-                        host.setPassword(password)
-                    }
+                withCredentials([
+                    usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                    host.setUser(user)
+                    host.setPassword(password)
+                }
 
-                    withCredentials([
-                        string(credentialsId: 'server-ip', variable: 'ip')]) {
-                        host.setIp(ip)
-                    }
-            }
-
-            stage('Execute Command') {
-                script {
-                    // Remote params
-                    def remote = [:]
-                    remote.name = host.getName()
-                    remote.host = host.getIp()
-                    remote.user = host.getUser()
-                    remote.password = host.getPassword()
-                    remote.port = 22
-                    remote.allowAnyHosts = true
-
-                    // Execute command
-                    sshCommand remote: remote, command: "systemctl status", sudo: false
+                withCredentials([
+                    string(credentialsId: 'server-ip', variable: 'ip')]) {
+                    host.setIp(ip)
                 }
             }
         } catch(Exception err) {
