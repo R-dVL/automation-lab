@@ -12,7 +12,7 @@ def call() {
             }
 
             stage('Host Setup'){
-                    Host host = new Host(HOST, WORKSPACE)
+                    Host host = new Host(this, HOST)
                     print(host)
             }
         } catch(Exception err) {

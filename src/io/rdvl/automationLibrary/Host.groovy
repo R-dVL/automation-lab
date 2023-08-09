@@ -3,6 +3,9 @@ package io.rdvl.automationLibrary
 import groovy.json.JsonSlurper
 
 class Host {
+    // Pipeline Context
+    private def pipeline
+
     // Default Params
     private String name
     private String credentials
@@ -11,12 +14,15 @@ class Host {
     private String password
     private def configuration
 
-    Host(hostName, workspace) {
+    Host(context, hostName) {
+        // Pipeline context setup
+        this.pipeline = context
+
         // Retrieve configuration
         def jsonSlurper = new JsonSlurper()
-        this.configuration =  jsonSlurper.parse(new File("${workspace}/automation-lab/resources/configuration.json"))
+        this.configuration =  jsonSlurper.parse(new File("${pipeline.WORKSPACE}/automation-lab/resources/configuration.json"))
 
-        // Name selected when constructed
+        // Host selected
         this.name = hostName
         
         // Get params from configuration
