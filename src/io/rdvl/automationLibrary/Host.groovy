@@ -47,7 +47,7 @@ class Host implements Serializable {
     }
 
     @NonCPS
-    def sshCommand(CMD) {
+    def sshCommand(cmd) {
         // Remote params
         def remote = [:]
         remote.name = name

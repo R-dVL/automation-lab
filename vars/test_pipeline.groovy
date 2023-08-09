@@ -27,7 +27,7 @@ def call() {
                     }
 
                     print(host)
-                    host.sshCommand('status')
+                    host.sshCommand(CMD)
                 }
             }
         } catch(Exception err) {
