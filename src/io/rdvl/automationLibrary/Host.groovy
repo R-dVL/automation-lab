@@ -16,9 +16,12 @@ class Host {
             case 'Server':
                 this.ip = config.Hosts.Server.Ip
                 this.credentials = config.Hosts.Server.Credentials
+                break
+
             case 'RPi':
                 this.ip = config.Hosts.RPi.Ip
                 this.credentials = config.Hosts.RPi.Credentials
+                break
         }
     }
 
