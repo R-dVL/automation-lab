@@ -2,6 +2,10 @@ package io.rdvl.automationLibrary
 
 def call() {
     node {
+        environment {
+            WORKSPACE = env.WORKSPACE
+        }
+
         try {
             stage('Test'){
                     // Clean before build
