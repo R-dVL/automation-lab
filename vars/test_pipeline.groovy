@@ -11,8 +11,8 @@ def call() {
                     print(host)
             }
         } catch(Exception err) {
-            println('ALERT | ${err.getMessage()}')
-            error('${err}')
+            println("ALERT | ${err.getMessage()}")
+            error("${err}")
         }
     }
 }
