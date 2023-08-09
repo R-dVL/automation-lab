@@ -41,27 +41,6 @@ class Host implements Serializable {
                 pipeline.error('Not defined in Configuration file')
                 break
         }
-
-        // Retrieve user and password from Jenkins
-        setUserPassword()
-
-        // Retrieve Ip from Jenkins
-        setIp()
-    }
-
-    @NonCPS
-    def setUserPassword() {
-        pipeline.withCredentials([pipeline.usernamePassword(credentialsId: credentials, usernameVariable: 'user', passwordVariable: 'password')]) {
-            this.user = user
-            this.password = password
-        }
-    }
-
-    @NonCPS
-    def setIp(){
-            pipeline.withCredentials([pipeline.string(credentialsId: ip, variable: 'ip',)]) {
-            this.ip = ip
-        }
     }
 
     @NonCPS
@@ -80,13 +59,28 @@ class Host implements Serializable {
     }
 
     @NonCPS
+    public def setIp(ip){
+        this.ip
+    }
+
+    @NonCPS
     public def getUser(){
         return this.user
     }
 
     @NonCPS
+    public def setUser(user){
+        this.user
+    }
+
+    @NonCPS
     public def getPassword(){
         return this.password
+    }
+
+    @NonCPS
+    public def setPassword(){
+        this.password
     }
 
     @NonCPS
