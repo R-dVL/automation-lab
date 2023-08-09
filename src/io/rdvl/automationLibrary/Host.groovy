@@ -42,19 +42,15 @@ class Host implements Serializable {
             default:
                 pipeline.error("${name} | Not defined in Configuration file")
                 break
-        }
-    }
 
-    @NonCPS
-    def init() {
-        // Retrieve info from Jenkins
-        pipeline.script {
+            // Retrieve info from Jenkins
             // User & Password
             pipeline.withCredentials([
                 pipeline.usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
                     this.user = user
                     this.password = password
             }
+
             // IP
             pipeline.withCredentials([
                 pipeline.string(credentialsId: 'server-ip', variable: 'ip')]) {
