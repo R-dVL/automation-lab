@@ -75,51 +75,6 @@ class Host implements Serializable {
         pipeline.sshCommand remote: remote, command: cmd, sudo: false
     }
 
-    @NonCPS
-    public def getName(){
-        return this.name
-    }
-
-    @NonCPS
-    public def getCredentials(){
-        return this.credentials
-    }
-
-    @NonCPS
-    public def getIp(){
-        return this.ip
-    }
-
-    @NonCPS
-    public def setIp(ip){
-        this.ip
-    }
-
-    @NonCPS
-    public def getUser(){
-        return this.user
-    }
-
-    @NonCPS
-    public def setUser(user){
-        this.user
-    }
-
-    @NonCPS
-    public def getPassword(){
-        return this.password
-    }
-
-    @NonCPS
-    public def setPassword(){
-        this.password
-    }
-
-    @NonCPS
-    public def getConfiguration(){
-        return this.configuration
-    }
-
     @Override
     @NonCPS
     public String toString() {
