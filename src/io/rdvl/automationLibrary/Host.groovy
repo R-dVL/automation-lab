@@ -44,6 +44,10 @@ class Host implements Serializable {
                 break
         }
 
+        init()
+    }
+    @NonCPS
+    def init() {
         // Retrieve info from Jenkins
         pipeline.script {
             // User & Password
@@ -61,7 +65,7 @@ class Host implements Serializable {
     }
 
     @NonCPS
-    def sshCommand(cmd){
+    def sshCommand(cmd) {
         pipeline.script {
             // Remote params
             def remote = [
