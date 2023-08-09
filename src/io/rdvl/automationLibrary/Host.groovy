@@ -1,5 +1,7 @@
 package io.rdvl.automationLibrary
 
+import groovy.json.JsonSlurper
+
 class Host {
     // Default Params
     private String name
@@ -11,7 +13,9 @@ class Host {
 
     Host(hostName, config) {
         // Retrieve configuration
-        this.configuration = config
+        def jsonSlurper = new JsonSlurper()
+
+        this.configuration =  jsonSlurper.parse(config)
 
         // Name selected when constructed
         this.name = hostName
