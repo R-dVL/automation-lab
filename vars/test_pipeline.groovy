@@ -1,12 +1,22 @@
 package io.rdvl.automationLibrary
 
+import groovy.json.JsonSlurper
+
 def call() {
     node {
+        environment {
+            CONFIGURATION
+        }
         try {
-            stage('Test'){
-                    // Clean before build
-                    cleanWs()
-                    sh('git clone https://github.com/R-dVL/automation-lab.git')
+            stage('Pipeline Setup') {
+                // Clean before build
+                cleanWs()
+                sh('git clone https://github.com/R-dVL/automation-lab.git')
+                def jsonSlurper = new JsonSlurper()
+                CONFIGURATION = jsonSlurper.parse(new File('./automation-lab/resources/configuration.json'))
+            }
+
+            stage('Host Setup'){
                     Host host = new Host(HOST)
                     print(host)
             }

@@ -7,12 +7,11 @@ class Host {
     private String ip
     private String user
     private String password
-    private def config
+    private def configuration
 
-    Host(hostName) {
+    Host(hostName, config) {
         // Retrieve configuration
-        Configuration configJson = new Configuration()
-        this.config = configJson.getConfiguration()
+        this.configuration = config
 
         // Name selected when constructed
         this.name = hostName
@@ -20,13 +19,13 @@ class Host {
         // Get params from configuration
         switch(name){
             case 'Server':
-                this.ip = config.Hosts.Server.Ip
-                this.credentials = config.Hosts.Server.Credentials
+                this.ip = configuration.Hosts.Server.Ip
+                this.credentials = configuration.Hosts.Server.Credentials
                 break
 
             case 'RPi':
-                this.ip = config.Hosts.RPi.Ip
-                this.credentials = config.Hosts.RPi.Credentials
+                this.ip = configuration.Hosts.RPi.Ip
+                this.credentials = configuration.Hosts.RPi.Credentials
                 break
         }
     }
@@ -57,8 +56,8 @@ class Host {
     }
 
     @NonCPS
-    public def getConfig(){
-        return this.config
+    public def getConfiguration(){
+        return this.configuration
     }
 
     @Override
