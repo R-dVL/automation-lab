@@ -44,7 +44,7 @@ class Host {
 
         // Retrieve user and password from Jenkins
         pipeline.withCredentials([
-            usernamePassword(
+            pipeline.usernamePassword(
                 credentialsId: credentials,
                 usernameVariable: 'credentialsUser',
                 passwordVariable: 'credentialsPassword')
@@ -55,7 +55,7 @@ class Host {
 
         // Retrieve Ip from Jenkins
         pipeline.withCredentials([
-            string(
+            pipeline.string(
                 credentialsId: ip,
                 variable: 'credentialsIp',)
         ]) {
