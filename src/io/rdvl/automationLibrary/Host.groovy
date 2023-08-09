@@ -20,8 +20,8 @@ class Host {
         // Get params from configuration
         switch(name){
             case 'Server':
-                this.ip = config.Hosts."${name}".Ip
-                this.credentials = config.Hosts."{name}".Credentials
+                this.ip = config.Hosts.Server.Ip
+                this.credentials = config.Hosts.Server.Credentials
                 break
 
             case 'RPi':
