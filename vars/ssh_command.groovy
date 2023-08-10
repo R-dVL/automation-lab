@@ -12,10 +12,16 @@ def call() {
             stage('Pipeline Setup') {
                 // Constants instance
                 constants = Constants.getInstance()
+
                 // Clean before build
                 cleanWs()
+
                 // Clone Repo
-                sh("git clone ${constants.repoURL}")
+                git(
+                    url: "${constants.repoURL}",
+                    credentialsId: 'github-token',
+                    branch: 'master'
+                )
 
                 // Retrieve Configuration
                 def jsonSlurperClassic = new JsonSlurperClassic()

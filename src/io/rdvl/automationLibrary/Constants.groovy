@@ -6,7 +6,7 @@ class Constants {
 
     // Constants
     static final String repoURL = 'https://github.com/R-dVL/automationLibrary.git'
-    static final String configPath = '/automationLibrary/resources/configuration.json'
+    static final String configPath = '/resources/configuration.json'
 
     // Singleton constructor
     private Constants () {}
