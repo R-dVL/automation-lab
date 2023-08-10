@@ -47,15 +47,16 @@ def call() {
                         string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
                             host.setIp(ip)
                     }
+                    println(host)
                 }
             }
 
             stage('Create Backup') {
-                host.sshCommand('tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery')
+                host.sshCommand("tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
             }
 
             stage('Delete Old Backups') {
-                host.sshCommand('find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +')
+                host.sshCommand("find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
             }
 
         } catch(Exception err) {
