@@ -1,11 +1,17 @@
 package io.rdvl.automationLibrary
 
+import groovy.json.JsonSlurperClassic
+
 def call() {
     node {
         // Environment vars
         environment {
+            configuration
             constants
         }
+
+        // Retrieve Configuration
+        configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
 
         // Constants instance
         constants = Constants.getInstance()

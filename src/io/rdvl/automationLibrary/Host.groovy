@@ -20,8 +20,7 @@ class Host implements Serializable {
         this.pipeline = pipeline
 
         // Retrieve configuration
-        def jsonSlurperClassic = new JsonSlurperClassic()
-        this.configuration =  jsonSlurperClassic.parse(new File("${pipeline.WORKSPACE}${pipeline.constants.configPath}"))
+        this.configuration = pipeline.configuration
 
         // Host selected
         this.name = hostName
