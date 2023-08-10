@@ -2,9 +2,14 @@ package io.rdvl.automationLibrary
 
 def call() {
     node {
+        // Environment vars
         environment {
-            constants = Constants.getInstance()
+            constants
         }
+
+        // Constants instance
+        constants = Constants.getInstance()
+
         try {
             stage('Pipeline Setup') {
                 // Clean before build
