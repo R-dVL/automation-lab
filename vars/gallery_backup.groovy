@@ -49,7 +49,6 @@ def call() {
             }
 
             stage('Create Backup') {
-                // Command
                 host.sshCommand('tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery')
             }
 

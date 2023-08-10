@@ -52,7 +52,6 @@ def call() {
         } catch(Exception err) {
             println("ALERT | Something went wrong")
             println("ERROR | Message: ${err.getMessage()}")
-            throw err
         }
     }
 }
