@@ -1,10 +1,23 @@
 package io.rdvl.automationLibrary
 
 class Constants {
+    // Singleton class to store constants
+    private static Constants instance
+
+    // Constants
     static final String repoURL = 'https://github.com/R-dVL/automationLibrary.git'
     static final String configPath = '/automationLibrary/resources/configuration.json'
 
-    Constants () {}
+    // Singleton constructor
+    private Constants () {}
+
+    @NonCPS
+    static Constants getInstance() {
+        if (instance == null) {
+            instance = new Constants()
+        }
+        return instance
+    }
 
     @Override
     @NonCPS

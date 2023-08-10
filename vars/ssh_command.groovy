@@ -1,10 +1,12 @@
 package io.rdvl.automationLibrary
 
 def call() {
+
+    def constants = Constants.getInstance()
+
     node {
         try {
             stage('Pipeline Setup') {
-                Constants constants = new Constants()
                 // Clean before build
                 cleanWs()
                 // Clone Repo

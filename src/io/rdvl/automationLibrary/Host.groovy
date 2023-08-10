@@ -16,13 +16,12 @@ class Host implements Serializable {
     private def configuration
 
     Host(pipeline, hostName) {
-        Constants constants = new Constants()
         // Pipeline context setup
         this.pipeline = pipeline
 
         // Retrieve configuration
         def jsonSlurperClassic = new JsonSlurperClassic()
-        this.configuration =  jsonSlurperClassic.parse(new File("${pipeline.WORKSPACE}${constants.configPath}"))
+        this.configuration =  jsonSlurperClassic.parse(new File("${pipeline.WORKSPACE}${pipeline.constants.configPath}"))
 
         // Host selected
         this.name = hostName
