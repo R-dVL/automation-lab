@@ -1,7 +1,5 @@
 package io.rdvl.automationLibrary
 
-import groovy.json.JsonSlurperClassic
-
 class Host implements Serializable {
     // Pipeline Context
     private def pipeline
