@@ -4,9 +4,11 @@ def call() {
     node {
         try {
             stage('Pipeline Setup') {
+                Constants constants = new Constants()
                 // Clean before build
                 cleanWs()
-                sh('git clone https://github.com/R-dVL/automation-lab.git')
+                // Clone Repo
+                sh("git clone ${constants.repoURL}")
             }
 
             // Default Params

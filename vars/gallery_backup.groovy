@@ -9,7 +9,7 @@ def call() {
                 // Clean before build
                 cleanWs()
                 // Clone repo
-                sh('git clone https://github.com/R-dVL/automation-lab.git')
+                sh('git clone https://github.com/R-dVL/automationLibrary.git')
             }
 
             // Default Params
