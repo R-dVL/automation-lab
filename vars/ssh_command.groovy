@@ -11,6 +11,7 @@ def call() {
         }
 
         // Retrieve Configuration
+        def jsonSlurperClassic = new JsonSlurperClassic()
         configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
 
         // Constants instance
