@@ -25,7 +25,7 @@ class Host implements Serializable {
 
         // Host selected
         this.name = hostName
-        
+
         // Get params from configuration
         switch(name){
             case 'Server':
@@ -37,7 +37,7 @@ class Host implements Serializable {
                 this.configIp = configuration.Hosts.RPi.Ip
                 this.configCredentials = configuration.Hosts.RPi.Credentials
                 break
-            
+
             default:
                 pipeline.error("${name} | Not defined in Configuration file")
                 break
@@ -73,7 +73,7 @@ class Host implements Serializable {
     def setUser(user) {
         this.user = user
     }
-    
+
     @NonCPS
     def setPassword(password) {
         this.password = password
