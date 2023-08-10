@@ -4,25 +4,22 @@ import groovy.json.JsonSlurperClassic
 
 def call() {
     node {
-        // Environment vars
         environment {
             constants
             configuration
         }
-
-        // Constants instance
-        constants = Constants.getInstance()
-
-        // Retrieve Configuration
-        def jsonSlurperClassic = new JsonSlurperClassic()
-        configuration = jsonSlurperClassic.parse(new File("/resources/configuration.json"))
-
         try {
             stage('Pipeline Setup') {
+                // Constants instance
+                constants = Constants.getInstance()
                 // Clean before build
                 cleanWs()
                 // Clone Repo
                 sh("git clone ${constants.repoURL}")
+
+                // Retrieve Configuration
+                def jsonSlurperClassic = new JsonSlurperClassic()
+                configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
             }
 
             // Default Params
