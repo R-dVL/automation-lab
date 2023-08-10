@@ -4,12 +4,22 @@ import java.time.LocalDate;
 
 def call() {
     node {
+        environment {
+            constants
+            configuration
+        }
         try {
             stage('Pipeline Setup') {
+                // Constants instance
+                constants = Constants.getInstance()
                 // Clean before build
                 cleanWs()
-                // Clone repo
-                sh('git clone https://github.com/R-dVL/automationLibrary.git')
+                // Clone Repo
+                sh("git clone ${constants.repoURL}")
+
+                // Retrieve Configuration
+                def jsonSlurperClassic = new JsonSlurperClassic()
+                configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
             }
 
             // Default Params
