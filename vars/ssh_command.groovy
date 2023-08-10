@@ -6,16 +6,16 @@ def call() {
     node {
         // Environment vars
         environment {
-            configuration
             constants
+            configuration
         }
+
+        // Constants instance
+        constants = Constants.getInstance()
 
         // Retrieve Configuration
         def jsonSlurperClassic = new JsonSlurperClassic()
         configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
-
-        // Constants instance
-        constants = Constants.getInstance()
 
         try {
             stage('Pipeline Setup') {
