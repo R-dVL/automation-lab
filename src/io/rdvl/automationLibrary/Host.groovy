@@ -20,7 +20,7 @@ class Host implements Serializable {
         this.pipeline = pipeline
 
         // Retrieve configuration
-        this.configuration = pipeline.configuration
+        //this.configuration = pipeline.configuration
 
         // Host selected
         this.name = hostName
@@ -28,13 +28,13 @@ class Host implements Serializable {
         // Get params from configuration
         switch(name){
             case 'Server':
-                this.configIp = configuration.Hosts.Server.Ip
-                this.configCredentials = configuration.Hosts.Server.Credentials
+                this.configIp = pipeline.configuration.Hosts.Server.Ip
+                this.configCredentials = pipeline.configuration.Hosts.Server.Credentials
                 break
 
             case 'RPi':
-                this.configIp = configuration.Hosts.RPi.Ip
-                this.configCredentials = configuration.Hosts.RPi.Credentials
+                this.configIp = pipeline.configuration.Hosts.RPi.Ip
+                this.configCredentials = pipeline.configuration.Hosts.RPi.Credentials
                 break
 
             default:
