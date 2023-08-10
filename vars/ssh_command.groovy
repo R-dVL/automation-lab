@@ -15,7 +15,7 @@ def call() {
 
         // Retrieve Configuration
         def jsonSlurperClassic = new JsonSlurperClassic()
-        configuration = jsonSlurperClassic.parse(new File(".${constants.configPath}"))
+        configuration = jsonSlurperClassic.parse(new File("/resources/configuration.json"))
 
         try {
             stage('Pipeline Setup') {
