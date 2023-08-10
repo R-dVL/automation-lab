@@ -13,14 +13,10 @@ class Host implements Serializable {
     private String ip
     private String user
     private String password
-    private def configuration
 
     Host(pipeline, hostName) {
         // Pipeline context setup
         this.pipeline = pipeline
-
-        // Retrieve configuration
-        //this.configuration = pipeline.configuration
 
         // Host selected
         this.name = hostName

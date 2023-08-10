@@ -43,6 +43,8 @@ def call() {
                         string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
                             host.setIp(ip)
                     }
+
+                    println(host)
                 }
             }
 
