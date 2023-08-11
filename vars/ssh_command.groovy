@@ -1,4 +1,4 @@
-package com.github.R-dVL.automationLibrary
+package com.github.rdvl.automationLibrary
 
 import groovy.json.JsonSlurperClassic
 

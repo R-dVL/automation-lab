@@ -1,4 +1,4 @@
-package com.github.R-dVL.automationLibrary
+package com.github.rdvl.automationLibrary
 
 class Host implements Serializable {
     // Pipeline Context

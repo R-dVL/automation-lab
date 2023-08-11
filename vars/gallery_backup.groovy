@@ -1,4 +1,4 @@
-package com.github.R-dVL.automationLibrary
+package com.github.rdvl.automationLibrary
 
 import java.time.LocalDate;
 import groovy.json.JsonSlurperClassic
