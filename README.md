@@ -8,11 +8,12 @@ Shared library for training and device maintenance purposes
 |   +- configuration.json
 |
 +- src                                      # Groovy source files (Classes)
-|   +- io
-|       +- rdvl
-|           +- automationLibrary
-|               +- Host.groovy
-|               +- Constants.groovy
+|   +- com
+|       +- github
+|           +- rdvl
+|               +- automationLibrary
+|                   +- Host.groovy
+|                   +- Constants.groovy
 |
 +- vars                                     # Pipelines
 |   +- gallery_backup.groovy
