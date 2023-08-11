@@ -1,4 +1,4 @@
-package io.rdvl.automationLibrary
+package com.github.R-dVL.automationLibrary
 
 class Constants {
     // Singleton class to store constants
