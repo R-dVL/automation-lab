@@ -12,7 +12,7 @@ Shared library for training and device maintenance purposes
 |       +- rdvl
 |           +- automationLibrary
 |               +- Host.groovy
-                +- Constants.groovy
+|               +- Constants.groovy
 |
 +- vars                                     # Pipelines
 |   +- gallery_backup.groovy
