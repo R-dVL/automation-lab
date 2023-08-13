@@ -52,7 +52,7 @@ def call() {
             }
 
             stage('Execute Command'){
-                String cmd = "docker ${ONOFF} cat-detector && docker ps"
+                String cmd = "docker ${ONOFF} cat-detector"
                 host.sshCommand(cmd)
             }
         } catch(Exception err) {
