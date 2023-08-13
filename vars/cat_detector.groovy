@@ -29,7 +29,7 @@ def call() {
             }
 
             // Default Params
-            Host host = new Host(this, 'RPi')
+            Host host = new Host(this, HOST)
 
             currentBuild.displayName = "Cat Detector - " + ONOFF
 
