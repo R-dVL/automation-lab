@@ -53,7 +53,7 @@ def call() {
             }
 
             stage('Execute Command'){
-                result = host.sshCommand(CMD)
+                host.sshCommand(CMD)
             }
         } catch(Exception err) {
             println("ALERT | Something went wrong")
