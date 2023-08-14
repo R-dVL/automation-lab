@@ -26,7 +26,6 @@ def call() {
             configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
             // Default Params
             Host host = new Host(this, HOST)
-            print(host)
             // Build Name
             currentBuild.displayName = "SSH Command - " + HOST
             currentBuild.description = CMD
@@ -40,6 +39,9 @@ def call() {
                             host.setUser(user)
                             host.setPassword(password)
                     }
+                }
+
+                script {
                     // IP
                     withCredentials([
                         string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
@@ -48,7 +50,7 @@ def call() {
                 }
             }
 
-            stage('Execute Command'){
+            stage('Execute Command') {
                 host.sshCommand(CMD)
             }
 
