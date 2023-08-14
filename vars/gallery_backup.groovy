@@ -42,7 +42,6 @@ def call() {
                             host.setUser(user)
                             host.setPassword(password)
                     }
-
                     // IP
                     withCredentials([
                         string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
