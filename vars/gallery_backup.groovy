@@ -6,36 +6,32 @@ import groovy.json.JsonSlurperClassic
 
 def call() {
     node {
+        // Environment variables
         environment {
             constants
             configuration
         }
+        // Pipeline error control
         try {
-            stage('Pipeline Setup') {
-                // Constants instance
-                constants = Constants.getInstance()
-
-                // Clean before build
-                cleanWs()
-
-                // Clone Repo
-                git(
-                    url: "${constants.repoURL}",
-                    credentialsId: 'github-token',
-                    branch: 'master'
-                )
-
-                // Retrieve Configuration
-                def jsonSlurperClassic = new JsonSlurperClassic()
-                configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
-            }
-
+            // Constants instance
+            constants = Constants.getInstance()
+            // Clean before build
+            cleanWs()
+            // Clone Repo
+            git(
+                url: "${constants.repoURL}",
+                credentialsId: 'github-token',
+                branch: 'master'
+            )
+            // Retrieve Configuration
+            def jsonSlurperClassic = new JsonSlurperClassic()
+            configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
             // Default Params
             Host host = new Host(this, 'Server')
-
+            // Define file name
             LocalDate date = LocalDate.now();
             String fileName = "gallery_backup_" + date.toString().replace('-', '_')
-
+            // Build name
             currentBuild.displayName = "Gallery Backup"
 
             stage('Host Setup') {
@@ -67,6 +63,7 @@ def call() {
         } catch(Exception err) {
             println("ALERT | Something went wrong")
             println("ERROR | Message: ${err.getMessage()}")
+            error(err)
         }
     }
 }
