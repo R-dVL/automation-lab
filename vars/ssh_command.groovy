@@ -25,7 +25,7 @@ def call() {
             def jsonSlurperClassic = new JsonSlurperClassic()
             configuration = jsonSlurperClassic.parse(new File("${WORKSPACE}${constants.configPath}"))
             // Default Params
-            Host host = new Host(this, HOST)
+            Host host = new Host(this, "${HOST}")
             // Build Name
             currentBuild.displayName = "SSH Command - " + HOST
             currentBuild.description = CMD
