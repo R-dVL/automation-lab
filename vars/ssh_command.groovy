@@ -8,13 +8,10 @@ def call() {
         }
         // Pipeline error control
         try {
-            // Constants instance
+            // Configuration instance
             cfg = Configuration.getInstance()
             // Default Params
             Host host = new Host(this, HOST)
-            // Build Name
-            currentBuild.displayName = "SSH Command - " + HOST
-            currentBuild.description = CMD
 
             stage('Host Setup') {
                 // Retrieve info from Jenkins

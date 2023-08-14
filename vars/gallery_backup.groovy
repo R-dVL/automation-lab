@@ -6,19 +6,17 @@ def call() {
     node {
         // Environment variables
         environment {
-            constants
+            cfg
         }
         // Pipeline error control
         try {
-            // Constants instance
-            constants = Constants.getInstance()
+            // Configuration instance
+            cfg = Configuration.getInstance()
             // Default Params
-            Host host = new Host(this, 'Server')
+            Host host = new Host(this, 'server')
             // Define file name
             LocalDate date = LocalDate.now();
             String fileName = "gallery_backup_" + date.toString().replace('-', '_')
-            // Build name
-            currentBuild.displayName = "Gallery Backup"
 
             stage('Host Setup') {
                 // Retrieve info from Jenkins
