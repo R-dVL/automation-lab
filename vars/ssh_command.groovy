@@ -31,8 +31,8 @@ def call() {
             currentBuild.description = CMD
 
             stage('Host Setup') {
+                // Retrieve info from Jenkins
                 script {
-                    // Retrieve info from Jenkins
                     // User & Password
                     withCredentials([
                         usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
