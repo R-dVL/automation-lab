@@ -18,23 +18,8 @@ class Host implements Serializable {
 
         // Host selected
         this.name = hostName
-
-        // Get params from configuration
-        switch(name){
-            case 'Server':
-                this.configIp = pipeline.configuration.Hosts.Server.Ip
-                this.configCredentials = pipeline.configuration.Hosts.Server.Credentials
-                break
-
-            case 'RPi':
-                this.configIp = pipeline.configuration.Hosts.RPi.Ip
-                this.configCredentials = pipeline.configuration.Hosts.RPi.Credentials
-                break
-
-            default:
-                pipeline.error("${name} | Not defined in Configuration file")
-                break
-        }
+        this.configIp = pipeline.cfg.hosts."${name}".ip
+        this.configCredentials = pipeline.cfg.hosts."${name}".credentials
     }
 
     @NonCPS
