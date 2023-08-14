@@ -3,7 +3,6 @@ package com.github.rdvl.automationLibrary
 import java.time.LocalDate;
 import groovy.json.JsonSlurperClassic
 
-
 def call() {
     node {
         // Environment variables
