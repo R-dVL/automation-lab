@@ -34,13 +34,6 @@ def call() {
                 host.sshCommand(CMD)
             }
 
-            stage('Finished msg'){
-                withCredentials(([string(credentialsId: 'telegram-bot-token', variable: 'TOKEN'),
-                string(credentialsId: 'telegram-chat-id', variable: 'CHAT_ID')])) {
-                    sh ('curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage -d "chat_id=$CHAT_ID"  -d text="[✅] Build successfully 😊"')
-                }
-            }
-
         } catch(Exception err) {
             println("ALERT | Something went wrong")
             error(err.getMessage())
