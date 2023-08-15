@@ -32,18 +32,12 @@ def call() {
 
             stage('Execute Command') {
                 host.sshCommand(CMD)
+            }
 
-                script {
-                    withCredentials([string(credentialsId: 'telegram-bot-token', variable: 'TOKEN'),
-                    string(credentialsId: 'telegram-chat-id', variable: 'CHAT_ID')]) {
-                        sh ('''
-                            curl -X POST \
-                                -H 'Content-Type: application/json' \
-                                -d '{"chat_id": $CHAT_ID, "text": "This is a test from curl", "disable_notification": true}' \
-                                https://api.telegram.org/bot$TOKEN/sendMessage
-                        ''')
-                    }
-                }
+            stage('Finished msg'){
+                withCredentials(([string(credentialsId: 'telegram-bot-token', variable: 'TOKEN'),
+                string(credentialsId: 'telegram-chat-id', variable: 'CHAT_ID')])) {
+                sh 'curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage -d "chat_id=$CHAT_ID"  -d text="[✅] Build successfully 😊"'
             }
 
         } catch(Exception err) {
