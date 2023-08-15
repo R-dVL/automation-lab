@@ -34,8 +34,8 @@ def call() {
                 host.sshCommand(CMD)
 
                 script {
-                    withCredentials([string(credentialsId: 'telegram-bot-token', variable: ‘TOKEN’),
-                    string(credentialsId: 'telegram-chat-id', variable: ‘CHAT_ID’)]) {
+                    withCredentials([string(credentialsId: 'telegram-bot-token', variable: 'TOKEN'),
+                    string(credentialsId: 'telegram-chat-id', variable: 'CHAT_ID')]) {
                     sh """
                     curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=”HTML” -d text="<b>Project</b> : POC \
                     <b>Branch</b>: master \
