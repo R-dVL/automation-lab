@@ -13,7 +13,7 @@ class TelegramUtils {
 
     @NonCPS
     def sendMessage(String token, String chatId, String message) {
-        def apiUrl = 'https://api.telegram.org/bot$token/sendMessage'
+        def apiUrl = "https://api.telegram.org/bot${token}/sendMessage"
         
         def restClient = new RESTClient(apiUrl)
         def response = restClient.post(
