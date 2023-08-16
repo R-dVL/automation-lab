@@ -37,7 +37,7 @@ def call() {
             stage('Send Telegram Notification') {
                 String token
                 String chatId
-                String message
+                String message = "Testeasion"
 
                 withCredentials([
                     string(credentialsId: 'telegram-bot-token', variable: 'BOT_TOKEN')]) {
