@@ -34,6 +34,25 @@ def call() {
                 host.sshCommand(CMD)
             }
 
+            stage('Send Telegram Notification') {
+                String token
+                String chatId
+                String message
+
+                withCredentials([
+                    string(credentialsId: 'telegram-bot-token', variable: 'BOT_TOKEN')]) {
+                        token = BOT_TOKEN
+                }
+
+                withCredentials([
+                    string(credentialsId: 'telegram-chat-id', variable: 'CHAT_ID')]) {
+                        chatId = CHAT_ID
+                }
+
+                TelegramUtils tg = new TelegramUtils()
+                tg.sendMessage(token, chatId, message)
+            }
+
         } catch(Exception err) {
             println("ALERT | Something went wrong")
             error(err.getMessage())
