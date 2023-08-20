@@ -38,6 +38,11 @@ class Host implements Serializable {
     }
 
     @NonCPS
+    def getIp() {
+        return this.ip
+    }
+
+    @NonCPS
     def getConfigIp() {
         return this.configIp
     }
@@ -45,6 +50,11 @@ class Host implements Serializable {
     @NonCPS
     def getConfigCredentials() {
         return this.configCredentials
+    }
+
+    @NonCPS
+    def getUser(user) {
+        return this.user
     }
 
     @NonCPS

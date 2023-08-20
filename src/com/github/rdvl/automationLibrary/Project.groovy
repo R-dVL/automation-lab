@@ -47,6 +47,16 @@ public class Project {
         return this.artifactId
     }
 
+    @NonCPS
+    def getDestination() {
+        return this.destination
+    }
+
+    @NonCPS
+    def get() {
+        return this.destination
+    }
+
     @Override
     @NonCPS
     public String toString() {

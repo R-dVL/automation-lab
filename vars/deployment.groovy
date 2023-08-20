@@ -11,17 +11,30 @@ def call() {
             // Configuration instance
             cfg = Configuration.getInstance()
             // Default Params
+            Project prj = new Project(this, NAME, VERSION)
+            Host host = new Host(this, 'server')
 
             stage('Prepare') {
                 cleanWs()
-                Project prj = new Project(this, NAME, VERSION)
-                print(prj)
 
                 prj.prepare()
             }
 
             stage('Deploy') {
-
+                script {
+                    // User & Password
+                    withCredentials([
+                            usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
+                        host.setUser(user)
+                        host.setPassword(password)
+                    }
+                    // IP
+                    withCredentials([
+                            string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
+                        host.setIp(ip)
+                    }
+                }
+                sh("scp target/${prj.getArtifactId()} ${host.getUser()}@${host.getIp()}:/home/rdvl/")
             }
 
         } catch(Exception err) {
