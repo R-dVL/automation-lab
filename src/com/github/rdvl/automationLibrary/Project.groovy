@@ -22,7 +22,7 @@ public class Project {
     def prepare() {
         switch(tech) {
             case 'maven':
-                pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-token']], branches: [[name: version]]],poll: false)
+                pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
 
                 def mvnHome = pipeline.tool name: 'Maven 3.9.4', type: 'maven'
                 def mvnCmd = "${mvnHome}/bin/mvn"
