@@ -37,17 +37,22 @@ def call() {
             }
 
             stage('Deploy') {
-                withCredentials([usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
-                    // Definir los parámetros
-                    def localFile = '/target/cat-watcher_v1.0.0.tar.gz'
-                    def remoteUser = user
-                    def remoteHost = '192.168.1.55'
-                    def remotePath = '/home/rdvl/'
-
-                    // Crear el script sftp con contraseña y ejecutarlo
-                    def sftpScript = "spawn sftp ${remoteUser}@${remoteHost}\nexpect \"password:\"\nsend \"${password}\\n\"\nexpect \"sftp>\"\nsend \"put ${localFile} ${remotePath}\\n\"\nexpect \"sftp>\"\nsend \"bye\\n\"\ninteract"
-                    writeFile file: 'sftp_script.exp', text: sftpScript
-                    sh "expect sftp_script.exp"
+                script {
+                    def sshPublisher = sshPublisher(
+                            publishers: [
+                                    sshPublisherDesc(
+                                            configName: 'Server',
+                                            transfers: [
+                                                    sshTransfer(
+                                                            sourceFiles: 'target/cat-watcher_v1.0.0.tar.gz',
+                                                            removePrefix: 'target/',
+                                                            remoteDirectory: '/home/rdvl/'
+                                                    )
+                                            ]
+                                    )
+                            ]
+                    )
+                    sshPublisher.perform(build, launcher, listener)
                 }
             }
 
