@@ -6,6 +6,9 @@ def call() {
         environment {
             cfg
         }
+        tools {
+            jdk 'JDK-20.0.2'
+        }
         // Pipeline error control
         try {
             // Configuration instance
