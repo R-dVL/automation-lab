@@ -39,9 +39,9 @@ def call() {
             stage('Deploy') {
                 sshagent(credentials: ['server-ssh-key']) {
                     sh """
-                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 700 ~/.ssh
                        ssh-keyscan -t rsa,dsa ${host.getIp()} >> ~/.ssh/known_hosts
-                        scp target/${prj.getArtifactId()}.tar.gz ${host.getUser()}@${host.getIp()}:${prj.getDestination()}
+                       scp target/${prj.getArtifactId()}.tar.gz ${host.getUser()}@${host.getIp()}:${prj.getDestination()}
                     """
                 }
             }
