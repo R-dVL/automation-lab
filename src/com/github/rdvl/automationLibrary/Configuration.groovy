@@ -23,19 +23,19 @@ class Configuration {
     static final def projects = [
         'cat-watcher': [
             'url': 'https://github.com/R-dVL/cat-watcher.git',
-            'destination': '/home/rdvl/cat-watcher',
+            'destination': '/home/jenkins/cat-watcher',
             'tech': 'maven'
         ],
 
         'lima-backend': [
             'url': 'https://github.com/R-dVL/lima-backend.git',
-            'destination': '/home/rdvl/lima-backend',
+            'destination': '/home/jenkins/lima-backend',
             'tech': 'node'
         ],
 
         'lima-frontend': [
             'url': 'https://github.com/R-dVL/lima-frontend.git',
-            'destination': '/home/rdvl/lima-frontend',
+            'destination': '/home/jenkins/lima-frontend',
             'tech': 'react'
         ]
     ]

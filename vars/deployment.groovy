@@ -35,6 +35,9 @@ def call() {
                 }
             }
 
+            stage('Deploy') {
+                prj.deploy()
+            }
         } catch(Exception err) {
             println("ALERT | Something went wrong")
             error(err.getMessage())
