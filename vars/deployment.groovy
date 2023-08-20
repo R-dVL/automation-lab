@@ -17,7 +17,7 @@ def call() {
                 Project prj = new Project(this, NAME, VERSION)
                 print(prj)
 
-                def mvnHome = tool name: 'Maven', type: 'maven'
+                def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
                 def mvnCmd = "${mvnHome}/bin/mvn"
 
                 sh "${mvnCmd} clean install"
