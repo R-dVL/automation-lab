@@ -21,6 +21,11 @@ public class Project {
         pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-token']], branches: [[name: version]]],poll: false)
     }
 
+    @NonCPS
+    def getArtifactId() {
+        return this.artifactId
+    }
+
     @Override
     @NonCPS
     public String toString() {

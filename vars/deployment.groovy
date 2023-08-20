@@ -12,7 +12,7 @@ def call() {
             cfg = Configuration.getInstance()
             // Default Params
 
-            stage('Test') {
+            stage('Build') {
                 cleanWs()
                 Project prj = new Project(this, NAME, VERSION)
                 print(prj)
@@ -23,6 +23,27 @@ def call() {
                 def mvnCmd = "${mvnHome}/bin/mvn"
 
                 sh "${mvnCmd} clean package"
+            }
+
+            stage('Publish') {
+                withCredentials([
+                    usernamePassword(credentialsId: 'github-token', usernameVariable: 'user', passwordVariable: 'password')]) {
+
+                    def settingsXml = """
+                    <settings>
+                        <servers>
+                            <server>
+                                <id>github</id>
+                                <username>${user}</username>
+                                <password>${password}</password>
+                            </server>
+                        </servers>
+                    </settings>
+                    """
+                    writeFile file: "${env.WORKSPACE}/.m2/settings.xml", text: settingsXml
+                }
+
+                sh "mvn deploy --settings ${env.WORKSPACE}/.m2/settings.xml"
             }
 
         } catch(Exception err) {
