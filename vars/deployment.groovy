@@ -15,6 +15,7 @@ def call() {
             stage('Test') {
                 Project prj = new Project(this, NAME, VERSION)
                 print(prj)
+                prj.downloadCode()
             }
 
         } catch(Exception err) {
