@@ -41,7 +41,8 @@ def call() {
                     sh """
                         [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                         ssh-keyscan -t rsa,dsa ${host.getIp()} >> ~/.ssh/known_hosts
-                        ssh jenkins@192.168.1.55
+                        ssh -tt jenkins@192.168.1.55
+                        pwd
                     """
                 }
             }
