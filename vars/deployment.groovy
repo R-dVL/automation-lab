@@ -38,7 +38,7 @@ def call() {
             sh "pwd"
             sh "ls"
             stage('Deploy') {
-                sh "mv ${WORKSPACE}/cat-watcher/target/cat-watcher_v1.0.0-shaded.tar.gz /home/jenkins/cat-watcher/app"
+                sh "mv /target/cat-watcher_v1.0.0-shaded.tar.gz /home/jenkins/cat-watcher/app"
             }
 
         } catch(Exception err) {
