@@ -37,7 +37,7 @@ def call() {
             }
 
             stage('Deploy') {
-                sh. "ssh rdvl@192.168.1.55"
+                sh "ssh rdvl@192.168.1.55"
             }
 
         } catch(Exception err) {
