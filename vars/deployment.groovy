@@ -35,14 +35,11 @@ def call() {
                     }
                 }
             }
-            sh "cat /etc/passwd"
+
             stage('Deploy') {
-                sshagent(credentials: ['server-ssh-key']) {
+                sshagent(['server-ssh-key']) {
                     sh """
-                        [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                        ssh-keyscan -t rsa,dsa ${host.getIp()} >> ~/.ssh/known_hosts
-                        ssh -tt jenkins@192.168.1.55
-                        pwd
+                    scp /target/cat-watcher_v1.0.0.tar.gz jenkins@192.168.1.55:/home/jenkins/cat-watcher/artifacts
                     """
                 }
             }
