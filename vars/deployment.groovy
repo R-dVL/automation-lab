@@ -37,7 +37,7 @@ def call() {
             }
 
             stage('Deploy') {
-                sh "mv target/cat-watcher_v1.0.0.tar.gz /home/jenkins/cat-watcher/app"
+                sh "mv cat-watcher/target/cat-watcher_v1.0.0.tar.gz /home/jenkins/cat-watcher/app"
             }
 
         } catch(Exception err) {
