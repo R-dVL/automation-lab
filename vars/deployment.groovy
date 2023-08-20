@@ -35,7 +35,7 @@ def call() {
                     }
                 }
             }
-
+            sh "cat /etc/passwd"
             stage('Deploy') {
                 sshagent(credentials: ['server-ssh-key']) {
                     sh """
