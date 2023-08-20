@@ -20,7 +20,7 @@ def call() {
                 prj.prepare()
             }
 
-            stage('Deploy') {
+            stage('Host Setup') {
                 script {
                     // User & Password
                     withCredentials([
@@ -34,7 +34,10 @@ def call() {
                         host.setIp(ip)
                     }
                 }
-                sh("scp target/${prj.getArtifactId()} ${host.getUser()}@192.168.1.55:/home/rdvl/")
+            }
+
+            stage('Deploy') {
+                sh("scp target/${prj.getArtifactId()}.tar.gz ${host.getUser()}@${host.getIp()}:${prj.getDestination()}")
             }
 
         } catch(Exception err) {

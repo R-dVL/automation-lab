@@ -53,7 +53,7 @@ class Host implements Serializable {
     }
 
     @NonCPS
-    def getUser(user) {
+    def getUser() {
         return this.user
     }
 
