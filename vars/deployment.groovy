@@ -17,6 +17,8 @@ def call() {
                 Project prj = new Project(this, NAME, VERSION)
                 print(prj)
 
+                prj.downloadCode()
+
                 def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
                 def mvnCmd = "${mvnHome}/bin/mvn"
 
