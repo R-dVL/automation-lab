@@ -19,14 +19,10 @@ def call() {
 
                 prj.downloadCode()
 
-                sh "java -version"
-
                 def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
                 def mvnCmd = "${mvnHome}/bin/mvn"
 
-                env.PATH = "/usr/lib/jvm/jdk-20/bin:${env.PATH}"
-
-                sh "${mvnCmd} clean install"
+                sh "${mvnCmd} clean package"
             }
 
         } catch(Exception err) {
