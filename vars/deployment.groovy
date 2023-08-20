@@ -34,7 +34,7 @@ def call() {
                         host.setIp(ip)
                     }
                 }
-                sh("scp target/${prj.getArtifactId()} ${host.getUser()}@${host.getIp()}:/home/rdvl/")
+                sh("scp target/${prj.getArtifactId()} ${host.getUser()}@192.168.1.55:/home/rdvl/")
             }
 
         } catch(Exception err) {
