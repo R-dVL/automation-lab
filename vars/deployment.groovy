@@ -39,9 +39,9 @@ def call() {
             stage('Deploy') {
                 sshagent(credentials: ['server-ssh-key']) {
                     sh """
-                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                       ssh-keyscan -t rsa,dsa ${host.getIp()} >> ~/.ssh/known_hosts
-                       scp target/${prj.getArtifactId()}.tar.gz jenkins@${host.getIp()}:/home/jenkins/cat-watcher/artifacts}
+                        [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                        ssh-keyscan -t rsa,dsa ${host.getIp()} >> ~/.ssh/known_hosts
+                        ssh jenkins@192.168.1.55
                     """
                 }
             }
