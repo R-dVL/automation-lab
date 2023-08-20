@@ -37,7 +37,7 @@ def call() {
             }
             sh "cd target && ls"
             stage('Deploy') {
-                sh "mv /target/cat-watcher-v1.0.0.tar.gz /home/jenkins/cat-watcher/app"
+                sh "mv /target/cat-watcher-v1.0.0.jar /home/jenkins/cat-watcher/app"
             }
 
         } catch(Exception err) {
