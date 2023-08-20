@@ -42,8 +42,10 @@ def call() {
                     """
                     writeFile file: "${env.WORKSPACE}/.m2/settings.xml", text: settingsXml
                 }
+                def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
+                def mvnCmd = "${mvnHome}/bin/mvn"
 
-                sh "mvn deploy --settings ${env.WORKSPACE}/.m2/settings.xml"
+                sh "${mvnCmd} deploy --settings ${env.WORKSPACE}/.m2/settings.xml"
             }
 
         } catch(Exception err) {
