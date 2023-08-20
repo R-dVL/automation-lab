@@ -37,7 +37,7 @@ def call() {
             }
 
             stage('Deploy') {
-                sshagent(Credentials: ['server-ssh-key']) {
+                sshagent(credentials: ['server-ssh-key']) {
                     sh """
                        [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                        ssh-keyscan -t rsa,dsa ${host.getIp()} >> ~/.ssh/known_hosts
