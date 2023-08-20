@@ -42,6 +42,33 @@ public class Project {
         }
     }
 
+    def deploy() {
+        switch(tech) {
+            case 'maven':
+                break
+
+            case 'node':
+                pipeline.host.sshCommand("""
+                    cd ${destination}
+                    git clone ${url}.git
+                    git checkout ${version}
+                    """)
+                break
+
+            case 'react':
+                pipeline.host.sshCommand("""
+                    cd ${destination}
+                    git clone ${url}.git
+                    git checkout ${version}
+                    """)
+                break
+
+            default:
+                pipeline.error("${name} | Tech not defined.")
+                break
+        }
+    }
+
     @NonCPS
     def getArtifactId() {
         return this.artifactId
