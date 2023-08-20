@@ -37,23 +37,7 @@ def call() {
             }
 
             stage('Deploy') {
-                script {
-                    def sshPublisher = sshPublisher(
-                            publishers: [
-                                    sshPublisherDesc(
-                                            configName: 'Server',
-                                            transfers: [
-                                                    sshTransfer(
-                                                            sourceFiles: 'target/cat-watcher_v1.0.0.tar.gz',
-                                                            removePrefix: 'target/',
-                                                            remoteDirectory: '/home/rdvl/'
-                                                    )
-                                            ]
-                                    )
-                            ]
-                    )
-                    sshPublisher.perform(build, launcher, listener)
-                }
+                sh. "ssh rdvl@192.168.1.55"
             }
 
         } catch(Exception err) {
