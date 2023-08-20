@@ -19,6 +19,31 @@ class Configuration {
         ]
     ]
 
+    // Projects
+    static final def projects = [
+        'cat-watcher': [
+            'url': 'https://github.com/R-dVL/cat-watcher.git',
+            'destination': [
+                'server': '/home/rdvl/cat-watcher',
+                'rpi': '/home/ubuntu/cat-watcher'
+            ]
+        ],
+
+        'lima-backend': [
+            'url': 'https://github.com/R-dVL/lima-backend.git',
+            'destination': [
+                'server': '/home/rdvl/lima-backend'
+            ]
+        ],
+
+        'lima-frontend': [
+            'url': 'https://github.com/R-dVL/lima-frontend.git',
+            'destination': [
+                '/home/rdvl/lima-frontend'
+            ]
+        ]
+    ]
+
     // Singleton constructor
     private Configuration () {}
 
