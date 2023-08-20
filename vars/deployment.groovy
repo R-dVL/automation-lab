@@ -17,9 +17,10 @@ def call() {
                 Project prj = new Project(this, NAME, VERSION)
                 print(prj)
 
-                withMaven {
-                    sh "mvn clean verify"
-                }
+                def mvnHome = tool name: 'Maven', type: 'maven'
+                def mvnCmd = "${mvnHome}/bin/mvn"
+
+                sh "${mvnCmd} clean install"
             }
 
         } catch(Exception err) {
