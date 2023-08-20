@@ -37,25 +37,7 @@ def call() {
             }
 
             stage('Deploy') {
-                script {
-                    // Configuración de la publicación mediante SSH
-                    def sshPublisher = sshPublisher(
-                            publishers: [
-                                    sshPublisherDesc(
-                                            configName: 'server', // Nombre de la configuración SSH previamente definida
-                                            transfers: [
-                                                    sshTransfer(
-                                                            sourceFiles: 'target/cat-watcher_v1.0.0.tar.gz', // Ruta local del archivo a transferir
-                                                            removePrefix: 'target/', // Prefijo a eliminar en la ruta de destino remota
-                                                            remoteDirectory: '/home/rdvl/cat-watcher/artifacts' // Ruta en el servidor remoto
-                                                    )
-                                                    // Puedes agregar más transferencias aquí si es necesario
-                                            ]
-                                    )
-                            ]
-                    )
-                    sshPublisher.perform(build, launcher, listener)
-                }
+                sh "mv target/cat-watcher_v1.0.0.tar.gz /home/rdvl/cat-watcher/app"
             }
 
         } catch(Exception err) {
