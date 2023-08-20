@@ -37,7 +37,13 @@ def call() {
             }
 
             stage('Deploy') {
-                sh("scp target/${prj.getArtifactId()}.tar.gz ${host.getUser()}@${host.getIp()}:${prj.getDestination()}")
+                sshagent(Credentials: ['server-ssh-key']) {
+                    sh """
+                       [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                       ssh-keyscan -t rsa,dsa ${host.getIp()} >> ~/.ssh/known_hosts
+                        scp target/${prj.getArtifactId()}.tar.gz ${host.getUser()}@${host.getIp()}:${prj.getDestination()}
+                    """
+                }
             }
 
         } catch(Exception err) {
