@@ -12,40 +12,16 @@ def call() {
             cfg = Configuration.getInstance()
             // Default Params
 
-            stage('Build') {
+            stage('Prepare') {
                 cleanWs()
                 Project prj = new Project(this, NAME, VERSION)
                 print(prj)
 
-                prj.downloadCode()
-
-                def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
-                def mvnCmd = "${mvnHome}/bin/mvn"
-
-                sh "${mvnCmd} clean package"
+                prj.prepare()
             }
 
-            stage('Publish') {
-                withCredentials([
-                    usernamePassword(credentialsId: 'github-token', usernameVariable: 'user', passwordVariable: 'password')]) {
+            stage('Deploy') {
 
-                    def settingsXml = """
-                    <settings>
-                        <servers>
-                            <server>
-                                <id>github</id>
-                                <username>${user}</username>
-                                <password>${password}</password>
-                            </server>
-                        </servers>
-                    </settings>
-                    """
-                    writeFile file: "${env.WORKSPACE}/.m2/settings.xml", text: settingsXml
-                }
-                def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
-                def mvnCmd = "${mvnHome}/bin/mvn"
-
-                sh "${mvnCmd} deploy --settings ${env.WORKSPACE}/.m2/settings.xml"
             }
 
         } catch(Exception err) {
