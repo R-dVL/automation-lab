@@ -19,6 +19,8 @@ def call() {
 
                 prj.downloadCode()
 
+                sh "java -version"
+
                 def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
                 def mvnCmd = "${mvnHome}/bin/mvn"
 
