@@ -39,7 +39,7 @@ def call() {
             stage('Deploy') {
                 sshagent(['server-ssh-key']) {
                     sh """
-                    scp /target/cat-watcher_v1.0.0.tar.gz jenkins@192.168.1.55:/home/jenkins/cat-watcher/artifacts
+                    scp -v -o StrictHostKeyChecking=no /target/cat-watcher_v1.0.0.tar.gz jenkins@192.168.1.55:/home/jenkins/cat-watcher/artifacts
                     """
                 }
             }
