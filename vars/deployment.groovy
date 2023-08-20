@@ -35,10 +35,9 @@ def call() {
                     }
                 }
             }
-            sh "pwd"
-            sh "ls"
+            sh "cd target && ls"
             stage('Deploy') {
-                sh "mv /target/cat-watcher_v1.0.0-shaded.tar.gz /home/jenkins/cat-watcher/app"
+                sh "mv /target/cat-watcher_v1.0.0.tar.gz /home/jenkins/cat-watcher/app"
             }
 
         } catch(Exception err) {
