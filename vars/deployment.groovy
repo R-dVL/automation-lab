@@ -37,7 +37,7 @@ def call() {
             }
 
             stage('Deploy') {
-                withCredentials([usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
+                withCredentials([usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
                     // Definir los parámetros
                     def localFile = '/target/cat-watcher_v1.0.0.tar.gz'
                     def remoteUser = user
