@@ -5,9 +5,7 @@ def call() {
         // Environment variables
         environment {
             cfg
-        }
-        tools {
-            jdk 'JDK-20.0.2'
+            JDK_20_HOME = "/usr/lib/jvm/jdk-20"
         }
         // Pipeline error control
         try {
@@ -24,6 +22,8 @@ def call() {
 
                 def mvnHome = tool name: 'Maven 3.9.4', type: 'maven'
                 def mvnCmd = "${mvnHome}/bin/mvn"
+
+                env.PATH = "${env.JDK_20_HOME}/bin:${env.PATH}"
 
                 sh "${mvnCmd} clean install"
             }
