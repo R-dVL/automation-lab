@@ -1,6 +1,7 @@
 package com.github.rdvl.automationLibrary
 
 def call() {
+    node {
         // Environment variables
         environment {
             cfg
