@@ -13,6 +13,7 @@ def call() {
             // Default Params
 
             stage('Test') {
+                cleanWs()
                 Project prj = new Project(this, NAME, VERSION)
                 print(prj)
                 prj.downloadCode()
