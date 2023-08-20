@@ -16,7 +16,6 @@ def call() {
 
             stage('Prepare') {
                 cleanWs()
-
                 prj.prepare()
             }
 
@@ -34,10 +33,6 @@ def call() {
                         host.setIp(ip)
                     }
                 }
-            }
-            sh "cd target && ls"
-            stage('Deploy') {
-                sh "cp /target /home/jenkins/cat-watcher/app"
             }
 
         } catch(Exception err) {
