@@ -36,7 +36,7 @@ public class TechMVN {
 
     def deploy() {
         Nexus nexus = new Nexus(pipeline)
-        nexus.uploadArtifact(artifactId, version, artifactId, 'jar')
+        nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
     }
 
     @Override

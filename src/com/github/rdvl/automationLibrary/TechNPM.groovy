@@ -31,7 +31,7 @@ public class TechNPM {
 
     def deploy() {
         Nexus nexus = new Nexus(pipeline)
-        nexus.uploadArtifact(artifactId, version, artifactId, '.package')
+        nexus.uploadArtifact(nexusRepository, version, artifactId, '.package')
     }
 
     @Override
