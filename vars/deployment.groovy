@@ -40,7 +40,7 @@ def call() {
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     nexusUrl: '192.168.1.55:8081',
-                    groupId: 'com.github.rdvl',
+                    groupId: 'com.rdvl',
                     version: 'v1.0.0',
                     repository: 'cat-watcher',
                     credentialsId: 'nexus-credentials',
