@@ -36,8 +36,21 @@ def call() {
             }
 
             stage('Deploy') {
-                createTag nexusInstanceId: 'nexus', tagAttributesJson: '{"createdBy" : "R-dVL"}', tagName: 'v1.0.0'
-                nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'cat-watcher', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/target/cat-watcher-v1.0.0.jar']], mavenCoordinate: [artifactId: 'cat-watcher', groupId: 'com.rdvl', packaging: 'jar', version: 'v1.0.0']]], tagName: 'v1.0.0'
+                        nexusArtifactUploader(
+                            nexusVersion: 'nexus3',
+                            protocol: 'http',
+                            nexusUrl: '192.168.1.55:8081',
+                            groupId: 'com.github.rdvl.catWatcher',
+                            version: 'v1.0.0',
+                            repository: 'cat-watcher',
+                            credentialsId: 'nexus-credentials',
+                            artifact {
+                                artifactId('cat-watcher')
+                                type('jar')
+                                classifier('debug')
+                                file('/target/cat-watcher-v1.0.0.jar')
+                            }
+                        );
             }
 
         } catch(Exception err) {
