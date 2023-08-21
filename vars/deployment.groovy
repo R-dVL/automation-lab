@@ -36,21 +36,8 @@ def call() {
             }
 
             stage('Deploy') {
-                script {
-                    nexusArtifactUploader(
-                        nexusVersion: 'nexus3',
-                        protocol: 'http',
-                        nexusUrl: 'http://192.168.1.55:8081/',
-                        groupId: 'cat-watcher',
-                        version: 'v1.0.0',
-                        repository: 'cat-watcher',
-                        credentialsId: "${nexus-credentials}",
-                        artifacts: [
-                            // Define los artefactos a subir, por ejemplo:
-                            [artifactId: 'cat-watcher-v1.0.0', type: 'jar', file: 'target/cat-watcher-v1.0.0.jar']
-                        ]
-                    )
-                }
+                createTag nexusInstanceId: 'nexus', tagAttributesJson: '{"createdBy" : "R-dVL"}', tagName: 'v1.0.0'
+                nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'cat-watcher', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/target/cat-watcher-v1.0.0.jar']], mavenCoordinate: [artifactId: 'cat-watcher', groupId: 'com.rdvl', packaging: 'jar', version: 'v1.0.0']]], tagName: 'v1.0.0'
             }
 
         } catch(Exception err) {
