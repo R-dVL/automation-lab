@@ -44,7 +44,7 @@ def call() {
                         groupId: 'cat-watcher',
                         version: 'v1.0.0',
                         repository: 'cat-watcher',
-                        credentialsId: "${NEXUS_CREDENTIALS}"
+                        credentialsId: "${nexus-credentials}",
                         artifacts: [
                             // Define los artefactos a subir, por ejemplo:
                             [artifactId: 'cat-watcher-v1.0.0', type: 'jar', file: 'target/cat-watcher-v1.0.0.jar']
