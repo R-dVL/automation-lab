@@ -36,7 +36,6 @@ def call() {
             }
 
             stage('Deploy') {
-                host.sshPut('target/cat-watcher-v1.0.0.jar', '/home/rdvl/cat-watcher/artifacts/')
             }
 
         } catch(Exception err) {
