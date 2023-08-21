@@ -36,9 +36,16 @@ public class TechMVN {
         // Build
         pipeline.sh "${mvnCmd} clean package"
 
+        def pom = readMavenPom file: 'pom.xml'
+        def groupId = pom.groupId()
+        def artifactId = pom.artifactId()
+        def version = pom.version()
+        
+        sh "${mvnCmd} deploy -Dmaven.deploy.skip=true -Dmaven.repo.local=\${WORKSPACE}/.m2/repository \
+            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/R-dVL/cat-watcher"
         // Upload artifact to Nexus
-        Nexus nexus = new Nexus(pipeline)
-        nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
+        //Nexus nexus = new Nexus(pipeline)
+        //nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
     }
 
     def deploy() {
