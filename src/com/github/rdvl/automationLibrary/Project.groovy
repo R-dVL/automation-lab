@@ -20,7 +20,7 @@ public class Project {
         this.artifactId = name + "_" + version
         this.url = pipeline.cfg.projects."${name}".url
         this.destination = pipeline.cfg.projects."${name}".destination
-        this.tech = pipeline.cfg.projects."${name}".techName
+        this.techName = pipeline.cfg.projects."${name}".techName
 
         switch(techName) {
             case 'maven':
