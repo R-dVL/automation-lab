@@ -39,8 +39,7 @@ public class TechNPM {
     def deploy() {
         pipeline.host.sshCommand("""mkdir -p ${name}/${artifactId}
         cd ${name}/${artifactId}
-        curl -O -L https://_:${pipeline.github_token}@npm.pkg.github.com/R-dVL/${name}/packages/${artifactId}/${version}/${artifactId}.tgz
-        tar -xzf ${artifactId}.tgz
+        npm install @r-dvl/${name}@${version}
         """)
     }
 
