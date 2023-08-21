@@ -36,7 +36,7 @@ public class TechMVN {
         // Build
         pipeline.sh "${mvnCmd} clean package"
 
-        def pom = readMavenPom file: 'pom.xml'
+        def pom = pipeline.readMavenPom file: 'pom.xml'
         def groupId = pom.groupId()
         def artifactId = pom.artifactId()
         def version = pom.version()
