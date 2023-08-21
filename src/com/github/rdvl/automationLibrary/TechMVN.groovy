@@ -33,6 +33,7 @@ public class TechMVN {
         def mvnHome = pipeline.tool name: 'Maven 3.9.4', type: 'maven'
         def mvnCmd = "${mvnHome}/bin/mvn"
 
+        // Protect token
         def settingsXml = """
         <settings>
             <servers>
