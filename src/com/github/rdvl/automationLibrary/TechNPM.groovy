@@ -43,6 +43,9 @@ public class TechNPM {
         pipeline.host.sshCommand("""mkdir -p ${name}/${artifactId}
         cd ${name}/${artifactId}
         git clone --depth 1 --branch ${version} ${url}
+        cd ${name}
+        npm install
+        npm start
         """)
     }
 
