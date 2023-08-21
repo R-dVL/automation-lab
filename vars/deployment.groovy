@@ -44,6 +44,7 @@ def call() {
             }
 
             stage('Deploy') {
+                prj.getDeploymentTech().deploy()
             }
 
         } catch(Exception err) {
