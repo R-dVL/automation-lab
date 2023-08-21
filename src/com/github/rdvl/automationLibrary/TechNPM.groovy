@@ -27,6 +27,7 @@ public class TechNPM {
         // Download Code
         pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
 
+        pipeline.sh("npm config set //npm.pkg.github.com/:_authToken=${pipeline.github_token}")
         // Config .npmrc file
         pipeline.sh("npm publish")
     }
