@@ -1,13 +1,17 @@
 package com.github.rdvl.automationLibrary;
 
 public class Project {
+    // Pipeline Context
     private def pipeline
+
+    // Project Params
     private String name
     private String version
     private String artifactId
     private String url
     private def destination
-    private String tech
+    private String techName
+    private def deploymentTech
 
     Project(pipeline, name, version) {
         this.pipeline = pipeline
@@ -16,51 +20,14 @@ public class Project {
         this.artifactId = name + "_" + version
         this.url = pipeline.cfg.projects."${name}".url
         this.destination = pipeline.cfg.projects."${name}".destination
-        this.tech = pipeline.cfg.projects."${name}".tech
-    }
+        this.tech = pipeline.cfg.projects."${name}".techName
 
-    def prepare() {
-        switch(tech) {
+        switch(techName) {
             case 'maven':
-                pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
-
-                def mvnHome = pipeline.tool name: 'Maven 3.9.4', type: 'maven'
-                def mvnCmd = "${mvnHome}/bin/mvn"
-
-                pipeline.sh "${mvnCmd} clean package"
+                TechMVN mvn = new TechMVN(pipeline, name, version, artifactId, url, destination)
                 break
 
-            case 'node':
-                break
-
-            case 'react':
-                break
-
-            default:
-                pipeline.error("${name} | Tech not defined.")
-                break
-        }
-    }
-
-    def deploy() {
-        switch(tech) {
-            case 'maven':
-                break
-
-            case 'node':
-                pipeline.host.sshCommand("""
-                    cd ${destination}
-                    git clone ${url}.git
-                    git checkout ${version}
-                    """)
-                break
-
-            case 'react':
-                pipeline.host.sshCommand("""
-                    cd ${destination}
-                    git clone ${url}.git
-                    git checkout ${version}
-                    """)
+            case 'npm':
                 break
 
             default:
@@ -70,18 +37,8 @@ public class Project {
     }
 
     @NonCPS
-    def getArtifactId() {
-        return this.artifactId
-    }
-
-    @NonCPS
-    def getDestination() {
-        return this.destination
-    }
-
-    @NonCPS
-    def get() {
-        return this.destination
+    def getDeploymentTech() {
+        return this.deploymentTech
     }
 
     @Override

@@ -16,7 +16,6 @@ class Nexus implements Serializable {
         this.pipeline = pipeline
     }
 
-    @NonCPS
     def uploadArtifact(repository, version, artifactId, type) {
         pipeline.nexusArtifactUploader(
             nexusVersion: nexusVersion,
@@ -40,12 +39,11 @@ class Nexus implements Serializable {
     @NonCPS
     public String toString() {
         return """
-            Name: ${name}
-            Config IP: ${configIp}
-            Credentials: ${configCredentials}
-            User: ${user}
-            Password: ${password}
-            IP: ${ip}
+            Nexus Version: ${nexusVersion}
+            Protocol: ${protocol}
+            URL: ${nexusUrl}
+            Group: ${groupId}
+            Credentials: ${credentialsId}
         """
     }
 }

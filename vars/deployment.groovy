@@ -16,7 +16,7 @@ def call() {
 
             stage('Prepare') {
                 cleanWs()
-                prj.prepare()
+                prj.getDeploymentTech().prepare()
             }
 
             stage('Host Setup') {

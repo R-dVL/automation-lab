@@ -30,13 +30,13 @@ class Configuration {
         'lima-backend': [
             'url': 'https://github.com/R-dVL/lima-backend.git',
             'destination': '/home/jenkins/lima-backend',
-            'tech': 'node'
+            'tech': 'npm'
         ],
 
         'lima-frontend': [
             'url': 'https://github.com/R-dVL/lima-frontend.git',
             'destination': '/home/jenkins/lima-frontend',
-            'tech': 'react'
+            'tech': 'npm'
         ]
     ]
 
