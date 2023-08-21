@@ -46,9 +46,10 @@ def call() {
                 prj.getDeploymentTech().deploy()
             }
 
-        } catch(Exception err) {
+        } catch(Exception e) {
             println("ALERT | Something went wrong")
-            error(err.getMessage())
+            error(e.getMessage())
+            error(e)
         }
     }
 }
