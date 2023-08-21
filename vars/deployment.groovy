@@ -36,8 +36,22 @@ def call() {
             }
 
             stage('Deploy') {
-                prj.deploy()
-            }
+                script {
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: 'http://192.168.1.55:8081/',
+                        groupId: 'cat-watcher',
+                        version: 'v1.0.0',
+                        repository: 'cat-watcher',
+                        credentialsId: "${NEXUS_CREDENTIALS}"
+                        artifacts: [
+                            // Define los artefactos a subir, por ejemplo:
+                            [artifactId: 'cat-watcher-v1.0.0', type: 'jar', file: 'target/cat-watcher-v1.0.0.jar']
+                        ]
+                    )
+                }
+            }            }
         } catch(Exception err) {
             println("ALERT | Something went wrong")
             error(err.getMessage())
