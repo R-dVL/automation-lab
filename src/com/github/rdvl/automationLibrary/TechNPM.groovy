@@ -38,7 +38,6 @@ public class TechNPM {
 
     def deploy() {
         pipeline.host.sshCommand("""mkdir -p ${name}/${artifactId}
-        chmod -R +w ${name}
         cd ${name}/${artifactId}
         npm install git+https://github.com/r-dvl/${name}.git#${version}
         """)
