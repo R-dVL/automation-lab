@@ -40,8 +40,8 @@ public class TechNPM {
     }
 
     def deploy() {
-        pipeline.host.sshCommand("""mkdir opt/apps/${name}/${version}
-        cd opt/apps/${name}/${version}
+        pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
+        cd /opt/apps/${name}/${version}
         git clone --depth 1 --branch ${version} ${url}
         cd ${name}
         npm install
