@@ -26,8 +26,8 @@ public class TechNPM {
     def prepare() {
         // Download Code
         pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
-        pipeline.writeFile file: "${pipeline.WORKSPACE}/.m2/settings.xml", text: "//npm.pkg.github.com/:_authToken=${pipeline.github_token}"
-        pipeline.host.sshCommand("npm publish --registry=https://npm.pkg.github.com")
+        pipeline.writeFile file: "${pipeline.WORKSPACE}/.npmrc", text: "//npm.pkg.github.com/:_authToken=${pipeline.github_token}"
+        pipeline.sh("npm publish --registry=https://npm.pkg.github.com")
     }
 
     def deploy() {
