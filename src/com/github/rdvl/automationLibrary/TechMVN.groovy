@@ -46,8 +46,15 @@ public class TechMVN {
         """
         pipeline.writeFile file: "${pipeline.WORKSPACE}/.m2/settings.xml", text: settingsXml
 
-        // Build and upload artifact to Github
-        pipeline.sh "${mvnCmd} clean package deploy --settings ${pipeline.WORKSPACE}/.m2/settings.xml"
+        // Build Artifact
+        pipeline.sh "${mvnCmd} clean package"
+
+        // Upload Artifact
+        try {
+            pipeline.sh "${mvnCmd} clean package deploy --settings ${pipeline.WORKSPACE}/.m2/settings.xml"
+        } catch(Exception e) {
+            pipeline.println('Already uploaded before to Github.')
+        }
 
         // Upload artifact to Nexus
         //Nexus nexus = new Nexus(pipeline)
