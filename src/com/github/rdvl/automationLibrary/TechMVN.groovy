@@ -36,13 +36,16 @@ public class TechMVN {
         // Build
         pipeline.sh "${mvnCmd} clean package"
 
-        def pom = pipeline.readMavenPom file: 'pom.xml'
-        def groupId = pom.groupId()
-        def artifactId = pom.artifactId()
-        def version = pom.version()
+        def pomContent = readFile 'pom.xml'
+        def groupId = pomContent =~ '<groupId>(.*?)</groupId>'
+        def artifactId = pomContent =~ '<artifactId>(.*?)</artifactId>'
+        def version = pomContent =~ '<version>(.*?)</version>'
         
-        sh "${mvnCmd} deploy -Dmaven.deploy.skip=true -Dmaven.repo.local=\${WORKSPACE}/.m2/repository \
-            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/R-dVL/cat-watcher"
+        // Publicar el archivo JAR en GitHub Packages usando Maven
+        pipeline.sh "${mvnCmd} deploy -Dmaven.deploy.skip=true -Dmaven.repo.local=\${WORKSPACE}/.m2/repository \
+            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/R-dVL/cat-watcher \
+            -DgroupId=${groupId[0][1]} -DartifactId=${artifactId[0][1]} -Dversion=${version[0][1]} \
+            -Dfile=target/your-artifact.jar"
         // Upload artifact to Nexus
         //Nexus nexus = new Nexus(pipeline)
         //nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
