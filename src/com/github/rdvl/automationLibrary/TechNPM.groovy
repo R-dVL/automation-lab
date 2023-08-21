@@ -40,7 +40,7 @@ public class TechNPM {
         pipeline.host.sshCommand("""mkdir -p ${name}/${artifactId}
         chmod -R +w ${name}
         cd ${name}/${artifactId}
-        npm install @r-dvl/${name}@${version}
+        npm install git+https://github.com/r-dvl/${name}.git#${version}
         """)
     }
 
