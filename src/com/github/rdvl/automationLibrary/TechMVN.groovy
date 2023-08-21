@@ -44,10 +44,10 @@ public class TechMVN {
             </servers>
         </settings>
         """
-        pipeline.writeFile file: "${env.WORKSPACE}/.m2/settings.xml", text: settingsXml
+        pipeline.writeFile file: "${pipeline.WORKSPACE}/.m2/settings.xml", text: settingsXml
 
         // Build and upload artifact to Github
-        pipeline.sh "${mvnCmd} clean package deploy --settings ${env.WORKSPACE}/.m2/settings.xml"
+        pipeline.sh "${mvnCmd} clean package deploy --settings ${pipeline.WORKSPACE}/.m2/settings.xml"
 
         // Upload artifact to Nexus
         //Nexus nexus = new Nexus(pipeline)
