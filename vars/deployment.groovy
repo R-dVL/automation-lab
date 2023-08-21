@@ -36,21 +36,8 @@ def call() {
             }
 
             stage('Deploy') {
-                nexusArtifactUploader(
-                    nexusVersion: 'nexus3',
-                    protocol: 'http',
-                    nexusUrl: '192.168.1.55:8081',
-                    groupId: 'com.rdvl',
-                    version: 'v1.0.0',
-                    repository: 'cat-watcher',
-                    credentialsId: 'nexus-credentials',
-                    artifacts: [
-                        [artifactId: 'cat-watcher',
-                        classifier: '',
-                        file: 'target/' + 'cat-watcher' + '-v1.0.0' + '.jar',
-                        type: 'jar']
-                    ]
-                );
+                Nexus nexus = new Nexus(this)
+                nexus.uploadArtifact('cat-watcher', 'v1.0.0', 'cat-watcher', 'jar')
             }
 
         } catch(Exception err) {
