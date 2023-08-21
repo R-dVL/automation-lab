@@ -7,6 +7,7 @@ def call() {
             cfg
             github_user
             github_token
+            npm_token
             host
         }
         // Pipeline error control
@@ -28,10 +29,14 @@ def call() {
                     withCredentials([string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
                         host.setIp(ip)
                     }
-                    // User & Password
+                    // Github Token
                     withCredentials([usernamePassword(credentialsId: 'github-package-token', usernameVariable: 'user', passwordVariable: 'token')]) {
                         github_user = user
                         github_token = token
+                    }
+                    // npm Token
+                    withCredentials([string(credentialsId: 'npm-token', variable: 'token')]) {
+                        npm_token = token
                     }
                 }
             }
