@@ -5,6 +5,8 @@ def call() {
         // Environment variables
         environment {
             cfg
+            github_user
+            github_token
         }
         // Pipeline error control
         try {
@@ -16,6 +18,13 @@ def call() {
 
             stage('Prepare') {
                 cleanWs()
+                script {
+                    // User & Password
+                    withCredentials([usernamePassword(credentialsId: 'github-package-token', usernameVariable: 'user', passwordVariable: 'token')]) {
+                        github_user = user
+                        github_token = token
+                    }
+                }
                 prj.getDeploymentTech().prepare()
             }
 

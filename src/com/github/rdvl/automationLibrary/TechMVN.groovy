@@ -38,8 +38,8 @@ public class TechMVN {
             <servers>
                 <server>
                     <id>github</id>
-                    <username>${githubUsername}</username>
-                    <password>${githubAccessToken}</password>
+                    <username>${pipeline.github_user}</username>
+                    <password>${pipeline.github_token}</password>
                 </server>
             </servers>
         </settings>
