@@ -27,8 +27,11 @@ public class TechNPM {
         // Download Code
         pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
 
+        // Build
+        pipeline.sh("npm install")
+
+        // Upload Artifact
         pipeline.sh("npm config set //npm.pkg.github.com/:_authToken=${pipeline.github_token}")
-        // Config .npmrc file
         try {
             pipeline.sh("npm publish")
         } catch (Exception e) {
@@ -39,7 +42,7 @@ public class TechNPM {
     def deploy() {
         pipeline.host.sshCommand("""mkdir -p ${name}/${artifactId}
         cd ${name}/${artifactId}
-        npm install git+https://github.com/r-dvl/${name}.git#${version}
+        git clone --depth 1 --branch ${version} ${url}
         """)
     }
 
