@@ -17,19 +17,7 @@ def call() {
             Project prj = new Project(this, NAME, VERSION)
             host = new Host(this, 'server')
 
-            stage('Prepare') {
-                cleanWs()
-                script {
-                    // User & Password
-                    withCredentials([usernamePassword(credentialsId: 'github-package-token', usernameVariable: 'user', passwordVariable: 'token')]) {
-                        github_user = user
-                        github_token = token
-                    }
-                }
-                prj.getDeploymentTech().prepare()
-            }
-
-            stage('Host Setup') {
+            stage('Retrieve Credentials') {
                 script {
                     // User & Password
                     withCredentials([usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
@@ -40,7 +28,17 @@ def call() {
                     withCredentials([string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
                         host.setIp(ip)
                     }
+                    // User & Password
+                    withCredentials([usernamePassword(credentialsId: 'github-package-token', usernameVariable: 'user', passwordVariable: 'token')]) {
+                        github_user = user
+                        github_token = token
+                    }
                 }
+            }
+
+            stage('Prepare') {
+                cleanWs()
+                prj.getDeploymentTech().prepare()
             }
 
             stage('Deploy') {

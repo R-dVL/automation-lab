@@ -13,8 +13,6 @@ public class TechMVN {
     private def destination
     private String tech
 
-    static final String type = 'jar'
-
     TechMVN(pipeline, name, version, artifactId, nexusRepository, url, destination) {
         this.pipeline = pipeline
         this.name = name
@@ -53,20 +51,16 @@ public class TechMVN {
         // Upload Artifact
         try {
             pipeline.sh "${mvnCmd} -Dmaven.package.skip=true deploy --settings ${pipeline.WORKSPACE}/.m2/settings.xml"
-        } catch(Exception e) {
-            pipeline.println('Already uploaded before to Github.')
-        }
 
-        // Upload artifact to Nexus
-        //Nexus nexus = new Nexus(pipeline)
-        //nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
+        } catch(Exception e) {
+            pipeline.println('Artifact already uploaded to Github.')
+        }
     }
 
     def deploy() {
         pipeline.host.sshCommand("""mkdir -p ${name}/${artifactId}
         cd ${name}/${artifactId}
         curl -O -L https://_:${pipeline.github_token}@maven.pkg.github.com/R-dVL/${name}/com/rdvl/${name}/${version}/${artifactId}.jar
-        java -jar ${artifactId}.jar
         """)
     }
 
