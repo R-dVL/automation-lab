@@ -34,10 +34,6 @@ def call() {
                         github_user = user
                         github_token = token
                     }
-                    // npm Token
-                    withCredentials([string(credentialsId: 'npm-token', variable: 'token')]) {
-                        npm_token = token
-                    }
                 }
             }
 
