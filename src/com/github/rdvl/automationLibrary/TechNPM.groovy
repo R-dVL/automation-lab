@@ -29,7 +29,7 @@ public class TechNPM {
 
         pipeline.sh("npm config set //npm.pkg.github.com/:_authToken=${pipeline.github_token}")
         // Config .npmrc file
-        pipeline.sh("npm publish")
+        pipeline.sh("npm publish --tag "${version})
     }
 
     def deploy() {
