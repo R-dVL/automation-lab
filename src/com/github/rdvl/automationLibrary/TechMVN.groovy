@@ -33,19 +33,22 @@ public class TechMVN {
         def mvnHome = pipeline.tool name: 'Maven 3.9.4', type: 'maven'
         def mvnCmd = "${mvnHome}/bin/mvn"
 
-        // Build
-        pipeline.sh "${mvnCmd} clean package"
+        def settingsXml = """
+        <settings>
+            <servers>
+                <server>
+                    <id>github</id>
+                    <username>${githubUsername}</username>
+                    <password>${githubAccessToken}</password>
+                </server>
+            </servers>
+        </settings>
+        """
+        pipeline.writeFile file: "${env.WORKSPACE}/.m2/settings.xml", text: settingsXml
 
-        def pomContent = readFile 'pom.xml'
-        def groupId = pomContent =~ '<groupId>(.*?)</groupId>'
-        def artifactId = pomContent =~ '<artifactId>(.*?)</artifactId>'
-        def version = pomContent =~ '<version>(.*?)</version>'
-        
-        // Publicar el archivo JAR en GitHub Packages usando Maven
-        pipeline.sh "${mvnCmd} deploy -Dmaven.deploy.skip=true -Dmaven.repo.local=\${WORKSPACE}/.m2/repository \
-            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/R-dVL/cat-watcher \
-            -DgroupId=${groupId[0][1]} -DartifactId=${artifactId[0][1]} -Dversion=${version[0][1]} \
-            -Dfile=target/your-artifact.jar"
+        // Build and upload artifact to Github
+        pipeline.sh "${mvnCmd} clean package deploy --settings ${env.WORKSPACE}/.m2/settings.xml"
+
         // Upload artifact to Nexus
         //Nexus nexus = new Nexus(pipeline)
         //nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
