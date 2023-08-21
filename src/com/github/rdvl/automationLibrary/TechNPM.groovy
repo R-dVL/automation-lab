@@ -29,7 +29,11 @@ public class TechNPM {
 
         pipeline.sh("npm config set //npm.pkg.github.com/:_authToken=${pipeline.github_token}")
         // Config .npmrc file
-        pipeline.sh("npm publish")
+        try {
+            pipeline.sh("npm publish")
+        } catch (Exception e) {
+            pipeline.println('Artifact already uploaded to Github.')
+        }
     }
 
     def deploy() {
