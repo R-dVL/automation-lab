@@ -36,8 +36,7 @@ def call() {
             }
 
             stage('Deploy') {
-                Nexus nexus = new Nexus(this)
-                nexus.uploadArtifact('cat-watcher', 'v1.0.0', 'cat-watcher', 'jar')
+                prj.getDeploymentTech().deploy()
             }
 
         } catch(Exception err) {
