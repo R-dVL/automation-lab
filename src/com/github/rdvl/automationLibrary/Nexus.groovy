@@ -28,7 +28,7 @@ class Nexus implements Serializable {
             artifacts: [
                 [artifactId: artifactId,
                 classifier: '',
-                file: 'target/' + artifactId + '-' + version + '.' + type,
+                file: 'target/' + artifactId + '.' + type,
                 type: type]
             ]
         );

@@ -17,7 +17,7 @@ public class Project {
         this.pipeline = pipeline
         this.name = name
         this.version = version
-        this.artifactId = name + "_" + version
+        this.artifactId = name + "-" + version
         this.url = pipeline.cfg.projects."${name}".url
         this.destination = pipeline.cfg.projects."${name}".destination
         this.techName = pipeline.cfg.projects."${name}".tech
@@ -28,6 +28,7 @@ public class Project {
                 break
 
             case 'npm':
+                this.deploymentTech = new TechNPM(pipeline, name, version, artifactId, url, destination)
                 break
 
             default:
