@@ -28,14 +28,8 @@ public class TechNPM {
         pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
 
         // Config .npmrc file
-        String npmrc = """//npm.pkg.github.com/:username=${pipeline.github_user}
-        //npm.pkg.github.com/:_password=${pipeline.github_token}
-        //npm.pkg.github.com/:email=rauldel.valle.lima@hotmail.com
-        //npm.pkg.github.com/:always-auth=true
-        """
-
-        pipeline.writeFile file: "${pipeline.WORKSPACE}/.npmrc", text: npmrc
-        pipeline.sh("npm publish --registry=https://npm.pkg.github.com")
+        pipeline.writeFile file: "${pipeline.WORKSPACE}/.npmrc", text: "@R-dVL:registry=https://npm.pkg.github.com"
+        pipeline.sh("npm publish")
     }
 
     def deploy() {
