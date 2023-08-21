@@ -49,7 +49,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        pipeline.sshPut remote: remote, from: file, into: remotePath
+        pipeline.sshPut remote: remote, from: file, into: remotePath, sudo: true
     }
 
     @NonCPS
