@@ -7,6 +7,7 @@ def call() {
             cfg
             github_user
             github_token
+            host
         }
         // Pipeline error control
         try {
@@ -14,7 +15,7 @@ def call() {
             cfg = Configuration.getInstance()
             // Default Params
             Project prj = new Project(this, NAME, VERSION)
-            Host host = new Host(this, 'server')
+            host = new Host(this, 'server')
 
             stage('Prepare') {
                 cleanWs()
@@ -43,7 +44,6 @@ def call() {
             }
 
             stage('Deploy') {
-                host.sshCommand("curl -O -L https://_:${github_token}@maven.pkg.github.com/R-dVL/cat-watcher/com/rdvl/cat-watcher/v1.0.0/cat-watcher-v1.0.0.jar")
             }
 
         } catch(Exception err) {
