@@ -28,7 +28,7 @@ public class TechNPM {
         pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
 
         // Config .npmrc file
-        pipeline.writeFile file: "${pipeline.WORKSPACE}/.npmrc", text: "@R-dVL:registry=https://npm.pkg.github.com\n//registry.npmjs.org/:_authToken=${TOKEN}"
+        pipeline.writeFile file: "${pipeline.WORKSPACE}/.npmrc", text: "@R-dVL:registry=https://npm.pkg.github.com\n//registry.npmjs.org/:_authToken=${pipeline.npm_token}"
         pipeline.sh("npm publish")
     }
 
