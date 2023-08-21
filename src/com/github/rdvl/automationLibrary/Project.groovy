@@ -54,6 +54,6 @@ public class Project {
             Url: ${url}
             Destination: ${destination}
             Tech: ${tech}
-        """;
+        """
     }
 }
