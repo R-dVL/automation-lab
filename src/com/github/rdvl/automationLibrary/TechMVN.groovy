@@ -52,7 +52,7 @@ public class TechMVN {
 
         // Upload Artifact
         try {
-            pipeline.sh "${mvnCmd} deploy --settings ${pipeline.WORKSPACE}/.m2/settings.xml"
+            pipeline.sh "${mvnCmd} -Dmaven.package.skip=true deploy --settings ${pipeline.WORKSPACE}/.m2/settings.xml"
         } catch(Exception e) {
             pipeline.println('Already uploaded before to Github.')
         }
