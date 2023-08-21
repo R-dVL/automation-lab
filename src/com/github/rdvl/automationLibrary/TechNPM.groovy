@@ -1,6 +1,6 @@
 package com.github.rdvl.automationLibrary;
 
-public class TechMVN {
+public class TechNPM {
     // Pipeline Context
     private def pipeline
 
@@ -12,7 +12,7 @@ public class TechMVN {
     private def destination
     private String tech
 
-    TechMVN(pipeline, name, version, artifactId, url, destination) {
+    TechNPM(pipeline, name, version, artifactId, url, destination) {
         this.pipeline = pipeline
         this.name = name
         this.version = version
