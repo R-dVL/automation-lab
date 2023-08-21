@@ -24,7 +24,7 @@ public class Project {
 
         switch(techName) {
             case 'maven':
-                TechMVN mvn = new TechMVN(pipeline, name, version, artifactId, url, destination)
+                this.deploymentTech = new TechMVN(pipeline, name, version, artifactId, url, destination)
                 break
 
             case 'npm':
