@@ -45,6 +45,7 @@ public class TechNPM {
         git clone --depth 1 --branch ${version} ${url}
         cd ${name}
         npm install
+        source /opt/apps/${name}/start.sh ${version}
         """)
     }
 
