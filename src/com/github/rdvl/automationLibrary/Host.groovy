@@ -38,6 +38,21 @@ class Host implements Serializable {
     }
 
     @NonCPS
+    def sshPut(file, remotePath) {
+        // Remote params
+        def remote = [:]
+        remote.name = name
+        remote.host = ip
+        remote.user = user
+        remote.password = password
+        remote.port = 22
+        remote.allowAnyHosts = true
+
+        // Execute command
+        pipeline.sshPut remote: remote, from: file, into: remotePath
+    }
+
+    @NonCPS
     def getIp() {
         return this.ip
     }

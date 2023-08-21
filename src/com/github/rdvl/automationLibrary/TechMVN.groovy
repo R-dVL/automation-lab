@@ -26,17 +26,23 @@ public class TechMVN {
     }
 
     def prepare() {
+        // Download Code
         pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
 
+        // Set-up Maven
         def mvnHome = pipeline.tool name: 'Maven 3.9.4', type: 'maven'
         def mvnCmd = "${mvnHome}/bin/mvn"
 
+        // Build
         pipeline.sh "${mvnCmd} clean package"
+
+        // Upload artifact to Nexus
+        Nexus nexus = new Nexus(pipeline)
+        nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
     }
 
     def deploy() {
-        Nexus nexus = new Nexus(pipeline)
-        nexus.uploadArtifact(nexusRepository, version, artifactId, 'jar')
+
     }
 
     @Override
