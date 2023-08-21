@@ -59,7 +59,7 @@ public class TechMVN {
 
     def deploy() {
         pipeline.host.sshCommand("""mkdir -p /opt/apps/${name}/${version}
-        cd opt/apps/${name}/${version}/
+        cd /opt/apps/${name}/${version}/
         curl -O -L https://_:${pipeline.github_token}@maven.pkg.github.com/R-dVL/${name}/com/rdvl/${name}/${version}/${artifactId}.jar
         """)
     }
