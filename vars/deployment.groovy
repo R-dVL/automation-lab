@@ -31,20 +31,19 @@ def call() {
             stage('Host Setup') {
                 script {
                     // User & Password
-                    withCredentials([
-                            usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
+                    withCredentials([usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
                         host.setUser(user)
                         host.setPassword(password)
                     }
                     // IP
-                    withCredentials([
-                            string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
+                    withCredentials([string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
                         host.setIp(ip)
                     }
                 }
             }
 
             stage('Deploy') {
+                host.sshCommand("curl -O -L https://_:${github_token}@maven.pkg.github.com/R-dVL/cat-watcher/com/rdvl/cat-watcher/v1.0.0/cat-watcher-v1.0.0.jar")
             }
 
         } catch(Exception err) {
