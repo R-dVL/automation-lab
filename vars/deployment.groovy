@@ -44,7 +44,7 @@ def call() {
                             version: 'v1.0.0',
                             repository: 'cat-watcher',
                             credentialsId: 'nexus-credentials',
-                            artifact {
+                            artifact: {
                                 artifactId('cat-watcher')
                                 type('jar')
                                 classifier('debug')
