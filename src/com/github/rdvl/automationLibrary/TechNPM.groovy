@@ -41,8 +41,8 @@ public class TechNPM {
 
     def deploy() {
         pipeline.host.sshCommand("""systemctl stop ${name}
-        rm -rf apps/${name}
-        cd apps/
+        rm -rf /opt/apps/${name}
+        cd opt/apps/
         git clone --depth 1 --branch ${version} ${url}
         cd ${name}
         npm install
