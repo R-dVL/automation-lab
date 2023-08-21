@@ -45,10 +45,10 @@ def call() {
                             repository: 'cat-watcher',
                             credentialsId: 'nexus-credentials',
                             artifact: {
-                                artifactId('cat-watcher')
-                                type('jar')
-                                classifier('debug')
-                                file('/target/cat-watcher-v1.0.0.jar')
+                                artifactId: 'cat-watcher',
+                                type: 'jar',
+                                classifier: 'debug',
+                                file: '/target/cat-watcher-v1.0.0.jar'
                             }
                         );
             }
