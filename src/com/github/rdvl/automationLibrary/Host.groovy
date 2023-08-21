@@ -34,7 +34,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        pipeline.sshCommand remote: remote, command: cmd, sudo: true
+        pipeline.sshCommand remote: remote, command: cmd
     }
 
     @NonCPS
