@@ -8,6 +8,7 @@ public class Project {
     private String name
     private String version
     private String artifactId
+    private String nexusRepository
     private String url
     private def destination
     private String techName
@@ -18,17 +19,18 @@ public class Project {
         this.name = name
         this.version = version
         this.artifactId = name + "-" + version
+        this.nexusRepository = pipeline.cfg.projects."${name}".nexus
         this.url = pipeline.cfg.projects."${name}".url
         this.destination = pipeline.cfg.projects."${name}".destination
         this.techName = pipeline.cfg.projects."${name}".tech
 
         switch(techName) {
             case 'maven':
-                this.deploymentTech = new TechMVN(pipeline, name, version, artifactId, url, destination)
+                this.deploymentTech = new TechMVN(pipeline, name, version, artifactId, nexusRepository, url, destination)
                 break
 
             case 'npm':
-                this.deploymentTech = new TechNPM(pipeline, name, version, artifactId, url, destination)
+                this.deploymentTech = new TechNPM(pipeline, name, version, artifactId, nexusRepository, url, destination)
                 break
 
             default:

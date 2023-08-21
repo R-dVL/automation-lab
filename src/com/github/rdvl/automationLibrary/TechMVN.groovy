@@ -8,15 +8,19 @@ public class TechMVN {
     private String name
     private String version
     private String artifactId
+    private String nexusRepository
     private String url
     private def destination
     private String tech
 
-    TechMVN(pipeline, name, version, artifactId, url, destination) {
+    static final String type = 'jar'
+
+    TechMVN(pipeline, name, version, artifactId, nexusRepository, url, destination) {
         this.pipeline = pipeline
         this.name = name
         this.version = version
         this.artifactId = artifactId
+        this.nexusRepository = nexusRepository
         this.url = url
         this.destination = destination
     }

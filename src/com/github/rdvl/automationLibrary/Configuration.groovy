@@ -24,18 +24,21 @@ class Configuration {
         'cat-watcher': [
             'url': 'https://github.com/R-dVL/cat-watcher.git',
             'destination': '/home/jenkins/cat-watcher',
+            'nexus': 'cat-watcher',
             'tech': 'maven'
         ],
 
         'lima-backend': [
             'url': 'https://github.com/R-dVL/lima-backend.git',
             'destination': '/home/jenkins/lima-backend',
+            'nexus': 'lima-backend',
             'tech': 'npm'
         ],
 
         'lima-frontend': [
             'url': 'https://github.com/R-dVL/lima-frontend.git',
             'destination': '/home/jenkins/lima-frontend',
+            'nexus': 'lima-frontend',
             'tech': 'npm'
         ]
     ]
