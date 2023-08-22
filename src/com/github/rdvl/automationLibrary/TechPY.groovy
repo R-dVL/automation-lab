@@ -24,6 +24,14 @@ public class TechNPM {
     }
 
     def deploy() {
+        // Stop service
+        try {
+            pipeline.host.sshCommand("pm2 stop ${name}", true)
+
+        } catch (Exception e) {
+            pipeline.println('Service already stopped.')
+        }
+
         // Deploy
         pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
         cd /opt/apps/${name}/${version}
@@ -32,8 +40,16 @@ public class TechNPM {
         python3 -m venv venv
         source venv/bin/activate
         pip3 install -r requirements.txt
-        python3 src/main.py
         """)
+
+        // Start service
+        pipeline.host.sshCommand("/opt/apps/${name}/start.sh ${version}", true)
+
+        // Wait until service is started
+        pipeline.sleep(15)
+
+        // Show log
+        pipeline.host.sshCommand("cat /opt/apps/${name}/${version}/${name}.log")
     }
 
     @Override
