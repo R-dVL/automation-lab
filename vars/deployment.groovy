@@ -7,7 +7,8 @@ def call() {
             cfg
             github_user
             github_token
-            npm_token
+            mongo_user
+            mongo_password
             host
         }
         // Pipeline error control
@@ -20,10 +21,15 @@ def call() {
 
             stage('Retrieve Credentials') {
                 script {
-                    // User & Password
+                    // Host User & Password
                     withCredentials([usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
                         host.setUser(user)
                         host.setPassword(password)
+                    }
+                    // Mongodb User & Password
+                    withCredentials([usernamePassword(credentialsId: 'mongo-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                        mongo_user = user
+                        mongo_password = password
                     }
                     // IP
                     withCredentials([string(credentialsId: host.getConfigIp(), variable: 'ip')]) {

@@ -49,6 +49,10 @@ public class TechNPM {
         cd /opt/apps/${name}/${version}
         git clone --depth 1 --branch ${version} ${url}
         cd ${name}
+        sed -i "s/${pipeline.mongo_user}/$MONGO_USER/" .env
+        sed -i "s/${pipeline.mongo_password}/$MONGO_PASSWORD/" .env
+        sed -i "s/${localhost:27017}/$MONGO_URI/" .env
+        sed -i "s/${cat-watcher}/$MONGO_DB/" .env
         npm install
         """)
 
