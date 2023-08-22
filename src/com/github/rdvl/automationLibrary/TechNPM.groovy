@@ -49,12 +49,17 @@ public class TechNPM {
         cd /opt/apps/${name}/${version}
         git clone --depth 1 --branch ${version} ${url}
         cd ${name}
-        sed -i "s/${pipeline.mongo_user}/$MONGO_USER/" .env
-        sed -i "s/${pipeline.mongo_password}/$MONGO_PASSWORD/" .env
-        sed -i "s/${localhost:27017}/$MONGO_URI/" .env
-        sed -i "s/${cat-watcher}/$MONGO_DB/" .env
         npm install
         """)
+
+        def env = """MONGO_USER = ${pipeline.mongo_user}
+        MONGO_PASSWORD = ${pipeline.mongo_password}
+        MONGO_URI = localhost:27017
+        MONGO_DB = cat-watcher
+        """
+        pipeline.writeFile file: "./env", text: env
+
+        pipeline.host.sshPut('./env', "/opt/apps/${name}/${version}/${name}")
 
         // Start service
         pipeline.host.sshCommand("bash /opt/apps/${name}/start.sh ${version}", true)
