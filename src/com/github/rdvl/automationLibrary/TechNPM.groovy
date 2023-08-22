@@ -54,6 +54,9 @@ public class TechNPM {
         // Start service
         pipeline.host.sshCommand("/opt/apps/${name}/start.sh ${version}", true)
 
+        // Wait until service is started
+        pipeline.sleep(15)
+
         // Show log
         pipeline.host.sshCommand("cat /opt/apps/${name}/${version}/${name}.log")
     }
