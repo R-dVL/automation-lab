@@ -20,19 +20,8 @@ public class TechNPM {
     }
 
     def prepare() {
-        // Download Code
-        pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
-
-        // Build
-        pipeline.sh("npm install")
-
-        // Upload Artifact
-        pipeline.sh("npm config set //npm.pkg.github.com/:_authToken=${pipeline.github_token}")
-        try {
-            pipeline.sh("npm publish")
-        } catch (Exception e) {
-            pipeline.println('Artifact already uploaded to Github.')
-        }
+        // Prepare
+        // Not building projects rn
     }
 
     def deploy() {
@@ -52,6 +41,7 @@ public class TechNPM {
         npm install
         """)
 
+        // Write .env file
         def env = """MONGO_USER=${pipeline.mongo_user}
 MONGO_PASSWORD=${pipeline.mongo_password}
 MONGO_URI=localhost:27017
@@ -59,6 +49,7 @@ MONGO_DB=cat-watcher
         """
         pipeline.writeFile file: "./.env", text: env
 
+        // Send .env file
         pipeline.host.sshPut('./.env', "/opt/apps/${name}/${version}/${name}")
 
         // Start service

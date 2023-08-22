@@ -5,13 +5,14 @@ def call() {
         // Environment variables
         environment {
             cfg
+            host
         }
         // Pipeline error control
         try {
             // Configuration instance
             cfg = Configuration.getInstance()
             // Default Params
-            Host host = new Host(this, HOST)
+            host = new Host(this, HOST)
 
             stage('Host Setup') {
                 // Retrieve info from Jenkins

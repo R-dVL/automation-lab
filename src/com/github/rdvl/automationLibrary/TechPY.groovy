@@ -21,6 +21,7 @@ public class TechPY {
 
     def prepare() {
         // Prepare
+        // Not building projects rn
     }
 
     def deploy() {
@@ -42,6 +43,7 @@ public class TechPY {
         pip3 install -r requirements.txt
         """)
 
+        // Write .env file
         def env = """MONGO_USER=${pipeline.mongo_user}
 MONGO_PASSWORD=${pipeline.mongo_password}
 MONGO_URI=192.168.1.55:27017
@@ -49,6 +51,7 @@ MONGO_DB=cat-watcher
         """
         pipeline.writeFile file: "./.env", text: env
 
+        // Send .env file
         pipeline.host.sshPut('./.env', "/opt/apps/${name}/${version}/${name}")
 
         // Start service

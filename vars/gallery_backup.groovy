@@ -7,13 +7,14 @@ def call() {
         // Environment variables
         environment {
             cfg
+            host
         }
         // Pipeline error control
         try {
             // Configuration instance
             cfg = Configuration.getInstance()
             // Default Params
-            Host host = new Host(this, 'server')
+            host = new Host(this, 'server')
             // Define file name
             LocalDate date = LocalDate.now();
             String fileName = "gallery_backup_" + date.toString().replace('-', '_')

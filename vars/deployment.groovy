@@ -5,8 +5,6 @@ def call() {
         // Environment variables
         environment {
             cfg
-            github_user
-            github_token
             mongo_user
             mongo_password
             host
@@ -35,11 +33,6 @@ def call() {
                     withCredentials([string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
                         host.setIp(ip)
                     }
-                    // Github Token
-                    withCredentials([usernamePassword(credentialsId: 'github-package-token', usernameVariable: 'user', passwordVariable: 'token')]) {
-                        github_user = user
-                        github_token = token
-                    }
                 }
             }
 
@@ -55,7 +48,6 @@ def call() {
         } catch(Exception e) {
             println("ALERT | Something went wrong")
             error(e.getMessage())
-            error(e)
         }
     }
 }
