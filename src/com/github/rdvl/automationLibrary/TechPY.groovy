@@ -42,10 +42,10 @@ public class TechPY {
         pip3 install -r requirements.txt
         """)
 
-        def env = """MONGO_USER = ${pipeline.mongo_user}
-MONGO_PASSWORD = ${pipeline.mongo_password}
-MONGO_URI = 192.168.1.55:27017
-MONGO_DB = cat-watcher
+        def env = """MONGO_USER=${pipeline.mongo_user}
+MONGO_PASSWORD=${pipeline.mongo_password}
+MONGO_URI=192.168.1.55:27017
+MONGO_DB=cat-watcher
         """
         pipeline.writeFile file: "./.env", text: env
 
