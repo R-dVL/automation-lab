@@ -40,13 +40,22 @@ public class TechNPM {
     }
 
     def deploy() {
+        // Stop service
+        pipeline.host.sshCommand("pm2 stop ${name}", true)
+
+        // Deploy
         pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
         cd /opt/apps/${name}/${version}
         git clone --depth 1 --branch ${version} ${url}
         cd ${name}
         npm install
-        /opt/apps/${name}/start.sh ${version}
         """)
+
+        // Start service
+        pipeline.host.sshCommand("/opt/apps/${name}/start.sh ${version}", true)
+
+        // Show log
+        pipeline.host.sshCommand("cat /opt/apps/${name}/${version}/${name}.log")
     }
 
     @Override

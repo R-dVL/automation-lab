@@ -23,7 +23,7 @@ class Host implements Serializable {
     }
 
     @NonCPS
-    def sshCommand(cmd) {
+    def sshCommand(cmd, sudo = false) {
         // Remote params
         def remote = [:]
         remote.name = name
@@ -34,7 +34,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        pipeline.sshCommand remote: remote, command: cmd
+        pipeline.sshCommand remote: remote, command: cmd, sudo: sudo
     }
 
     @NonCPS
