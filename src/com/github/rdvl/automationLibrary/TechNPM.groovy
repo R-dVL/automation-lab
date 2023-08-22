@@ -8,19 +8,15 @@ public class TechNPM {
     private String name
     private String version
     private String artifactId
-    private String nexusRepository
     private String url
-    private def destination
     private String tech
 
-    TechNPM(pipeline, name, version, artifactId, nexusRepository, url, destination) {
+    TechNPM(pipeline, name, version, artifactId, url) {
         this.pipeline = pipeline
         this.name = name
         this.version = version
         this.artifactId = artifactId
-        this.nexusRepository = nexusRepository
         this.url = url
-        this.destination = destination
     }
 
     def prepare() {
