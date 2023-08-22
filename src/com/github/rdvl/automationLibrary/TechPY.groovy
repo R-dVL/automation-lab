@@ -1,6 +1,6 @@
 package com.github.rdvl.automationLibrary;
 
-public class TechNPM {
+public class TechPY {
     // Pipeline Context
     private def pipeline
 
@@ -11,7 +11,7 @@ public class TechNPM {
     private String url
     private String tech
 
-    TechNPM(pipeline, name, version, artifactId, url) {
+    TechPY(pipeline, name, version, artifactId, url) {
         this.pipeline = pipeline
         this.name = name
         this.version = version
