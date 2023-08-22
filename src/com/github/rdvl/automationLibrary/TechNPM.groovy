@@ -53,7 +53,7 @@ public class TechNPM {
         """)
 
         // Start service
-        pipeline.host.sshCommand("/opt/apps/${name}/start.sh ${version}", true)
+        pipeline.host.sshCommand("bash /opt/apps/${name}/start.sh ${version}", true)
 
         // Wait until service is started
         pipeline.sleep(15)
