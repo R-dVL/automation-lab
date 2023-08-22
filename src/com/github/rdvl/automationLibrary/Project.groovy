@@ -10,27 +10,31 @@ public class Project {
     private String artifactId
     private String nexusRepository
     private String url
-    private def destination
     private String techName
     private def deploymentTech
 
     Project(pipeline, name, version) {
+        // Pipeline Context
         this.pipeline = pipeline
+
+        // Basic Params
         this.name = name
         this.version = version
         this.artifactId = name + "-" + version
-        this.nexusRepository = pipeline.cfg.projects."${name}".nexus
         this.url = pipeline.cfg.projects."${name}".url
-        this.destination = pipeline.cfg.projects."${name}".destination
         this.techName = pipeline.cfg.projects."${name}".tech
 
         switch(techName) {
             case 'maven':
-                this.deploymentTech = new TechMVN(pipeline, name, version, artifactId, nexusRepository, url, destination)
+                this.deploymentTech = new TechMVN(pipeline, name, version, artifactId, url)
                 break
 
             case 'npm':
-                this.deploymentTech = new TechNPM(pipeline, name, version, artifactId, nexusRepository, url, destination)
+                this.deploymentTech = new TechNPM(pipeline, name, version, artifactId, url)
+                break
+
+            case 'python':
+                this.deploymentTech = new TechPY(pipeline, name, version, artifactId, url)
                 break
 
             default:
