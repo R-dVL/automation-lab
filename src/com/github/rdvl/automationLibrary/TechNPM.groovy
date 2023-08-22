@@ -41,7 +41,7 @@ public class TechNPM {
 
     def deploy() {
         // Stop service
-        pipeline.host.sshCommand("pm2 stop ${name}", true)
+        pipeline.host.sshCommand("pm2 stop ${name}")
 
         // Deploy
         pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
@@ -52,7 +52,7 @@ public class TechNPM {
         """)
 
         // Start service
-        pipeline.host.sshCommand("/opt/apps/${name}/start.sh ${version}", true)
+        pipeline.host.sshCommand("/opt/apps/${name}/start.sh ${version}")
 
         // Show log
         pipeline.host.sshCommand("cat /opt/apps/${name}/${version}/${name}.log")
