@@ -41,7 +41,12 @@ public class TechNPM {
 
     def deploy() {
         // Stop service
-        pipeline.host.sshCommand("pm2 stop ${name}", true)
+        try {
+            pipeline.host.sshCommand("pm2 stop ${name}", true)
+
+        } catch (Exception e) {
+            pipeline.println('Service already stopped.')
+        }
 
         // Deploy
         pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
