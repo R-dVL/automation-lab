@@ -14,10 +14,14 @@ Shared library for training and device maintenance purposes
 |               +- automationLibrary
 |                   +- Host.groovy
 |                   +- Constants.groovy
+|                   +- TechMVN.groovy
+|                   +- TechNPM.groovy
+|                   +- TechPY.groovy
 |
 +- vars                                     # Pipelines
 |   +- gallery_backup.groovy
 |   +- ssh_command.groovy
+|   +- deployment.groovy
 ~~~
 
 ## Pipelines
