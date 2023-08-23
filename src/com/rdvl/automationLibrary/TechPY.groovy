@@ -34,7 +34,7 @@ public class TechPY {
         try { pipeline.host.sshCommand("pm2 stop ${name}", true) } catch (Exception e) { pipeline.println('Already stopped..') }
 
         // Deploy
-        if(allreadyDeployed == 'false') {
+        if(this.allreadyDeployed == false) {
             pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
             cd /opt/apps/${name}/${version}
             git clone --depth 1 --branch ${version} ${url}
