@@ -1,4 +1,4 @@
-package com.github.rdvl.automationLibrary
+package com.rdvl.automationLibrary
 
 class Configuration {
     // Singleton class to store configuration

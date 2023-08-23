@@ -1,4 +1,4 @@
-package com.github.rdvl.automationLibrary;
+package com.rdvl.automationLibrary;
 
 public class TechNPM {
     // Pipeline Context
