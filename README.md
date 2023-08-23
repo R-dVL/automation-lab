@@ -6,7 +6,7 @@ Shared library for training and device maintenance purposes
 (root)
 +- resources                                # Resources (configuration files, playbooks)
 |   +- configuration.json
-|
+|   +- ...
 +- src                                      # Groovy source files (Classes)
 |   +- com
 |       +- github
@@ -14,14 +14,16 @@ Shared library for training and device maintenance purposes
 |               +- automationLibrary
 |                   +- Host.groovy
 |                   +- Configuration.groovy
+|                   +- Project.groovy
 |                   +- TechMVN.groovy
 |                   +- TechNPM.groovy
 |                   +- TechPY.groovy
-|
+|                   +- ...
 +- vars                                     # Pipelines
 |   +- gallery_backup.groovy
 |   +- ssh_command.groovy
 |   +- deployment.groovy
+|   +- ...
 ~~~
 
 ## Pipelines
