@@ -11,6 +11,9 @@ public class TechNPM {
     private String url
     private String tech
 
+    // Control params
+    private boolean allreadyDeployed
+
     TechNPM(pipeline, name, version, artifactId, url) {
         this.pipeline = pipeline
         this.name = name
@@ -21,36 +24,38 @@ public class TechNPM {
 
     def prepare() {
         // Prepare
-        // Not building projects rn
+        def result = pipeline.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi")
+
+        this.allreadyDeployed = result
     }
 
     def deploy() {
         // Stop service
-        try {
-            pipeline.host.sshCommand("pm2 stop ${name}", true)
-
-        } catch (Exception e) {
-            pipeline.println('Service already stopped.')
-        }
+        pipeline.host.sshCommand("pm2 stop ${name}", true)
 
         // Deploy
-        pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
-        cd /opt/apps/${name}/${version}
-        git clone --depth 1 --branch ${version} ${url}
-        cd ${name}
-        npm install
-        """)
+        if(allreadyDeployed == false) {
+            pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
+            cd /opt/apps/${name}/${version}
+            git clone --depth 1 --branch ${version} ${url}
+            cd ${name}
+            npm install
+            """)
 
-        // Write .env file
-        def env = """MONGO_USER=${pipeline.mongo_user}
-MONGO_PASSWORD=${pipeline.mongo_password}
-MONGO_URI=localhost:27017
-MONGO_DB=cat-watcher
-        """
-        pipeline.writeFile file: "./.env", text: env
+            // Write .env file
+            def env = """MONGO_USER=${pipeline.mongo_user}
+    MONGO_PASSWORD=${pipeline.mongo_password}
+    MONGO_URI=localhost:27017
+    MONGO_DB=cat-watcher
+            """
+            pipeline.writeFile file: "./.env", text: env
 
-        // Send .env file
-        pipeline.host.sshPut('./.env', "/opt/apps/${name}/${version}/${name}")
+            // Send .env file
+            pipeline.host.sshPut('./.env', "/opt/apps/${name}/${version}/${name}")
+
+        } else {
+            pipeline.print('Allready deployed, starting service..')
+        }
 
         // Start service
         pipeline.host.sshCommand("bash /opt/apps/${name}/start.sh ${version}", true)
