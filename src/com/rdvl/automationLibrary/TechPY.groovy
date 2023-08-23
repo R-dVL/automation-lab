@@ -24,12 +24,15 @@ public class TechPY {
 
     def prepare() {
         // Prepare
-        def result = pipeline.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi")
+        def result = pipeline.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi").trim()
 
         pipeline.print(result)
         pipeline.print(result.getClass())
 
-        this.allreadyDeployed = result    
+        this.allreadyDeployed = result.toBoolean()
+
+        pipeline.print(allreadyDeployed)
+        pipeline.print(this.allreadyDeployed)
     }
 
     def deploy() {
@@ -37,9 +40,7 @@ public class TechPY {
         try { pipeline.host.sshCommand("pm2 stop ${name}", true) } catch (Exception e) { pipeline.println('Already stopped..') }
 
         // Deploy
-        pipeline.print(allreadyDeployed)
-        pipeline.print(this.allreadyDeployed)
-        if(this.allreadyDeployed == 'false') {
+        if(this.allreadyDeployed == false) {
             pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
             cd /opt/apps/${name}/${version}
             git clone --depth 1 --branch ${version} ${url}
