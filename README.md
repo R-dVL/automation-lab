@@ -13,7 +13,7 @@ Shared library for training and device maintenance purposes
 |           +- rdvl
 |               +- automationLibrary
 |                   +- Host.groovy
-|                   +- Constants.groovy
+|                   +- Configuration.groovy
 |                   +- TechMVN.groovy
 |                   +- TechNPM.groovy
 |                   +- TechPY.groovy
