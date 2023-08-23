@@ -9,16 +9,15 @@ Shared library for training and device maintenance purposes
 |   +- ...
 +- src                                      # Groovy source files (Classes)
 |   +- com
-|       +- github
-|           +- rdvl
-|               +- automationLibrary
-|                   +- Host.groovy
-|                   +- Configuration.groovy
-|                   +- Project.groovy
-|                   +- TechMVN.groovy
-|                   +- TechNPM.groovy
-|                   +- TechPY.groovy
-|                   +- ...
+|       +- rdvl
+|           +- automationLibrary
+|               +- Host.groovy
+|               +- Configuration.groovy
+|               +- Project.groovy
+|               +- TechMVN.groovy
+|               +- TechNPM.groovy
+|               +- TechPY.groovy
+|               +- ...
 +- vars                                     # Pipelines
 |   +- gallery_backup.groovy
 |   +- ssh_command.groovy
