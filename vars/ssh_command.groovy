@@ -32,7 +32,7 @@ def call() {
             }
 
             stage('Execute Command') {
-                host.sshCommand(CMD)
+                host.sshCommand(CMD, SUDO)
             }
 
         } catch(Exception err) {
