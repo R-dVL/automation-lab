@@ -15,7 +15,7 @@ def call() {
             cfg = Configuration.getInstance()
             // Default Params
             Project prj = new Project(this, NAME, VERSION)
-            host = new Host(this, 'server')
+            host = new Host(this, HOST)
 
             stage('Retrieve Credentials') {
                 script {

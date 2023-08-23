@@ -14,7 +14,7 @@ def call() {
             // Configuration instance
             cfg = Configuration.getInstance()
             // Default Params
-            host = new Host(this, 'server')
+            host = new Host(this, HOST)
             // Define file name
             LocalDate date = LocalDate.now();
             String fileName = "gallery_backup_" + date.toString().replace('-', '_')
