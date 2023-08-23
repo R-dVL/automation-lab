@@ -31,7 +31,7 @@ public class TechPY {
 
     def deploy() {
         // Stop service
-        pipeline.host.sshCommand("pm2 stop ${name}", true)
+        try { pipeline.host.sshCommand("pm2 stop ${name}", true) } catch (Exception e) { pipeline.println('Already stopped..') }
 
         // Deploy
         if(allreadyDeployed == false) {
