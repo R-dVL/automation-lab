@@ -26,13 +26,7 @@ public class TechPY {
         // Prepare
         def result = pipeline.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi").trim()
 
-        pipeline.print(result)
-        pipeline.print(result.getClass())
-
         this.allreadyDeployed = result.toBoolean()
-
-        pipeline.print(allreadyDeployed)
-        pipeline.print(this.allreadyDeployed)
     }
 
     def deploy() {

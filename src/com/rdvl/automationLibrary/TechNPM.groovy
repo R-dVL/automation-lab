@@ -24,9 +24,9 @@ public class TechNPM {
 
     def prepare() {
         // Prepare
-        def result = pipeline.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi")
+        def result = pipeline.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi").trim()
 
-        this.allreadyDeployed = result
+        this.allreadyDeployed = result.toBoolean()
     }
 
     def deploy() {
@@ -34,7 +34,7 @@ public class TechNPM {
         try { pipeline.host.sshCommand("pm2 stop ${name}", true) } catch (Exception e) { pipeline.println('Already stopped..') }
 
         // Deploy
-        if(allreadyDeployed == 'false') {
+        if(allreadyDeployed == false) {
             pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
             cd /opt/apps/${name}/${version}
             git clone --depth 1 --branch ${version} ${url}
