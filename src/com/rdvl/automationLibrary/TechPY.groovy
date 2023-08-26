@@ -45,11 +45,13 @@ public class TechPY {
             """)
 
             // Write .env file
-            def env = """MONGO_USER=${pipeline.mongo_user}
-    MONGO_PASSWORD=${pipeline.mongo_password}
-    MONGO_URI=192.168.1.55:27017
-    MONGO_DB=cat-watcher
+            def env =
+            """MONGO_USER=${pipeline.mongo_user}
+            MONGO_PASSWORD=${pipeline.mongo_password}
+            MONGO_URI=192.168.1.55:27017
+            MONGO_DB=cat-watcher
             """
+
             pipeline.writeFile file: "./.env", text: env
 
             // Send .env file
@@ -72,8 +74,7 @@ public class TechPY {
     @Override
     @NonCPS
     public String toString() {
-        return """
-            Name: ${name}
+        return """Name: ${name}
             Version: ${version}
             Artifact: ${artifactId}
             Url: ${url}

@@ -11,9 +11,11 @@ def call() {
         try {
             // Configuration instance
             cfg = Configuration.getInstance()
+
             // Default Params
             host = new Host(this, HOST)
 
+            // TODO: Retrieve host credentials in Host constructor
             stage('Host Setup') {
                 // Retrieve info from Jenkins
                 script {

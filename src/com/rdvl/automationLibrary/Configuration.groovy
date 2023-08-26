@@ -23,16 +23,19 @@ class Configuration {
     static final def projects = [
         'cat-watcher': [
             'url': 'https://github.com/R-dVL/cat-watcher.git',
+            'destination': '/opt/apps/cat-watcher',
             'tech': 'python'
         ],
 
         'lima-backend': [
             'url': 'https://github.com/R-dVL/lima-backend.git',
+            'destination': '/opt/apps/lima-backend',
             'tech': 'npm'
         ],
 
         'lima-frontend': [
             'url': 'https://github.com/R-dVL/lima-frontend.git',
+            'destination': '/opt/apps/lima-frontend',
             'tech': 'npm'
         ]
     ]
@@ -40,6 +43,7 @@ class Configuration {
     // Singleton constructor
     private Configuration () {}
 
+    // Instance getter
     @NonCPS
     static Configuration getInstance() {
         if (instance == null) {

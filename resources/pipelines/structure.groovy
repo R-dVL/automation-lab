@@ -12,6 +12,7 @@ def call() {
             cfg = Configuration.getInstance()
             // Default Params
 
+            // Stages
             stage('Stage 1') {
 
             }

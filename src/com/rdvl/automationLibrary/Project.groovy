@@ -24,6 +24,7 @@ public class Project {
         this.url = pipeline.cfg.projects."${name}".url
         this.techName = pipeline.cfg.projects."${name}".tech
 
+        // Deployment tech construction
         switch(techName) {
             case 'maven':
                 this.deploymentTech = new TechMVN(pipeline, name, version, artifactId, url)

@@ -43,11 +43,13 @@ public class TechNPM {
             """)
 
             // Write .env file
-            def env = """MONGO_USER=${pipeline.mongo_user}
-    MONGO_PASSWORD=${pipeline.mongo_password}
-    MONGO_URI=localhost:27017
-    MONGO_DB=cat-watcher
+            def env = 
+            """MONGO_USER=${pipeline.mongo_user}
+            MONGO_PASSWORD=${pipeline.mongo_password}
+            MONGO_URI=localhost:27017
+            MONGO_DB=cat-watcher
             """
+
             pipeline.writeFile file: "./.env", text: env
 
             // Send .env file
@@ -77,6 +79,6 @@ public class TechNPM {
             Url: ${url}
             Destination: ${destination}
             Tech: ${tech}
-        """;
+        """
     }
 }

@@ -22,6 +22,7 @@ class Host implements Serializable {
         this.configCredentials = pipeline.cfg.hosts."${name}".credentials
     }
 
+    // Jenkins ssh Command wrapper
     @NonCPS
     def sshCommand(cmd, sudo = false) {
         // Remote params
@@ -37,6 +38,7 @@ class Host implements Serializable {
         pipeline.sshCommand remote: remote, command: cmd, sudo: sudo
     }
 
+    // Jenkins ssh Put wrapper
     @NonCPS
     def sshPut(file, remotePath) {
         // Remote params
