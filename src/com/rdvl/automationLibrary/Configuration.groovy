@@ -44,7 +44,6 @@ class Configuration {
     private Configuration () {}
 
     // Instance getter
-    @NonCPS
     static Configuration getInstance() {
         if (instance == null) {
             instance = new Configuration()
