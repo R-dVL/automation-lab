@@ -77,7 +77,7 @@ def call() {
                                 print("NOT CATS | ${count} of ${not_cats.size()}")
                             }
                         }
-                        print("Cat files written: ${count}")
+                        print("Not cat files written: ${count}")
                     }
                 }
             }
