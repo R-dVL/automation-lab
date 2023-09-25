@@ -21,7 +21,7 @@ def call() {
                     def cats = []
                     def not_cats = []
 
-                    def response = sh(script: "curl http:192.168.1.55:3001/photos/date/${date} --output photos.json", returnStdout: true).trim()
+                    def response = sh(script: "curl http://192.168.1.55:3001/photos/date/${date} --output photos.json", returnStdout: true).trim()
                     def photos = readJSON file: 'photos.json'
 
                     photos.each { photo ->
@@ -31,6 +31,9 @@ def call() {
                             not_cats.add(photo.image)
                         }
                     }
+
+                    print("cats: " + cats)
+                    print("not cats: "+ not_cats)
                 }
             }
 
