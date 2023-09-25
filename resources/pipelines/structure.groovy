@@ -1,4 +1,4 @@
-package com.github.rdvl.automationLibrary
+package com.rdvl.automationLibrary
 
 def call() {
     node {
@@ -17,9 +17,9 @@ def call() {
 
             }
 
-        } catch(Exception err) {
+        } catch(Exception e) {
             println("ALERT | Something went wrong")
-            error(err.getMessage())
+            error(e.getMessage())
         }
     }
 }
