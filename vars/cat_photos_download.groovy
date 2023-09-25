@@ -25,7 +25,7 @@ def call() {
                     def photos = readJSON file: 'photos.json'
 
                     photos.each { photo ->
-                        if(photo.cat.toString() == "True") {
+                        if(photo.cat) {
                             cats.add(photo.image)
                         } else {
                             not_cats.add(photo.image)
