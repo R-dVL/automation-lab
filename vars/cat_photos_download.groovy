@@ -35,7 +35,8 @@ def call() {
                     dir('cats') {
                         def count = 0
                         for(image in cats) {
-                            writeFile file: "cat_${count}_${date}.jpg", text: image, encoding: 'BASE64'
+                            def imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(image)
+                            writeFile file: "cat_${count}_${date}.jpg", binary: imageBytes, encoding: 'ISO-8859-1'
                             count += 1
                         }
                         print("Cat files written: ${count}")
@@ -44,7 +45,8 @@ def call() {
                     dir('not_cats') {
                         def count = 0
                         for(image in cats) {
-                            writeFile file: "not_cat_${count}_${date}.jpg", text: image, encoding: 'BASE64'
+                            def imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(image)
+                            writeFile file: "not_cat_${count}_${date}.jpg", binary: imageBytes, encoding: 'ISO-8859-1'
                             count += 1
                         }
                         print("Not cat files written: ${count}")
