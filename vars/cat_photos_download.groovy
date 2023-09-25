@@ -54,7 +54,7 @@ def call() {
                             if(image != null) {
                                 def file = "${date}_cat_${count}.jpg"
                                 writeFile file: file, text: image, encoding: 'Base64'
-                                host.sshPut(file, '/home/jenkins/cat-watcher/dataset/cats')
+                                host.sshPut(file, '/home/jenkins/cat-watcher/dataset/not_cats')
                                 count += 1
                                 print("NOT CATS | ${count} of ${not_cats.size()}")
                             }
