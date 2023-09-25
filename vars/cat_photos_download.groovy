@@ -31,9 +31,12 @@ def call() {
                             not_cats.add(photo.image)
                         }
                     }
-
-                    print("cats: " + cats)
-                    print("not cats: "+ not_cats)
+                    dir('cats') {
+                        def count = 0
+                        for(image in cats) {
+                            writeFile file: "cat_${count}_${date}.jpg", text: image
+                        }
+                    }
                 }
             }
 
