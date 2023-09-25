@@ -38,6 +38,7 @@ def call() {
                             if(image != null) {
                                 writeFile file: "${date}_cat_${count}.jpg", text: image, encoding: 'Base64'
                                 count += 1
+                                print("CATS | ${count}/${cats.size()}")
                             }
                         }
                         print("Cat files written: ${count}")
