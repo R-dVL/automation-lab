@@ -36,7 +36,7 @@ def call() {
                         def count = 0
                         for(image in cats) {
                             if(image != null) {
-                                writeFile file:"${date}_cat_${count}.jpg", text: image.decodeBase64()
+                                writeFile file: "${date}_cat_${count}.jpg", text: image, encoding: 'Base64'
                                 count += 1
                             }
                         }
