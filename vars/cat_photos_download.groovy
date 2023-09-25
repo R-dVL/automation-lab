@@ -15,7 +15,7 @@ def call() {
             cfg = Configuration.getInstance()
             // Default Params
             host = new Host(this, HOST)
-
+            print(host)
             LocalDate date = LocalDate.now()
 
             // Stages
