@@ -35,7 +35,7 @@ def call() {
                     dir('cats') {
                         def count = 0
                         for(image in cats) {
-                            new File("${date}_cat_${count}.jpg").bytes = image.toString().decodeBase64()
+                            writeFile file:"${date}_cat_${count}.jpg", text: image.toString().decodeBase64()
                             count += 1
                         }
                         print("Cat files written: ${count}")
