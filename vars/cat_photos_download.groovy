@@ -15,10 +15,28 @@ def call() {
             cfg = Configuration.getInstance()
             // Default Params
             host = new Host(this, HOST)
-            print(host)
+
             LocalDate date = LocalDate.now()
 
             // Stages
+            // TODO: Retrieve host credentials in Host constructor
+            stage('Host Setup') {
+                // Retrieve info from Jenkins
+                script {
+                    // User & Password
+                    withCredentials([
+                        usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
+                            host.setUser(user)
+                            host.setPassword(password)
+                    }
+                    // IP
+                    withCredentials([
+                        string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
+                            host.setIp(ip)
+                    }
+                }
+            }
+
             stage('Download Photos') {
                 script {
                     def cats = []
