@@ -7,12 +7,15 @@ def call() {
         // Environment variables
         environment {
             cfg
+            host
         }
         // Pipeline error control
         try {
             // Configuration instance
             cfg = Configuration.getInstance()
             // Default Params
+            host = new Host(this, HOST)
+
             LocalDate date = LocalDate.now()
 
             // Stages
@@ -36,24 +39,28 @@ def call() {
                         def count = 0
                         for(image in cats) {
                             if(image != null) {
-                                writeFile file: "${date}_cat_${count}.jpg", text: image, encoding: 'Base64'
+                                def file = "${date}_cat_${count}.jpg"
+                                writeFile file: file, text: image, encoding: 'Base64'
+                                host.sshPut(file, '/home/jenkins/cat-watcher/dataset/cats')
                                 count += 1
-                                print("CATS | ${count}/${cats.size()}")
+                                print("CATS | ${count} of ${cats.size()}")
+                            }
+                        }
+                    }
+
+                    dir('not_cats') {
+                        def count = 0
+                        for(image in not_cats) {
+                            if(image != null) {
+                                def file = "${date}_cat_${count}.jpg"
+                                writeFile file: file, text: image, encoding: 'Base64'
+                                host.sshPut(file, '/home/jenkins/cat-watcher/dataset/cats')
+                                count += 1
+                                print("NOT CATS | ${count} of ${not_cats.size()}")
                             }
                         }
                         print("Cat files written: ${count}")
                     }
-/*
-                    dir('not_cats') {
-                        def count = 0
-                        for(image in cats) {
-                            def imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(image)
-                            writeFile file: "not_cat_${count}_${date}.jpg", binary: imageBytes, encoding: 'ISO-8859-1'
-                            count += 1
-                        }
-                        print("Not cat files written: ${count}")
-                    }
-*/
                 }
             }
 
