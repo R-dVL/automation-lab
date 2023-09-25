@@ -56,7 +56,8 @@ def call() {
 
         } catch(Exception e) {
             println("ALERT | Something went wrong")
-            error(e.getMessage())
+            error(e)
+            //error(e.getMessage())
         }
     }
 }
