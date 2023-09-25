@@ -35,8 +35,7 @@ def call() {
                     dir('cats') {
                         def count = 0
                         for(image in cats) {
-                            def imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(image)
-                            writeFile file: "cat_${count}_${date}.jpg", text: imageBytes, encoding: 'ISO-8859-1'
+                            new File("cat_${count}_${date}.jpg").bytes = image.decodeBase64()
                             count += 1
                         }
                         print("Cat files written: ${count}")
