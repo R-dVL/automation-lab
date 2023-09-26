@@ -37,14 +37,13 @@ def call() {
 
             stage('Training') {
                 git branch: 'ai_model', url: 'https://github.com/R-dVL/cat-watcher.git'
-                sh('cd ./cat-watcher/resources')
-                host.sshGet('./cat-watcher/resources', '/home/jenkins/cat-watcher/dataset')
-                sh('''
-                    cd cat-watcher
+                host.sshGet("${env.WORKSPACE}/cat-watcher/resources", '/home/jenkins/cat-watcher/dataset')
+                sh("""
+                    cd ${env.WORKSPACE}/cat-watcher
                     pip install -r requirements
                     python ./model/cat_identifyer.py
-                ''')
-                archiveArtifacts artifacts: 'cat-watcher/model/cat_identifyer.keras', fingerprint: true
+                """)
+                archiveArtifacts artifacts: "${env.WORKSPACE}/cat-watcher/model/cat_identifyer.keras", fingerprint: true
             }
 
         } catch(Exception e) {
