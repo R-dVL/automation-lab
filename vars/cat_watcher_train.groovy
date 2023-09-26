@@ -35,10 +35,16 @@ def call() {
                 }
             }
 
-            stage('Prepare') {
+            stage('Training') {
                 git branch: 'ai_model', url: 'https://github.com/R-dVL/cat-watcher.git'
                 sh('cd ./cat-watcher/resources')
-                host.sshGet('/home/jenkins/cat-watcher/dataset')
+                host.sshGet('./cat-watcher/resources', '/home/jenkins/cat-watcher/dataset')
+                sh('''
+                    cd cat-watcher
+                    pip install -r requirements
+                    python ./model/cat_identifyer.py
+                ''')
+                archiveArtifacts artifacts: 'cat-watcher/model/cat_identifyer.keras', fingerprint: true
             }
 
         } catch(Exception e) {

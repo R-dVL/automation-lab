@@ -56,7 +56,7 @@ class Host implements Serializable {
 
     // Jenkins ssh Get wrapper
     @NonCPS
-    def sshGet(folder) {
+    def sshGet(path, remotePath) {
         def remote = [:]
         remote.name = name
         remote.host = ip
@@ -64,7 +64,7 @@ class Host implements Serializable {
         remote.password = password
         remote.allowAnyHosts = true
 
-        sshGet remote: remote, from: folder, into: './', override: true
+        sshGet remote: remote, from: remotePath, into: path, override: true
     }
 
     @NonCPS
