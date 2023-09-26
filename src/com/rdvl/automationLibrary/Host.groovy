@@ -64,7 +64,7 @@ class Host implements Serializable {
         remote.password = password
         remote.allowAnyHosts = true
 
-        sshGet remote: remote, from: remotePath, into: path, override: true
+        pipeline.sshGet remote: remote, from: remotePath, into: path, override: true
     }
 
     @NonCPS
