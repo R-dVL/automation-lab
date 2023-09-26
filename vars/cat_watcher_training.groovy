@@ -37,9 +37,9 @@ def call() {
 
             stage('Training') {
                 git branch: 'ai_model', url: 'https://github.com/R-dVL/cat-watcher.git'
-                host.sshGet("${env.WORKSPACE}/cat-watcher/resources", '/home/jenkins/cat-watcher/dataset')
                 sh("""
                     cd ${env.WORKSPACE}/cat-watcher
+                    cp //192.168.1.55/dataset ./resources
                     pip install -r requirements
                     python ./model/cat_identifyer.py
                 """)
