@@ -40,7 +40,7 @@ def call() {
                 host.sshGet('./resources', '/home/jenkins/cat-watcher/dataset')
                 sh("""
                     pip install -r requirements.txt
-                    python ./model/cat_identifyer.py
+                    python3 ./model/cat_identifyer.py
                 """)
                 archiveArtifacts artifacts: "${env.WORKSPACE}/cat-watcher/model/cat_identifyer.keras", fingerprint: true
             }
