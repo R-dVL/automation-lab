@@ -17,13 +17,14 @@ def call() {
             host = new Host(this, HOST)
 
             def date
-
-            if (env.DATE == '') {
+            print(env.DATE)
+            print(env.DATE.getClass())
+            if (env.DATE == null) {
                 date = LocalDate.now()
             } else {
                 date = env.DATE
             }
-
+            error('controlado')
             // Stages
             // TODO: Retrieve host credentials in Host constructor
             stage('Host Setup') {
