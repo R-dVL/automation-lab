@@ -23,6 +23,9 @@ def call() {
                 date = env.DATE
             }
 
+            currentBuild.displayName = "Cat-Watcher Dataset Update"
+            currentBuild.description = date
+            error('controlado')
             // Stages
             // TODO: Retrieve host credentials in Host constructor
             stage('Host Setup') {
