@@ -16,8 +16,12 @@ def call() {
             // Default Params
             host = new Host(this, HOST)
 
-            if(env.DATE == '') {
-                LocalDate date = LocalDate.now()
+            def date
+
+            if (env.DATE == '') {
+                date = LocalDate.now()
+            } else {
+                date = env.DATE
             }
 
             // Stages
