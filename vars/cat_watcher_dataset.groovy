@@ -24,6 +24,7 @@ def call() {
             } else {
                 date = env.DATE
             }
+            print(date)
             error('controlado')
             // Stages
             // TODO: Retrieve host credentials in Host constructor
