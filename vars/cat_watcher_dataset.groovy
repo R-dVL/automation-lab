@@ -19,7 +19,7 @@ def call() {
             def date
             print(env.DATE)
             print(env.DATE.getClass())
-            if (env.DATE == null) {
+            if (env.DATE.isEmpty()) {
                 date = LocalDate.now()
             } else {
                 date = env.DATE
