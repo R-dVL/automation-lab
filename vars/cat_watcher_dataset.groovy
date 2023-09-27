@@ -24,8 +24,7 @@ def call() {
             }
 
             currentBuild.displayName = "Cat-Watcher Dataset Update"
-            currentBuild.description = date
-            error('controlado')
+
             // Stages
             // TODO: Retrieve host credentials in Host constructor
             stage('Host Setup') {
@@ -72,6 +71,8 @@ def call() {
                                 print("CATS | ${count} of ${cats.size()}")
                             }
                         }
+                        print("Cat files written: ${count}")
+                        currentBuild.description = "Cats: ${count} | "
                     }
 
                     dir('not_cats') {
@@ -86,6 +87,7 @@ def call() {
                             }
                         }
                         print("Not cat files written: ${count}")
+                        currentBuild.description = currentBuild.description + "Not cats: ${count}"
                     }
                 }
             }
