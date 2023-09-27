@@ -16,7 +16,9 @@ def call() {
             // Default Params
             host = new Host(this, HOST)
 
-            LocalDate date = LocalDate.now()
+            if(env.DATE == '') {
+                LocalDate date = LocalDate.now()
+            }
 
             // Stages
             // TODO: Retrieve host credentials in Host constructor
