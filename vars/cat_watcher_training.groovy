@@ -39,8 +39,6 @@ def call() {
                 git branch: 'ai_model', url: 'https://github.com/R-dVL/cat-watcher.git'
                 host.sshGet('./resources', '/home/jenkins/cat-watcher/dataset')
                 sh("""
-                    python3 -m venv venv
-                    source venv/bin/activate
                     pip install -r requirements.txt
                     python3 ./model/cat_identifyer.py
                 """)
