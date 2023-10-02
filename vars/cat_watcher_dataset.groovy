@@ -49,12 +49,7 @@ def call() {
                     def cats = []
                     def not_cats = []
 
-                    try {
-                        sh(script: "curl http://192.168.1.55:3001/photos/date/${date} --output photos.json", returnStdout: true).trim()
-                    } catch (Exception e) {
-                        error('There are not photos today!')
-                    }
-
+                    sh(script: "curl http://192.168.1.55:3001/photos/date/${date} --output photos.json", returnStdout: true).trim()
                     def photos = readJSON file: 'photos.json'
 
                     photos.each { photo ->
