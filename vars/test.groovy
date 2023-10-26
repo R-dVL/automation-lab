@@ -19,7 +19,7 @@ def call() {
             }
 
             stage('Execute Playbook') {
-                ansiblePlaybook playbook: "${env.WORKSPACE}/playbooks/hello-world.yaml"
+                ansiblePlaybook playbook: "./playbooks/hello-world.yaml"
             }
 
         } catch(Exception err) {
