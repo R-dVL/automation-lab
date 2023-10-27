@@ -1,6 +1,9 @@
 package com.rdvl.automationLibrary
 
 def call() {
+    agent {
+        docker { image 'jenkins/agent'}
+    }
     node {
         // Environment variables
         environment {
