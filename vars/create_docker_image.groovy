@@ -4,13 +4,13 @@ def call() {
     node {
         // Environment variables
         environment {
-            cfg
-            host
+            configuration
         }
         // Pipeline error control
         try {
             // Configuration instance
-            cfg = readJSON text: libraryResource resource: 'configuration.json'
+            String configurationJson = libraryResource resource: 'configuration.json'
+            configuration = readJSON text: configurationJson
 
             stage('Get Dockerfile') {
                 script {
