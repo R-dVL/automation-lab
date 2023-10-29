@@ -7,7 +7,6 @@ RUN apt-get update && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     ln -s /usr/bin/pip3 /usr/bin/pip && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Instala Ansible
 RUN pip install ansible
