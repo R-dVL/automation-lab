@@ -1,4 +1,4 @@
-package com.rdvl.automationLibrary
+package com.rdvl.jenkins-library
 
 import java.time.LocalDate
 

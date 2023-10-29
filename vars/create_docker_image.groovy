@@ -10,7 +10,7 @@ def call() {
         // Pipeline error control
         try {
             // Configuration instance
-            cfg = Configuration.getInstance()
+            cfg = readJSON text: libraryResource resource: 'configuration.json'
 
             stage('Get Dockerfile') {
                 script {

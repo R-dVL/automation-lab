@@ -1,0 +1,31 @@
+{
+    "hosts": {
+        "server": {
+            "credentials": "server-credentials",
+            "ip": "server-ip"
+        },
+        "rpi": {
+            "credentials": "rpi-credentials",
+            "ip": "rpi-ip"
+        }
+    },
+    "projects": {
+        "cat-watcher": {
+            "url": "https://github.com/R-dVL/cat-watcher.git",
+            "destination": "/opt/apps/cat-watcher",
+            "tech": "python"
+        },
+
+        "lima-backend": {
+            "url": "https://github.com/R-dVL/lima-backend.git",
+            "destination": "/opt/apps/lima-backend",
+            "tech": "npm"
+        },
+
+        "lima-frontend": {
+            "url": "https://github.com/R-dVL/lima-frontend.git",
+            "destination": "/opt/apps/lima-frontend",
+            "tech": "npm"
+        }
+    }
+}
