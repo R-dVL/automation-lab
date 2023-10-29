@@ -12,14 +12,15 @@ def call() {
             // Configuration instance
             cfg = Configuration.getInstance()
 
-            // TODO: Retrieve host credentials in Host constructor
-            stage('Host Setup') {
-                git branch: 'master',
-                    url: 'https://github.com/R-dVL/ansible-playbooks.git'
+            stage('Get Dockerfile') {
+                script {
+                    String dockerfile = libraryResource resource: 'Dockerfile'
+                    writeFile file: 'Dockerfile', text: dockerfile
+                }
             }
 
-            stage('Execute Playbook') {
-                ansiblePlaybook playbook: "./playbooks/hello-world.yaml"
+            stage('Create and upload image') {
+                sh 'docker build -t automationLibrary:latest .'
             }
 
         } catch(Exception err) {
