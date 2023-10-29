@@ -20,12 +20,14 @@ def call() {
             }
 
             stage('Create and upload image') {
+                String imageName = 'jenkins-agent'
+                String imageTag = 'latest'
                 script {
                     sh """
-                    docker build -t jenkins-library:latest .
-                    docker tag jenkins-library:latest ghcr.io/R-dVL/jenkins-library:latest
+                    docker build -t ${imageName}:${imageTag} .
+                    docker tag ${imageName}:${imageTag} ghcr.io/R-dVL/${imageName}:${imageTag}
                     docker login ghcr.io -u R-dVL
-                    docker push ghcr.io/R-dVL/jenkins-library:latest
+                    docker push ghcr.io/R-dVL/${imageName}:${imageTag}
                     """
                 }
             }
