@@ -18,13 +18,10 @@ WORKDIR /home/${user}
 
 # Dependencies
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip nodejs npm && \
-    ln -s /usr/bin/python3 /usr/bin/python && \
-    ln -s /usr/bin/pip3 /usr/bin/pip
-
-# Install Ansible
-RUN pip install ansible
-
-WORKDIR /home/jenkins
+    apt-get install python3 nodejs npm && \
+    apt-get install python3-pip && \
+    apt-get install nodejs && \
+    apt-get install npm && \
+    apt-get install ansible
 
 CMD ["bash"]
