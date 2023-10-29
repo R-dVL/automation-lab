@@ -20,7 +20,14 @@ def call() {
             }
 
             stage('Create and upload image') {
-                sh 'docker build -t automationLibrary:latest .'
+                script {
+                    sh """
+                    docker build -t jenkins-library:latest .
+                    docker tag jenkins-library:latest ghcr.io/R-dVL/jenkins-library:latest
+                    docker login ghcr.io -u R-dVL
+                    docker push ghcr.io/R-dVL/jenkins-library:latest
+                    """
+                }
             }
 
         } catch(Exception err) {
