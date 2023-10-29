@@ -1,4 +1,4 @@
-package com.rdvl.jenkins-library
+package com.rdvl.jenkinsLibrary
 
 def call() {
     node {
