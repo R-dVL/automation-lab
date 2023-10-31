@@ -1,7 +1,7 @@
 package com.rdvl.jenkinsLibrary
 
 def call() {
-    node ('Docker') {
+    node ('docker-agent') {
         try {
             stage('Test') {
                 echo 'TEST'
