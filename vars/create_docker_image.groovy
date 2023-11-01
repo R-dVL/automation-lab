@@ -25,10 +25,8 @@ def call() {
                 withCredentials([
                     string (credentialsId: 'dockerhub-token', variable: 'token')]) {
                         script {
-                            docker.withRegistry('https://registry.hub.docker.com', token) {
-                                def customImage = docker.build('jenkins-agent:latest', '.')
-                                customImage.push()
-                            }
+                            def customImage = docker.build('jenkins-agent:latest', '.')
+                            customImage.push()
                         }
                 }
             }
