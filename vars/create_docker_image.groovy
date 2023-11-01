@@ -28,7 +28,7 @@ def call() {
                 withCredentials([
                     usernamePassword(credentialsId: 'github-package-token', usernameVariable: 'user', passwordVariable: 'password')]) {
                         script {
-                            docker.withRegistry('https://docker.pkg.github.com', 'password') {
+                            docker.withRegistry('https://docker.pkg.github.com', password) {
                                 def customImage = docker.build('R-dVL/jenkins-agent:latest', '.')
                                 customImage.push()
                             }
