@@ -1,4 +1,4 @@
-package com.rdvl.automationLibrary
+package com.rdvl.jenkinsLibrary
 
 class Configuration {
     // Singleton class to store configuration

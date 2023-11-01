@@ -1,4 +1,4 @@
-package com.rdvl.automationLibrary;
+package com.rdvl.jenkinsLibrary
 
 public class Project {
     // Pipeline Context

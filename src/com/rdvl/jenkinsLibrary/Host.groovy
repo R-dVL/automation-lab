@@ -1,4 +1,4 @@
-package com.rdvl.automationLibrary
+package com.rdvl.jenkinsLibrary
 
 class Host implements Serializable {
     // Pipeline Context
