@@ -23,14 +23,13 @@ def call() {
                 String imageName = 'jenkins-agent'
                 String imageTag = 'latest'
                 withCredentials([
-                    string(credentialsId: 'dockerhub-token', variable: 'token')]) {
+                    string (credentialsId: 'dockerhub-token', variable: 'token')]) {
                         script {
                             docker.withRegistry('https://registry.hub.docker.com', token) {
                                 def customImage = docker.build('jenkins-agent:latest', '.')
                                 customImage.push()
                             }
                         }
-                    }
                 }
             }
 
