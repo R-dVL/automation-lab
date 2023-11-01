@@ -25,13 +25,14 @@ def call() {
             stage('Create and upload image') {
                 String imageName = 'jenkins-agent'
                 String imageTag = 'latest'
-                script {
-                    sh """
-                    docker build -t ${imageName}:${imageTag} .
-                    docker tag ${imageName}:${imageTag} ghcr.io/R-dVL/${imageName}:${imageTag}
-                    docker login ghcr.io -u R-dVL
-                    docker push ghcr.io/R-dVL/${imageName}:${imageTag}
-                    """
+                withCredentials([
+                    usernamePassword(credentialsId: 'github-token', variable: 'token')]) {
+                    script {
+                        docker.withRegistry('https://docker.pkg.github.com', 'token') {
+                            def customImage = docker.build('nombre-de-usuario/mi-imagen:etiqueta', '.')
+                            customImage.push()
+                        }
+                    }
                 }
             }
 
