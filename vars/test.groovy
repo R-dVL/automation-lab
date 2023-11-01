@@ -9,7 +9,10 @@ def call() {
             }
 
             stage('Execute Playbook') {
-                ansiblePlaybook inventory:'./inventories/hosts', playbook: "./playbooks/hello-world.yaml"
+                ansiblePlaybook(
+                    inventory:'./inventories/hosts',
+                    playbook: "./playbooks/hello-world.yaml",
+                    credentials: 'jenkins')
             }
         } catch(Exception err) {
             error(err.getMessage())
