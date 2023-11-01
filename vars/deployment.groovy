@@ -1,7 +1,7 @@
 package com.rdvl.jenkinsLibrary
 
 def call() {
-    node {
+    node ('docker-agent') {
         // Environment variables
         environment {
             configuration

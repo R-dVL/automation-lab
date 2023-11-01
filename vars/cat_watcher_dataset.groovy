@@ -3,7 +3,7 @@ package com.rdvl.jenkinsLibrary
 import java.time.LocalDate
 
 def call() {
-    node {
+    node ('docker-agent') {
         // Environment variables
         environment {
             configuration
