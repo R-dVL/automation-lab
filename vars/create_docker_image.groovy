@@ -19,12 +19,24 @@ def call() {
                 }
             }
 
-            stage('Build and Push Image') {
-                String imageName = 'jenkins-agent'
-                String imageTag = 'latest'
+            stage('Build') {
                 script {
-                    def customImage = docker.build('rdvlima/jenkins-agent:latest', '.')
-                    customImage.push()
+                    sh ("docker build -t rdvlima/jenkins-agent:latest .")
+                }
+            }
+
+            stage('Login') {
+                withCredentials([
+                    usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                        script {
+                            sh "echo ${password} | docker login -u ${user} --password-stdin"
+                        }
+                    }
+            }
+
+            stage('Push') {
+                script {
+                    sh 'docker push rdvlima/jenkins-agent:latest'
                 }
             }
 
