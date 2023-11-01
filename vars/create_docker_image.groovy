@@ -16,6 +16,9 @@ def call() {
                 script {
                     String dockerfile = libraryResource resource: 'Dockerfile'
                     writeFile file: 'Dockerfile', text: dockerfile
+
+                    String sshKey = libraryResource resource: 'keys/jenkins_agent_key.pub'
+                    writeFile file: 'jenkins_agent_key.pub', text: sshKey
                 }
             }
 

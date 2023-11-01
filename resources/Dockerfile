@@ -1,27 +1,20 @@
-FROM ubuntu:22.04
+# Usa una imagen base de Ubuntu
+FROM ubuntu:latest
 
-# Settings
-ARG user=jenkins
-ARG group=jenkins
-ARG uid=1000
-ARG gid=1000
-
-RUN addgroup -g ${gid} ${group}
-RUN adduser -h /home/${user} -u ${uid} -G ${group} -D ${user}
-ARG AGENT_WORKDIR=/home/${user}/agent
-USER ${user}
-ENV AGENT_WORKDIR=${AGENT_WORKDIR}
-RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
-VOLUME /home/${user}/.jenkins
-VOLUME ${AGENT_WORKDIR}
-WORKDIR /home/${user}
-
-# Dependencies
+# Actualiza el sistema y añade las dependencias
 RUN apt-get update && \
-    apt-get install python3 nodejs npm && \
-    apt-get install python3-pip && \
-    apt-get install nodejs && \
-    apt-get install npm && \
-    apt-get install ansible
+    apt-get install -y ansible python3 python3-pip nodejs npm openssh-server
 
-CMD ["bash"]
+# Configura el servidor SSH
+RUN mkdir /var/run/sshd
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+RUN echo "AuthorizedKeysFile /root/.ssh/authorized_keys" >> /etc/ssh/sshd_config
+
+# Añade tu clave pública SSH
+COPY jenkins_agent_key.pub /root/.ssh/authorized_keys
+
+# Expón el puerto 22 para SSH
+EXPOSE 22
+
+# Comando por defecto para iniciar el contenedor
+CMD ["/usr/sbin/sshd", "-D"]
