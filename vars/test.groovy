@@ -12,7 +12,7 @@ def call() {
                 ansiblePlaybook(
                     inventory:'./inventories/hosts',
                     playbook: "./playbooks/hello-world.yaml",
-                    credentials: 'jenkins')
+                    credentialsId: 'jenkins')
             }
         } catch(Exception err) {
             error(err.getMessage())
