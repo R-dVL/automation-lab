@@ -25,7 +25,7 @@ def call() {
                 withCredentials([
                     string (credentialsId: 'dockerhub-token', variable: 'token')]) {
                         script {
-                            def customImage = docker.build('jenkins-agent:latest', '.')
+                            def customImage = docker.build('rdvlima/jenkins-agent:latest', '.')
                             customImage.push()
                         }
                 }
