@@ -26,7 +26,7 @@ def call() {
                 String imageName = 'jenkins-agent'
                 String imageTag = 'latest'
                 withCredentials([
-                    usernamePassword(credentialsId: 'github-token', variable: 'token')]) {
+                    usernamePassword(credentialsId: 'github-package-token', variable: 'token')]) {
                     script {
                         docker.withRegistry('https://docker.pkg.github.com', 'token') {
                             def customImage = docker.build('nombre-de-usuario/mi-imagen:etiqueta', '.')
