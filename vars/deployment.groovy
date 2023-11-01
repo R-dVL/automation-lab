@@ -32,10 +32,6 @@ def call() {
                         mongo_user = user
                         mongo_password = password
                     }
-                    // IP
-                    withCredentials([string(credentialsId: host.getConfigIp(), variable: 'ip')]) {
-                        host.setIp(ip)
-                    }
                 }
             }
 

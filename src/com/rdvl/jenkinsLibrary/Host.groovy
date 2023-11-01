@@ -7,7 +7,6 @@ class Host implements Serializable {
     // Default Params
     private String name
     private String configCredentials
-    private String configIp
     private String ip
     private String user
     private String password
@@ -18,7 +17,7 @@ class Host implements Serializable {
 
         // Host selected
         this.name = hostName
-        this.configIp = pipeline.configuration.hosts."${name}".ip
+        this.ip = pipeline.configuration.hosts."${name}".ip
         this.configCredentials = pipeline.configuration.hosts."${name}".credentials
     }
 
@@ -70,11 +69,6 @@ class Host implements Serializable {
     @NonCPS
     def getIp() {
         return this.ip
-    }
-
-    @NonCPS
-    def getConfigIp() {
-        return this.configIp
     }
 
     @NonCPS

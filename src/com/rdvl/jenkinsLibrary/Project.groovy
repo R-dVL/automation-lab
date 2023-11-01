@@ -8,7 +8,6 @@ public class Project {
     private String name
     private String version
     private String artifactId
-    private String nexusRepository
     private String url
     private String techName
     private def deploymentTech

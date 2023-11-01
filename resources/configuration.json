@@ -2,11 +2,11 @@
     "hosts": {
         "server": {
             "credentials": "server-credentials",
-            "ip": "server-ip"
+            "ip": "192.168.1.55"
         },
         "rpi": {
             "credentials": "rpi-credentials",
-            "ip": "rpi-ip"
+            "ip": "192.168.1.44"
         }
     },
     "projects": {
