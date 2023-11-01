@@ -1,7 +1,7 @@
 package com.rdvl.jenkinsLibrary
 
 def call() {
-    node {
+    node ('server') {
         // Environment variables
         environment {
             configuration
