@@ -21,8 +21,8 @@ public class Project {
         this.name = name
         this.version = version
         this.artifactId = name + "-" + version
-        this.url = pipeline.cfg.projects."${name}".url
-        this.techName = pipeline.cfg.projects."${name}".tech
+        this.url = pipeline.configuration.projects."${name}".url
+        this.techName = pipeline.configuration.projects."${name}".tech
 
         // Deployment tech construction
         switch(techName) {

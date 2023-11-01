@@ -4,7 +4,7 @@ def call() {
     node {
         // Environment variables
         environment {
-            cfg
+            configuration
             mongo_user
             mongo_password
             host
@@ -12,7 +12,8 @@ def call() {
         // Pipeline error control
         try {
             // Configuration instance
-            cfg = Configuration.getInstance()
+            String configurationJson = libraryResource resource: 'configuration.json'
+            configuration = readJSON text: configurationJson
 
             // Default Params
             Project prj = new Project(this, NAME, VERSION)

@@ -18,8 +18,8 @@ class Host implements Serializable {
 
         // Host selected
         this.name = hostName
-        this.configIp = pipeline.cfg.hosts."${name}".ip
-        this.configCredentials = pipeline.cfg.hosts."${name}".credentials
+        this.configIp = pipeline.configuration.hosts."${name}".ip
+        this.configCredentials = pipeline.configuration.hosts."${name}".credentials
     }
 
     // Jenkins ssh Command wrapper

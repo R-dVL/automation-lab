@@ -6,13 +6,14 @@ def call() {
     node {
         // Environment variables
         environment {
-            cfg
+            configuration
             host
         }
         // Pipeline error control
         try {
             // Configuration instance
-            cfg = Configuration.getInstance()
+            String configurationJson = libraryResource resource: 'configuration.json'
+            configuration = readJSON text: configurationJson
 
             // Default Params
             host = new Host(this, HOST)
