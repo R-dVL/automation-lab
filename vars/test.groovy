@@ -3,8 +3,13 @@ package com.rdvl.jenkinsLibrary
 def call() {
     node ('docker-agent') {
         try {
-            stage('Test') {
-                echo 'TEST'
+            stage('Download Ansible Playbooks') {
+                git branch: 'master',
+                    url: 'https://github.com/R-dVL/ansible-playbooks.git'
+            }
+
+            stage('Execute Playbook') {
+                ansiblePlaybook playbook: "./playbooks/hello-world.yaml"
             }
         } catch(Exception err) {
             error(err.getMessage())
