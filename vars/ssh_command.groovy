@@ -1,6 +1,5 @@
 package com.rdvl.jenkinsLibrary
 
-import utils
 
 def call() {
     node ('docker-agent') {
