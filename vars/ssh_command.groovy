@@ -3,12 +3,10 @@ package com.rdvl.jenkinsLibrary
 
 def call() {
     node ('docker-agent') {
-        // Environment variables
         environment {
             configuration
             host
         }
-        // Pipeline error control
         try {
             // Configuration instance
             String configurationJson = libraryResource resource: 'configuration.json'
@@ -22,7 +20,6 @@ def call() {
             }
 
         } catch(Exception err) {
-            println("ALERT | Something went wrong")
             error(err.getMessage())
         }
     }

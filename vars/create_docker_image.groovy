@@ -2,16 +2,7 @@ package com.rdvl.jenkinsLibrary
 
 def call() {
     node ('server') {
-        // Environment variables
-        environment {
-            configuration
-        }
-        // Pipeline error control
         try {
-            // Configuration instance
-            String configurationJson = libraryResource resource: 'configuration.json'
-            configuration = readJSON text: configurationJson
-
             stage('Get Dockerfile') {
                 script {
                     String dockerfile = libraryResource resource: 'Dockerfile'

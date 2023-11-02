@@ -1,6 +1,5 @@
 package com.rdvl.jenkinsLibrary
 
-
 class Host implements Serializable {
     // Pipeline Context
     private def pipeline
@@ -19,11 +18,9 @@ class Host implements Serializable {
         // Host setup
         this.name = hostName
         this.ip = pipeline.configuration.hosts."${name}".ip
-        pipeline.withCredentials(
-                [usernamePassword(credentialsId: pipeline.configuration.hosts."${name}".credentials, usernameVariable: 'user', passwordVariable: 'password')]) {
-                    this.user = user
-                    this.password = password
-        }
+        def credentials = pipeline.utils.retrieveCredentials(pipeline.configuration.hosts."${name}".credentials)
+        this.user = credentials.user
+        this.password = credentials.password
     }
 
     // Jenkins ssh Command wrapper

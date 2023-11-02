@@ -4,12 +4,10 @@ import java.time.LocalDate
 
 def call() {
     node ('docker-agent') {
-        // Environment variables
         environment {
             configuration
             host
         }
-        // Pipeline error control
         try {
             // Configuration instance
             String configurationJson = libraryResource resource: 'configuration.json'
@@ -89,7 +87,6 @@ def call() {
             }
 
         } catch(Exception e) {
-            println("ALERT | Something went wrong")
             error(e.getMessage())
         }
     }

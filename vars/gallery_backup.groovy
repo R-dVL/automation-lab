@@ -4,7 +4,6 @@ import java.time.LocalDate
 
 def call() {
     node ('docker-agent') {
-        // Environment variables
         environment {
             configuration
             host
@@ -44,7 +43,6 @@ def call() {
             }
 
         } catch(Exception err) {
-            println("ALERT | Something went wrong")
             error(err.getMessage())
         }
     }
