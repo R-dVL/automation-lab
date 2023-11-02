@@ -1,6 +1,5 @@
 package com.rdvl.jenkinsLibrary
 
-import utils
 
 class Host implements Serializable {
     // Pipeline Context
