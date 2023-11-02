@@ -15,10 +15,12 @@ class Host implements Serializable {
         // Pipeline context setup
         this.pipeline = pipeline
 
-        // Host selected
+        // Host setup
         this.name = hostName
         this.ip = pipeline.configuration.hosts."${name}".ip
-        this.configCredentials = pipeline.configuration.hosts."${name}".credentials
+        def credentials = pipeline.utils.retrieveCredentials(pipeline.configuration.hosts."${name}".credentials)
+        this.user = credentials.user
+        this.password = credentials.password
     }
 
     // Jenkins ssh Command wrapper
