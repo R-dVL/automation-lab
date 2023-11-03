@@ -1,10 +1,9 @@
 //// UTILS SINGLETON ////
 
-def retrieveCredentials(credentialsId) {
-    script {
-        withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'user', passwordVariable: 'password')]) {
+def retrieveCredentials() {
+    withCredentials(
+        [usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
             return [user: user, password: password]
-        }
     }
 }
 
