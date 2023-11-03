@@ -1,11 +1,7 @@
-package com.rdvl.jenkinsLibrary
+//// UTILS SINGLETON ////
 
-
-def call() {
-
-    def retrieveCredentials(credentialsId) {
-        withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'user', passwordVariable: 'password')]) {
-            return [user: user, password: password]
-        }
+def retrieveCredentials(credentialsId) {
+    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'user', passwordVariable: 'password')]) {
+        return [user: user, password: password]
     }
 }
