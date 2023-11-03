@@ -6,7 +6,3 @@ def retrieveCredentials(credentialsId) {
             return [user: user, password: password]
     }
 }
-
-def myTest() {
-    echo 'Funsiono'
-}
