@@ -1,4 +1,3 @@
-package com.rdvl.jenkinsLibrary
 
 
 def retrieveCredentials(credentialsId) {
