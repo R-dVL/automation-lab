@@ -2,7 +2,7 @@ package com.rdvl.jenkinsLibrary
 
 class Host implements Serializable {
     // Pipeline Context
-    private def pipeline
+    private def steps
 
     // Default Params
     private String name
@@ -11,14 +11,14 @@ class Host implements Serializable {
     private String user
     private String password
 
-    Host(pipeline, hostName) {
+    Host(steps, hostName) {
         // Pipeline context setup
-        this.pipeline = pipeline
+        this.steps = steps
 
         // Host setup
         this.name = hostName
-        this.ip = pipeline.configuration.hosts."${name}".ip
-        def credentials = pipeline.utils.retrieveCredentials(pipeline.configuration.hosts."${name}".credentials)
+        this.ip = steps.configuration.hosts."${name}".ip
+        def credentials = steps.utils.retrieveCredentials(steps.configuration.hosts."${name}".credentials)
         this.user = credentials.user
         this.password = credentials.password
     }
@@ -36,7 +36,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        pipeline.sshCommand remote: remote, command: cmd, sudo: sudo
+        steps.sshCommand remote: remote, command: cmd, sudo: sudo
     }
 
     // Jenkins ssh Put wrapper
@@ -52,7 +52,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        pipeline.sshPut remote: remote, from: file, into: remotePath
+        steps.sshPut remote: remote, from: file, into: remotePath
     }
 
     // Jenkins ssh Get wrapper
@@ -65,7 +65,7 @@ class Host implements Serializable {
         remote.password = password
         remote.allowAnyHosts = true
 
-        pipeline.sshGet remote: remote, from: remotePath, into: path, override: true
+        steps.sshGet remote: remote, from: remotePath, into: path, override: true
     }
 
     @NonCPS

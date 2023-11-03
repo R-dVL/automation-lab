@@ -2,7 +2,7 @@ package com.rdvl.jenkinsLibrary
 
 public class TechNPM {
     // Pipeline Context
-    private def pipeline
+    private def steps
 
     // Tech
     private String name
@@ -14,8 +14,8 @@ public class TechNPM {
     // Control params
     private boolean allreadyDeployed
 
-    TechNPM(pipeline, name, version, artifactId, url) {
-        this.pipeline = pipeline
+    TechNPM(steps, name, version, artifactId, url) {
+        this.steps = steps
         this.name = name
         this.version = version
         this.artifactId = artifactId
@@ -24,18 +24,18 @@ public class TechNPM {
 
     def prepare() {
         // Prepare
-        def result = pipeline.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi").trim()
+        def result = steps.host.sshCommand("if [ -d \'/opt/apps/${name}/${version}\' ]; then echo \'true\'; else echo \'false\'; fi").trim()
 
         this.allreadyDeployed = result.toBoolean()
     }
 
     def deploy() {
         // Stop service
-        try { pipeline.host.sshCommand("pm2 stop ${name}", true) } catch (Exception e) { pipeline.println('Already stopped..') }
+        try { steps.host.sshCommand("pm2 stop ${name}", true) } catch (Exception e) { steps.println('Already stopped..') }
 
         // Deploy
         if(allreadyDeployed == false) {
-            pipeline.host.sshCommand("""mkdir /opt/apps/${name}/${version}
+            steps.host.sshCommand("""mkdir /opt/apps/${name}/${version}
             cd /opt/apps/${name}/${version}
             git clone --depth 1 --branch ${version} ${url}
             cd ${name}
@@ -44,29 +44,29 @@ public class TechNPM {
 
             // Write .env file
             def env = 
-            """MONGO_USER=${pipeline.mongo_user}
-            MONGO_PASSWORD=${pipeline.mongo_password}
+            """MONGO_USER=${steps.mongo_user}
+            MONGO_PASSWORD=${steps.mongo_password}
             MONGO_URI=localhost:27017
             MONGO_DB=cat-watcher
             """
 
-            pipeline.writeFile file: "./.env", text: env
+            steps.writeFile file: "./.env", text: env
 
             // Send .env file
-            pipeline.host.sshPut('./.env', "/opt/apps/${name}/${version}/${name}")
+            steps.host.sshPut('./.env', "/opt/apps/${name}/${version}/${name}")
 
         } else {
-            pipeline.print('Allready deployed, starting service..')
+            steps.print('Allready deployed, starting service..')
         }
 
         // Start service
-        pipeline.host.sshCommand("bash /opt/apps/${name}/start.sh ${version}", true)
+        steps.host.sshCommand("bash /opt/apps/${name}/start.sh ${version}", true)
 
         // Wait until service is started
-        pipeline.sleep(15)
+        steps.sleep(15)
 
         // Show log
-        pipeline.host.sshCommand("cat /opt/apps/${name}/${version}/${name}.log")
+        steps.host.sshCommand("cat /opt/apps/${name}/${version}/${name}.log")
     }
 
     @Override

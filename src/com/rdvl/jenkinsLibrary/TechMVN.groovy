@@ -2,7 +2,7 @@ package com.rdvl.jenkinsLibrary
 
 public class TechMVN {
     // Pipeline Context
-    private def pipeline
+    private def steps
 
     // Tech
     private String name
@@ -11,8 +11,8 @@ public class TechMVN {
     private String url
     private String tech
 
-    TechMVN(pipeline, name, version, artifactId, url) {
-        this.pipeline = pipeline
+    TechMVN(steps, name, version, artifactId, url) {
+        this.steps = steps
         this.name = name
         this.version = version
         this.artifactId = artifactId
@@ -21,10 +21,10 @@ public class TechMVN {
 
     def prepare() {
         // Download Code
-        pipeline.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
+        steps.checkout(scm: [$class: 'GitSCM', userRemoteConfigs: [[url: url, credentialsId: 'github-login-credentials']], branches: [[name: version]]],poll: false)
 
         // Set-up Maven
-        def mvnHome = pipeline.tool name: 'Maven 3.9.4', type: 'maven'
+        def mvnHome = steps.tool name: 'Maven 3.9.4', type: 'maven'
         def mvnCmd = "${mvnHome}/bin/mvn"
 
         // Protect token
@@ -33,30 +33,30 @@ public class TechMVN {
             <servers>
                 <server>
                     <id>github</id>
-                    <username>${pipeline.github_user}</username>
-                    <password>${pipeline.github_token}</password>
+                    <username>${steps.github_user}</username>
+                    <password>${steps.github_token}</password>
                 </server>
             </servers>
         </settings>
         """
-        pipeline.writeFile file: "${pipeline.WORKSPACE}/.m2/settings.xml", text: settingsXml
+        steps.writeFile file: "${steps.WORKSPACE}/.m2/settings.xml", text: settingsXml
 
         // Build Artifact
-        pipeline.sh "${mvnCmd} clean package"
+        steps.sh "${mvnCmd} clean package"
 
         // Upload Artifact
         try {
-            pipeline.sh "${mvnCmd} -Dmaven.package.skip=true deploy --settings ${pipeline.WORKSPACE}/.m2/settings.xml"
+            steps.sh "${mvnCmd} -Dmaven.package.skip=true deploy --settings ${steps.WORKSPACE}/.m2/settings.xml"
 
         } catch(Exception e) {
-            pipeline.println('Artifact already uploaded to Github.')
+            steps.println('Artifact already uploaded to Github.')
         }
     }
 
     def deploy() {
-        pipeline.host.sshCommand("""mkdir -p /opt/apps/${name}/${version}
+        steps.host.sshCommand("""mkdir -p /opt/apps/${name}/${version}
         cd /opt/apps/${name}/${version}/
-        curl -O -L https://_:${pipeline.github_token}@maven.pkg.github.com/R-dVL/${name}/com/rdvl/${name}/${version}/${artifactId}.jar
+        curl -O -L https://_:${steps.github_token}@maven.pkg.github.com/R-dVL/${name}/com/rdvl/${name}/${version}/${artifactId}.jar
         /opt/apps/${name}/start.sh ${version}
         """)
     }

@@ -1,7 +1,11 @@
+package com.rdvl.jenkinsLibrary
 
-@NonCPS
-def retrieveCredentials(credentialsId) {
-    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'user', passwordVariable: 'password')]) {
-        return [user: user, password: password]
+
+def call() {
+
+    def retrieveCredentials(credentialsId) {
+        withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'user', passwordVariable: 'password')]) {
+            return [user: user, password: password]
+        }
     }
 }
