@@ -6,8 +6,8 @@ class Host implements Serializable {
 
     // Default Params
     private String name
-    private String configCredentials
     private String ip
+    private String credentials
     private String user
     private String password
 
@@ -18,7 +18,9 @@ class Host implements Serializable {
         // Host setup
         this.name = hostName
         this.ip = steps.configuration.hosts."${name}".ip
-        def credentials = steps.utils.retrieveCredentials(steps.configuration.hosts."${name}".credentials)
+        this.credentials = steps.configuration.hosts."${name}".credentials
+        steps.print(credentials)
+        def credentials = steps.utils.retrieveCredentials(credentials)
         this.user = credentials.user
         this.password = credentials.password
     }
