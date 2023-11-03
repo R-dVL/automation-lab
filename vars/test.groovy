@@ -4,7 +4,7 @@ def call() {
     node ('docker-agent') {
         try {
             def creds = utils.retrieveCredentials()
-            echo creds
+            print creds
         } catch(Exception err) {
             error(err.getMessage())
         }
