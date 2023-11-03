@@ -7,7 +7,7 @@ class Host implements Serializable {
     // Default Params
     private String name
     private String ip
-    private String credentials
+    private String credentialsId
     private String user
     private String password
 
@@ -18,11 +18,8 @@ class Host implements Serializable {
         // Host setup
         this.name = hostName
         this.ip = steps.configuration.hosts."${name}".ip
-        this.credentials = steps.configuration.hosts."${name}".credentials
-        steps.print(credentials)
-        def credentials = steps.utils.retrieveCredentials(credentials)
-        this.user = credentials.user
-        this.password = credentials.password
+        this.credentialsId = steps.configuration.hosts."${name}".credentials
+        (this.user, this.password) = steps.utils.retrieveCredentials(credentialsId)
     }
 
     // Jenkins ssh Command wrapper
@@ -85,28 +82,11 @@ class Host implements Serializable {
         return this.user
     }
 
-    @NonCPS
-    def setUser(user) {
-        this.user = user
-    }
-
-    @NonCPS
-    def setPassword(password) {
-        this.password = password
-    }
-
-    @NonCPS
-    def setIp(ip) {
-        this.ip = ip
-    }
-
     @Override
     @NonCPS
     public String toString() {
         return """
             Name: ${name}
-            Config IP: ${configIp}
-            Credentials: ${configCredentials}
             User: ${user}
             Password: ${password}
             IP: ${ip}
