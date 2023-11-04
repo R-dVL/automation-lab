@@ -23,6 +23,11 @@ class Host implements Serializable {
         steps.print(credentials)
     }
 
+    def credentialsSetup() {
+        def credentials = steps.utils.retrieveCredentials(credentialsId)
+        steps.print(credentials)  
+    }
+
     // Jenkins ssh Command wrapper
     @NonCPS
     def sshCommand(cmd, sudo = false) {
