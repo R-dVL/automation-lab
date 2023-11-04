@@ -19,8 +19,7 @@ class Host implements Serializable {
         this.name = hostName
         this.ip = steps.configuration.hosts."${name}".ip
         this.credentialsId = steps.configuration.hosts."${name}".credentials
-        def credentials = steps.utils.retrieveCredentials(credentialsId)
-        steps.print(credentials)
+        credentialsSetup()
     }
 
     def credentialsSetup() {
