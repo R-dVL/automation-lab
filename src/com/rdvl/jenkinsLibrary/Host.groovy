@@ -19,7 +19,8 @@ class Host implements Serializable {
         this.name = hostName
         this.ip = steps.configuration.hosts."${name}".ip
         this.credentialsId = steps.configuration.hosts."${name}".credentials
-        (this.user, this.password) = steps.utils.retrieveCredentials(credentialsId)
+        def credentials = steps.utils.retrieveCredentials(credentialsId)
+        steps.print(credentials)
     }
 
     // Jenkins ssh Command wrapper
