@@ -10,7 +10,7 @@ def call() {
 
             stage('Execute Playbook') {
                 ansiblePlaybook(
-                    inventory:'./inventories/hosts',
+                    inventory:'./inventories/hosts.yaml',
                     playbook: "./playbooks/hello-world.yaml",
                     credentialsId: 'jenkins')
             }
