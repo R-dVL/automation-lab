@@ -22,6 +22,7 @@ class Host implements Serializable {
         credentialsSetup()
     }
 
+    @NonCPS
     def credentialsSetup() {
         def credentials = steps.utils.retrieveCredentials(credentialsId)
         steps.print(credentials)  
