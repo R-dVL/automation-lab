@@ -14,6 +14,7 @@ def call() {
 
             // Default Params
             host = new Host(this, HOST)
+            host.init()
 
             stage('Execute Command') {
                 host.sshCommand(CMD, SUDO)
