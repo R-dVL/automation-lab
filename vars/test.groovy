@@ -9,6 +9,7 @@ def call() {
                 ssh-keyscan -t rsa,dsa 192.168.1.55 >> ~/.ssh/known_hosts
                 ssh jenkins@192.168.1.55 ...
             '''
+            }
         } catch(Exception err) {
             error(err.getMessage())
         }
