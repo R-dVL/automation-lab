@@ -16,6 +16,7 @@ def call() {
             // Default Params
             Project prj = new Project(this, NAME, VERSION)
             host = new Host(this, HOST)
+            host.init()
 
             // TODO: Retrieve host credentials in Host constructor
             stage('Retrieve Credentials') {

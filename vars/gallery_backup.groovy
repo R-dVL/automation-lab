@@ -16,6 +16,7 @@ def call() {
 
             // Default Params
             host = new Host(this, HOST)
+            host.init()
 
             // Define file name
             LocalDate date = LocalDate.now();

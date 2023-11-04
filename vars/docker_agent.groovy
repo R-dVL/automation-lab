@@ -16,20 +16,19 @@ def call() {
             host = new Host(this, 'server')
             host.init()
 
-            String command
-
-            if (OPTION == 'ON') {
-                String sshKey = libraryResource resource: 'keys/jenkins_agent_key.pub'
-                command = """
-                    docker run -d --rm --name=jenkins-agent -p 4444:22 \
-                    -e "JENKINS_AGENT_SSH_PUBKEY=${sshKey}" \
-                    rdvlima/jenkins-agent
-                """
-            } else if (OPTION == 'OFF') {
-                command = 'docker stop jenkins-agent'
-            }
-
             stage('Execute Command') {
+                String command
+
+                if (OPTION == 'ON') {
+                    String sshKey = libraryResource resource: 'keys/jenkins_agent_key.pub'
+                    command = """
+                        docker run -d --rm --name=jenkins-agent -p 4444:22 \
+                        -e "JENKINS_AGENT_SSH_PUBKEY=${sshKey}" \
+                        rdvlima/jenkins-agent
+                    """
+                } else if (OPTION == 'OFF') {
+                    command = 'docker stop jenkins-agent'
+                }
                 host.sshCommand(command)
             }
 

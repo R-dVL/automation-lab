@@ -14,6 +14,7 @@ def call() {
             configuration = readJSON text: configurationJson
             // Default Params
             host = new Host(this, HOST)
+            host.init()
 
             def date
             if (env.DATE.isEmpty()) {
