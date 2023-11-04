@@ -25,7 +25,7 @@ def call() {
                     rdvlima/jenkins-agent
                 '''
             } else if (OPTION == 'OFF') {
-                command = 'docker stop rdvlima/jenkins-agent'
+                command = 'docker stop jenkins-agent'
             }
 
             stage('Execute Command') {
