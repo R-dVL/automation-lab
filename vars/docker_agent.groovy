@@ -19,18 +19,25 @@ def call() {
             stage('Execute Command') {
                 String command
 
-                if (OPTION == 'ON') {
-                    String sshKey = libraryResource resource: 'keys/jenkins_agent_key.pub'
-                    command = """
-                        docker run -d --rm --name=jenkins-agent -p 4444:22 \
-                        -e "JENKINS_AGENT_SSH_PUBKEY=${sshKey}" \
-                        rdvlima/jenkins-agent
-                    """
-                } else if (OPTION == 'OFF') {
-                    command = 'docker stop jenkins-agent'
+                switch (OPTION) {
+                    case 'ON':
+                        String sshKey = libraryResource resource: 'keys/jenkins_agent_key.pub'
+                        command = """
+                            docker run -d --rm --name=jenkins-agent -p 4444:22 \
+                            -e "JENKINS_AGENT_SSH_PUBKEY=${sshKey}" \
+                            rdvlima/jenkins-agent
+                        """
+                        break
+
+                    case 'OFF':
+                        command = 'docker stop jenkins-agent'
+                        break
+                    
+                    default:
+                        error("${OPTION} not defined.")
                 }
+
                 host.sshCommand(command)
-            }
 
         } catch(Exception err) {
             error(err.getMessage())

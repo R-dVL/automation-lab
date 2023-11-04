@@ -43,9 +43,10 @@ public class TechNPM {
             """)
 
             // Write .env file
+            def mongoCredentials = steps.utils.retrieveCredentials(credentialsId)
             def env = 
-            """MONGO_USER=${steps.mongo_user}
-            MONGO_PASSWORD=${steps.mongo_password}
+            """MONGO_USER=${mongoCredentials.user}
+            MONGO_PASSWORD=${mongoCredentials.password}
             MONGO_URI=localhost:27017
             MONGO_DB=cat-watcher
             """

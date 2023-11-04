@@ -8,32 +8,18 @@ def call() {
             configuration
             host
         }
-        // Pipeline error control
         try {
             // Configuration instance
             String configurationJson = libraryResource resource: 'configuration.json'
             configuration = readJSON text: configurationJson
 
-            // Default Params
+            // Host setup
             host = new Host(this, HOST)
             host.init()
 
             // Define file name
             LocalDate date = LocalDate.now();
             String fileName = "gallery_backup_" + date.toString().replace('-', '_')
-
-            // TODO: Retrieve host credentials in Host constructor
-            stage('Host Setup') {
-                // Retrieve info from Jenkins
-                script {
-                    // User & Password
-                    withCredentials([
-                        usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
-                            host.setUser(user)
-                            host.setPassword(password)
-                    }
-                }
-            }
 
             stage('Create Backup') {
                 host.sshCommand("tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")

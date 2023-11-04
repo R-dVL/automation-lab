@@ -12,31 +12,17 @@ def call() {
             // Configuration instance
             String configurationJson = libraryResource resource: 'configuration.json'
             configuration = readJSON text: configurationJson
-            // Default Params
+
+            // Host Setup
             host = new Host(this, HOST)
             host.init()
 
+            // Date to fetch
             def date
             if (env.DATE.isEmpty()) {
                 date = LocalDate.now()
             } else {
                 date = env.DATE
-            }
-
-            currentBuild.displayName = "Cat-Watcher Dataset Update"
-
-            // Stages
-            // TODO: Retrieve host credentials in Host constructor
-            stage('Host Setup') {
-                // Retrieve info from Jenkins
-                script {
-                    // User & Password
-                    withCredentials([
-                        usernamePassword(credentialsId: host.getConfigCredentials(), usernameVariable: 'user', passwordVariable: 'password')]) {
-                            host.setUser(user)
-                            host.setPassword(password)
-                    }
-                }
             }
 
             stage('Download Photos') {
