@@ -19,7 +19,7 @@ def call() {
                     inventory:'./inventories/hosts.yaml',
                     playbook: "./playbooks/deploy-backend.yaml",
                     credentialsId: 'jenkins',
-                    extras: "-e ${prj}")
+                    extras: "-e ${prj} -v")
             }
         } catch(Exception err) {
             error(err.getMessage())
