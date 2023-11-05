@@ -5,6 +5,7 @@ def call() {
         ansiColor('xterm') {
             environment {
                 configuration
+                project
             }
             try {
                 stage('Setup') {
@@ -13,7 +14,7 @@ def call() {
                     configuration = readJSON text: configurationJson
 
                     // Project to deploy
-                    Project project = new Project(this, NAME, VERSION)
+                    project = new Project(this, NAME, VERSION)
                     project.init()
 
                     // Donwload Ansible Playbooks
