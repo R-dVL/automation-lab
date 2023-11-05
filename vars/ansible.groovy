@@ -13,13 +13,13 @@ def call() {
 
             // Project to deploy
             Project prj = new Project(this, 'lima-frontend', '1.3.3')
-
+            def prjJSON = readJSON text: prj
             stage('Execute Playbook') {
                 ansiblePlaybook(
                     inventory:'./inventories/hosts.yaml',
                     playbook: "./playbooks/hello-world.yaml",
                     credentialsId: 'jenkins',
-                    extras: "-e project=${prj}")
+                    extras: "-e project=${prjJSON}")
             }
         } catch(Exception err) {
             error(err.getMessage())
