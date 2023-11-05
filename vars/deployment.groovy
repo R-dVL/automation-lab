@@ -33,7 +33,7 @@ def call() {
                         playbook: "./playbooks/${project.getPlaybook()}.yaml",
                         credentialsId: 'jenkins',
                         colorized: true,
-                        extras: "-e ${project.getProjectJson()} -v")
+                        extras: "-e ${project} -v")
                 }
 
             } catch(Exception e) {
