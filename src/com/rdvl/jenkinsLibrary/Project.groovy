@@ -7,10 +7,9 @@ public class Project {
     // Project Params
     private String name
     private String version
-    private String artifactId
     private String url
-    private String techName
-    private def deploymentTech
+    private String user
+    private String password
 
     Project(steps, name, version) {
         // Pipeline Context
@@ -19,28 +18,13 @@ public class Project {
         // Basic Params
         this.name = name
         this.version = version
-        this.artifactId = name + "-" + version
         this.url = steps.configuration.projects."${name}".url
-        this.techName = steps.configuration.projects."${name}".tech
+    }
 
-        // Deployment tech construction
-        switch(techName) {
-            case 'maven':
-                this.deploymentTech = new TechMVN(steps, name, version, artifactId, url)
-                break
-
-            case 'npm':
-                this.deploymentTech = new TechNPM(steps, name, version, artifactId, url)
-                break
-
-            case 'python':
-                this.deploymentTech = new TechPY(steps, name, version, artifactId, url)
-                break
-
-            default:
-                steps.error("${name} | Tech not defined.")
-                break
-        }
+    def init() {
+        def credentials = steps.utils.retrieveCredentials('mongo-credentials')
+        this.user = credentials.user
+        this.password = credentials.password
     }
 
     @NonCPS
@@ -51,6 +35,6 @@ public class Project {
     @Override
     @NonCPS
     public String toString() {
-        return """'{"project": {"name": "${name}", "version": "${version}", "url": ${url}}}'"""
+        return """'{"project": {"name": "${name}", "version": "${version}", "url": "${url}"}, "user": "${user}", "password": ${password}}}'"""
     }
 }

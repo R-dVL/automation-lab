@@ -13,7 +13,8 @@ def call() {
                 configuration = readJSON text: configurationJson
 
                 // Project to deploy
-                Project prj = new Project(this, 'lima-backend', '1.1.0')
+                Project project = new Project(this, 'lima-backend', '1.1.0')
+                project.init()
 
                 stage('Execute Playbook') {
                     def credentials = utils.retrieveCredentials('mongo-credentials')
@@ -22,7 +23,7 @@ def call() {
                         playbook: "./playbooks/deploy-backend.yaml",
                         credentialsId: 'jenkins',
                         colorized: true,
-                        extras: "-e ${prj} user=${credentials.user} password=${credentials.password} -v")
+                        extras: "-e ${project} -v")
                 }
             } catch(Exception err) {
                 error(err.getMessage())
