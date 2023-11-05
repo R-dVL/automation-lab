@@ -7,13 +7,19 @@ def call() {
                 configuration
             }
             try {
-                // Configuration
-                String configurationJson = libraryResource resource: 'configuration.json'
-                configuration = readJSON text: configurationJson
+                stage('Setup') {
+                    // Configuration
+                    String configurationJson = libraryResource resource: 'configuration.json'
+                    configuration = readJSON text: configurationJson
 
-                // Project to deploy
-                Project project = new Project(this, NAME, VERSION)
-                project.init()
+                    // Project to deploy
+                    Project project = new Project(this, NAME, VERSION)
+                    project.init()
+
+                    // Donwload Ansible Playbooks
+                    git branch: 'master',
+                        url: 'https://github.com/R-dVL/ansible-playbooks.git'
+                }
 
                 stage('Prepare') {
                     // TODO: Tests and Sonar
