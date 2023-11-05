@@ -16,12 +16,13 @@ def call() {
                 Project prj = new Project(this, 'lima-backend', '1.1.0')
 
                 stage('Execute Playbook') {
+                    def credentials = utils.retrieveCredentials('mongo-credentials')
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/deploy-backend.yaml",
                         credentialsId: 'jenkins',
                         colorized: true,
-                        extras: "-e ${prj} -v")
+                        extras: "-e ${prj} user=${credentials.user} password=${credentials.password} -v")
                 }
             } catch(Exception err) {
                 error(err.getMessage())
