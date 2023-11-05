@@ -51,13 +51,6 @@ public class Project {
     @Override
     @NonCPS
     public String toString() {
-        return """
-            Name: ${name}
-            Version: ${version}
-            Artifact: ${artifactId}
-            Url: ${url}
-            Destination: ${destination}
-            Tech: ${tech}
-        """
+        return "{'name': ${name}, 'version': ${version}, 'artifact': ${artifactId}, 'url': ${url}, 'destination': ${destination}, 'tech': ${tech}}"
     }
 }

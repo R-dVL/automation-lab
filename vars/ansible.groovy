@@ -8,14 +8,15 @@ def call() {
                     url: 'https://github.com/R-dVL/ansible-playbooks.git'
             }
 
-            def host = 'jenkins'
+            // Project to deploy
+            Project prj = new Project(this, 'lima-frontend', '1.3.3')
 
             stage('Execute Playbook') {
                 ansiblePlaybook(
                     inventory:'./inventories/hosts.yaml',
                     playbook: "./playbooks/hello-world.yaml",
                     credentialsId: 'jenkins',
-                    extras: "-e host=${host}")
+                    extras: "-e project=${project}")
             }
         } catch(Exception err) {
             error(err.getMessage())
