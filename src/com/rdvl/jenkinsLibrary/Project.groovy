@@ -51,6 +51,6 @@ public class Project {
     @Override
     @NonCPS
     public String toString() {
-        return """'{"project": {"name": "${name}", "version": "${version}"}}'"""
+        return """'{"project": {"name": "${name}", "version": "${version}", "url": "${url}"}'"""
     }
 }
