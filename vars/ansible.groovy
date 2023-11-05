@@ -8,11 +8,14 @@ def call() {
                     url: 'https://github.com/R-dVL/ansible-playbooks.git'
             }
 
+            def host = 'jenkins'
+
             stage('Execute Playbook') {
                 ansiblePlaybook(
                     inventory:'./inventories/hosts.yaml',
                     playbook: "./playbooks/hello-world.yaml",
-                    credentialsId: 'jenkins')
+                    credentialsId: 'jenkins'
+                    extras: "-e ansible_host=${host}")
             }
         } catch(Exception err) {
             error(err.getMessage())
