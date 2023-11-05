@@ -42,11 +42,7 @@ public class Project {
         return this.playbook
     }
 
-    @NonCPS
-    def getProjectJson() {
-        return """'{"project": {"name": "${name}", "version": "${version}", "url": "${url}", "user": "${user}", "password": "${password}"}}'"""
-    }
-
+    // toString() method override to get a JSON of the class
     @Override
     @NonCPS
     public String toString() {
