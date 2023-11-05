@@ -13,7 +13,7 @@ def call() {
 
             // Project to deploy
             Project prj = new Project(this, 'lima-frontend', '1.3.3')
-            def prjJSON = readJSON text: prj
+            def prjJSON = readJSON text: prj.toString()
             stage('Execute Playbook') {
                 ansiblePlaybook(
                     inventory:'./inventories/hosts.yaml',
