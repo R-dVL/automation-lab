@@ -10,14 +10,14 @@
         "lima-backend": {
             "url": "https://github.com/R-dVL/lima-backend.git",
             "destination": "/opt/apps/lima-backend",
-            "playbook": "deploy-catwatcher",
+            "playbook": "deploy-backend",
             "credentials": "mongo-credentials"
         },
 
         "lima-frontend": {
             "url": "https://github.com/R-dVL/lima-frontend.git",
             "destination": "/opt/apps/lima-frontend",
-            "playbook": "deploy-catwatcher"
+            "playbook": "deploy-backend"
         }
     }
 }
