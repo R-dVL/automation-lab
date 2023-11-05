@@ -13,19 +13,18 @@
         "cat-watcher": {
             "url": "https://github.com/R-dVL/cat-watcher.git",
             "destination": "/opt/apps/cat-watcher",
-            "tech": "python"
+            "credentials": "mongo-credentials"
         },
 
         "lima-backend": {
             "url": "https://github.com/R-dVL/lima-backend.git",
             "destination": "/opt/apps/lima-backend",
-            "tech": "npm"
+            "credentials": "mongo-credentials"
         },
 
         "lima-frontend": {
             "url": "https://github.com/R-dVL/lima-frontend.git",
-            "destination": "/opt/apps/lima-frontend",
-            "tech": "npm"
+            "destination": "/opt/apps/lima-frontend"
         }
     }
 }

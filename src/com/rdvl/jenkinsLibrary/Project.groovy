@@ -8,6 +8,7 @@ public class Project {
     private String name
     private String version
     private String url
+    private String credentialsId
     private String user
     private String password
 
@@ -19,12 +20,19 @@ public class Project {
         this.name = name
         this.version = version
         this.url = steps.configuration.projects."${name}".url
+        this.credentialsId = steps.configuration.projects."${name}".credentials != null ? steps.configuration.projects."${name}".credentials : null
     }
 
     def init() {
-        def credentials = steps.utils.retrieveCredentials('mongo-credentials')
-        this.user = credentials.user
-        this.password = credentials.password
+        if (credentialsId != null) {
+            def credentials = steps.utils.retrieveCredentials(credentialsId)
+            this.user = credentials.user
+            this.password = credentials.password
+        } else {
+            this.user = null
+            this.password = null
+        }
+
     }
 
     @NonCPS
