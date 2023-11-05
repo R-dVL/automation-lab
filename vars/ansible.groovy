@@ -12,14 +12,14 @@ def call() {
             configuration = readJSON text: configurationJson
 
             // Project to deploy
-            Project prj = new Project(this, 'lima-frontend', '1.3.3')
+            Project prj = new Project(this, 'lima-backend', '1.1.0')
 
             stage('Execute Playbook') {
                 ansiblePlaybook(
                     inventory:'./inventories/hosts.yaml',
                     playbook: "./playbooks/hello-world.yaml",
                     credentialsId: 'jenkins',
-                    extras: "-e ${prj.toString()}")
+                    extras: "-e ${prj}")
             }
         } catch(Exception err) {
             error(err.getMessage())
