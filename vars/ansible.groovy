@@ -17,7 +17,7 @@ def call() {
             stage('Execute Playbook') {
                 ansiblePlaybook(
                     inventory:'./inventories/hosts.yaml',
-                    playbook: "./playbooks/hello-world.yaml",
+                    playbook: "./playbooks/deploy-backend.yaml",
                     credentialsId: 'jenkins',
                     extras: "-e ${prj}")
             }
