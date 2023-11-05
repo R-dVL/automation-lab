@@ -7,6 +7,9 @@ def call() {
                 git branch: 'master',
                     url: 'https://github.com/R-dVL/ansible-playbooks.git'
             }
+            // Configuration instance
+            String configurationJson = libraryResource resource: 'configuration.json'
+            configuration = readJSON text: configurationJson
 
             // Project to deploy
             Project prj = new Project(this, 'lima-frontend', '1.3.3')
