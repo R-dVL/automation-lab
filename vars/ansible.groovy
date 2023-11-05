@@ -23,7 +23,7 @@ def call() {
                         playbook: "./playbooks/deploy-backend.yaml",
                         credentialsId: 'jenkins',
                         colorized: true,
-                        extras: "-e ${project} -v")
+                        extras: "-e ${project.getProjectJson()} -v")
                 }
             } catch(Exception err) {
                 error(err.getMessage())

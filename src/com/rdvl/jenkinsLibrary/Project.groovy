@@ -11,6 +11,7 @@ public class Project {
     private String credentialsId
     private String user
     private String password
+    private String playbook
 
     Project(steps, name, version) {
         // Pipeline Context
@@ -21,6 +22,7 @@ public class Project {
         this.version = version
         this.url = steps.configuration.projects."${name}".url
         this.credentialsId = steps.configuration.projects."${name}".credentials != null ? steps.configuration.projects."${name}".credentials : null
+        this.playbook = steps.configuration.projects."${name}".playbook
     }
 
     def init() {
@@ -36,8 +38,13 @@ public class Project {
     }
 
     @NonCPS
-    def getDeploymentTech() {
-        return this.deploymentTech
+    def getPlaybook() {
+        return this.playbook
+    }
+
+    @NonCPS
+    def getProjectJson() {
+        return """'{"project": {"name": "${name}", "version": "${version}", "url": "${url}", "user": "${user}", "password": "${password}"}}'"""
     }
 
     @Override

@@ -2,33 +2,36 @@ package com.rdvl.jenkinsLibrary
 
 def call() {
     node ('docker-agent') {
-        environment {
-            configuration
-            host
-        }
-        try {
-            // Configuration
-            String configurationJson = libraryResource resource: 'configuration.json'
-            configuration = readJSON text: configurationJson
-
-            // Project to deploy
-            Project prj = new Project(this, NAME, VERSION)
-
-            // Host Setup
-            host = new Host(this, HOST)
-            host.init()
-
-            stage('Prepare') {
-                cleanWs()
-                prj.getDeploymentTech().prepare()
+        ansiColor('xterm') {
+            environment {
+                configuration
             }
+            try {
+                // Configuration
+                String configurationJson = libraryResource resource: 'configuration.json'
+                configuration = readJSON text: configurationJson
 
-            stage('Deploy') {
-                prj.getDeploymentTech().deploy()
+                // Project to deploy
+                Project project = new Project(this, NAME, VERSION)
+                project.init()
+
+                stage('Prepare') {
+                    // TODO: Tests and Sonar
+                }
+
+                stage('Deploy') {
+                    def credentials = utils.retrieveCredentials('mongo-credentials')
+                    ansiblePlaybook(
+                        inventory:'./inventories/hosts.yaml',
+                        playbook: "./playbooks/${project.getPlaybook()}.yaml",
+                        credentialsId: 'jenkins',
+                        colorized: true,
+                        extras: "-e ${project.getProjectJson()} -v")
+                }
+
+            } catch(Exception e) {
+                error(e.getMessage())
             }
-
-        } catch(Exception e) {
-            error(e.getMessage())
         }
     }
 }
