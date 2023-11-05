@@ -19,7 +19,7 @@ def call() {
                     inventory:'./inventories/hosts.yaml',
                     playbook: "./playbooks/hello-world.yaml",
                     credentialsId: 'jenkins',
-                    extras: "-e project=${project}")
+                    extras: "-e project=${prj}")
             }
         } catch(Exception err) {
             error(err.getMessage())
