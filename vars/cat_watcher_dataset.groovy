@@ -9,13 +9,15 @@ def call() {
             host
         }
         try {
-            // Configuration instance
-            String configurationJson = libraryResource resource: 'configuration.json'
-            configuration = readJSON text: configurationJson
+            stage('Setup') {
+                // Configuration instance
+                String configurationJson = libraryResource resource: 'configuration.json'
+                configuration = readJSON text: configurationJson
 
-            // Host Setup
-            host = new Host(this, HOST)
-            host.init()
+                // Default Params
+                host = new Host(this, 'server')
+                host.init()
+            }
 
             // Date to fetch
             def date

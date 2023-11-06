@@ -6,6 +6,7 @@ def call() {
             sshagent(credentials: ['jenkins']) {
             sh 'ls -altr'
             }
+
         } catch(Exception err) {
             error(err.getMessage())
         }
