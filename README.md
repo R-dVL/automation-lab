@@ -58,6 +58,5 @@ Fetchs photos taken with the [cat-watcher](https://github.com/R-dVL/cat-watcher.
 
 
 ## Utils
----
 Jenkins scripts written in vars are instantiated on-demand as singletons. Auxiliary functions and Jenkins wrappers are defined here to being used in pipelines and classes such as _Host.groovy_.
 
