@@ -30,7 +30,7 @@ def call() {
                     def credentials = utils.retrieveCredentials('mongo-credentials')
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/${project.getPlaybook()}.yaml",
+                        playbook: "./playbooks/deploy.yaml",
                         credentialsId: 'jenkins',
                         colorized: true,
                         extras: "-e ${project} -v")

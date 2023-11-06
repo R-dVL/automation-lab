@@ -22,7 +22,6 @@ public class Project {
         this.version = version
         this.url = steps.configuration.projects."${name}".url
         this.credentialsId = steps.configuration.projects."${name}".credentials != null ? steps.configuration.projects."${name}".credentials : null
-        this.playbook = steps.configuration.projects."${name}".playbook
     }
 
     def init() {
@@ -35,11 +34,6 @@ public class Project {
             this.password = null
         }
 
-    }
-
-    @NonCPS
-    def getPlaybook() {
-        return this.playbook
     }
 
     // toString() method override to get a JSON of the class
