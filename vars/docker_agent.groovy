@@ -36,9 +36,8 @@ def call() {
                     default:
                         error("${OPTION} not defined.")
                 }
-
                 host.sshCommand(command)
-
+            }
         } catch(Exception err) {
             error(err.getMessage())
         }
