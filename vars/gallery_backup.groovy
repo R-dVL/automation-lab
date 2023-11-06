@@ -14,7 +14,7 @@ def call() {
             configuration = readJSON text: configurationJson
 
             // Host setup
-            host = new Host(this, HOST)
+            host = new Host(this, 'server')
             host.init()
 
             // Define file name
