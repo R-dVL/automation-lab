@@ -1,4 +1,4 @@
-# Automation Library
+# Jenkins Shared Library
 _Shared library for training and device maintenance purposes._
 
 
