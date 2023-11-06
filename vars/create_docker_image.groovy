@@ -30,7 +30,6 @@ def call() {
                     sh 'docker push rdvlima/jenkins-agent:latest'
                 }
             }
-
         } catch(Exception err) {
             error(err.getMessage())
         }

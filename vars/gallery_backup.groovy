@@ -28,7 +28,6 @@ def call() {
             stage('Delete Old Backups') {
                 host.sshCommand("find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
             }
-
         } catch(Exception err) {
             error(err.getMessage())
         }

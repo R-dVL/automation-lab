@@ -19,7 +19,6 @@ def call() {
             stage('Execute Command') {
                 host.sshCommand(CMD, SUDO)
             }
-
         } catch(Exception err) {
             error(err.getMessage())
         }

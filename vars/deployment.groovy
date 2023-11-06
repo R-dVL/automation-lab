@@ -35,7 +35,6 @@ def call() {
                         colorized: true,
                         extras: "-e ${project} -v")
                 }
-
             } catch(Exception e) {
                 error(e.getMessage())
             }
