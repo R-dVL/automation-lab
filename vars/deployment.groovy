@@ -56,7 +56,7 @@ def call() {
                     }
 
                     sh(
-                        script: """ansible-playbook ./playbooks/deploy.yaml -i ./inventories/hosts.yaml --private-key ./ssh_key -u jenkins -e '${project}' -v""",
+                        script: """ansible-playbook ./playbooks/deploy.yaml -i ./inventories/hosts.yaml --private-key ./ssh_key -u jenkins -e ${project} -v""",
                         returnStdout: true)
                 }
 /*
