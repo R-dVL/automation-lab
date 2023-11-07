@@ -37,7 +37,7 @@ def call() {
                     try {
                         sshagent(credentials: ['jenkins']) {
                             def sshResult = sh(script: "whoami", returnStdout: true).trim()
-                            println("SSH connection with user: ${result} OK")
+                            println("SSH connection with user: ${sshResult} OK")
                         }
                     } catch (e) {
                         println("SSH connection error: ${e}")
