@@ -72,29 +72,10 @@ class Host implements Serializable {
         steps.sshGet remote: remote, from: remotePath, into: path, override: true
     }
 
-    @NonCPS
-    def getIp() {
-        return this.ip
-    }
-
-    @NonCPS
-    def getConfigCredentials() {
-        return this.configCredentials
-    }
-
-    @NonCPS
-    def getUser() {
-        return this.user
-    }
-
+    // toString() method override to get a JSON of the class
     @Override
     @NonCPS
     public String toString() {
-        return """
-            Name: ${name}
-            User: ${user}
-            Password: ${password}
-            IP: ${ip}
-        """
+        return """'{"host": {"name": "${name}", "ip": "${ip}", "credentialsId": "${credentialsId}", "user": "${user}", "password": "${password}"}}'"""
     }
 }
