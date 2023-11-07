@@ -25,9 +25,9 @@ def call() {
                 stage('Connectivity Check') {
                     // Host alive check
                     // TODO: Dynamic host
-                    def pingResult = sh(script: "ping -c 4 192.168.1.55", returnStdout: true).trim()
+                    def pingResult = sh(script: "nc -z -w5 192.168.1.55 80", returnStatus: true).trim()
                     
-                    if (result.contains("4 packets transmitted, 4 received")) {
+                    if (result.toInteger() == 0) {
                         println("Host reachable")
                     } else {
                         error "Host not reachable: ${result}"
