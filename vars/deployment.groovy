@@ -37,8 +37,8 @@ def call() {
                     // Host accesible check
                     try {
                         sshagent(credentials: ['jenkins']) {
-                            def sshResult = sh(script: """ssh jenkins@192.168.1.55 && whoami""", returnStdout: true).trim()
-                            println("SSH connection with user: ${sshResult} OK")
+                            def sshResult = sh(script: """ssh jenkins@192.168.1.55""", failOnError: true).trim()
+                            println("SSH connection OK")
                         }
                     } catch (e) {
                         println("SSH connection error: ${e}")
