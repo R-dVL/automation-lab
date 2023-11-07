@@ -30,7 +30,7 @@ def call() {
                     if (pingResult == 0) {
                         println("Host reachable")
                     } else {
-                        error "Host not reachable: ${result}"
+                        error("Host not reachable: ${pingResult}")
                     }
 
                     // Host accesible check
@@ -49,7 +49,6 @@ def call() {
                 }
 
                 stage('Deploy') {
-                    def credentials = utils.retrieveCredentials('mongo-credentials')
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/deploy.yaml",
