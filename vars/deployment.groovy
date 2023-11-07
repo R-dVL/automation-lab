@@ -25,7 +25,7 @@ def call() {
                 stage('Connectivity Check') {
                     // Host alive check
                     // TODO: Dynamic host
-                    def result = sh(script: "ping -c 4 192.168.1.55", returnStdout: true).trim()
+                    def pingResult = sh(script: "ping -c 4 192.168.1.55", returnStdout: true).trim()
                     
                     if (result.contains("4 packets transmitted, 4 received")) {
                         println("Host reachable")
@@ -36,7 +36,7 @@ def call() {
                     // Host accesible check
                     try {
                         sshagent(credentials: ['jenkins']) {
-                            def result = sh(script: "whoami", returnStdout: true).trim()
+                            def sshResult = sh(script: "whoami", returnStdout: true).trim()
                             println("SSH connection with user: ${result} OK")
                         }
                     } catch (e) {
