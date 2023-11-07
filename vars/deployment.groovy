@@ -22,6 +22,28 @@ def call() {
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
                 }
 
+                stage('Connectivity Check') {
+                    // Host alive check
+                    // TODO: Dynamic host
+                    def result = sh(script: "ping -c 4 192.168.1.55", returnStdout: true).trim()
+                    
+                    if (result.contains("4 packets transmitted, 4 received")) {
+                        println("Host reachable")
+                    } else {
+                        error "Host not reachable: ${result}"
+                    }
+
+                    // Host accesible check
+                    try {
+                        sshagent(credentials: ['jenkins']) {
+                            def result = sh(script: "whoami", returnStdout: true).trim()
+                            println("SSH connection with user: ${result} OK")
+                        }
+                    } catch (e) {
+                        println("SSH connection error: ${e}")
+                    }
+                }
+
                 stage('Prepare') {
                     // TODO: Tests and Sonar
                 }
