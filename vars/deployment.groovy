@@ -9,6 +9,7 @@ def call() {
             }
             try {
                 stage('Setup') {
+                    cleanWs()
                     // Configuration
                     String configurationJson = libraryResource resource: 'configuration.json'
                     configuration = readJSON text: configurationJson
