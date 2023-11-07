@@ -54,7 +54,6 @@ def call() {
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/deploy.yaml",
                         credentialsId: 'jenkins',
-                        hostKeyChecking: true,
                         colorized: true,
                         extras: "-e ${project} -v")
                 }
