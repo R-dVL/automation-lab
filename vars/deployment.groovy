@@ -50,25 +50,14 @@ def call() {
                 }
 
                 stage('Deploy') {
-                    withCredentials([
-                        string(credentialsId: 'jenkins-test', variable: 'ssh_key')]) {
-                            writeFile file: 'ssh_key', text: ssh_key
-                    }
-
-                    sh(
-                        script: """ansible-playbook ./playbooks/deploy.yaml -i ./inventories/hosts.yaml --private-key ./ssh_key -u jenkins -e ${project} -v""",
-                        returnStdout: true)
-                }
-/*
-                stage('Deploy') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/deploy.yaml",
                         credentialsId: 'jenkins',
+                        hostKeyChecking: false,
                         colorized: true,
                         extras: "-e ${project} -v")
                 }
-*/
 
             } catch(Exception e) {
                 error(e.getMessage())
