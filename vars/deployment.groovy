@@ -34,6 +34,12 @@ def call() {
                         error("Host not reachable: ${pingResult}")
                     }
 
+                    // Remove any old fingerprints for the host
+                    sh(script: "ssh-keygen -R 192.168.1.55")
+
+                    // Add SSH fingerprints for the host
+                    sh(script: "ssh-keyscan -t ecdsa,ed25519 -H 192.168.1.55 >> ~/.ssh/known_hosts 2>&1")
+
                     // Host accesible check
                     try {
                         sshagent(credentials: ['jenkins']) {
