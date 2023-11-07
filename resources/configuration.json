@@ -1,4 +1,16 @@
 {
+    "hosts": {
+        "server": {
+            "ip": "192.168.1.55",
+            "credentials": "server-credentials"
+        },
+
+        "rpi": {
+            "ip": "192.168.1.44",
+            "credentials": "rpi-credentials"
+        }
+    },
+
     "projects": {
         "cat-watcher": {
             "url": "https://github.com/R-dVL/cat-watcher.git",

@@ -9,13 +9,15 @@ def call() {
             host
         }
         try {
-            // Configuration instance
-            String configurationJson = libraryResource resource: 'configuration.json'
-            configuration = readJSON text: configurationJson
+            stage('Setup') {
+                // Configuration instance
+                String configurationJson = libraryResource resource: 'configuration.json'
+                configuration = readJSON text: configurationJson
 
-            // Host setup
-            host = new Host(this, HOST)
-            host.init()
+                // Default Params
+                host = new Host(this, 'server')
+                host.init()
+            }
 
             // Define file name
             LocalDate date = LocalDate.now();
@@ -28,6 +30,7 @@ def call() {
             stage('Delete Old Backups') {
                 host.sshCommand("find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
             }
+
         } catch(Exception err) {
             error(err.getMessage())
         }
