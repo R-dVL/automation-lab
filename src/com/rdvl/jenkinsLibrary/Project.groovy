@@ -24,7 +24,7 @@ public class Project {
         this.url = steps.configuration.projects."${name}".url
 
         // Some projects such as frontend doesn't have a related database
-        this.database = steps.configuration.projects."${name}".database.name ? steps.configuration.projects."${name}".database.name : null
+        this.database = steps.configuration.projects."${name}".database.name != null ? steps.configuration.projects."${name}".database.name : null
         this.uri = database != null ? steps.configuration.projects."${name}".database.uri : null
         this.credentialsId = database != null ? steps.configuration.projects."${name}".database.credentials : null
     }
