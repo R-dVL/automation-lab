@@ -8,10 +8,11 @@ public class Project {
     private String name
     private String version
     private String url
+    private String database
+    private String uri
     private String credentialsId
     private String user
     private String password
-    private String playbook
 
     Project(steps, name, version) {
         // Pipeline Context
@@ -21,7 +22,9 @@ public class Project {
         this.name = name
         this.version = version
         this.url = steps.configuration.projects."${name}".url
-        this.credentialsId = steps.configuration.projects."${name}".credentials != null ? steps.configuration.projects."${name}".credentials : null
+        this.database = steps.configuration.projects."${name}".database.name
+        this.uri = steps.configuration.projects."${name}".database.uri
+        this.credentialsId = steps.configuration.projects."${name}".database.credentials
     }
 
     def init() {
