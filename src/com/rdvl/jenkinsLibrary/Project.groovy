@@ -22,9 +22,11 @@ public class Project {
         this.name = name
         this.version = version
         this.url = steps.configuration.projects."${name}".url
-        this.database = steps.configuration.projects."${name}".database.name
-        this.uri = steps.configuration.projects."${name}".database.uri
-        this.credentialsId = steps.configuration.projects."${name}".database.credentials
+
+        // Some projects such as frontend doesn't have a related database
+        this.database = steps.configuration.projects."${name}".database.name ? steps.configuration.projects."${name}".database.name : null
+        this.uri = database != null ? steps.configuration.projects."${name}".database.uri : null
+        this.credentialsId = database != null ? steps.configuration.projects."${name}".database.credentials : null
     }
 
     def init() {
