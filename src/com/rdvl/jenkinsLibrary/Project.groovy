@@ -8,7 +8,6 @@ public class Project {
     private String name
     private String version
     private String url
-    // TODO: Database as a Map
     private String database
     private String uri
     private String credentialsId
@@ -44,6 +43,18 @@ public class Project {
     @Override
     @NonCPS
     public String toString() {
-        return """'{"project": {"name": "${name}", "version": "${version}", "url": "${url}", "database": "${database}, "uri": "${uri}, "user": "${user}", "password": "${password}"}}'"""
+        return """
+        '{
+            "project": {
+                "name": "${name}",
+                "version": "${version}",
+                "url": "${url}",
+                "user": "${user}",
+                "password": "${password}",
+                "database": "${database}",
+                "uri": "${uri}"
+            }
+        }'
+        """
     }
 }
