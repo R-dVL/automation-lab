@@ -76,6 +76,16 @@ class Host implements Serializable {
     @Override
     @NonCPS
     public String toString() {
-        return """'{"host": {"name": "${name}", "ip": "${ip}", "credentialsId": "${credentialsId}", "user": "${user}", "password": "${password}"}}'"""
+        return """
+        '{
+            "host": {
+                "name": "${name}",
+                "ip": "${ip}",
+                "credentialsId": "${credentialsId}",
+                "user": "${user}",
+                "password": "${password}"
+            }
+        }'
+    """
     }
 }
