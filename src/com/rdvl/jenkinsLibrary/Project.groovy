@@ -44,18 +44,6 @@ public class Project {
     @Override
     @NonCPS
     public String toString() {
-        return """
-        '{
-            "project": {
-                "name": "${name}",
-                "version": "${version}",
-                "url": "${url}",
-                "database": "${database},
-                "uri": "${uri},
-                "user": "${user}",
-                "password": "${password}"
-            }
-        }'
-        """
+        return """'{"project": {"name": "${name}", "version": "${version}", "url": "${url}", "database": "${database}, "uri": "${uri}, "user": "${user}", "password": "${password}"}}'"""
     }
 }
