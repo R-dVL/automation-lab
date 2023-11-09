@@ -6,6 +6,7 @@ def call() {
             environment {
                 configuration
                 project
+                host
             }
             try {
                 stage('Setup') {
