@@ -7,6 +7,9 @@ def call() {
         environment {
             configuration
             host
+            fileName
+            source
+            destination
         }
         try {
             stage('Setup') {
@@ -17,20 +20,20 @@ def call() {
                 // Default Params
                 host = new Host(this, 'server')
                 host.init()
+
+                // Set facts
+                LocalDate date = LocalDate.now();
+                fileName = "gallery_backup_" + date.toString().replace('-', '_')
+                source = '/DATA/Gallery'
+                destination = '/media/devmon/WD_BLACK/NAS/system/backups/gallery'
             }
 
-            // Set facts
-            LocalDate date = LocalDate.now();
-            String fileName = "gallery_backup_" + date.toString().replace('-', '_')
-            String source = '/DATA/Gallery'
-            String destination = '/media/devmon/WD_BLACK/NAS/system/backups/gallery'
-
             stage('Create Backup') {
-                host.sshCommand(command: "tar -czvf ${destination}/${fileName}.tar.gz ${source}", sudo: true)
+                host.sshCommand("tar -czvf ${destination}/${fileName}.tar.gz ${source}", true)
             }
 
             stage('Delete Old Backups') {
-                host.sshCommand(command: "find ${destination}/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +", sudo: true)
+                host.sshCommand("find ${destination}/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +", true)
             }
 
         } catch(Exception err) {
