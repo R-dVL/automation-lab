@@ -63,7 +63,7 @@ def call() {
                 }
 
                 stage('Post Implantation') {
-                    host.sshGet("./', '/opt/apps/${project.getName()}/${project.getVersion()}/${project.getName()}.log")
+                    host.sshGet("./", "/opt/apps/${project.getName()}/${project.getVersion()}/${project.getName()}.log")
                     archiveArtifacts artifacts: "./${project.getName()}.log"
                 }
 
