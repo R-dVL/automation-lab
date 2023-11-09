@@ -41,6 +41,16 @@ public class Project {
 
     }
 
+    @NonCPS
+    def getName() {
+        return name
+    }
+
+    @NonCPS
+    def getVersion() {
+        return version
+    }
+
     // toString() method override to get a JSON of the class
     @Override
     @NonCPS
