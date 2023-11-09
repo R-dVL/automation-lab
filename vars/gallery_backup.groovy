@@ -26,11 +26,11 @@ def call() {
             String destination = '/media/devmon/WD_BLACK/NAS/system/backups/gallery'
 
             stage('Create Backup') {
-                host.sshCommand("tar -czvf ${destination}/${fileName}.tar.gz ${source}")
+                host.sshCommand(command: "tar -czvf ${destination}/${fileName}.tar.gz ${source}", sudo: true)
             }
 
             stage('Delete Old Backups') {
-                host.sshCommand("find ${destination}/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
+                host.sshCommand(command: "find ${destination}/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +", sudo: true)
             }
 
         } catch(Exception err) {
