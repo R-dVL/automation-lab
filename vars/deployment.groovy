@@ -18,6 +18,9 @@ def call() {
                     project = new Project(this, NAME, VERSION)
                     project.init()
 
+                    host = new Host(this, 'server')
+                    host.init()
+
                     // Donwload Ansible Playbooks
                     git branch: 'master',
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
@@ -27,14 +30,14 @@ def call() {
                     // Host alive check
                     // TODO: Dynamic host
                     def pingResult = sh(script: "nc -z -w5 192.168.1.55 80", returnStatus: true)
-                    
+
                     if (pingResult == 0) {
                         println("Host reachable")
                     } else {
                         error("Host not reachable: ${pingResult}")
                     }
 
-                    // Host accesible check
+                    // Host accesible with ssh key check
                     try {
                         sshagent(credentials: ['jenkins']) {
                             sh(script: """ssh jenkins@192.168.1.55""")

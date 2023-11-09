@@ -19,16 +19,18 @@ def call() {
                 host.init()
             }
 
-            // Define file name
+            // Set facts
             LocalDate date = LocalDate.now();
             String fileName = "gallery_backup_" + date.toString().replace('-', '_')
+            String source = '/DATA/Gallery'
+            String destination = '/media/devmon/WD_BLACK/NAS/system/backups/gallery'
 
             stage('Create Backup') {
-                host.sshCommand("tar -czvf /DATA/Backups/Gallery/${fileName}.tar.gz /DATA/Gallery")
+                host.sshCommand("tar -czvf ${destination}/${fileName}.tar.gz ${source}")
             }
 
             stage('Delete Old Backups') {
-                host.sshCommand("find /DATA/Backups/Gallery/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
+                host.sshCommand("find ${destination}/ ! -name ${fileName}.tar.gz -type f -exec rm -f {} +")
             }
 
         } catch(Exception err) {
