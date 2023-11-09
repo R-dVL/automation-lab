@@ -62,8 +62,8 @@ def call() {
                 }
 
                 stage('Post Implantation') {
-                    host.sshGet("./', '/opt/apps/${project.getName()}/${project.getVersion()}/${project.getName()}.log")
-                    archiveArtifacts artifacts: "./${project.getName()}.log"
+                    host.sshGet("./', '/opt/apps/${project.getname()}/${project.getversion()}/${project.getname()}.log")
+                    archiveArtifacts artifacts: "./${project.getname()}.log"
                 }
 
             } catch(Exception e) {
