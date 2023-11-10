@@ -12,7 +12,7 @@ def call() {
 
             stage('Build') {
                 script {
-                    sh ("docker build -t ghcr.io/r-dvl/jenkins-library/jenkins-agent:latest .")
+                    sh ("docker build -t jenkins-agent:latest .")
                 }
             }
 
