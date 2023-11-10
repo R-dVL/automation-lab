@@ -27,7 +27,7 @@ def call() {
                         command = """
                             docker run -d --rm --name=jenkins-agent -p 4444:22 \
                             -e "JENKINS_AGENT_SSH_PUBKEY=${sshKey}" \
-                            rdvlima/jenkins-agent
+                            ghcr.io/r-dvl/jenkins-library/jenkins-agent:latest
                         """
                         break
 

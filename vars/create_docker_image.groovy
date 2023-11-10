@@ -12,22 +12,22 @@ def call() {
 
             stage('Build') {
                 script {
-                    sh ("docker build -t rdvlima/jenkins-agent:latest .")
+                    sh ("docker build -t ghcr.io/r-dvl/jenkins-library/jenkins-agent:latest .")
                 }
             }
 
             stage('Login') {
                 withCredentials([
-                    usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'user', passwordVariable: 'password')]) {
+                    string(credentialsId: 'github-package-token	', variable: 'token')]) {
                         script {
-                            sh "echo ${password} | docker login -u ${user} --password-stdin"
+                            sh "echo ${token} | docker login ghcr.io -u r-dvl --password-stdin"
                         }
                     }
             }
 
             stage('Push') {
                 script {
-                    sh 'docker push rdvlima/jenkins-agent:latest'
+                    sh "docker push ghcr.io/r-dvl/jenkins-library/jenkins-agent:latest"
                 }
             }
 

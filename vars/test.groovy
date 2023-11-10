@@ -2,12 +2,7 @@ package com.rdvl.jenkinsLibrary
 
 def call() {
     node ('server') {
-        environment {
-            user
-        }
         try {
-            user = 'r-dvl'
-
             stage('Get Dockerfile') {
                 script {
                     String dockerfile = libraryResource resource: 'Dockerfile'
@@ -17,7 +12,7 @@ def call() {
 
             stage('Build') {
                 script {
-                    sh ("docker build -t ghcr.io/${user}/jenkins-library/jenkins-agent:latest .")
+                    sh ("docker build -t ghcr.io/r-dvl/jenkins-library/jenkins-agent:latest .")
                 }
             }
 
@@ -25,14 +20,14 @@ def call() {
                 withCredentials([
                     string(credentialsId: 'github-package-token	', variable: 'token')]) {
                         script {
-                            sh "echo ${token} | docker login ghcr.io -u ${user} --password-stdin"
+                            sh "echo ${token} | docker login ghcr.io -u r-dvl --password-stdin"
                         }
                     }
             }
 
             stage('Push') {
                 script {
-                    sh "docker push ghcr.io/${user}/jenkins-library/jenkins-agent:latest"
+                    sh "docker push ghcr.io/r-dvl/jenkins-library/jenkins-agent:latest"
                 }
             }
 
