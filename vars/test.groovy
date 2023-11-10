@@ -17,7 +17,7 @@ def call() {
 
             stage('Build') {
                 script {
-                    sh ("docker build -t ghcr.io/${user}/jenkins-agent:latest .")
+                    sh ("docker build -t ghcr.io/${user}/jenkins-library/jenkins-agent:latest .")
                 }
             }
 
@@ -32,7 +32,7 @@ def call() {
 
             stage('Push') {
                 script {
-                    sh "docker push ghcr.io/${user}/jenkins-agent:latest"
+                    sh "docker push ghcr.io/${user}/jenkins-library/jenkins-agent:latest"
                 }
             }
 
