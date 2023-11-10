@@ -6,7 +6,7 @@ def call() {
             user
         }
         try {
-            user = 'R-dVL'
+            user = 'r-dvl'
 
             stage('Get Dockerfile') {
                 script {
