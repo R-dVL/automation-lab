@@ -29,7 +29,7 @@ class Host implements Serializable {
 
     // Jenkins ssh Command wrapper
     @NonCPS
-    def sshCommand(cmd, sudo = false) {
+    def sshCommand(command, sudo = false) {
         // Remote params
         def remote = [:]
         remote.name = name
@@ -40,7 +40,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        steps.sshCommand remote: remote, command: cmd, sudo: sudo
+        steps.sshCommand remote: remote, command: command, sudo: sudo
     }
 
     // Jenkins ssh Put wrapper

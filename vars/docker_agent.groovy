@@ -34,7 +34,7 @@ def call() {
                     case 'OFF':
                         command = 'docker stop jenkins-agent'
                         break
-                    
+
                     default:
                         error("${OPTION} not defined.")
                 }
