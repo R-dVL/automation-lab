@@ -27,7 +27,7 @@ def call() {
 
             stage('Push') {
                 script {
-                    sh "docker push ghcr.io/r-dvl/jenkins-library/jenkins-agent:latest"
+                    sh "docker push ghcr.io/r-dvl/jenkins-agent:latest"
                 }
             }
 

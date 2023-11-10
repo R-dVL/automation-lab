@@ -3,5 +3,5 @@ FROM jenkins/ssh-agent:debian-jdk17 as jenkins-agent
 RUN apt-get update
 RUN apt-get install -y ansible python3 python3-pip nodejs npm
 
-LABEL org.opencontainers.image.source https://github.com/R-dVL/jenkins-library
+LABEL org.opencontainers.image.source https://github.com/r-dvl/jenkins-library
 
