@@ -5,6 +5,8 @@ _Shared library for training and device maintenance purposes._
 ## Table of Contents
 1. [Project Structure](#Project%20Structure)
 2. [Pipelines](#Pipelines)
+3. [Utils](#Utils)
+4. [Agents](#Agents)
 
 
 ## Project Structure
@@ -50,7 +52,6 @@ It reads the Dockerfile repository from the resources, builds the image and push
 
 ### Docker Agent
 Starts or stops the Docker Agent Container in server using the _principal Node_.
-> [Create Jenkins Agent](https://gist.github.com/R-dVL/374d1e0bd23f4d1f52dcb48f1d27f4b7)
 
 
 ### Cat Watcher Dataset
@@ -59,4 +60,10 @@ Fetchs photos taken with the [cat-watcher](https://github.com/R-dVL/cat-watcher.
 
 ## Utils
 Jenkins scripts written in vars are instantiated on-demand as singletons. Auxiliary functions and Jenkins wrappers are defined here to being used in pipelines and classes such as _Host.groovy_.
+
+
+## Agents
+A Docker Container is used as Agent in almost every Pipeline (except some utility pipelines that are executed when this Agent is down).
+Tools used, such as Ansible or Python are installed in [Jenkins Agent](https://github.com/R-dVL/jenkins-library/pkgs/container/jenkins-agent) Docker image.
+> [Create Jenkins Agent](https://gist.github.com/R-dVL/374d1e0bd23f4d1f52dcb48f1d27f4b7)
 
