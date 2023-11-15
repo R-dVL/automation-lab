@@ -23,7 +23,7 @@ def call() {
                         playbook: "./playbooks/backup.yaml",
                         credentialsId: 'server-credentials',
                         colorized: true,
-                        extras: "-e path:${PATH} -vvv")
+                        extras: "-vvv")
                 }
 
             } catch(Exception e) {
