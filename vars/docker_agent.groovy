@@ -25,6 +25,7 @@ def call() {
                     case 'ON':
                         String sshKey = libraryResource resource: 'keys/jenkins_agent_key.pub'
                         command = """
+                            docker pull ghcr.io/r-dvl/jenkins-agent:latest && \
                             docker run -d --rm --name=jenkins-agent -p 4444:22 \
                             -e "JENKINS_AGENT_SSH_PUBKEY=${sshKey}" \
                             ghcr.io/r-dvl/jenkins-agent:latest
