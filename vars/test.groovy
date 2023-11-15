@@ -9,7 +9,7 @@ def call() {
                 PATH
             }
             try {
-                PATH='/DATA/Media'
+                PATH='"/DATA/Media"'
                 stage('Setup') {
                     cleanWs()
                     // Configuration
@@ -51,7 +51,7 @@ def call() {
                         playbook: "./playbooks/backup.yaml",
                         credentialsId: 'server-credentials',
                         colorized: true,
-                        extras: "-e path=${PATH} -vvv")
+                        extras: "-e path=${PATH} -v")
                 }
 
             } catch(Exception e) {
