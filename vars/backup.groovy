@@ -19,8 +19,8 @@ def call() {
 
                 stage('Backup') {
                     ansiblePlaybook(
-                        inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/backup.yaml",
+                        inventory: "${WORKSPACE}/inventories/hosts.yaml",
+                        playbook: "${WORKSPACE}/playbooks/backup.yaml",
                         credentialsId: 'server-credentials',
                         colorized: true,
                         extras: "-e path=${PATH} -vvv")
