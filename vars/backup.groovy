@@ -3,9 +3,21 @@ package com.rdvl.jenkinsLibrary
 def call() {
     node ('docker-agent') {
         ansiColor('xterm') {
+            environment {
+                configuration
+                project
+                host
+            }
             try {
                 stage('Setup') {
                     cleanWs()
+                    // Configuration
+                    String configurationJson = libraryResource resource: 'configuration.json'
+                    configuration = readJSON text: configurationJson
+
+                    host = new Host(this, 'server')
+                    host.init()
+
                     // Donwload Ansible Playbooks
                     git branch: 'master',
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
