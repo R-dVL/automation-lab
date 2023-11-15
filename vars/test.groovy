@@ -10,7 +10,11 @@ def call() {
             }
             try {
                 PATH='/DATA/Media'
-                params = """'{"path": "${PATH}"}'"""
+                params = """
+                    '{
+                        "path": "${PATH}"
+                    }'
+                """
 
                 stage('Setup') {
                     cleanWs()
