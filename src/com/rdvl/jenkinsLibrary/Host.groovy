@@ -40,7 +40,7 @@ class Host implements Serializable {
         remote.allowAnyHosts = true
 
         // Execute command
-        steps.sshCommand remote: remote, command: command, sudo: sudo
+        return steps.sshCommand remote: remote, command: command, sudo: sudo
     }
 
     // Jenkins ssh Put wrapper

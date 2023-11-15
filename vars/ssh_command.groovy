@@ -19,7 +19,8 @@ def call() {
             }
 
             stage('Execute Command') {
-                host.sshCommand(CMD, SUDO)
+                def result = host.sshCommand(CMD, SUDO)
+                print result
             }
 
         } catch(Exception err) {
