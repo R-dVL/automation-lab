@@ -26,6 +26,7 @@ def call() {
                     git branch: 'master',
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
                 }
+
                 stage('Test') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
@@ -33,6 +34,7 @@ def call() {
                         credentialsId: 'jenkins',
                         colorized: true)
                 }
+            }
 
         } catch(Exception err) {
             error(err.getMessage())
