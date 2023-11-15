@@ -20,10 +20,10 @@ def call() {
                 stage('Backup') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/backup.yaml",
+                        playbook: "./playbooks/test.yaml",
                         credentialsId: 'server-credentials',
                         colorized: true,
-                        extras: "-e {path: ${PATH}} -vvv")
+                        extras: "-v")
                 }
 
             } catch(Exception e) {
