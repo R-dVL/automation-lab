@@ -11,13 +11,15 @@ def call() {
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
                 }
 
+                print PATH
+
                 stage('Backup') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/backup.yaml",
                         credentialsId: 'jenkins',
                         colorized: true,
-                        extras: "-e path:${PATH} -v")
+                        extras: "-e path=${PATH} -v")
                 }
 
             } catch(Exception e) {
