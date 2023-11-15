@@ -34,10 +34,10 @@ def call() {
                         credentialsId: 'jenkins',
                         colorized: true)
                 }
-            }
 
-        } catch(Exception err) {
-            error(err.getMessage())
+            } catch(Exception err) {
+                error(err.getMessage())
+            }
         }
     }
 }
