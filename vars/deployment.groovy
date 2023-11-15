@@ -37,16 +37,6 @@ def call() {
                     } else {
                         error("Host not reachable: ${pingResult}")
                     }
-
-                    // Host accesible with ssh key check
-                    try {
-                        sshagent(credentials: ['jenkins']) {
-                            sh(script: """ssh jenkins@192.168.1.55""")
-                            println("SSH connection OK")
-                        }
-                    } catch (e) {
-                        error("SSH connection error: ${e}")
-                    }
                 }
 
                 stage('Prepare') {
@@ -57,7 +47,7 @@ def call() {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/deploy.yaml",
-                        credentialsId: 'jenkins',
+                        credentialsId: 'server-credentials',
                         colorized: true,
                         extras: "-e ${project} -v")
                 }
