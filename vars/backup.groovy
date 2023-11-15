@@ -17,7 +17,7 @@ def call() {
                         playbook: "./playbooks/backup.yaml",
                         credentialsId: 'jenkins',
                         colorized: true,
-                        extras: "-vvv")
+                        extras: "-e path=${PATH} -vvv")
                 }
 
             } catch(Exception e) {
