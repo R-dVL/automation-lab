@@ -6,8 +6,10 @@ def call() {
             environment {
                 configuration
                 host
+                PATH
             }
             try {
+                PATH='/DATA/Media'
                 stage('Setup') {
                     cleanWs()
                     // Configuration
