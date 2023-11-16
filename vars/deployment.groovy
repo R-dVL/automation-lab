@@ -27,10 +27,9 @@ def call() {
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
                 }
 
-                stage('Connectivity Check') {
+                stage('Connectivity Test') {
                     // Host alive check
-                    // TODO: Dynamic host
-                    def pingResult = sh(script: "nc -z -w5 192.168.1.55 80", returnStatus: true)
+                    def pingResult = sh(script: "nc -z -w5 ${host.getIp()}", returnStatus: true)
 
                     if (pingResult == 0) {
                         println("Host reachable")
