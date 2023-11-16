@@ -46,7 +46,7 @@ def call() {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/sync-folder.yaml",
-                        credentialsId: 'server-credentials',
+                        credentialsId: "${host.getCredentialsId()}",
                         colorized: true,
                         extras: "-e src_path=${SRC_PATH} -vv")
                 }

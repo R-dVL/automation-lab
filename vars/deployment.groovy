@@ -54,7 +54,7 @@ def call() {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/deploy.yaml",
-                        credentialsId: 'server-credentials',
+                        credentialsId: "${host.getCredentialsId()}",
                         colorized: true,
                         extras: "-e ${project} -v")
                 }
