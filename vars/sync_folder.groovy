@@ -25,7 +25,7 @@ def call() {
 
                 stage('Connectivity Test') {
                     // Host alive check
-                    def pingResult = sh(script: "nc -z -w5 ${host.getIp()}", returnStatus: true)
+                    def pingResult = sh(script: "nc -z -w5 ${host.getIp()} 80", returnStatus: true)
 
                     if (pingResult == 0) {
                         println("Host reachable")
@@ -33,8 +33,8 @@ def call() {
                         error("Host not reachable: ${pingResult}")
                     }
 
+                    // Host SSH accesible check
                     def sshResult = host.sshCommand('whoami')
-
                     if (sshResult != 'jenkins') {
                         error("SSH Connection failed: ${sshResult}")
                     } else {
