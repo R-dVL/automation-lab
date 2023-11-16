@@ -10,35 +10,35 @@ def retrieveCredentials(credentialsId) {
 def log(text, color = 'none') {
     switch(color) {
         case 'black':
-            text = "\e[30m${text}\e[0m"
+            text = "\033[30m${text}\033[0m"
             break
 
         case 'red':
-            text = "\e[31m${text}\e[0m"
+            text = "\033[31m${text}\033[0m"
             break
 
         case 'green':
-            text = "\e[32m${text}\e[0m"
+            text = "\033[32m${text}\033[0m"
             break
 
         case 'yellow':
-            text = "\e[33m${text}\e[0m"
+            text = "\033[33m${text}\033[0m"
             break
-        
+
         case 'blue':
-            text = "\e[34m${text}\e[0m"
+            text = "\033[34m${text}\033[0m"
             break
-        
+
         case 'purple':
-            text = "\e[35m${text}\e[0m"
+            text = "\033[35m${text}\033[0m"
             break
-        
+
         case 'cyan':
-            text = "\e[36m${text}\e[0m"
+            text = "\033[36m${text}\033[0m"
             break
 
         case 'white':
-            text = "\e[37m${text}\e[0m"
+            text = "\033[37m${text}\033[0m"
             break
 
         case 'none':
@@ -47,5 +47,5 @@ def log(text, color = 'none') {
         default:
             println('Unknown color')
     }
-    println(text)
+    printf(text)
 }
