@@ -46,7 +46,7 @@ def call() {
                 stage('Backup') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/backup.yaml",
+                        playbook: "./playbooks/sync-folder.yaml",
                         credentialsId: 'server-credentials',
                         colorized: true,
                         extras: "-e src_path=${SRC_PATH} -vv")

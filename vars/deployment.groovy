@@ -37,6 +37,14 @@ def call() {
                     } else {
                         error("Host not reachable: ${pingResult}")
                     }
+
+                    def sshResult = host.sshCommand('whoami')
+
+                    if (sshResult != 'jenkins') {
+                        error("SSH Connection failed: ${sshResult}")
+                    } else {
+                        println("Host accesible")
+                    }
                 }
 
                 stage('Prepare') {
