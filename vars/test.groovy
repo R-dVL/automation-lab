@@ -5,18 +5,17 @@ def call() {
         ansiColor('xterm') {
             try {
                 stage('TEST') {
-                    log = utils.log
                     text = 'lorem ipsum dolor'
-                    log(text, 'black')
-                    log(text, 'red')
-                    log(text, 'green')
-                    log(text, 'yellow')
-                    log(text, 'blue')
-                    log(text, 'purple')
-                    log(text, 'cyan')
-                    log(text, 'white')
-                    log(text)
-                    log(text, 'inventao')
+                    utils.log(text, 'black')
+                    utils.log(text, 'red')
+                    utils.log(text, 'green')
+                    utils.log(text, 'yellow')
+                    utils.log(text, 'blue')
+                    utils.log(text, 'purple')
+                    utils.log(text, 'cyan')
+                    utils.log(text, 'white')
+                    utils.log(text)
+                    utils.log(text, 'inventao')
                 }
 
             } catch(Exception e) {
