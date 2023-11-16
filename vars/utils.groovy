@@ -10,7 +10,7 @@ def retrieveCredentials(credentialsId) {
 String log(text, color = 'none') {
     switch(color) {
         case 'black':
-            println("\0[30m${text}\0[0m")
+            println("\033[30m${text}\033[0m")
             break
 
         case 'red':
