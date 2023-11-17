@@ -20,7 +20,7 @@ def call() {
                 }
 
                 // Common functions
-                def connectivity_test = load 'common/connectivity_test'
+                def connectivity_test = load 'common/connectivity_test.groovy'
                 connectivity_test(host)
 
                 stage('Execute Command') {
