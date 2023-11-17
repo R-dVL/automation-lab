@@ -19,12 +19,7 @@ def call() {
                     host.init()
                 }
 
-                connectivity_test(host)
-
-                stage('Execute Command') {
-                    def result = host.sshCommand(CMD, SUDO)
-                    print("Result: ${result}")
-                }
+                common.connectivity_test(host)
 
             } catch(Exception err) {
                 error(err.getMessage())
