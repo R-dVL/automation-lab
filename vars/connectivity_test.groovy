@@ -7,7 +7,7 @@ def call(steps) {
     try {
         stage('Connectivity Test') {
             // Host alive check
-            def pingResult = sh(script: "nc -z -w5 ${host.getIp()} 80", returnStatus: true)
+            def pingResult = sh(script: "nc -z -w5 ${steps.env.host.getIp()} 80", returnStatus: true)
 
             if (pingResult == 0) {
                 utils.log("Host reachable", 'green')
