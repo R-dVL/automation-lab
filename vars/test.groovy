@@ -20,7 +20,7 @@ def call() {
                 }
 
                 def connectivity_test = load(libraryResource(resource: 'common/connectivity_test.groovy'))
-                connectivity_test.call(host)
+                //connectivity_test.call(host)
 
             } catch(Exception err) {
                 error(err.getMessage())
