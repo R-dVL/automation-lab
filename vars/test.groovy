@@ -19,7 +19,8 @@ def call() {
                     host.init()
                 }
 
-                common.connectivity_test(host)
+                def connectivity_test = load(libraryResource(resource: 'common/connectivity_test.groovy'))
+                connectivity_test.call(host)
 
             } catch(Exception err) {
                 error(err.getMessage())
