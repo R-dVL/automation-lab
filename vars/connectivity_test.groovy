@@ -1,5 +1,7 @@
 package com.rdvl.jenkinsLibrary
 
+//// COMMON STAGE ////
+// Performs a connectivity test
 
 def call(host) {
     try {
