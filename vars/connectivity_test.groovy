@@ -25,5 +25,3 @@ def call(host) {
         error(err.getMessage())
     }
 }
-
-return this
