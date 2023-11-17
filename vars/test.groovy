@@ -15,7 +15,7 @@ def call() {
                     configuration = readJSON text: configurationJson
 
                     // Default Params
-                    host = new Host(this, HOST)
+                    host = new Host(this, 'server')
                     host.init()
                 }
 
