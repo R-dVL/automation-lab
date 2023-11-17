@@ -19,9 +19,7 @@ def call() {
                     host.init()
                 }
 
-                // Common functions
-                def connectivity_test = load 'common/connectivity_test.groovy'
-                connectivity_test.call(host)
+                connectivity_test(host)
 
                 stage('Execute Command') {
                     def result = host.sshCommand(CMD, SUDO)
