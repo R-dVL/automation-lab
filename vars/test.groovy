@@ -1,25 +1,35 @@
 package com.rdvl.jenkinsLibrary
 
+
 def call() {
     node ('docker-agent') {
         ansiColor('xterm') {
+            environment {
+                configuration
+                host
+            }
             try {
-                stage('TEST') {
-                    text = 'lorem ipsum dolor'
-                    utils.log(text, 'black')
-                    utils.log(text, 'red')
-                    utils.log(text, 'green')
-                    utils.log(text, 'yellow')
-                    utils.log(text, 'blue')
-                    utils.log(text, 'purple')
-                    utils.log(text, 'cyan')
-                    utils.log(text, 'white')
-                    utils.log(text)
-                    utils.log(text, 'inventao')
+                stage('Setup') {
+                    // Configuration instance
+                    String configurationJson = libraryResource resource: 'configuration.json'
+                    configuration = readJSON text: configurationJson
+
+                    // Default Params
+                    host = new Host(this, HOST)
+                    host.init()
                 }
 
-            } catch(Exception e) {
-                error(e.getMessage())
+                // Common functions
+                def connectivity_test = load 'common/connectivity_test()'
+                connectivity_test(host)
+
+                stage('Execute Command') {
+                    def result = host.sshCommand(CMD, SUDO)
+                    print("Result: ${result}")
+                }
+
+            } catch(Exception err) {
+                error(err.getMessage())
             }
         }
     }
