@@ -15,15 +15,15 @@ def call(steps) {
             }
 
             // Project to deploy
-            if(steps.project) {
-                steps.project = new Project(this, NAME, VERSION)
-                steps.project.init()
+            if(steps.env.project) {
+                steps.env.project = new Project(this, NAME, VERSION)
+                steps.env.project.init()
             }
 
             // Host
-            if(steps.host) {
-                steps.host = new Host(this, 'server')
-                steps.host.init()
+            if(steps.env.host) {
+                steps.env.host = new Host(this, 'server')
+                steps.env.host.init()
             }
 
             // Donwload Ansible Playbooks
