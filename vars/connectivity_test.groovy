@@ -3,7 +3,7 @@ package com.rdvl.jenkinsLibrary
 //// COMMON STAGE ////
 // Performs a connectivity test
 
-def call(host) {
+def call(steps) {
     try {
         stage('Connectivity Test') {
             // Host alive check
@@ -16,7 +16,7 @@ def call(host) {
             }
 
             // Host SSH accesible check
-            def sshResult = host.sshCommand('whoami')
+            def sshResult = steps.env.host.sshCommand('whoami')
             if (sshResult != 'jenkins') {
                 error("SSH Connection failed: ${sshResult}")
             } else {

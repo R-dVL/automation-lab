@@ -10,7 +10,7 @@ def call() {
             }
             try {
                 setup(this)
-                connectivity_test(host)
+                connectivity_test(this)
 
             } catch(Exception err) {
                 error(err.getMessage())
