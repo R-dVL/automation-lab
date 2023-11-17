@@ -8,6 +8,10 @@ def call(steps) {
         stage('Setup') {
             cleanWs()
 
+            print (steps.env.configuration)
+            print (steps.env.project)
+            print (steps.env.host)
+
             // Configuration
             if(steps.env.configuration) {
                 String configurationJson = libraryResource resource: 'configuration.json'
