@@ -9,9 +9,9 @@ def call(steps) {
             cleanWs()
 
             // Configuration
-            if(steps.configuration) {
+            if(steps.env.configuration) {
                 String configurationJson = libraryResource resource: 'configuration.json'
-                steps.configuration = readJSON text: configurationJson
+                steps.env.configuration = readJSON text: configurationJson
             }
 
             // Project to deploy
