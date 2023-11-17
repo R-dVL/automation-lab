@@ -3,14 +3,10 @@ package com.rdvl.jenkinsLibrary
 //// COMMON STAGE ////
 // Setups Pipeline
 
-def call(steps) {
+def call() {
     try {
         stage('Setup') {
             cleanWs()
-
-            print (steps.env.configuration)
-            print (steps.env.project)
-            print (steps.env.host)
 
             // Configuration
             if(steps.env.configuration != null) {
