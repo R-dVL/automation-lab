@@ -7,10 +7,12 @@ def call() {
                 configuration
                 project
                 host
+                log
             }
             try {
                 stage('Setup') {
                     cleanWs()
+
                     // Configuration
                     String configurationJson = libraryResource resource: 'configuration.json'
                     configuration = readJSON text: configurationJson
@@ -32,7 +34,7 @@ def call() {
                     def pingResult = sh(script: "nc -z -w5 ${host.getIp()} 80", returnStatus: true)
 
                     if (pingResult == 0) {
-                        println("Host reachable")
+                        utils.log("Host reachable", 'green')
                     } else {
                         error("Host not reachable: ${pingResult}")
                     }
@@ -42,7 +44,7 @@ def call() {
                     if (sshResult != 'jenkins') {
                         error("SSH Connection failed: ${sshResult}")
                     } else {
-                        println("Host accesible")
+                        utils.log("Host accesible", 'green')
                     }
                 }
 

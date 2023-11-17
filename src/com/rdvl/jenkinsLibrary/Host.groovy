@@ -3,6 +3,7 @@ package com.rdvl.jenkinsLibrary
 class Host implements Serializable {
     // Pipeline Context
     private def steps
+    private def utils
 
     // Default Params
     private String name
@@ -14,6 +15,7 @@ class Host implements Serializable {
     Host(steps, hostName) {
         // Pipeline context setup
         this.steps = steps
+        this.utils = steps.utils
 
         // Host setup
         this.name = hostName
@@ -22,7 +24,7 @@ class Host implements Serializable {
     }
 
     def init() {
-        def credentials = steps.utils.retrieveCredentials(credentialsId)
+        def credentials = utils.retrieveCredentials(credentialsId)
         this.user = credentials.user
         this.password = credentials.password
     }

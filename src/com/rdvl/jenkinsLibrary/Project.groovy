@@ -3,6 +3,7 @@ package com.rdvl.jenkinsLibrary
 public class Project {
     // Pipeline Context
     private def steps
+    private def utils
 
     // Project Params
     private String name
@@ -17,6 +18,7 @@ public class Project {
     Project(steps, name, version) {
         // Pipeline Context
         this.steps = steps
+        this.utils = steps.utils
 
         // Basic Params
         this.name = name
@@ -31,7 +33,7 @@ public class Project {
 
     def init() {
         if (credentialsId != null) {
-            def credentials = steps.utils.retrieveCredentials(credentialsId)
+            def credentials = utils.retrieveCredentials(credentialsId)
             this.user = credentials.user
             this.password = credentials.password
         } else {
