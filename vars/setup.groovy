@@ -3,27 +3,27 @@ package com.rdvl.jenkinsLibrary
 //// COMMON STAGE ////
 // Setups Pipeline
 
-def call() {
+def call(steps) {
     try {
         stage('Setup') {
             cleanWs()
 
             // Configuration
-            if(configuration) {
+            if(steps.configuration) {
                 String configurationJson = libraryResource resource: 'configuration.json'
-                configuration = readJSON text: configurationJson
+                steps.configuration = readJSON text: configurationJson
             }
 
             // Project to deploy
-            if(project) {
-                project = new Project(this, NAME, VERSION)
-                project.init()
+            if(steps.project) {
+                steps.project = new Project(this, NAME, VERSION)
+                steps.project.init()
             }
 
             // Host
-            if(host) {
-                host = new Host(this, 'server')
-                host.init()
+            if(steps.host) {
+                steps.host = new Host(this, 'server')
+                steps.host.init()
             }
 
             // Donwload Ansible Playbooks
