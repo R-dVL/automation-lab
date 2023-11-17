@@ -9,7 +9,7 @@ def call() {
                 host
             }
             try {
-                setup()
+                setup(this)
                 connectivity_test(host)
 
             } catch(Exception err) {
