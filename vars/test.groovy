@@ -9,17 +9,8 @@ def call() {
                 host
             }
             try {
-                stage('Setup') {
-                    // Configuration instance
-                    String configurationJson = libraryResource resource: 'configuration.json'
-                    configuration = readJSON text: configurationJson
-
-                    // Default Params
-                    host = new Host(this, 'server')
-                    host.init()
-                }
-
-                connectivity_test.call(host)
+                setup()
+                connectivity_test(host)
 
             } catch(Exception err) {
                 error(err.getMessage())
