@@ -1,5 +1,7 @@
 package com.rdvl.jenkinsLibrary
-
+/**
+ * Represents a remote host in the context of a Jenkins pipeline.
+ */
 class Host implements Serializable {
     // Pipeline Context
     private def steps
@@ -12,6 +14,12 @@ class Host implements Serializable {
     private String user
     private String password
 
+    /**
+     * Constructor for the Host class.
+     *
+     * @param steps The Jenkins pipeline steps context.
+     * @param hostName The name of the host.
+     */
     Host(steps, hostName) {
         // Pipeline context setup
         this.steps = steps
@@ -23,13 +31,22 @@ class Host implements Serializable {
         this.credentialsId = steps.configuration.hosts."${name}".credentials
     }
 
+    /**
+     * Initializes the host by retrieving credentials.
+     */
     def init() {
         def credentials = utils.retrieveCredentials(credentialsId)
         this.user = credentials.user
         this.password = credentials.password
     }
 
-    // Jenkins ssh Command wrapper
+    /**
+     * Executes an SSH command on the remote host.
+     *
+     * @param command The command to be executed.
+     * @param sudo Indicates whether to use sudo for the command. Default is false.
+     * @return The result of the SSH command.
+     */
     @NonCPS
     def sshCommand(command, sudo = false) {
         // Remote params
@@ -45,7 +62,12 @@ class Host implements Serializable {
         return steps.sshCommand(remote: remote, command: command, sudo: sudo)
     }
 
-    // Jenkins ssh Put wrapper
+    /**
+     * Uploads a file to the remote host using SSH.
+     *
+     * @param file The local file to be uploaded.
+     * @param remotePath The path on the remote host to upload the file to.
+     */
     @NonCPS
     def sshPut(file, remotePath) {
         // Remote params
@@ -61,7 +83,12 @@ class Host implements Serializable {
         steps.sshPut remote: remote, from: file, into: remotePath
     }
 
-    // Jenkins ssh Get wrapper
+    /**
+     * Downloads a file from the remote host using SSH.
+     *
+     * @param path The local path to save the downloaded file.
+     * @param remotePath The path on the remote host to download the file from.
+     */
     @NonCPS
     def sshGet(path, remotePath) {
         def remote = [:]
@@ -89,7 +116,11 @@ class Host implements Serializable {
         return credentialsId
     }
 
-    // toString() method override to get a JSON of the class
+    /**
+     * Overrides the toString() method to return a JSON representation of the Host object.
+     *
+     * @return A JSON representation of the Host object.
+     */
     @Override
     @NonCPS
     public String toString() {

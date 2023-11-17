@@ -1,6 +1,10 @@
 package com.rdvl.jenkinsLibrary
-
-
+/**
+ * Jenkins pipeline for executing a command on a remote Docker agent and performing connectivity tests.
+ *
+ * This pipeline sets up the environment, performs connectivity tests on a remote host,
+ * and executes a specified command remotely on a Docker agent.
+ */
 def call() {
     node ('docker-agent') {
         ansiColor('xterm') {

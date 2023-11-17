@@ -1,5 +1,10 @@
 package com.rdvl.jenkinsLibrary
-
+/**
+ * Jenkins pipeline for building and pushing a Docker image to GitHub Container Registry.
+ *
+ * This pipeline retrieves a Dockerfile from the Jenkins library, builds a Docker image,
+ * logs in to GitHub Container Registry, and pushes the Docker image.
+ */
 def call() {
     node ('server') {
         ansiColor('xterm') {

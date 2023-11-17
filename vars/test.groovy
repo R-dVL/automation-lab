@@ -1,6 +1,5 @@
 package com.rdvl.jenkinsLibrary
 
-
 def call() {
     node ('docker-agent') {
         ansiColor('xterm') {

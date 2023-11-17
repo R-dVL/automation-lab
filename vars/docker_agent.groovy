@@ -1,6 +1,10 @@
 package com.rdvl.jenkinsLibrary
-
-
+/**
+ * Jenkins pipeline for managing the lifecycle of a Jenkins agent Docker container.
+ *
+ * This pipeline sets up the environment, executes a specified command (start or stop)
+ * on a Jenkins agent Docker container based on the provided option, and updates the Docker image.
+ */
 def call() {
     node ('server') {
         ansiColor('xterm') {

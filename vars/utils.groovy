@@ -1,5 +1,13 @@
-//// UTILS SINGLETON ////
+/**
+ * Singleton class providing utility methods for Jenkins pipelines.
+ */
 
+/**
+* Retrieves username and password from Jenkins credentials.
+*
+* @param credentialsId The ID of the Jenkins credentials.
+* @return A map containing 'user' and 'password'.
+*/
 def retrieveCredentials(credentialsId) {
     withCredentials(
         [usernamePassword(credentialsId: credentialsId, usernameVariable: 'user', passwordVariable: 'password')]) {
@@ -7,6 +15,12 @@ def retrieveCredentials(credentialsId) {
     }
 }
 
+/**
+* Logs a message to the console with optional color formatting.
+*
+* @param text The message to be logged.
+* @param color The color to use for formatting (e.g., 'red', 'green', 'blue'). Default is 'none'.
+*/
 def log(text, color = 'none') {
     switch(color) {
         case 'black':

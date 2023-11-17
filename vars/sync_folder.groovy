@@ -1,5 +1,10 @@
 package com.rdvl.jenkinsLibrary
-
+/**
+ * Jenkins pipeline for backing up data using Ansible playbooks on a remote Docker agent.
+ *
+ * This pipeline sets up the environment, performs connectivity tests on a remote host,
+ * downloads Ansible playbooks from a Git repository, and executes a backup playbook.
+ */
 def call() {
     node ('docker-agent') {
         ansiColor('xterm') {

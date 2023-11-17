@@ -20,24 +20,7 @@ def call() {
                     host.init()
                 }
 
-                stage('Connectivity Test') {
-                    // Host alive check
-                    def pingResult = sh(script: "nc -z -w5 ${host.getIp()} 80", returnStatus: true)
-
-                    if (pingResult == 0) {
-                        println("Host reachable")
-                    } else {
-                        error("Host not reachable: ${pingResult}")
-                    }
-
-                    // Host SSH accesible check
-                    def sshResult = host.sshCommand('whoami')
-                    if (sshResult != 'jenkins') {
-                        error("SSH Connection failed: ${sshResult}")
-                    } else {
-                        println("Host accesible")
-                    }
-                }
+                connectivity_test(host)
 
                 // Date to fetch
                 def date

@@ -1,8 +1,11 @@
 package com.rdvl.jenkinsLibrary
-
-//// COMMON STAGE ////
-// Performs a connectivity test
-
+/**
+ * Jenkins Common Stage Pipeline for connectivity testing to a remote host.
+ *
+ * This pipeline checks the reachability of a specified host and verifies SSH accessibility.
+ *
+ * @param host An instance of the Host class representing the remote host to test.
+ */
 def call(host) {
     try {
         stage('Connectivity Test') {

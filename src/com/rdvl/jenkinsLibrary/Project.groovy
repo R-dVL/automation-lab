@@ -1,5 +1,7 @@
 package com.rdvl.jenkinsLibrary
-
+/**
+ * Represents a project in the context of a Jenkins pipeline.
+ */
 public class Project {
     // Pipeline Context
     private def steps
@@ -15,6 +17,13 @@ public class Project {
     private String user
     private String password
 
+    /**
+     * Constructor for the Project class.
+     *
+     * @param steps The Jenkins pipeline steps context.
+     * @param name The name of the project.
+     * @param version The version of the project.
+     */
     Project(steps, name, version) {
         // Pipeline Context
         this.steps = steps
@@ -30,7 +39,9 @@ public class Project {
         this.uri = database != null ? steps.configuration.projects."${name}".database.uri : null
         this.credentialsId = database != null ? steps.configuration.projects."${name}".database.credentials : null
     }
-
+    /**
+     * Initializes the project by retrieving credentials if they exist.
+     */
     def init() {
         if (credentialsId != null) {
             def credentials = utils.retrieveCredentials(credentialsId)
