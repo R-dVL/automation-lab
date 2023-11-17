@@ -64,7 +64,11 @@ public class Project {
         return version
     }
 
-    // toString() method override to get a JSON of the class
+    /**
+     * Overrides the toString() method to return a JSON representation of the Project object.
+     *
+     * @return A JSON representation of the Project object.
+     */
     @Override
     @NonCPS
     public String toString() {
