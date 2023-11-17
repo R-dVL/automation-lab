@@ -12,7 +12,6 @@ def call() {
                 configuration
                 project
                 host
-                log
             }
             try {
                 stage('Setup') {
