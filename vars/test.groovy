@@ -5,8 +5,8 @@ def call() {
     node ('docker-agent') {
         ansiColor('xterm') {
             environment {
-                configuration
-                host
+                configuration = ""
+                host = ""
             }
             try {
                 setup(this)
