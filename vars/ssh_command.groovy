@@ -12,7 +12,7 @@ def call() {
             try {
                 stage('Setup') {
                     // Logger instance
-                    log = utils.log()
+                    //log = utils.log()
                     // Configuration instance
                     String configurationJson = libraryResource resource: 'configuration.json'
                     configuration = readJSON text: configurationJson
