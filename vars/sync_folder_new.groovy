@@ -34,10 +34,10 @@ def call() {
                 connectivity_test(host)
 
                 stage('Backup') {
-                    def parallelTech = [:]
+                    def parallelSync = [:]
 
                     for(folder in folders) {
-                        parallelSync = ["${folder}"] = {
+                        parallelSync["${folder}"] = {
                             ansiblePlaybook(
                                 inventory:'./inventories/hosts.yaml',
                                 playbook: "./playbooks/sync-folder.yaml",
@@ -46,7 +46,7 @@ def call() {
                                 extras: "-e src_path=${folder} -vv")
                         }
                     }
-                    parallel parallelTech
+                    parallel parallelSync
                 }
 
             } catch(Exception e) {
