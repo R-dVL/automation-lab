@@ -36,5 +36,13 @@
             "url": "https://github.com/R-dVL/lima-frontend.git",
             "destination": "/opt/apps/lima-frontend"
         }
+    },
+
+    "backups": {
+        "folders": {
+            "media": "/DATA/Media",
+            "gallery": "/DATA/Gallery",
+            "jenkins": "/var/lib/jenkins"
+        }
     }
 }
