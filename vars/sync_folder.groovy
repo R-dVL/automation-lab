@@ -28,6 +28,7 @@ def call() {
                     git branch: 'master',
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
 
+                    // Init folders to synchronize
                     folders = FOLDERS.contains(',') ? FOLDERS.split(', ') : [FOLDERS]
                 }
 
