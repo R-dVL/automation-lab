@@ -34,7 +34,7 @@ def call() {
                 connectivity_test(host)
 
                 stage('Backup') {
-                    def parallelSync = [:]
+                    def parallelTech = [:]
 
                     for(folder in folders) {
                         parallelSync = ["${folder}"] = {
@@ -46,7 +46,7 @@ def call() {
                                 extras: "-e src_path=${folder} -vv")
                         }
                     }
-                    parallel parallelSync
+                    parallel parallelTech
                 }
 
             } catch(Exception e) {
