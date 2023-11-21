@@ -37,13 +37,14 @@ def call() {
                     def parallelSync = [:]
 
                     for(folder in folders) {
+                        String syncPath = folder
                         parallelSync["${folder}"] = {
                             ansiblePlaybook(
                                 inventory:'./inventories/hosts.yaml',
                                 playbook: "./playbooks/sync-folder.yaml",
                                 credentialsId: "${host.getCredentialsId()}",
                                 colorized: true,
-                                extras: "-e src_path=${folder} -vv")
+                                extras: "-e src_path=${syncPath} -vv")
                         }
                     }
                     parallel parallelSync
