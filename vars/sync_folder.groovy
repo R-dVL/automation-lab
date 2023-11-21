@@ -11,6 +11,7 @@ def call() {
             environment {
                 configuration
                 host
+                folders
             }
             try {
                 stage('Setup') {
@@ -26,17 +27,26 @@ def call() {
                     // Donwload Ansible Playbooks
                     git branch: 'master',
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
+
+                    folders = FOLDERS.split(', ')
                 }
 
                 connectivity_test(host)
 
                 stage('Backup') {
-                    ansiblePlaybook(
-                        inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/sync-folder.yaml",
-                        credentialsId: "${host.getCredentialsId()}",
-                        colorized: true,
-                        extras: "-e src_path=${SRC_PATH} -vv")
+                    def parallelSync = [:]
+
+                    for(folder in folders) {
+                        parallelSync["${folder}"] = {
+                            ansiblePlaybook(
+                                inventory:'./inventories/hosts.yaml',
+                                playbook: "./playbooks/sync-folder.yaml",
+                                credentialsId: "${host.getCredentialsId()}",
+                                colorized: true,
+                                extras: "-e src_path=${folder} -vv")
+                        }
+                    }
+                    parallel parallelSync
                 }
 
             } catch(Exception e) {
