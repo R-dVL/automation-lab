@@ -28,7 +28,7 @@ def call() {
                     git branch: 'master',
                         url: 'https://github.com/R-dVL/ansible-playbooks.git'
 
-                    folders = FOLDERS.split(', ')
+                    folders = FOLDERS.contains(',') ? FOLDERS.split(', ') : [FOLDERS]
                 }
 
                 connectivity_test(host)

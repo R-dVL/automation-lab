@@ -11,7 +11,6 @@ def call() {
             environment {
                 configuration
                 host
-                log
             }
             try {
                 stage('Setup') {
