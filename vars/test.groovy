@@ -3,10 +3,6 @@ package com.rdvl.jenkinsLibrary
 def call() {
     node () {
         ansiColor('xterm') {
-            environment {
-                configuration = ""
-                host = ""
-            }
             try {
                 stage('Test') {
                     echo 'test'
