@@ -1,16 +1,16 @@
 package com.rdvl.jenkinsLibrary
 
 def call() {
-    node ('docker-agent') {
+    node () {
         ansiColor('xterm') {
             environment {
                 configuration = ""
                 host = ""
             }
             try {
-                setup(this)
-                connectivity_test(this)
-
+                stage('Test') {
+                    echo 'test'
+                }
             } catch(Exception err) {
                 error(err.getMessage())
             }
