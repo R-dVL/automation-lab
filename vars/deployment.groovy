@@ -34,8 +34,7 @@ def call() {
                 stage('Prepare') {
                     // TODO: Tests and Sonar
                     // Donwload Source Code
-                    git branch: "${project.getVersion()}",
-                        url: "${project.getUrl()}"
+                    def downloadResult = sh(script: "git clone --depth 1 --branch ${project.getVersion()} ${project.getUrl()}", returnStatus: true)
                 }
 
                 stage('Build') {
