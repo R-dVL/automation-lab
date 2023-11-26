@@ -6,7 +6,7 @@ package com.rdvl.jenkinsLibrary
  * deploys the project using Ansible playbooks, and handles post-implementation tasks.
  */
 def call() {
-    node ('docker-agent') {
+    node ('server') {
         ansiColor('xterm') {
             environment {
                 configuration
