@@ -27,40 +27,30 @@ def call() {
 
                     host = new Host(this, 'server')
                     host.init()
+
+                    // Donwload Ansible Playbooks
+                    git branch: 'master',
+                        url: 'https://github.com/R-dVL/ansible-playbooks.git'
                 }
 
                 connectivity_test(host)
 
                 stage('Prepare') {
                     // TODO: Tests and Sonar
-                    // Donwload Source Code
-                    git branch: "${project.getVersion()}",
-                        url: "${project.getUrl()}"
-                }
-
-                stage('Build') {
-                    // Build image
-                    def buildResult = sh(script:"docker build -t ghcr.io/r-dvl/${project.getName()}:${project.getVersion()} .", returnStatus: true)
-                    print(buildResult)
-
-                    // Registry login
-                    withCredentials([
-                        string(credentialsId: 'github-package-token	', variable: 'token')]) {
-                            def loginResult = sh(script: "echo ${token} | docker login ghcr.io -u r-dvl --password-stdin", returnStatus: true)
-                            print(loginResult)
-                        }
-
-                    // Push
-                    def loginsResult = sh(script: "docker push ghcr.io/r-dvl/${project.getName()}:${project.getVersion()}", returnStatus: true)
                 }
 
                 stage('Deploy') {
-                    def deployResult = host.sshCommand("docker run ghcr.io/r-dvl/${project.getName()}:${project.getVersion()}")
-                    print(deployResult)
+                    ansiblePlaybook(
+                        inventory:'./inventories/hosts.yaml',
+                        playbook: "./playbooks/deploy.yaml",
+                        credentialsId: "${host.getCredentialsId()}",
+                        colorized: true,
+                        extras: "-e ${project} -v")
                 }
 
                 stage('Post Implantation') {
-                    // TODO: Check status
+                    host.sshGet("./", "/opt/apps/${project.getName()}/${project.getVersion()}/${project.getName()}.log")
+                    archiveArtifacts artifacts: "${project.getName()}.log"
                 }
 
             } catch(Exception e) {

@@ -64,6 +64,11 @@ public class Project {
         return version
     }
 
+    @NonCPS
+    def getUrl() {
+        return url
+    }
+
     /**
      * Overrides the toString() method to return a JSON representation of the Project object.
      *
