@@ -4,7 +4,14 @@ def call() {
     node () {
         try {
             stage('Test') {
-                echo 'test'
+                def tokenVal
+                withCredentials([
+                    string(credentialsId: 'github-package-token	', variable: 'token')]) {
+                        script {
+                            tokenVal = token
+                        }
+                    }
+                print(tokenVal)
             }
         } catch(Exception err) {
             error(err.getMessage())
