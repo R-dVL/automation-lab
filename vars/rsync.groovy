@@ -6,7 +6,7 @@ package com.rdvl.jenkinsLibrary
  * downloads Ansible playbooks from a Git repository, and executes a backup playbook.
  */
 def call() {
-    node ('docker-agent') {
+    node () {
         ansiColor('xterm') {
             environment {
                 configuration
