@@ -1,7 +1,12 @@
-FROM jenkins/ssh-agent:latest as jenkins-agent
+FROM jenkins/jenkins:lts-alpine
 
-RUN apt-get update
-RUN apt-get install -y ansible python3 python3-pip nodejs npm rsync sshpass
+# Install dependencies
+USER root
+
+RUN apk update && \
+    apk add ansible python3 nodejs npm rsync sshpass && \
+    rm -rf /var/cache/apk/*
+
+USER jenkins
 
 LABEL org.opencontainers.image.source https://github.com/r-dvl/jenkins-library
-
