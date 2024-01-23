@@ -10,7 +10,13 @@ def call() {
         ansiColor('xterm') {
             try {
                 stage('Setup') {
+                    // Read configuration file
+                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
+
+                    // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
+
+                    // Clone project repository
                     git "${project.getUrl()}"
                 }
 
