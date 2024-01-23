@@ -4,7 +4,7 @@ def call() {
     node () {
         try {
             stage('Test') {
-                git '...'
+                git 'https://github.com/r-dvl/lima-backend.git'
                 def customImage = docker.build('custom-jenkins:latest')
             }
         } catch(Exception err) {
