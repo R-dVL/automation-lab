@@ -4,7 +4,8 @@ def call() {
     node () {
         try {
             stage('Test') {
-                print('test')
+                git '...'
+                def customImage = docker.build('custom-jenkins:latest')
             }
         } catch(Exception err) {
             error(err.getMessage())
