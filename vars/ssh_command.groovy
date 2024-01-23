@@ -6,7 +6,7 @@ package com.rdvl.jenkinsLibrary
  * and executes a specified command remotely on a Docker agent.
  */
 def call() {
-    node ('docker-agent') {
+    node () {
         ansiColor('xterm') {
             environment {
                 configuration
