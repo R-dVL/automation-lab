@@ -14,16 +14,23 @@ def call() {
             }
             try {
                 stage('Setup') {
-                    // Configuration instance
-                    String configurationJson = libraryResource resource: 'configuration.json'
-                    configuration = readJSON text: configurationJson
+                    // Read configuration file
+                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
 
                     // Default Params
                     host = new Host(this, HOST)
                     host.init()
                 }
 
-                connectivity_test(host)
+                stage('Connectivity Test') {
+                    // Host SSH accesible check
+                    def sshResult = host.sshCommand('whoami')
+                    if (sshResult != 'jenkins') {
+                        error("SSH Connection failed: ${sshResult}")
+                    } else {
+                        utils.log("Host accesible", 'green')
+                    }
+                }
 
                 stage('Execute Command') {
                     def result = host.sshCommand(CMD, SUDO)

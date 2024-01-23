@@ -40,13 +40,13 @@ def call() {
                     }
                 }
 
-                stage('Rsync') {
+                stage('Sync Folder') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/sync-folder.yaml",
                         credentialsId: "${host.getCredentialsId()}",
                         colorized: true,
-                        extras: "-e src_path=${FOLDER} -vv"
+                        extras: "-e src_path=${SRC_PATH} -e dest_path=${DEST_PATH} -vv"
                     )
                 }
 
