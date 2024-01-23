@@ -48,12 +48,14 @@ def call() {
                 }
 */
                 stage('Rsync') {
-                    ansiblePlaybook(
-                        inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/sync-folder.yaml",
-                        credentialsId: "${host.getCredentialsId()}",
-                        colorized: true,
-                        extras: "-e src_path=${FOLDER} -vv")
+                    docker.image('ansible/ansible:latest').inside {
+                        ansiblePlaybook(
+                            inventory:'./inventories/hosts.yaml',
+                            playbook: "./playbooks/sync-folder.yaml",
+                            credentialsId: "${host.getCredentialsId()}",
+                            colorized: true,
+                            extras: "-e src_path=${FOLDER} -vv"
+                        )
                 }
 
             } catch(Exception e) {
