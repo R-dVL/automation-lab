@@ -31,7 +31,7 @@ def call() {
                 stage('Connectivity Test') {
                     // Host SSH accesible check
                     def sshResult = host.sshCommand('whoami')
-                    if (sshResult != 'jenkins') {
+                    if (sshResult != 'rdvl') {
                         error("SSH Connection failed: ${sshResult}")
                     } else {
                         utils.log("Host accesible", 'green')
