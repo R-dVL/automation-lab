@@ -13,10 +13,15 @@ RUN add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
-RUN apt-get update  -qq \
+RUN apt-get update -qq \
     && apt-get -y install docker-ce
 
 RUN usermod -aG docker jenkins
+
+# Install Ansible
+RUN apt-get update -y && apt-get install -y \
+    ansible \
+    sshpass
 
 # Repository connection
 LABEL org.opencontainers.image.source https://github.com/r-dvl/jenkins-library
