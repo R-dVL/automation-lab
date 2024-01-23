@@ -38,7 +38,7 @@ def call() {
                     }
                 }
 
-                stage('rsync') {
+                stage('Rsync') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
                         playbook: "./playbooks/sync-folder.yaml",
