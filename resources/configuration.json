@@ -31,14 +31,5 @@
             "url": "https://github.com/r-dvl/stay-active.git",
             "artifact_name": "stay-active"
         }
-    },
-
-    "backup": {
-        "folders": {
-            "Media": "/media/Storage/Media",
-            "Gallery": "/media/Storage/Gallery",
-            "AppData": "/media/Storage/AppData",
-            "Documents": "/media/Storage/Documents"
-        }
     }
 }
