@@ -16,9 +16,9 @@ def call() {
             try {
                 stage('Setup') {
                     cleanWs()
-                    // Configuration
-                    String configurationJson = libraryResource resource: 'configuration.json'
-                    configuration = readJSON text: configurationJson
+
+                    // Read configuration file
+                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
 
                     // Host init
                     host = new Host(this, 'server')
@@ -26,10 +26,14 @@ def call() {
 
                     // Donwload Ansible Playbooks
                     git branch: 'master',
-                        url: 'https://github.com/R-dVL/ansible-playbooks.git'
+                        url: 'https://github.com/r-dvl/ansible-playbooks.git'
 
                     // Init folders to synchronize
-                    folders = FOLDERS.contains(',') ? FOLDERS.split(', ') : [FOLDERS]
+                    folders = []
+                    for (folder in configuration.backup.folders) {
+                        folders.add(folder)
+                    }
+                    print("Folders: ${folders}")
                 }
 
                 stage('Connectivity Test') {

@@ -10,13 +10,18 @@ def call() {
         ansiColor('xterm') {
             try {
                 stage('Setup') {
+                    cleanWs()
                     // Read configuration file
                     configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
 
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
 
+                    currentBuild.displayName = "${project.getName()} - ${project.getVersion()}"
+
                     // Clone project repository
+                    // git branch: 'master',
+                    //    url: 'https://github.com/R-dVL/ansible-playbooks.git'
                     git "${project.getUrl()}"
                 }
 

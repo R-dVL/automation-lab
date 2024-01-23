@@ -34,10 +34,11 @@
     },
 
     "backup": {
-        "path": {
-            "media": "/DATA/Media",
-            "gallery": "/DATA/Gallery",
-            "jenkins": "/var/lib/jenkins"
+        "folders": {
+            "Media": "/media/Storage/Media",
+            "Gallery": "/media/Storage/Gallery",
+            "AppData": "/media/Storage/AppData",
+            "Documents": "/media/Storage/Documents"
         }
     }
 }
