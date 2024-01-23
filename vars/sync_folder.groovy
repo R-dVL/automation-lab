@@ -23,7 +23,7 @@ def call() {
                     host = new Host(this, 'server')
                     host.init()
 
-                    currentBuild.description = "${FOLDER}"
+                    currentBuild.description = "${SRC_PATH}"
 
                     // Donwload Ansible Playbooks
                     git branch: 'master',
