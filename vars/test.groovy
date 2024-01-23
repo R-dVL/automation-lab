@@ -14,7 +14,7 @@ def call() {
 
                 stage('Push image') {
                     def (user, password) = utils.retrieveCredentials('github-user-password')
-                    docker.withRegistry('https://ghcr.io', "docker login -u ${user} -p ${password}") {
+                    docker.withRegistry('github') {
                         image.push()
                     }
                 }
