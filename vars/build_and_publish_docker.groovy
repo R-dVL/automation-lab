@@ -25,7 +25,7 @@ def call() {
                 }
 
                 stage('Push image') {
-                    docker.withRegistry('https://ghcr.io', 'github-username-password') {
+                    docker.withRegistry('https://ghcr.io', 'github-user-password') {
                         image.push()
                     }
                 }
