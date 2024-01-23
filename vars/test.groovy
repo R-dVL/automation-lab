@@ -13,7 +13,7 @@ def call() {
                 }
 
                 stage('Push image') {
-                    docker.withRegistry('https://ghcr.io', "docker login") {
+                    docker.withRegistry('https://ghcr.io') {
                         image.push()
                     }
                 }
