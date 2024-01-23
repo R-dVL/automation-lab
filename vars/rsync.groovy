@@ -56,6 +56,7 @@ def call() {
                             colorized: true,
                             extras: "-e src_path=${FOLDER} -vv"
                         )
+                    }
                 }
 
             } catch(Exception e) {
