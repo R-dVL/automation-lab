@@ -2,12 +2,12 @@
     "hosts": {
         "server": {
             "ip": "192.168.1.55",
-            "credentials": "server-credentials"
+            "credentials": "jenkins-credentials"
         },
 
         "rpi": {
             "ip": "192.168.1.44",
-            "credentials": "rpi-credentials"
+            "credentials": "jenkins-credentials"
         }
     },
 
