@@ -11,11 +11,7 @@ public class Project {
     private String name
     private String version
     private String url
-    private String database
-    private String uri
-    private String credentialsId
-    private String user
-    private String password
+    private String artifactName
 
     /**
      * Constructor for the Project class.
@@ -33,25 +29,7 @@ public class Project {
         this.name = name
         this.version = version
         this.url = steps.configuration.projects."${name}".url
-
-        // Some projects such as frontend doesn't have a related database
-        this.database = steps.configuration.projects."${name}".database != null ? steps.configuration.projects."${name}".database.name : null
-        this.uri = database != null ? steps.configuration.projects."${name}".database.uri : null
-        this.credentialsId = database != null ? steps.configuration.projects."${name}".database.credentials : null
-    }
-    /**
-     * Initializes the project by retrieving credentials if they exist.
-     */
-    def init() {
-        if (credentialsId != null) {
-            def credentials = utils.retrieveCredentials(credentialsId)
-            this.user = credentials.user
-            this.password = credentials.password
-        } else {
-            this.user = null
-            this.password = null
-        }
-
+        this.artifactName = steps.configuration.projects."${name}".artifact_name
     }
 
     @NonCPS
@@ -69,6 +47,11 @@ public class Project {
         return url
     }
 
+    @NonCPS
+    def getArtifactName() {
+        return artifactName
+    }
+
     /**
      * Overrides the toString() method to return a JSON representation of the Project object.
      *
@@ -83,10 +66,7 @@ public class Project {
                 "name": "${name}",
                 "version": "${version}",
                 "url": "${url}",
-                "user": "${user}",
-                "password": "${password}",
-                "database": "${database}",
-                "uri": "${uri}"
+                "artifactName": "${artifactName}",
             }
         }'
     """

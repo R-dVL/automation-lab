@@ -13,33 +13,28 @@
 
     "projects": {
         "cat-watcher": {
-            "url": "https://github.com/R-dVL/cat-watcher.git",
-            "destination": "/opt/apps/cat-watcher",
-            "database": {
-                "name": "cat-watcher",
-                "uri": "localhost:27017",
-                "credentials": "mongo-credentials"
-            }
+            "url": "https://github.com/r-dvl/cat-watcher.git",
+            "artifact_name": "cat-watcher"
         },
 
         "lima-backend": {
-            "url": "https://github.com/R-dVL/lima-backend.git",
-            "destination": "/opt/apps/lima-backend",
-            "database": {
-                "name": "cat-watcher",
-                "uri": "localhost:27017",
-                "credentials": "mongo-credentials"
-            }
+            "url": "https://github.com/r-dvl/lima-backend.git",
+            "artifact_name": "lima-backend"
         },
 
         "lima-frontend": {
-            "url": "https://github.com/R-dVL/lima-frontend.git",
-            "destination": "/opt/apps/lima-frontend"
+            "url": "https://github.com/r-dvl/lima-frontend.git",
+            "artifact_name": "lima-frontend"
+        },
+
+        "stay-active": {
+            "url": "https://github.com/r-dvl/stay-active.git",
+            "artifact_name": "stay-active"
         }
     },
 
-    "backups": {
-        "folders": {
+    "backup": {
+        "path": {
             "media": "/DATA/Media",
             "gallery": "/DATA/Gallery",
             "jenkins": "/var/lib/jenkins"
