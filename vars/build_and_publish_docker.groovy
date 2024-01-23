@@ -21,7 +21,7 @@ def call() {
                 }
 
                 stage('Build image') {
-                    image = docker.build("ghcr.io/r-dVl/${project.getArtifactName()}:${TAG}")
+                    image = docker.build("ghcr.io/r-dvl/${project.getArtifactName()}:${TAG}")
                 }
 
                 stage('Push image') {
