@@ -23,21 +23,14 @@ def call() {
                     host = new Host(this, 'server')
                     host.init()
 
+                    currentBuild.description = "${FOLDER}"
+
                     // Donwload Ansible Playbooks
                     git branch: 'master',
                         url: 'https://github.com/r-dvl/ansible-playbooks.git'
                 }
-/*
+
                 stage('Connectivity Test') {
-                    // Host alive check
-                    def pingResult = sh(script: "nc -z -w5 ${host.getIp()} 80", returnStatus: true)
-
-                    if (pingResult == 0) {
-                        utils.log("Host reachable", 'green')
-                    } else {
-                        error("Host not reachable: ${pingResult}")
-                    }
-
                     // Host SSH accesible check
                     def sshResult = host.sshCommand('whoami')
                     if (sshResult != 'jenkins') {
@@ -46,7 +39,7 @@ def call() {
                         utils.log("Host accesible", 'green')
                     }
                 }
-*/
+
                 stage('Rsync') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
