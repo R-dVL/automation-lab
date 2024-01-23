@@ -5,6 +5,7 @@ def call() {
         environment {
             project
             image
+            configuration
         }
         ansiColor('xterm') {
             try {
