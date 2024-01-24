@@ -18,7 +18,7 @@ def call() {
                     matrix = ['windows', 'linux', 'darwin']
 
                     // Binaries folder
-                    sh("mkdir ./bin")
+                    sh("mkdir ${env.WORKSPACE}/bin")
 
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
@@ -47,7 +47,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run --rm -v ./bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
+                            sh("docker run --rm -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
                     parallel parallelTech
@@ -60,15 +60,15 @@ def call() {
                         parallelTech["${os}"] = {
                             switch(os) {
                                 case 'windows':
-                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${os}-amd64.exe"
+                                    archiveArtifacts artifacts: "${env.WORKSPACE}/bin/stay_active-${TAG}.${os}-amd64.exe"
                                     break
 
                                 case 'linux':
-                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${os}-amd64.bin"
+                                    archiveArtifacts artifacts: "${env.WORKSPACE}/bin/stay_active-${TAG}.${os}-amd64.bin"
                                     break
 
                                 case 'darwin':
-                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${os}-amd64.app"
+                                    archiveArtifacts artifacts: "${env.WORKSPACE}/bin/stay_active-${TAG}.${os}-amd64.app"
                                     break
 
                                 default:
