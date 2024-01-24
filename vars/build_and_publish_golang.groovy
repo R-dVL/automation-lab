@@ -24,7 +24,6 @@ def call() {
 
                     // Binaries folder
                     sh("mkdir ${env.WORKSPACE}/bin")
-                    bin = "${env.WORKSPACE}/bin"
                 }
 
                 stage('Build Compiler') {
@@ -43,7 +42,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run --rm -v /DATA/AppData/jenkins${bin - '/var'}:/home/app/bin -e TAG=${TAG} ${os}-builder")    // sh uses Server shell
+                            sh("docker run --rm -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
                     parallel parallelTech
@@ -54,23 +53,25 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
+                            String extension
                             switch(os) {
                                 case 'windows':
-                                    archiveArtifacts artifacts: "/DATA/AppData/jenkins${bin - '/var'}/stay_active-${TAG}.${os}-amd64.exe"
+                                    extension = 'exe'
                                     break
 
                                 case 'linux':
-                                    archiveArtifacts artifacts: "/DATA/AppData/jenkins${bin - '/var'}/stay_active-${TAG}.${os}-amd64.bin"
+                                    extension = 'bin'
                                     break
 
                                 case 'darwin':
-                                    archiveArtifacts artifacts: "/DATA/AppData/jenkins${bin - '/var'}/stay_active-${TAG}.${os}-amd64.app"
+                                    extension = 'app'
                                     break
 
                                 default:
                                     utils.log("OS: ${os}, not configured.", "red")
                                     break
                             }
+                            archiveArtifacts artifacts: "${env.WORKSPACE}/bin/${project.getArtifactName()}-${TAG}.${os}-amd64.${extension}"
                         }
                     }
                     parallel parallelTech
