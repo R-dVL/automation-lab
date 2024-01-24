@@ -19,8 +19,10 @@ def call() {
 
                     // Clone project repository
                     // TODO: Use TAG env var to download selected version
-                    git branch: "${project.getVersion()}",
-                        url: "${project.getUrl()}"
+                    checkout scmGit(
+                        branches: [[name: "${project.getVersion()}"]],
+                        userRemoteConfigs: [[url: "${project.getUrl()}"]]
+                    )
 
                     // Binaries folder
                     sh("mkdir ${env.WORKSPACE}/bin")
