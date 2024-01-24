@@ -6,6 +6,7 @@ def call() {
             project
             matrix
             configuration
+            bin
         }
         ansiColor('xterm') {
             try {
@@ -18,10 +19,8 @@ def call() {
                     matrix = ['windows', 'linux', 'darwin']
 
                     // Binaries folder
-                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                    print(pwd)
                     sh("mkdir ${env.WORKSPACE}/bin")
-                    error('CONTROLADO')
+                    bin = "${env.WORKSPACE}/bin"
 
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
@@ -50,7 +49,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run --rm -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
+                            sh("docker run --rm -v ${bin}:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
                     parallel parallelTech
@@ -63,19 +62,19 @@ def call() {
                         parallelTech["${os}"] = {
                             switch(os) {
                                 case 'windows':
-                                    archiveArtifacts artifacts: "${env.WORKSPACE}/bin/stay_active-${TAG}.${os}-amd64.exe"
+                                    archiveArtifacts artifacts: "${bin}/stay_active-${TAG}.${os}-amd64.exe"
                                     break
 
                                 case 'linux':
-                                    archiveArtifacts artifacts: "${env.WORKSPACE}/bin/stay_active-${TAG}.${os}-amd64.bin"
+                                    archiveArtifacts artifacts: "${bin}/stay_active-${TAG}.${os}-amd64.bin"
                                     break
 
                                 case 'darwin':
-                                    archiveArtifacts artifacts: "${env.WORKSPACE}/bin/stay_active-${TAG}.${os}-amd64.app"
+                                    archiveArtifacts artifacts: "${bin}/stay_active-${TAG}.${os}-amd64.app"
                                     break
 
                                 default:
-                                    utils.log("Sistema Operativo no configurado", "red")
+                                    utils.log("OS: ${os}, not configured.", "red")
                                     break
                             }
                         }
