@@ -18,7 +18,7 @@ def call() {
                     matrix = ['windows', 'linux', 'darwin']
 
                     // Binaries folder
-                    def pwd = sh('pwd', returnStdout: true).trim()
+                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
                     print(pwd)
                     sh("mkdir ${env.WORKSPACE}/bin")
                     error('CONTROLADO')
