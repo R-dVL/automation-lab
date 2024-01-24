@@ -5,41 +5,69 @@
             "credentials": "jenkins-credentials"
         },
 
-        "rpi": {
+        "rastberry": {
             "ip": "192.168.1.44",
             "credentials": "jenkins-credentials"
         }
     },
 
-    "projects": {
-        "cat-watcher": {
-            "url": "https://github.com/r-dvl/cat-watcher.git",
-            "artifact_name": "cat-watcher",
-            "tech_name": "docker"
-        },
+    "cicd": {
+        "projects": {
+            "cat-watcher": {
+                "url": "https://github.com/r-dvl/cat-watcher.git",
+                "artifact_name": "cat-watcher",
+                "tech_name": "docker"
+            },
 
-        "lima-backend": {
-            "url": "https://github.com/r-dvl/lima-backend.git",
-            "artifact_name": "lima-backend",
-            "tech_name": "docker"
-        },
+            "lima-backend": {
+                "url": "https://github.com/r-dvl/lima-backend.git",
+                "artifact_name": "lima-backend",
+                "tech_name": "docker"
+            },
 
-        "lima-frontend": {
-            "url": "https://github.com/r-dvl/lima-frontend.git",
-            "artifact_name": "lima-frontend",
-            "tech_name": "docker"
-        },
+            "lima-frontend": {
+                "url": "https://github.com/r-dvl/lima-frontend.git",
+                "artifact_name": "lima-frontend",
+                "tech_name": "docker"
+            },
 
-        "stay-active": {
-            "url": "https://github.com/r-dvl/stay-active.git",
-            "artifact_name": "stay_active",
-            "tech_name": "golang"
-        },
+            "stay-active": {
+                "url": "https://github.com/r-dvl/stay-active.git",
+                "artifact_name": "stay_active",
+                "tech_name": "golang"
+            },
 
-        "jenkins-library": {
-            "url": "https://github.com/r-dvl/jenkins-library.git",
-            "artifact_name": "jenkins-library",
-            "tech_name": "docker"
+            "jenkins-library": {
+                "url": "https://github.com/r-dvl/jenkins-library.git",
+                "artifact_name": "jenkins-library",
+                "tech_name": "docker"
+            },
+            "rdvl-cli": {
+                "url": "https://github.com/r-dvl/rdvl-cli.git",
+                "artifact_name": "rdvl_cli",
+                "tech_name": "golang"
+            }
+        }
+    },
+
+    "automation": {
+        "backups": {
+            "AppData": {
+                "src_path": "/DATA/AppData",
+                "dest_path": "/DATA/Backups"
+            },
+            "Documents": {
+                "src_path": "/DATA/Documents",
+                "dest_path": "/DATA/Backups"
+            },
+            "Gallery": {
+                "src_path": "/DATA/Gallery",
+                "dest_path": "/DATA/Backups"
+            },
+            "Media": {
+                "src_path": "/DATA/Media",
+                "dest_path": "/DATA/Backups"
+            }
         }
     }
 }

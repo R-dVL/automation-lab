@@ -36,9 +36,9 @@ public class Project {
         // Basic Params
         this.name = name
         this.version = version
-        this.url = steps.configuration.projects."${name}".url
-        this.artifactName = steps.configuration.projects."${name}".artifact_name
-        this.techName = steps.configuration.projects."${name}".tech_name
+        this.url = steps.configuration.cicd.projects."${name}".url
+        this.artifactName = steps.configuration.cicd.projects."${name}".artifact_name
+        this.techName = steps.configuration.cicd.projects."${name}".tech_name
 
         // Technology
         switch(techName) {
@@ -101,6 +101,7 @@ public class Project {
                 "version": "${version}",
                 "url": "${url}",
                 "artifactName": "${artifactName}",
+                "techName": "${techName}"
             }
         }'
     """

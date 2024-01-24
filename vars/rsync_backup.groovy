@@ -11,6 +11,8 @@ def call() {
             environment {
                 configuration
                 host
+                src_path
+                dest_path
             }
             try {
                 stage('Prepare') {
@@ -21,10 +23,14 @@ def call() {
                     host = new Host(this, HOST)
                     host.init()
 
-                    currentBuild.displayName = "${SRC_PATH}"    // Build name
-                    currentBuild.description = "${DEST_PATH}"    // Build description
+                    // Retrieve paths
+                    src_path = configuration.automation.backups."${FOLDER_NAME}".src_path
+                    dest_path = configuration.cicd.projects."${FOLDER_NAME}".dest_path
 
-                    // Clone ansible playbooks repository
+                    currentBuild.displayName = "${src_path}"    // Build name
+                    currentBuild.description = "${dest_path}"    // Build description
+
+                    // Clone Ansible Playbooks repository
                     checkout scmGit(
                         branches: [[name: "master"]],
                         userRemoteConfigs: [[url: "https://github.com/r-dvl/ansible-playbooks.git"]]
@@ -47,7 +53,7 @@ def call() {
                         playbook: "./playbooks/sync-folder.yaml",
                         credentialsId: "${host.getCredentialsId()}",
                         colorized: true,
-                        extras: "-e src_path=${SRC_PATH} -e dest_path=${DEST_PATH} -vv"
+                        extras: "-e src_path=${src_path} -e dest_path=${dest_path} -vv"
                     )
                 }
 

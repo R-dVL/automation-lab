@@ -129,9 +129,7 @@ class Host implements Serializable {
             "host": {
                 "name": "${name}",
                 "ip": "${ip}",
-                "credentialsId": "${credentialsId}",
-                "user": "${user}",
-                "password": "${password}"
+                "credentialsId": "${credentialsId}"
             }
         }'
     """
