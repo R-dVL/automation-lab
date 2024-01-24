@@ -24,7 +24,7 @@ def call() {
 
                     // Clone project repository
                     // TODO: Use TAG env var to download selected version
-                    git branch: 'master',
+                    git branch: 'main',
                         url: "${project.getUrl()}"
                 }
 
