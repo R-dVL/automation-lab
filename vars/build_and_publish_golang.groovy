@@ -11,17 +11,11 @@ def call() {
         ansiColor('xterm') {
             try {
                 stage('Setup') {
-                    cleanWs()
-                    // Read configuration file
-                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
-
-                    // OS Binaries to build
-                    matrix = ['windows', 'linux', 'darwin']
-
-                    // Init project
-                    project = new Project(this, PROJECT_NAME, TAG)
-
-                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"
+                    cleanWs()    //Clean Workspace
+                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
+                    matrix = ['windows', 'linux', 'darwin']    // OS Binaries to build
+                    project = new Project(this, PROJECT_NAME, TAG)    // Init project
+                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"    // Build name
 
                     // Clone project repository
                     // TODO: Use TAG env var to download selected version
@@ -49,7 +43,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run --rm -v ${bin}:/home/app/bin -e TAG=${TAG} ${os}-builder")
+                            sh("docker run --rm -v /DATA/AppData/jenkins/${bin - '/var'}:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
                     parallel parallelTech
