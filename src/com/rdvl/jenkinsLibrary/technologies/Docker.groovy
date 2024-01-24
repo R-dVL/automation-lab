@@ -11,7 +11,7 @@ public class Docker {
     private def image
 
     // Parent
-    private Project project
+    private def project
 
     /**
      * Constructor for the Golang technology class.

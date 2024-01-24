@@ -11,7 +11,7 @@ public class Golang {
     static final matrix = ['windows', 'linux', 'darwin']    // OS Binaries to build
 
     // Parent
-    private Project project
+    private def project
 
     /**
      * Constructor for the Golang technology class.
