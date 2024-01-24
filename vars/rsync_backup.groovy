@@ -25,7 +25,7 @@ def call() {
 
                     // Retrieve paths
                     src_path = configuration.automation.backups."${FOLDER_NAME}".src_path
-                    dest_path = configuration.cicd.projects."${FOLDER_NAME}".dest_path
+                    dest_path = configuration.automation.backups."${FOLDER_NAME}".dest_path
 
                     currentBuild.displayName = "${src_path}"    // Build name
                     currentBuild.description = "${dest_path}"    // Build description
