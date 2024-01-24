@@ -43,7 +43,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run --rm -v /DATA/AppData/jenkins/${bin - '/var'}:/home/app/bin -e TAG=${TAG} ${os}-builder")
+                            sh("docker run --rm -v /DATA/AppData/jenkins${bin - '/var'}:/home/app/bin -e TAG=${TAG} ${os}-builder")    // sh uses Server shell
                         }
                     }
                     parallel parallelTech
@@ -56,15 +56,15 @@ def call() {
                         parallelTech["${os}"] = {
                             switch(os) {
                                 case 'windows':
-                                    archiveArtifacts artifacts: "${bin}/stay_active-${TAG}.${os}-amd64.exe"
+                                    archiveArtifacts artifacts: "/DATA/AppData/jenkins${bin - '/var'}/stay_active-${TAG}.${os}-amd64.exe"
                                     break
 
                                 case 'linux':
-                                    archiveArtifacts artifacts: "${bin}/stay_active-${TAG}.${os}-amd64.bin"
+                                    archiveArtifacts artifacts: "/DATA/AppData/jenkins${bin - '/var'}/stay_active-${TAG}.${os}-amd64.bin"
                                     break
 
                                 case 'darwin':
-                                    archiveArtifacts artifacts: "${bin}/stay_active-${TAG}.${os}-amd64.app"
+                                    archiveArtifacts artifacts: "/DATA/AppData/jenkins${bin - '/var'}/stay_active-${TAG}.${os}-amd64.app"
                                     break
 
                                 default:
