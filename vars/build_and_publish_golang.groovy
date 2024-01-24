@@ -34,6 +34,7 @@ def call() {
                         def os = index
                         parallelTech["${os}"] = {
                             sh("docker build --build-arg OS=${os} -t ${os}-builder .")
+                            sh("mkdir ./bin")
                             sh("docker run --rm -v ./bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
