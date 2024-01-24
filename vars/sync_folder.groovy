@@ -13,21 +13,22 @@ def call() {
                 host
             }
             try {
-                stage('Setup') {
-                    cleanWs()
+                stage('Prepare') {
+                    cleanWs()    //Clean Workspace
+                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
 
-                    // Read configuration file
-                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
-
-                    // Host init
-                    host = new Host(this, 'server')
+                    // Create Host object
+                    host = new Host(this, HOST)
                     host.init()
 
-                    currentBuild.description = "${SRC_PATH}"
+                    currentBuild.displayName = "${SRC_PATH}"    // Build name
+                    currentBuild.description = "${DEST_PATH}"    // Build description
 
-                    // Donwload Ansible Playbooks
-                    git branch: 'master',
-                        url: 'https://github.com/r-dvl/ansible-playbooks.git'
+                    // Clone ansible playbooks repository
+                    checkout scmGit(
+                        branches: [[name: "master"]],
+                        userRemoteConfigs: [[url: "https://github.com/r-dvl/ansible-playbooks.git"]]
+                    )
                 }
 
                 stage('Connectivity Test') {

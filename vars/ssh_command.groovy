@@ -13,13 +13,16 @@ def call() {
                 host
             }
             try {
-                stage('Setup') {
-                    // Read configuration file
-                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
+                stage('Prepare') {
+                    cleanWs()    //Clean Workspace
+                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
 
-                    // Default Params
+                    // Create Host object
                     host = new Host(this, HOST)
                     host.init()
+
+                    currentBuild.displayName = "${HOST}"    // Build name
+                    currentBuild.description = "${CMD}"    // Build description
                 }
 
                 stage('Connectivity Test') {
