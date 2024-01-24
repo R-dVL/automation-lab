@@ -2,7 +2,7 @@ package com.rdvl.jenkinsLibrary
 /**
  * Represents Golang technology in the context of a Jenkins pipeline.
  */
-public class Golang {
+public class Docker {
     // Pipeline Context
     private def steps
     private def utils
@@ -20,7 +20,7 @@ public class Golang {
      * @param steps The Jenkins pipeline steps context.
      * @param utils Utils object
      */
-    Golang(parent) {
+    Docker(parent) {
         this.parent = parent
         this.steps = parent.steps
         this.utils = parent.steps.utils
