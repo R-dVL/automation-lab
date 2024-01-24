@@ -47,7 +47,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run --rm -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
+                            sh("docker run -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
                     parallel parallelTech
