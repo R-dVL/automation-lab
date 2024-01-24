@@ -20,7 +20,7 @@ def call() {
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
 
-                    currentBuild.displayName = "${project.getName()} - ${project.getVersion()}"
+                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"
 
                     // Clone project repository
                     // TODO: Use TAG env var to download selected version
@@ -33,8 +33,8 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            def builder = docker.build("ghcr.io/r-dvl/${project.getArtifactName()}:${TAG}", "--build-arg OS=${os} -f Dockerfile .")
-                            builder.withRun("-v ./bin:/home/app/bin -e TAG=${TAG}") {}
+                            sh("docker build --build-arg OS=${os} -t ${os}-builder .")
+                            sh("docker run --rm -v ./bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
                     parallel parallelTech
@@ -47,15 +47,15 @@ def call() {
                         parallelTech["${os}"] = {
                             switch(os) {
                                 case 'windows':
-                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${OS}-amd64.exe"
+                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${os}-amd64.exe"
                                     break
 
                                 case 'linux':
-                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${OS}-amd64.bin"
+                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${os}-amd64.bin"
                                     break
 
                                 case 'darwin':
-                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${OS}-amd64.app"
+                                    archiveArtifacts artifacts: "./bin/stay_active-${TAG}.${os}-amd64.app"
                                     break
 
                                 default:
