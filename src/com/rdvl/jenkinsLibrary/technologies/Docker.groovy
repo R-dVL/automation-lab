@@ -26,18 +26,15 @@ public class Docker {
         this.utils = parent.steps.utils
     }
 
-    @NonCPS
     def build() {
         this.image = steps.docker.build("ghcr.io/r-dvl/${parent.getArtifactName()}:${parent.getVersion()}")
     }
 
-    @NonCPS
     def publish() {
         steps.docker.withRegistry('https://ghcr.io', 'github-user-password') {
             image.push()
         }
     }
 
-    @NonCPS
     def deploy() {}
 }

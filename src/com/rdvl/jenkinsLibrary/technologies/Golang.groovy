@@ -26,7 +26,6 @@ public class Golang {
         this.utils = parent.steps.utils
     }
 
-    @NonCPS
     def build() {
         def parallelTech = [:]
         for (index in matrix) {
@@ -39,7 +38,6 @@ public class Golang {
         steps.parallel parallelTech
     }
 
-    @NonCPS
     def publish() {
         def parallelTech = [:]
         for (index in matrix) {
@@ -69,6 +67,5 @@ public class Golang {
         steps.parallel parallelTech
     }
 
-    @NonCPS
     def deploy() {}
 }
