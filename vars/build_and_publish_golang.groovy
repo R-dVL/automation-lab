@@ -24,9 +24,8 @@ def call() {
 
                     // Clone project repository
                     // TODO: Use TAG env var to download selected version
-                    // git branch: 'master',
-                    //    url: 'https://github.com/R-dVL/ansible-playbooks.git'
-                    git "${project.getUrl()}"
+                    git branch: 'master',
+                        url: "${project.getUrl()}"
                 }
 
                 stage('Build Binaries') {
