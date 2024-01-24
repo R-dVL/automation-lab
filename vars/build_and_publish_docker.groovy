@@ -17,13 +17,14 @@ def call() {
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
 
-                    currentBuild.displayName = "${project.getName()} - ${project.getVersion()}"
+                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"
 
                     // Clone project repository
                     // TODO: Use TAG env var to download selected version
                     // git branch: 'master',
                     //    url: 'https://github.com/R-dVL/ansible-playbooks.git'
-                    git "${project.getUrl()}"
+                    git branch: 'master',
+                        url: "${project.getUrl()}"
                 }
 
                 stage('Build image') {

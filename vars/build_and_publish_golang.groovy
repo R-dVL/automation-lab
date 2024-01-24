@@ -18,7 +18,10 @@ def call() {
                     matrix = ['windows', 'linux', 'darwin']
 
                     // Binaries folder
+                    def pwd = sh('pwd', returnStdout: true).trim()
+                    print(pwd)
                     sh("mkdir ${env.WORKSPACE}/bin")
+                    error('CONTROLADO')
 
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
@@ -47,7 +50,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
+                            sh("docker run --rm -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
                     parallel parallelTech
