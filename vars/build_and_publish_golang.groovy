@@ -17,6 +17,9 @@ def call() {
                     // OS Binaries to build
                     matrix = ['windows', 'linux', 'darwin']
 
+                    // Binaries folder
+                    sh("mkdir ./bin")
+
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
 
@@ -28,13 +31,22 @@ def call() {
                         url: "${project.getUrl()}"
                 }
 
-                stage('Build Binaries') {
+                stage('Build Compiler') {
                     def parallelTech = [:]
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
                             sh("docker build --build-arg OS=${os} -t ${os}-builder .")
-                            sh("mkdir ./bin")
+                        }
+                    }
+                    parallel parallelTech
+                }
+
+                stage('Build Binaries') {
+                    def parallelTech = [:]
+                    for (index in matrix) {
+                        def os = index
+                        parallelTech["${os}"] = {
                             sh("docker run --rm -v ./bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
                         }
                     }
