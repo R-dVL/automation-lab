@@ -20,7 +20,7 @@ public class Golang {
      * @param steps The Jenkins pipeline steps context.
      * @param utils Utils object
      */
-    Golang(Project project) {
+    Golang(project) {
         this.project = project
         this.steps = project.steps
         this.utils = project.steps.utils

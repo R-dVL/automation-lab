@@ -20,7 +20,7 @@ public class Docker {
      * @param steps The Jenkins pipeline steps context.
      * @param utils Utils object
      */
-    Docker(Project project) {
+    Docker(project) {
         this.project = project
         this.steps = project.steps
         this.utils = project.steps.utils
