@@ -71,7 +71,7 @@ def call() {
                                     utils.log("OS: ${os}, not configured.", "red")
                                     break
                             }
-                            archiveArtifacts artifacts: "${env.WORKSPACE}/bin/${project.getArtifactName()}-${TAG}.${os}-amd64.${extension}"
+                            archiveArtifacts artifacts: "bin/${project.getArtifactName()}-${TAG}.${os}-amd64.${extension}"
                         }
                     }
                     parallel parallelTech
