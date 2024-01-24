@@ -38,6 +38,7 @@ def call() {
                             builder.withRun("-v ./bin:/home/app/bin", "-e TAG=${TAG}")
                         }
                     }
+                    parallel parallelTech
                 }
 
                 stage('Upload Binaries') {
@@ -64,6 +65,7 @@ def call() {
                             }
                         }
                     }
+                    parallel parallelTech
                 }
 
             } catch(Exception err) {
