@@ -5,7 +5,7 @@ package com.rdvl.jenkinsLibrary
  * This pipeline sets up the environment, performs connectivity tests on a remote host,
  * downloads Ansible playbooks from a Git repository, and executes a backup playbook.
  */
-def call(FOLDER_NAME, HOST) {
+def call(folder_name, host_name) {
     node () {
         ansiColor('xterm') {
             environment {
@@ -20,12 +20,12 @@ def call(FOLDER_NAME, HOST) {
                     configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
 
                     // Create Host object
-                    host = new Host(this, HOST)
+                    host = new Host(this, host_name)
                     host.init()
 
                     // Retrieve paths
-                    src_path = configuration.automation.backups."${FOLDER_NAME}".src_path
-                    dest_path = configuration.automation.backups."${FOLDER_NAME}".dest_path
+                    src_path = configuration.automation.backups."${folder_name}".src_path
+                    dest_path = configuration.automation.backups."${folder_name}".dest_path
 
                     currentBuild.displayName = "${src_path}"    // Build name
                     currentBuild.description = "${dest_path}"    // Build description
