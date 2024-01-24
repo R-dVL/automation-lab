@@ -12,6 +12,10 @@ public class Project {
     private String version
     private String url
     private String artifactName
+    private String techName
+
+    // Technology
+    private def technology
 
     /**
      * Constructor for the Project class.
@@ -30,26 +34,52 @@ public class Project {
         this.version = version
         this.url = steps.configuration.projects."${name}".url
         this.artifactName = steps.configuration.projects."${name}".artifact_name
+        this.techName = steps.configuration.projects."${name}".tech_name
+
+        // Technology
+        switch(techName) {
+            case 'docker':
+                this.technology = new Docker(this)
+                break
+
+            case 'golang':
+                this.technology = new Golang(this)
+                break
+
+            default:
+                utils.log("Technology not configured.", "red")
+                break
+        }
     }
 
     @NonCPS
-    def getName() {
+    String getName() {
         return name
     }
 
     @NonCPS
-    def getVersion() {
+    String getVersion() {
         return version
     }
 
     @NonCPS
-    def getUrl() {
+    String getUrl() {
         return url
     }
 
     @NonCPS
-    def getArtifactName() {
+    String getArtifactName() {
         return artifactName
+    }
+
+    @NonCPS
+    String getTechName() {
+        return techName
+    }
+
+    @NonCPS
+    def getTechnology() {
+        return technology
     }
 
     /**
