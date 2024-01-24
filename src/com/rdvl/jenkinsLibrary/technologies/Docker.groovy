@@ -11,23 +11,23 @@ public class Docker {
     private def image
 
     // Parent
-    private def parent
+    private Project project
 
     /**
      * Constructor for the Golang technology class.
      *
-     * @param parent Parent class.
+     * @param project Project class.
      * @param steps The Jenkins pipeline steps context.
      * @param utils Utils object
      */
-    Docker(parent) {
-        this.parent = parent
-        this.steps = parent.steps
-        this.utils = parent.steps.utils
+    Docker(Project project) {
+        this.project = project
+        this.steps = project.steps
+        this.utils = project.steps.utils
     }
 
     def build() {
-        this.image = steps.docker.build("ghcr.io/r-dvl/${parent.getArtifactName()}:${parent.getVersion()}")
+        this.image = steps.docker.build("ghcr.io/r-dvl/${project.getArtifactName()}:${project.getVersion()}")
     }
 
     def publish() {

@@ -11,19 +11,19 @@ public class Golang {
     static final matrix = ['windows', 'linux', 'darwin']    // OS Binaries to build
 
     // Parent
-    private def parent
+    private Project project
 
     /**
      * Constructor for the Golang technology class.
      *
-     * @param parent Parent class.
+     * @param project Project class.
      * @param steps The Jenkins pipeline steps context.
      * @param utils Utils object
      */
-    Golang(parent) {
-        this.parent = parent
-        this.steps = parent.steps
-        this.utils = parent.steps.utils
+    Golang(Project project) {
+        this.project = project
+        this.steps = project.steps
+        this.utils = project.steps.utils
     }
 
     def build() {
@@ -32,7 +32,7 @@ public class Golang {
             def os = index
             parallelTech["${os}"] = {
                 steps.sh("docker build --build-arg OS=${os} -t ${os}-builder .")    // Build compiler
-                steps.sh("docker run --rm -v /DATA/AppData/jenkins/${steps.env.WORKSPACE - /var/}/bin:/home/app/bin -e TAG=${parent.getVersion()} ${os}-builder")    // Build binaries
+                steps.sh("docker run --rm -v /DATA/AppData/jenkins/${steps.env.WORKSPACE - /var/}/bin:/home/app/bin -e TAG=${project.getVersion()} ${os}-builder")    // Build binaries
             }
         }
         steps.parallel parallelTech
@@ -61,7 +61,7 @@ public class Golang {
                         utils.log("OS: ${os}, not configured.", "red")
                         break
                 }
-                steps.archiveArtifacts artifacts: "bin/${parent.getArtifactName()}-${parent.getVersion()}.${os}-amd64.${extension}"
+                steps.archiveArtifacts artifacts: "bin/${project.getArtifactName()}-${project.getVersion()}.${os}-amd64.${extension}"
             }
         }
         steps.parallel parallelTech
