@@ -30,6 +30,11 @@
         "stay-active": {
             "url": "https://github.com/r-dvl/stay-active.git",
             "artifact_name": "stay-active"
+        },
+
+        "jenkins-library": {
+            "url": "https://github.com/r-dvl/stay-active.git",
+            "artifact_name": "stay-active"
         }
     }
 }
