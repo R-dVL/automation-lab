@@ -42,7 +42,7 @@ def call() {
                     for (index in matrix) {
                         def os = index
                         parallelTech["${os}"] = {
-                            sh("docker run --rm -v ${env.WORKSPACE}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")
+                            sh("docker run --rm -v /DATA/AppData/jenkins/${env.WORKSPACE - /var/}/bin:/home/app/bin -e TAG=${TAG} ${os}-builder")    // Using Server docker.sock
                         }
                     }
                     parallel parallelTech
