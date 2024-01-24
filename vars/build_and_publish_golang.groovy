@@ -34,7 +34,7 @@ def call() {
                         def os = index
                         parallelTech["${os}"] = {
                             def builder = docker.build("ghcr.io/r-dvl/${project.getArtifactName()}:${TAG}", "--build-arg OS=${os} -f Dockerfile .")
-                            builder.withRun("-v ./bin:/home/app/bin", "-e TAG=${TAG}")
+                            builder.withRun("-v ./bin:/home/app/bin" + "-e TAG=${TAG}")
                         }
                     }
                     parallel parallelTech
