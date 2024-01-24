@@ -1,4 +1,4 @@
-package com.rdvl.jenkinsLibrary
+package com.rdvl.jenkinsLibrary.technologies
 /**
  * Represents Golang technology in the context of a Jenkins pipeline.
  */
