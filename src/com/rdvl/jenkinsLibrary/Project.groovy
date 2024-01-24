@@ -39,11 +39,11 @@ public class Project {
         // Technology
         switch(techName) {
             case 'docker':
-                this.technology = new Docker(this)
+                this.technology = new Technologies.Docker(this)
                 break
 
             case 'golang':
-                this.technology = new Golang(this)
+                this.technology = new Technologies.Golang(this)
                 break
 
             default:
