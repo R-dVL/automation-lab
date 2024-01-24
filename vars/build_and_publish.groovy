@@ -1,6 +1,6 @@
 package com.rdvl.jenkinsLibrary
 
-def call() {
+def call(project_name, version) {
     node () {
         environment {
             project
@@ -11,7 +11,7 @@ def call() {
                 stage('Prepare') {
                     cleanWs()    //Clean Workspace
                     configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
-                    project = new Project(this, PROJECT_NAME, TAG)    // Init project
+                    project = new Project(this, project_name, version)    // Init project
 
                     // Clone project repository
                     checkout scmGit(

@@ -5,7 +5,7 @@ package com.rdvl.jenkinsLibrary
  * This pipeline sets up the environment, performs connectivity tests on a remote host,
  * and executes a specified command remotely on a Docker agent.
  */
-def call() {
+def call(cmd, sudo, host_name) {
     node () {
         ansiColor('xterm') {
             environment {
@@ -18,11 +18,11 @@ def call() {
                     configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
 
                     // Create Host object
-                    host = new Host(this, HOST)
+                    host = new Host(this, host_name)
                     host.init()
 
-                    currentBuild.displayName = "${HOST}"    // Build name
-                    currentBuild.description = "${CMD}"    // Build description
+                    currentBuild.displayName = "${host_name}"    // Build name
+                    currentBuild.description = "${cmd}"    // Build description
                 }
 
                 stage('Connectivity Test') {
@@ -36,7 +36,7 @@ def call() {
                 }
 
                 stage('Execute Command') {
-                    def result = host.sshCommand(CMD, SUDO)
+                    def result = host.sshCommand(cmd, sudo)
                     print("Result: ${result}")
                 }
 
