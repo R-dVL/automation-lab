@@ -10,21 +10,16 @@ def call() {
         ansiColor('xterm') {
             try {
                 stage('Setup') {
-                    cleanWs()
-                    // Read configuration file
-                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))
-
-                    // Init project
-                    project = new Project(this, PROJECT_NAME, TAG)
-
-                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"
+                    cleanWs()    //Clean Workspace
+                    configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
+                    project = new Project(this, PROJECT_NAME, TAG)    // Init project
 
                     // Clone project repository
-                    // TODO: Use TAG env var to download selected version
-                    // git branch: 'master',
-                    //    url: 'https://github.com/R-dVL/ansible-playbooks.git'
-                    git branch: 'master',
-                        url: "${project.getUrl()}"
+                    checkout scmGit(
+                        branches: [[name: "${project.getVersion()}"]],
+                        userRemoteConfigs: [[url: "${project.getUrl()}"]]
+                    )
+                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"
                 }
 
                 stage('Build image') {

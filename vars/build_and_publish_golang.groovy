@@ -13,22 +13,19 @@ def call() {
                 stage('Setup') {
                     cleanWs()    //Clean Workspace
                     configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
-                    matrix = ['windows', 'linux', 'darwin']    // OS Binaries to build
                     project = new Project(this, PROJECT_NAME, TAG)    // Init project
-                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"    // Build name
 
                     // Clone project repository
-                    // TODO: Use TAG env var to download selected version
                     checkout scmGit(
                         branches: [[name: "${project.getVersion()}"]],
                         userRemoteConfigs: [[url: "${project.getUrl()}"]]
                     )
 
-                    // Binaries folder
-                    sh("mkdir ${env.WORKSPACE}/bin")
+                    currentBuild.displayName = "${project.getName()}:${project.getVersion()}"    // Build name
                 }
 
                 stage('Build Compiler') {
+                    matrix = ['windows', 'linux', 'darwin']    // OS Binaries to build
                     def parallelTech = [:]
                     for (index in matrix) {
                         def os = index
