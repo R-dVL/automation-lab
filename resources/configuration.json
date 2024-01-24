@@ -38,7 +38,7 @@
             },
             "rdvl-cli": {
                 "url": "https://github.com/r-dvl/rdvl-cli.git",
-                "artifact_name": "rdvl_cli",
+                "artifact_name": "rdvl-cli",
                 "tech_name": "golang"
             }
         }
