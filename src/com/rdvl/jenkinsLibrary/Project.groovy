@@ -1,4 +1,7 @@
 package com.rdvl.jenkinsLibrary
+
+import com.rdvl.jenkinsLibrary.technologies
+
 /**
  * Represents a project in the context of a Jenkins pipeline.
  */
