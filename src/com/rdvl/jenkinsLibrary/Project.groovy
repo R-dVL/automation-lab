@@ -1,6 +1,7 @@
 package com.rdvl.jenkinsLibrary
 
-import com.rdvl.jenkinsLibrary.technologies
+import com.rdvl.jenkinsLibrary.technologies.Docker
+import com.rdvl.jenkinsLibrary.technologies.Golang
 
 /**
  * Represents a project in the context of a Jenkins pipeline.
