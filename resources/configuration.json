@@ -4,13 +4,11 @@
             "ip": "192.168.1.55",
             "credentials": "jenkins-credentials"
         },
-
         "rastberry": {
             "ip": "192.168.1.44",
             "credentials": "jenkins-credentials"
         }
     },
-
     "cicd": {
         "projects": {
             "cat-watcher": {
@@ -18,25 +16,21 @@
                 "artifact_name": "cat-watcher",
                 "tech_name": "docker"
             },
-
             "lima-backend": {
                 "url": "https://github.com/r-dvl/lima-backend.git",
                 "artifact_name": "lima-backend",
                 "tech_name": "docker"
             },
-
             "lima-frontend": {
                 "url": "https://github.com/r-dvl/lima-frontend.git",
                 "artifact_name": "lima-frontend",
                 "tech_name": "docker"
             },
-
             "stay-active": {
                 "url": "https://github.com/r-dvl/stay-active.git",
                 "artifact_name": "stay_active",
                 "tech_name": "golang"
             },
-
             "jenkins-library": {
                 "url": "https://github.com/r-dvl/jenkins-library.git",
                 "artifact_name": "jenkins-library",
@@ -49,7 +43,6 @@
             }
         }
     },
-
     "automation": {
         "backups": {
             "AppData": {
