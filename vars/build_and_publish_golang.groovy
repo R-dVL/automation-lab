@@ -18,10 +18,6 @@ def call() {
                     // OS Binaries to build
                     matrix = ['windows', 'linux', 'darwin']
 
-                    // Binaries folder
-                    sh("mkdir ${env.WORKSPACE}/bin")
-                    bin = "${env.WORKSPACE}/bin"
-
                     // Init project
                     project = new Project(this, PROJECT_NAME, TAG)
 
@@ -31,6 +27,10 @@ def call() {
                     // TODO: Use TAG env var to download selected version
                     git branch: 'main',
                         url: "${project.getUrl()}"
+
+                    // Binaries folder
+                    sh("mkdir ${env.WORKSPACE}/bin")
+                    bin = "${env.WORKSPACE}/bin"
                 }
 
                 stage('Build Compiler') {
