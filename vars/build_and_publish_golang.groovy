@@ -6,11 +6,10 @@ def call() {
             project
             matrix
             configuration
-            bin
         }
         ansiColor('xterm') {
             try {
-                stage('Setup') {
+                stage('Prepare') {
                     cleanWs()    //Clean Workspace
                     configuration = readJSON(text: libraryResource(resource: 'configuration.json'))    // Read configuration file
                     project = new Project(this, PROJECT_NAME, TAG)    // Init project
