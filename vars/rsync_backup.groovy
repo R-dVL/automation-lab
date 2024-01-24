@@ -5,7 +5,7 @@ package com.rdvl.jenkinsLibrary
  * This pipeline sets up the environment, performs connectivity tests on a remote host,
  * downloads Ansible playbooks from a Git repository, and executes a backup playbook.
  */
-def call() {
+def call(FOLDER_NAME, HOST) {
     node () {
         ansiColor('xterm') {
             environment {
