@@ -39,32 +39,8 @@ public class Golang {
     }
 
     def publish() {
-        def parallelTech = [:]
-        for (index in matrix) {
-            def os = index
-            parallelTech["${os}"] = {
-                String extension
-                switch(os) {
-                    case 'windows':
-                        extension = 'exe'
-                        break
-
-                    case 'linux':
-                        extension = 'bin'
-                        break
-
-                    case 'darwin':
-                        extension = 'app'
-                        break
-
-                    default:
-                        utils.log("OS: ${os}, not configured.", "red")
-                        break
-                }
-                steps.archiveArtifacts artifacts: "bin/*.${extension}"
-            }
-        }
-        steps.parallel parallelTech
+        zip zipFile: "${project.getArtifactName()}.zip", archive: false, dir: 'bin'
+        archiveArtifacts artifacts: "${project.getArtifactName()}.zip", fingerprint: true
     }
 
     def deploy() {}
