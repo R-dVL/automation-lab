@@ -61,7 +61,7 @@ public class Golang {
                         utils.log("OS: ${os}, not configured.", "red")
                         break
                 }
-                steps.archiveArtifacts artifacts: "bin/${project.getArtifactName()}-${project.getVersion()}.${os}-amd64.${extension}"
+                steps.archiveArtifacts artifacts: "bin/*.${extension}"
             }
         }
         steps.parallel parallelTech
