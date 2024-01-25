@@ -6,6 +6,7 @@ _Shared library for training and device maintenance purposes._
 1. [Project Structure](#Project%20Structure)
 2. [Pipelines](#Pipelines)
 3. [Utils](#Utils)
+4. [Plugins](#Plugins)
 
 
 ## Project Structure
@@ -58,4 +59,28 @@ Sends a SSH command to any of the configured hosts in Jenkins.
 
 ## Utils
 Jenkins scripts written in vars are instantiated on-demand as singletons. Auxiliary functions and Jenkins wrappers are defined here to being used in pipelines and classes such as _Host.groovy_.
+
+
+## Plugins
+Must install plugins
+
+
+### Ansible
+- [Ansible](https://plugins.jenkins.io/ansible/)
+
+
+### Docker
+- [Docker](https://plugins.jenkins.io/docker-plugin/)
+- [Docker Pipeline](https://plugins.jenkins.io/docker-workflow/)
+- [CloudBees Docker Build and Publish](https://plugins.jenkins.io/docker-build-publish/)
+
+
+### Pipeline
+- [Pipeline Utility Steps](https://plugins.jenkins.io/pipeline-utility-steps/)
+- [SSH Pipeline Steps](https://plugins.jenkins.io/ssh-steps/)
+
+
+### Other
+- [Calendar View](https://plugins.jenkins.io/calendar-view/)
+- [AnsiColor](https://plugins.jenkins.io/ansicolor/)
 
