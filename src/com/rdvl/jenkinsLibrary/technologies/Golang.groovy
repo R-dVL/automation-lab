@@ -39,8 +39,8 @@ public class Golang {
     }
 
     def publish() {
-        zip zipFile: "${project.getArtifactName()}.zip", archive: false, dir: 'bin'
-        archiveArtifacts artifacts: "${project.getArtifactName()}.zip", fingerprint: true
+        steps.zip(zipFile: "${project.getArtifactName()}.zip", archive: false, dir: 'bin')
+        steps.archiveArtifacts(artifacts: "${project.getArtifactName()}.zip", fingerprint: true)
     }
 
     def deploy() {}
