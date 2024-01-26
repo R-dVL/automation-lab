@@ -32,7 +32,7 @@ public class Golang {
             def os = index
             parallelTech["${os}"] = {
                 steps.sh("docker build --build-arg OS=${os} -t ${os}-builder .")    // Build compiler
-                steps.sh("docker run --rm -v /DATA/AppData/jenkins/${steps.env.WORKSPACE - /var/}/bin:/home/app/bin -e TAG=${project.getVersion()} ${os}-builder")    // Build binaries
+                steps.sh("docker run --rm -v ${steps.env.WORKSPACE}/bin:/home/app/bin -e TAG=${project.getVersion()} ${os}-builder")    // Build binaries
             }
         }
         steps.parallel parallelTech
