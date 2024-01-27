@@ -41,7 +41,7 @@ def call(cmd, sudo, host_name) {
                 }
 
             } catch(Exception e) {
-                sh(script: "curl -X POST http://192.168.1.55:8123/api/webhook/jenkins?build_name=${JOB_NAME}&build_result=FAILED&build_error=${e.getMessage()}")
+                sh(script: """curl -X POST -H "Content-Type: application/json" -d '{"build_name":"${JOB_NAME}", "build_result":"FAILED", "build_error":"${e.getMessage()}"}' http://192.168.1.55:8123/api/webhook/jenkins""")
                 error(e.getMessage())
             }
         }
