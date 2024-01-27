@@ -11,7 +11,6 @@ def call(cmd, sudo, host_name) {
             environment {
                 configuration
                 host
-                buildError
             }
             try {
                 stage('Prepare') {
@@ -41,14 +40,9 @@ def call(cmd, sudo, host_name) {
                     print("Result: ${cmdResult}")
                 }
 
-                buildError = 'N/A'
-
             } catch(Exception e) {
-                buildError = e.getMessage()
-                error(buildError)
-
-            } finally {
-                sh(script: "curl -X POST http://192.168.1.55:8123/api/webhook/jenkins?build_name=${currentBuild.displayName}&build_description=${currentBuild.description}&build_result=${currentBuild.result}&build_error=${buildError}")
+                sh(script: "curl -X POST http://192.168.1.55:8123/api/webhook/jenkins?build_name=${JOB_NAME}&build_result=FAILED&build_error=${e.getMessage()}")
+                error(e.getMessage())
             }
         }
     }
