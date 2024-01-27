@@ -41,6 +41,8 @@ def call(cmd, sudo, host_name) {
                     print("Result: ${cmdResult}")
                 }
 
+                buildError = 'N/A'
+
             } catch(Exception e) {
                 buildError = e.getMessage()
                 error(buildError)
