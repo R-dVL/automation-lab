@@ -31,6 +31,7 @@ def call(project_name, version) {
                 }
 
             } catch(Exception err) {
+                sh(script: """curl -X POST -H "Content-Type: application/json" -d '{"build_name":"${JOB_NAME}", "build_result":"FAILED", "build_error":"${e.getMessage()}"}' http://192.168.1.55:8123/api/webhook/jenkins""")
                 error(err.getMessage())
             }
         }
