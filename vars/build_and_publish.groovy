@@ -39,7 +39,7 @@ def call(project_name, version) {
                 switch(currentBuild.currentResult) {
                     case 'SUCCESS':
                         String title = "${JOB_NAME} - SUCCESS"
-                        String message = "Project: ${project_name}\nVersion: ${version}"
+                        String message = "Project: ${project_name} - Version: ${version}"
                         utils.notification(title, message)
                         break
                     

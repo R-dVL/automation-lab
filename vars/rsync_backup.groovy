@@ -66,7 +66,7 @@ def call(folder_name, host_name) {
                 switch(currentBuild.currentResult) {
                     case 'SUCCESS':
                         String title = "${JOB_NAME} - SUCCESS"
-                        String message = "Source: ${src_path}\nDestination: ${dest_path}"
+                        String message = "Source: ${src_path} - Destination: ${dest_path}"
                         utils.notification(title, message)
                         break
                     
