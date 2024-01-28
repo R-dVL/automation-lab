@@ -5,6 +5,7 @@ def call(project_name, version) {
         environment {
             project
             configuration
+            buildError
         }
         ansiColor('xterm') {
             try {
@@ -28,12 +29,38 @@ def call(project_name, version) {
 
                 stage('Publish') {
                     project.getTechnology().publish()
-                    utils.notification(title="${JOB_NAME} - SUCCESS", message="Project: ${project_name}\nVersion: ${version}")
                 }
 
-            } catch(Exception err) {
-                utils.notification(title="${JOB_NAME} - FAILED", message="${e.getMessage()}")
-                error(err.getMessage())
+            } catch(Exception e) {
+                buildError = e.getMessage()
+                error(buildError)
+
+            } finally {
+                switch(currentBuild.currentResult) {
+                    case 'SUCCESS':
+                        String title = "${JOB_NAME} - SUCCESS"
+                        String message = "Project: ${project_name}\nVersion: ${version}"
+                        utils.notification(title, message)
+                        break
+                    
+                    case 'FAILURE':
+                        String title = "${JOB_NAME} - FAILED"
+                        String message = "${buildError}"
+                        utils.notification(title, message)
+                        break
+                    
+                    case 'UNSTABLE':
+                        String title = "${JOB_NAME} - UNSTABLE"
+                        String message = "Build unstable"
+                        utils.notification(title, message)
+                        break
+
+                    default:
+                        String title = "${JOB_NAME}"
+                        String message = "Unknown result"
+                        utils.notification(title, message)
+                        break
+                }
             }
         }
     }

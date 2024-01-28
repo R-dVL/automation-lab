@@ -11,6 +11,7 @@ def call(cmd, sudo, host_name) {
             environment {
                 configuration
                 host
+                buildError
             }
             try {
                 stage('Prepare') {
@@ -38,12 +39,38 @@ def call(cmd, sudo, host_name) {
                 stage('Execute Command') {
                     def cmdResult = host.sshCommand(cmd, sudo)
                     print("Result: ${cmdResult}")
-                    utils.notification(title="${JOB_NAME} - SUCCESS", message="${cmdResult}")
                 }
 
             } catch(Exception e) {
-                utils.notification(title="${JOB_NAME} - FAILED", message="${e.getMessage()}")
-                error(e.getMessage())
+                buildError = e.getMessage()
+                error(buildError)
+
+            } finally {
+                switch(currentBuild.currentResult) {
+                    case 'SUCCESS':
+                        String title = "${JOB_NAME} - SUCCESS"
+                        String message = "Command: ${cmd}"
+                        utils.notification(title, message)
+                        break
+                    
+                    case 'FAILURE':
+                        String title = "${JOB_NAME} - FAILED"
+                        String message = "${buildError}"
+                        utils.notification(title, message)
+                        break
+                    
+                    case 'UNSTABLE':
+                        String title = "${JOB_NAME} - UNSTABLE"
+                        String message = "Build unstable"
+                        utils.notification(title, message)
+                        break
+
+                    default:
+                        String title = "${JOB_NAME}"
+                        String message = "Unknown result"
+                        utils.notification(title, message)
+                        break
+                }
             }
         }
     }

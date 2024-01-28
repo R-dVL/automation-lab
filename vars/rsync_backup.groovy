@@ -13,6 +13,7 @@ def call(folder_name, host_name) {
                 host
                 src_path
                 dest_path
+                buildError
             }
             try {
                 stage('Prepare') {
@@ -55,12 +56,38 @@ def call(folder_name, host_name) {
                         colorized: true,
                         extras: "-e src_path=${src_path} -e dest_path=${dest_path} -vv"
                     )
-                    utils.notification(title="${JOB_NAME} - SUCCESS", message="Source: ${src_path}\nDestination: ${dest_path}")
                 }
 
             } catch(Exception e) {
-                utils.notification(title="${JOB_NAME} - FAILED", message="${e.getMessage()}")
-                error(e.getMessage())
+                buildError = e.getMessage()
+                error(buildError)
+
+            } finally {
+                switch(currentBuild.currentResult) {
+                    case 'SUCCESS':
+                        String title = "${JOB_NAME} - SUCCESS"
+                        String message = "Source: ${src_path}\nDestination: ${dest_path}"
+                        utils.notification(title, message)
+                        break
+                    
+                    case 'FAILURE':
+                        String title = "${JOB_NAME} - FAILED"
+                        String message = "${buildError}"
+                        utils.notification(title, message)
+                        break
+                    
+                    case 'UNSTABLE':
+                        String title = "${JOB_NAME} - UNSTABLE"
+                        String message = "Build unstable"
+                        utils.notification(title, message)
+                        break
+
+                    default:
+                        String title = "${JOB_NAME}"
+                        String message = "Unknown result"
+                        utils.notification(title, message)
+                        break
+                }
             }
         }
     }
