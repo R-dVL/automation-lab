@@ -38,11 +38,11 @@ def call(cmd, sudo, host_name) {
                 stage('Execute Command') {
                     def cmdResult = host.sshCommand(cmd, sudo)
                     print("Result: ${cmdResult}")
-                    utils.notification(title = "${JOB_NAME} - SUCCESS", message = "${cmdResult}")
+                    utils.notification(title="${JOB_NAME} - SUCCESS", message="${cmdResult}")
                 }
 
             } catch(Exception e) {
-                utils.notification(title = "${JOB_NAME} - FAILED", message = "${e.getMessage()}")
+                utils.notification(title="${JOB_NAME} - FAILED", message="${e.getMessage()}")
                 error(e.getMessage())
             }
         }

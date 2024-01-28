@@ -43,7 +43,7 @@ def call(folder_name, host_name) {
                     if (sshResult != 'jenkins') {
                         error("SSH Connection failed: ${sshResult}")
                     } else {
-                        utils.log("Host accesible", 'green')
+                        utils.log(text='Host accesible', color='green')
                     }
                 }
 
@@ -55,10 +55,11 @@ def call(folder_name, host_name) {
                         colorized: true,
                         extras: "-e src_path=${src_path} -e dest_path=${dest_path} -vv"
                     )
+                    utils.notification(title="${JOB_NAME} - SUCCESS", message="Source: ${src_path}\nDestination: ${dest_path}")
                 }
 
             } catch(Exception e) {
-                sh(script: """curl -X POST -H "Content-Type: application/json" -d '{"build_name":"${JOB_NAME}", "build_result":"FAILED", "build_error":"${e.getMessage()}"}' http://192.168.1.55:8123/api/webhook/jenkins""")
+                utils.notification(title="${JOB_NAME} - FAILED", message="${e.getMessage()}")
                 error(e.getMessage())
             }
         }
