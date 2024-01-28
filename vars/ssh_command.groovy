@@ -38,10 +38,11 @@ def call(cmd, sudo, host_name) {
                 stage('Execute Command') {
                     def cmdResult = host.sshCommand(cmd, sudo)
                     print("Result: ${cmdResult}")
+                    utils.notification(title: "${JOB_NAME} - SUCCESS", message: "${cmdResult}")
                 }
 
             } catch(Exception e) {
-                sh(script: """curl -X POST -H "Content-Type: application/json" -d '{"build_name":"${JOB_NAME}", "build_result":"FAILED", "build_error":"${e.getMessage()}"}' http://192.168.1.55:8123/api/webhook/jenkins""")
+                utils.notification(title: "${JOB_NAME} - FAILED", message: "${e.getMessage()}")
                 error(e.getMessage())
             }
         }

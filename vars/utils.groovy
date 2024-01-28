@@ -63,3 +63,7 @@ def log(text, color = 'none') {
     }
     printf(text)
 }
+
+def notification(title, message) {
+    sh(script: """curl -X POST -H "Content-Type: application/json" -d '{"title":"${title}", "message":"${message}}"}' http://192.168.1.55:8123/api/webhook/jenkins""")
+}
