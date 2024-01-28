@@ -31,7 +31,7 @@ def call(cmd, sudo, host_name) {
                     if (sshResult != 'jenkins') {
                         error("SSH Connection failed: ${sshResult}")
                     } else {
-                        utils.log("Host accesible", 'green')
+                        utils.log(text: 'Host accesible', color: 'green')
                     }
                 }
 
