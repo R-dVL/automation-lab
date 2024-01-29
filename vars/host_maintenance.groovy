@@ -22,8 +22,6 @@ def call(host_name) {
                     host = new Host(this, host_name)
                     host.init()
 
-                    currentBuild.displayName = "${host_name}"    // Build name
-
                     // Clone Ansible Playbooks repository
                     checkout scmGit(
                         branches: [[name: "master"]],
