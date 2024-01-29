@@ -42,8 +42,12 @@ def call(host_name) {
                 stage('Backup') {
                     def parallelTech = [:]
                     for(folder in configuration.automation."${host.getName()}".backups) {
+                        utils.log('folder: ' + folder, 'green')
                         String src_path = configuration.automation."${host.getName()}".backups."${folder}".src_path
+                        utils.log('src_path: ' + src_path, 'green')
                         String dest_path = configuration.automation."${host.getName()}".backups."${folder}".dest_path
+                        utils.log('dest_path: ' + dest_path, 'green')
+
                         parallelTech = {
                             ansiblePlaybook(
                                 inventory:'./inventories/hosts.yaml',
