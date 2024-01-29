@@ -47,7 +47,7 @@ def call(host_name) {
                         playbook: "./playbooks/host-mgmt.yaml",
                         credentialsId: "${host.getCredentialsId()}",
                         colorized: true,
-                        extras: "-e host=${host.getName()} -vv"
+                        extras: "-e host=${host.getName()} -v"
                     )
                 }
 
