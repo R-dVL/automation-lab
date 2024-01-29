@@ -40,6 +40,11 @@ _Shared library for training and device maintenance purposes._
 ### Build and Publish
 Builds and publish any project configured in configuration.json
 
+```mermaid
+flowchart LR
+	A[Prepare] --> B[Build]
+	B --> C[Publish]
+```
 
 #### Docker
 Builds root dockerfile and publish built image in its Github repository.
