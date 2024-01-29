@@ -44,7 +44,7 @@ def call(host_name) {
                     for(index in configuration.automation."${host.getName()}".backups) {
                         def folder = index
                         utils.log("""Debug 0: ${folder}""", 'green')
-                        utils.log("""Debug 1: ${folder.src_path}""", 'green')
+                        utils.log("""Debug 1: ${folder['src_path']}""", 'green')
                         parallelTech = {
                             ansiblePlaybook(
                                 inventory:'./inventories/hosts.yaml',
