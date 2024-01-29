@@ -62,7 +62,8 @@ flowchart LR
 	A[Prepare] --> B[Connectivity Test]
 	B --> C{Host reachable?}
     C -- Yes --> D[Sync Folder]
-    C -- No --> E[Stop]
+    D --> F[END]
+    C -- No --> F
 ```
 
 
@@ -75,7 +76,8 @@ flowchart LR
 	A[Prepare] --> B[Connectivity Test]
 	B --> C{Host reachable?}
     C -- Yes --> D[Execute Command]
-    C -- No --> E[Stop]
+    D --> F[END]
+    C -- No --> F
 ```
 
 ## Utils
