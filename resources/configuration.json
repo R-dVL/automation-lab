@@ -44,23 +44,28 @@
         }
     },
     "automation": {
-        "backups": {
-            "AppData": {
-                "src_path": "/DATA/AppData",
-                "dest_path": "/DATA/Backups"
-            },
-            "Documents": {
-                "src_path": "/DATA/Documents",
-                "dest_path": "/DATA/Backups"
-            },
-            "Gallery": {
-                "src_path": "/DATA/Gallery",
-                "dest_path": "/DATA/Backups"
-            },
-            "Media": {
-                "src_path": "/DATA/Media",
-                "dest_path": "/DATA/Backups"
+        "server": {
+            "backups": {
+                "AppData": {
+                    "src_path": "/DATA/AppData",
+                    "dest_path": "/DATA/Backups"
+                },
+                "Documents": {
+                    "src_path": "/DATA/Documents",
+                    "dest_path": "/DATA/Backups"
+                },
+                "Gallery": {
+                    "src_path": "/DATA/Gallery",
+                    "dest_path": "/DATA/Backups"
+                },
+                "Media": {
+                    "src_path": "/DATA/Media",
+                    "dest_path": "/DATA/Backups"
+                }
             }
+        },
+        "rastberry": {
+            "backups": {}
         }
     }
 }

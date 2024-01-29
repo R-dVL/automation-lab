@@ -11,8 +11,6 @@ def call(folder_name, host_name) {
             environment {
                 configuration
                 host
-                src_path
-                dest_path
                 buildError
             }
             try {
@@ -48,14 +46,22 @@ def call(folder_name, host_name) {
                     }
                 }
 
-                stage('Sync Folder') {
-                    ansiblePlaybook(
-                        inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/sync-folder.yaml",
-                        credentialsId: "${host.getCredentialsId()}",
-                        colorized: true,
-                        extras: "-e src_path=${src_path} -e dest_path=${dest_path} -v"
-                    )
+                stage('Backup') {
+                    def parallelTech = [:]
+                    for(folder in configuration.automation."${host.getName()}".backups) {
+                        String src_path = configuration.automation."${host.getName()}".backups."${folder}".src_path
+                        String dest_path = configuration.automation."${host.getName()}".backups."${folder}".dest_path
+                        parallelTech = {
+                            ansiblePlaybook(
+                                inventory:'./inventories/hosts.yaml',
+                                playbook: "./playbooks/sync-folder.yaml",
+                                credentialsId: "${host.getCredentialsId()}",
+                                colorized: true,
+                                extras: "-e src_path=${src_path} -e dest_path=${dest_path} -v"
+                            )
+                        }
+                    }
+                    parallel parallelTech
                 }
 
             } catch(Exception e) {
