@@ -57,10 +57,24 @@ Builds binaries using [Golang Builder](https://github.com/r-dvl/golang-builder) 
 ### Rsync Backup
 Sync folders configured in configuration.json launching an [Ansible Playbook](https://github.com/r-dvl/ansible-playbooks/tree/master).
 
+```mermaid
+	A[Prepare] --> B[Connectivity Test]
+	B --> C{Host reachable?}
+    C -- Yes --> D[Sync Folder]
+    C -- No --> E[Stop]
+```
+
 
 ### SSH Command
 Sends a SSH command to any of the configured hosts in Jenkins.
 > Used mainly to program commands with Jenkins Trigger (used as Cron).
+
+```mermaid
+	A[Prepare] --> B[Connectivity Test]
+	B --> C{Host reachable?}
+    C -- Yes --> D[Execute Command]
+    C -- No --> E[Stop]
+```
 
 ## Utils
 Jenkins scripts written in vars are instantiated on-demand as singletons. Auxiliary functions and Jenkins wrappers are defined here to being used in pipelines and classes such as _Host.groovy_.
