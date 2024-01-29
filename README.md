@@ -58,6 +58,7 @@ Builds binaries using [Golang Builder](https://github.com/r-dvl/golang-builder) 
 Sync folders configured in configuration.json launching an [Ansible Playbook](https://github.com/r-dvl/ansible-playbooks/tree/master).
 
 ```mermaid
+flowchart LR
 	A[Prepare] --> B[Connectivity Test]
 	B --> C{Host reachable?}
     C -- Yes --> D[Sync Folder]
@@ -70,6 +71,7 @@ Sends a SSH command to any of the configured hosts in Jenkins.
 > Used mainly to program commands with Jenkins Trigger (used as Cron).
 
 ```mermaid
+flowchart LR
 	A[Prepare] --> B[Connectivity Test]
 	B --> C{Host reachable?}
     C -- Yes --> D[Execute Command]
