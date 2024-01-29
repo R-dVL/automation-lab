@@ -5,8 +5,9 @@ _Shared library for training and device maintenance purposes._
 ## Table of Contents
 1. [Project Structure](#Project%20Structure)
 2. [Pipelines](#Pipelines)
-3. [Utils](#Utils)
-4. [Plugins](#Plugins)
+3. [Classes](#Classes)
+4. [Utils](#Utils)
+5. [Plugins](#Plugins)
 
 
 ## Project Structure
@@ -80,12 +81,80 @@ flowchart LR
     C -- No --> F
 ```
 
+## Classes
+
+```mermaid
+---
+title: Class Diagram
+---
+classDiagram
+    class Project {
+        -steps
+        -utils
+        -String name
+        -String version
+        -String url
+        -String artifactName
+        -String techName
+        -technology
+        +Project(steps, name, version)
+        +getName() String
+        +getVersion() String
+        +getUrl() String
+        +getArtifactName() String
+        +getTechName() String
+        +getTechnology()
+        +toString() String
+    }
+    class Docker {
+        -steps
+        -utils
+        -image
+        -project
+        +Docker(project)
+        +build()
+        +publish()
+        +deploy()
+    }
+    class Golang {
+        -steps
+        -utils
+        -matrix
+        -project
+        +Golang(project)
+        +build()
+        +publish()
+        +deploy()
+    }
+    class Host {
+        -steps
+        -utils
+        -String name
+        -String ip
+        -String credentialsId
+        -String user
+        -String password
+        +Host(steps, hostName)
+        +init()
+        +sshCommand(command, sudo)
+        +sshPut(file, remotePath)
+        +sshGet(path, remotePath)
+        +getIp() String
+        +getName() String
+        +getCredentialsId() String
+        +toString() String
+    }
+    Project "1" *-- "1" Docker : contains
+    Project "1" *-- "1" Golang : contains
+```
+
+
 ## Utils
 Jenkins scripts written in vars are instantiated on-demand as singletons. Auxiliary functions and Jenkins wrappers are defined here to being used in pipelines and classes such as _Host.groovy_.
 
 
 ## Plugins
-Must install plugins
+Used plugins
 
 
 ### Ansible
