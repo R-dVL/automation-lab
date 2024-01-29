@@ -48,7 +48,7 @@ def call(host_name) {
                                 playbook: "./playbooks/sync-folder.yaml",
                                 credentialsId: "${host.getCredentialsId()}",
                                 colorized: true,
-                                extras: "-e src_path=${paths['src_path']} -e dest_path=${paths['dest_path']} -v"
+                                extras: "-e host=${host.getName()} -e src_path=${paths['src_path']} -e dest_path=${paths['dest_path']} -v"
                             )
                         }
                     }
