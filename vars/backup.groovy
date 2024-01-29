@@ -41,14 +41,14 @@ def call(host_name) {
 
                 stage('Backup') {
                     def parallelTech = [:]
-                    configuration.automation."${host.getName()}".backups.each { folder, paths ->          
+                    configuration.automation."${host.getName()}".backup.each { folder, path ->          
                         parallelTech["${folder}"] = {
                             ansiblePlaybook(
                                 inventory:'./inventories/hosts.yaml',
                                 playbook: "./playbooks/sync-folder.yaml",
                                 credentialsId: "${host.getCredentialsId()}",
                                 colorized: true,
-                                extras: "-e host=${host.getName()} -e src_path=${paths['src_path']} -e dest_path=${paths['dest_path']} -v"
+                                extras: "-e host=${host.getName()} -e src_path=${path['src_path']} -e dest_path=${path['dest_path']} -v"
                             )
                         }
                     }
