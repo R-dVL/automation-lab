@@ -44,7 +44,7 @@ def call(host_name) {
                 stage('Host Maintenance') {
                     ansiblePlaybook(
                         inventory:'./inventories/hosts.yaml',
-                        playbook: "./playbooks/host-mgmt.yaml",
+                        playbook: "./playbooks/host-maintenance.yaml",
                         credentialsId: "${host.getCredentialsId()}",
                         colorized: true,
                         extras: "-e host=${host.getName()} -v"
