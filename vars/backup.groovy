@@ -42,6 +42,7 @@ def call(host_name) {
                 stage('Backup') {
                     def parallelTech = [:]
                     for(folder in configuration.automation."${host.getName()}".backups) {
+                        utils.log("""Debug 0: ${folder}""", 'green')
                         utils.log("""Debug 1: ${configuration.automation."${host.getName()}".backups."${folder}"}""", 'green')
                         String src_path = configuration.automation."${host.getName()}".backups."${folder}".src_path
 
