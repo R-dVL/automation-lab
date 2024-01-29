@@ -9,6 +9,32 @@
             "credentials": "jenkins-credentials"
         }
     },
+    "automation": {
+        "server": {
+            "backup": {
+                "Documents": {
+                    "src_path": "/DATA/Documents",
+                    "dest_path": "/DATA/Backups/Server"
+                },
+                "Gallery": {
+                    "src_path": "/DATA/Gallery",
+                    "dest_path": "/DATA/Backups/Server"
+                },
+                "Media": {
+                    "src_path": "/DATA/Media",
+                    "dest_path": "/DATA/Backups/Server"
+                }
+            }
+        },
+        "rastberry": {
+            "backup": {
+                "Docker-Apps": {
+                    "src_path": "/opt/docker-apps",
+                    "dest_path": "/mnt/Backups"
+                }
+            }
+        }
+    },
     "cicd": {
         "projects": {
             "cat-watcher": {
@@ -40,32 +66,6 @@
                 "url": "https://github.com/r-dvl/rdvl-cli.git",
                 "artifact_name": "rdvl-cli",
                 "tech_name": "golang"
-            }
-        }
-    },
-    "automation": {
-        "server": {
-            "backup": {
-                "Documents": {
-                    "src_path": "/DATA/Documents",
-                    "dest_path": "/DATA/Backups/Server"
-                },
-                "Gallery": {
-                    "src_path": "/DATA/Gallery",
-                    "dest_path": "/DATA/Backups/Server"
-                },
-                "Media": {
-                    "src_path": "/DATA/Media",
-                    "dest_path": "/DATA/Backups/Server"
-                }
-            }
-        },
-        "rastberry": {
-            "backup": {
-                "Docker-Apps": {
-                    "src_path": "/opt/docker-apps",
-                    "dest_path": "/mnt/Backups"
-                }
             }
         }
     }
