@@ -46,10 +46,6 @@
     "automation": {
         "server": {
             "backups": {
-                "AppData": {
-                    "src_path": "/DATA/AppData",
-                    "dest_path": "/DATA/Backups"
-                },
                 "Documents": {
                     "src_path": "/DATA/Documents",
                     "dest_path": "/DATA/Backups"
