@@ -41,20 +41,15 @@ def call(host_name) {
 
                 stage('Backup') {
                     def parallelTech = [:]
-                    for(folder in configuration.automation."${host.getName()}".backups) {
-                        utils.log('folder: ' + folder, 'green')
-                        String src_path = folder.src_path
-                        utils.log('src_path: ' + src_path, 'green')
-                        String dest_path = folder.dest_path
-                        utils.log('dest_path: ' + dest_path, 'green')
-
+                    for(index in configuration.automation."${host.getName()}".backups) {
+                        def folder = readJSON(text: index)
                         parallelTech = {
                             ansiblePlaybook(
                                 inventory:'./inventories/hosts.yaml',
                                 playbook: "./playbooks/sync-folder.yaml",
                                 credentialsId: "${host.getCredentialsId()}",
                                 colorized: true,
-                                extras: "-e src_path=${src_path} -e dest_path=${dest_path} -v"
+                                extras: "-e src_path=${folder.src_path} -e dest_path=${folder.dest_path} -v"
                             )
                         }
                     }
