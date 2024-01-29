@@ -48,20 +48,25 @@
             "backup": {
                 "Documents": {
                     "src_path": "/DATA/Documents",
-                    "dest_path": "/DATA/Backups"
+                    "dest_path": "/DATA/Backups/Server"
                 },
                 "Gallery": {
                     "src_path": "/DATA/Gallery",
-                    "dest_path": "/DATA/Backups"
+                    "dest_path": "/DATA/Backups/Server"
                 },
                 "Media": {
                     "src_path": "/DATA/Media",
-                    "dest_path": "/DATA/Backups"
+                    "dest_path": "/DATA/Backups/Server"
                 }
             }
         },
         "rastberry": {
-            "backups": {}
+            "backup": {
+                "Docker-Apps": {
+                    "src_path": "/opt/docker-apps",
+                    "dest_path": "/mnt/Backups"
+                }
+            }
         }
     }
 }
