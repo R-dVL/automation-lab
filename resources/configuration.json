@@ -30,7 +30,7 @@
             "backup": {
                 "Docker-Apps": {
                     "src_path": "/opt/docker-apps",
-                    "dest_path": "/mnt/Backups"
+                    "dest_path": "/mnt/Backups/Rastberry"
                 }
             }
         }
