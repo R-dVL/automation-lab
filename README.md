@@ -31,8 +31,7 @@ _Shared library for training and device maintenance purposes._
 |               +- ...
 +- vars                                     # Pipelines
 |   +- build_and_publish.groovy
-|   +- rsync_backup.groovy
-|   +- ssh_command.groovy
+|   +- backup.groovy
 |   +- ...
 ~~~
 
@@ -55,14 +54,14 @@ Builds root dockerfile and publish built image in its Github repository.
 Builds binaries using [Golang Builder](https://github.com/r-dvl/golang-builder) Docker image and attach those binaries to Job Build in Jenkins.
 
 
-### Rsync Backup
+### Backup
 Sync folders configured in configuration.json launching an [Ansible Playbook](https://github.com/r-dvl/ansible-playbooks/tree/master).
 
 ```mermaid
 flowchart LR
 	A[Prepare] --> B[Connectivity Test]
 	B --> C{Host reachable?}
-    C -- Yes --> D[Sync Folder]
+    C -- Yes --> D[Backup]
     D --> F[END]
     C -- No --> F
 ```
