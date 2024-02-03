@@ -8,7 +8,7 @@ public class Golang {
     private def utils
 
     // Tech params
-    static final matrix = ['windows', 'linux', 'darwin']    // OS Binaries to build
+    static final matrix = ['windows': ['amd64'], 'linux': ['amd64', 'arm64'], 'darwin': ['amd64', 'arm64']]    // Binaries to build
 
     // Parent
     private def project
@@ -28,11 +28,12 @@ public class Golang {
 
     def build() {
         def parallelTech = [:]
-        for (index in matrix) {
-            def os = index
-            parallelTech["${os}"] = {
-                steps.sh("docker build --build-arg OS=${os} -t ${os}-builder .")    // Build compiler
-                steps.sh("docker run --rm -v ${steps.env.WORKSPACE}/bin:/home/app/bin -e TAG=${project.getVersion()} ${os}-builder")    // Build binaries
+        matrix.each { os, archs ->
+            archs.each { arch ->
+                parallelTech["${os}-${arch}"] = {
+                    steps.sh("docker build --build-arg OS=${os}-${arch} -t ${os}-${arch}-builder .")    // Build compiler
+                    steps.sh("docker run --rm -v ${steps.env.WORKSPACE}/bin:/home/app/bin -e TAG=${project.getVersion()} ${os}-${arch}-builder")    // Build binaries
+                }
             }
         }
         steps.parallel parallelTech
