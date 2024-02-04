@@ -41,15 +41,6 @@ public class Golang {
 
     def publish() {
         steps.dir('bin') {
-            def files = steps.findFiles(glob: '*')
-            for (file in files) {
-                steps.archiveArtifacts artifacts: "${file.name}", onlyIfSuccessful: true, fingerprint: true
-            }
-        }
-    }
-
-    def publish() {
-        steps.dir('bin') {
             def dirs = steps.sh(returnStdout: true, script: 'find . -type d').trim().split("\n")
             for (dir in dirs) {
                 steps.zip zipFile: "${dir}.zip", dir: "${dir}"
