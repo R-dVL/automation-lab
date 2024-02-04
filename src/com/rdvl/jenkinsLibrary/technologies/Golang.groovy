@@ -45,7 +45,7 @@ public class Golang {
             archs.each { arch ->
                 parallelTech["${os}-${arch}"] = {
                     String fileName = "${project.getName()}-${project.getVersion()}.${os}-${arch}"
-                    steps.zip zipFile: "${fileName}.zip", dir: "${fileName}"
+                    steps.zip zipFile: "${fileName}.zip", dir: "bin/${fileName}"
                     steps.archiveArtifacts artifacts: "${fileName}.zip", onlyIfSuccessful: true, fingerprint: true
                 }
             }
