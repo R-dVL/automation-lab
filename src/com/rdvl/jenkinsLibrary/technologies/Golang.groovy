@@ -43,7 +43,7 @@ public class Golang {
         steps.dir('bin') {
             def files = steps.findFiles(glob: '*')
             for (file in files) {
-                steps.archiveArtifacts artifacts: "${file.name}", onlyIfSuccessful: true
+                steps.archiveArtifacts artifacts: "${file.name}", onlyIfSuccessful: true, fingerprint: true
             }
         }
     }
