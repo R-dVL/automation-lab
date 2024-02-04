@@ -40,8 +40,16 @@ public class Golang {
     }
 
     def publish() {
-        steps.zip(zipFile: "${project.getArtifactName()}.zip", archive: false, dir: 'bin')
-        steps.archiveArtifacts(artifacts: "${project.getArtifactName()}.zip", fingerprint: true)
+        dir('bin') {
+            script {
+                def files = findFiles(glob: '**')
+                files.each { file ->
+                    def zipFile = "${file.name}.zip"
+                    steps.zip(zipFile: zipFile, archive: false, dir: file.path)
+                    steps.archiveArtifacts(artifacts: zipFile, fingerprint: true)
+                }
+            }
+        }
     }
 
     def deploy() {}
