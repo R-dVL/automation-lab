@@ -44,7 +44,7 @@ public class Golang {
             def files = steps.findFiles(glob: '**')
             files.each { file ->
                 def zipFile = "${file.name}.zip"
-                steps.zip(zipFile: zipFile, archive: false, dir: file.path)
+                steps.zip(zipFile: zipFile, archive: true, dir: file.path)
                 steps.archiveArtifacts(artifacts: zipFile, fingerprint: true)
             }
         }
