@@ -41,7 +41,7 @@ public class Golang {
 
     def publish() {
         steps.dir('bin') {
-            def files = findFiles(glob: '**')
+            def files = steps.findFiles(glob: '**')
             files.each { file ->
                 def zipFile = "${file.name}.zip"
                 steps.zip(zipFile: zipFile, archive: false, dir: file.path)
