@@ -48,5 +48,15 @@ public class Golang {
         }
     }
 
+    def publish() {
+        steps.dir('bin') {
+            def dirs = steps.sh(returnStdout: true, script: 'find . -type d').trim().split("\n")
+            for (dir in dirs) {
+                steps.zip zipFile: "${dir}.zip", dir: "${dir}"
+                steps.archiveArtifacts artifacts: "${dir}.zip", onlyIfSuccessful: true, fingerprint: true
+            }
+        }
+    }
+
     def deploy() {}
 }
