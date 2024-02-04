@@ -54,8 +54,13 @@
             },
             "stay-active": {
                 "url": "https://github.com/r-dvl/stay-active.git",
-                "artifact_name": "stay_active",
-                "tech_name": "golang"
+                "artifact_name": "stay-active",
+                "tech_name": "golang",
+                "platforms": {
+                    "windows": ["amd64"],
+                    "linux": ["amd64"],
+                    "darwin": ["amd64", "arm64"]
+                }
             },
             "jenkins-library": {
                 "url": "https://github.com/r-dvl/jenkins-library.git",
@@ -65,7 +70,12 @@
             "rdvl-cli": {
                 "url": "https://github.com/r-dvl/rdvl-cli.git",
                 "artifact_name": "rdvl-cli",
-                "tech_name": "golang"
+                "tech_name": "golang",
+                "platforms": {
+                    "windows": ["amd64"],
+                    "linux": ["amd64", "arm64"],
+                    "darwin": ["amd64", "arm64"]
+                }
             }
         }
     }

@@ -6,9 +6,7 @@ public class Golang {
     // Pipeline Context
     private def steps
     private def utils
-
-    // Tech params
-    static final matrix = ['windows': ['amd64'], 'linux': ['amd64', 'arm64'], 'darwin': ['amd64', 'arm64']]    // Binaries to build
+    private def platforms
 
     // Parent
     private def project
@@ -24,11 +22,12 @@ public class Golang {
         this.project = project
         this.steps = project.steps
         this.utils = project.steps.utils
+        this.platforms = steps.configuration.cicd.projects."${project.getName()}".platforms
     }
 
     def build() {
         def parallelTech = [:]
-        matrix.each { os, archs ->
+        platforms.each { os, archs ->
             archs.each { arch ->
                 parallelTech["${os}-${arch}"] = {
                     steps.sh("docker build --build-arg OS=${os} --build-arg ARCH=${arch} -t ${os}-${arch}-builder .")    // Build compiler
@@ -41,7 +40,7 @@ public class Golang {
 
     def publish() {
         def parallelTech = [:]
-        matrix.each { os, archs ->
+        platforms.each { os, archs ->
             archs.each { arch ->
                 parallelTech["${os}-${arch}"] = {
                     String fileName = "${project.getName()}-${project.getVersion()}.${os}-${arch}"
