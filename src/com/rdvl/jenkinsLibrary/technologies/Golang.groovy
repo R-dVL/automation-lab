@@ -43,8 +43,7 @@ public class Golang {
         steps.dir('bin') {
             def files = steps.findFiles(glob: '*')
             for (file in files) {
-                steps.zip zipFile: "${file.name}.zip", archive: true, dir: "${file.name}"
-                steps.archiveArtifacts artifacts: "${file.name}.zip", onlyIfSuccessful: true
+                steps.archiveArtifacts artifacts: "${file.name}", onlyIfSuccessful: true
             }
         }
     }
