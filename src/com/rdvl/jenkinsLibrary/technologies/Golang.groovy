@@ -31,7 +31,7 @@ public class Golang {
         matrix.each { os, archs ->
             archs.each { arch ->
                 parallelTech["${os}-${arch}"] = {
-                    steps.sh("docker build --build-arg OS=${os}-${arch} -t ${os}-${arch}-builder .")    // Build compiler
+                    steps.sh("docker build --build-arg OS=${os} --build-arg ARCH=${arch} -t ${os}-${arch}-builder .")    // Build compiler
                     steps.sh("docker run --rm -v ${steps.env.WORKSPACE}/bin:/home/app/bin -e TAG=${project.getVersion()} ${os}-${arch}-builder")    // Build binaries
                 }
             }
