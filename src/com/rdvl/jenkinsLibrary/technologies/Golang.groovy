@@ -41,11 +41,10 @@ public class Golang {
 
     def publish() {
         steps.dir('bin') {
-            def files = steps.findFiles(glob: '**')
-            files.each { file ->
-                def zipFile = "${file.name}.zip"
-                steps.zip(zipFile: zipFile, archive: true, dir: file.path)
-                steps.archiveArtifacts(artifacts: zipFile, fingerprint: true)
+            def files = findFiles(glob: '*')
+            for (file in files) {
+                zip zipFile: "${file.name}.zip", archive: true, dir: "${file.name}"
+                archiveArtifacts artifacts: "${file.name}.zip", onlyIfSuccessful: true
             }
         }
     }
