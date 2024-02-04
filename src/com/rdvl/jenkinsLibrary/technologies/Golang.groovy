@@ -40,14 +40,12 @@ public class Golang {
     }
 
     def publish() {
-        dir('bin') {
-            script {
-                def files = findFiles(glob: '**')
-                files.each { file ->
-                    def zipFile = "${file.name}.zip"
-                    steps.zip(zipFile: zipFile, archive: false, dir: file.path)
-                    steps.archiveArtifacts(artifacts: zipFile, fingerprint: true)
-                }
+        steps.dir('bin') {
+            def files = findFiles(glob: '**')
+            files.each { file ->
+                def zipFile = "${file.name}.zip"
+                steps.zip(zipFile: zipFile, archive: false, dir: file.path)
+                steps.archiveArtifacts(artifacts: zipFile, fingerprint: true)
             }
         }
     }
