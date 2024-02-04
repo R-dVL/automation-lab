@@ -40,13 +40,17 @@ public class Golang {
     }
 
     def publish() {
-        steps.dir('bin') {
-            def dirs = steps.sh(returnStdout: true, script: 'find . -type d').trim().split("\n")
-            for (dir in dirs) {
-                steps.zip zipFile: "${dir}.zip", dir: "${dir}"
-                steps.archiveArtifacts artifacts: "${dir}.zip", onlyIfSuccessful: true, fingerprint: true
+        def parallelTech = [:]
+        matrix.each { os, archs ->
+            archs.each { arch ->
+                parallelTech["${os}-${arch}"] = {
+                    String fileName = "${project.getName()}-${project.getVersion()}.${os}-${arch}"
+                    steps.zip zipFile: "${fileName}.zip", dir: "${fileName}"
+                    steps.archiveArtifacts artifacts: "${fileName}.zip", onlyIfSuccessful: true, fingerprint: true
+                }
             }
         }
+        steps.parallel parallelTech
     }
 
     def deploy() {}
