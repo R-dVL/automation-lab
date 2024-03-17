@@ -1,7 +1,7 @@
 {
     "hosts": {
         "server": {
-            "ip": "192.168.1.55",
+            "ip": "192.168.1.39",
             "credentials": "jenkins-credentials"
         },
         "rastberry": {
@@ -52,6 +52,11 @@
                 "artifact_name": "lima-frontend",
                 "tech_name": "docker"
             },
+            "jenkins-library": {
+                "url": "https://github.com/r-dvl/jenkins-library.git",
+                "artifact_name": "jenkins-library",
+                "tech_name": "docker"
+            },
             "stay-active": {
                 "url": "https://github.com/r-dvl/stay-active.git",
                 "artifact_name": "stay-active",
@@ -61,11 +66,6 @@
                     "linux": ["amd64"],
                     "darwin": ["amd64", "arm64"]
                 }
-            },
-            "jenkins-library": {
-                "url": "https://github.com/r-dvl/jenkins-library.git",
-                "artifact_name": "jenkins-library",
-                "tech_name": "docker"
             },
             "rdvl-cli": {
                 "url": "https://github.com/r-dvl/rdvl-cli.git",
